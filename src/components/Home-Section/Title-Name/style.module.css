@@ -1,42 +1,48 @@
-
-.title{
-    background: none;
-    width: 9.5ch;
-    animation: type 2.5s steps(13), blink .5s step-end infinite alternate;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 5px solid;
-    color: lightgreen;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 30px;
-    place-items: center;
+.title {
+  background: none;
+  width: 9.5ch;
+  animation: type 2.5s steps(13), blink 0.5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 5px solid;
+  color: lightgreen;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  place-items: center;
+}
+.O {
+  @apply text-secondary;
+}
+@keyframes type {
+  from {
+    width: 0%;
   }
-  
-@keyframes type{
-    from{width: 0%}
 }
-  
-@keyframes blink{
-    50%{border-color: transparent}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
-.title{
-    @apply text-6xl text-white;
-    font-weight: 700;
+.title {
+  @apply text-[6vw] text-white;
+  font-weight: 700;
 }
-.title_and_button{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+.title_and_button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-.button{
-    width: 90px;
-    background-color: white;
-    color: black;
-    transition: all 0.3s;
+.button {
+  width: 100px;
+  background-color: white;
+  color: black;
+  padding: 8px;
+  transition: all 0.3s;
 }
-.button:hover{
-    background-color:#B88B05;
-    color: white;
+.button:hover {
+  background-color: #b88b05;
+  color: white;
 }

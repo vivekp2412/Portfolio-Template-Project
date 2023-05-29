@@ -1,12 +1,40 @@
-.Product_Navbar_container{
-  @apply border-b-2 border-secondary w-[80%] mx-auto flex justify-around items-baseline
+.Product_Navbar_container {
+  @apply border-b-2 border-secondary w-[80%] mx-auto flex justify-around items-baseline;
 }
-.navoptions{
-    @apply flex justify-center items-center space-x-10 mt-10
+.navoptions {
+  @apply flex justify-center items-center space-x-3 md:space-x-7 mt-10;
 }
-.navoption{
-    @apply text-white text-xl
+.navoption {
+  @apply text-white text-sm md:text-xl;
 }
-.navoption a{
-    @apply hover:text-secondary
+.navoption a {
+  @apply hover:text-secondary;
+}
+.searchbar {
+  max-width: 100px;
+  display: flex;
+  margin-bottom: 1rem;
+}
+.searchButton {
+  color: #b88b05;
+  width: 30px;
+  padding: 5px;
+}
+.searchbar input {
+  border-bottom: 2px solid white;
+  padding: 5px;
+  background-color: black;
+  color: white;
+}
+@media screen and (max-width: 900px) {
+  .Product_Navbar_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+  .searchbar {
+    max-width: 100%;
+  }
 }

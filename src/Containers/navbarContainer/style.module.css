@@ -10,11 +10,11 @@
 }
 .navbarContainer {
   height: 60px;
-  @apply bg-primary border-solid border-white border-b-2 w-[100vw];
+  @apply bg-primary border-solid border-white border-b-2;
 }
-.hamburger_logo{
+.hamburger_logo {
   position: absolute;
-  top:12px;
+  top: 12px;
   width: 100vw;
   display: flex;
   flex-direction: row-reverse;
@@ -32,15 +32,15 @@
   /* top: 12px; */
   /* left: 10px; */
   cursor: pointer;
-  @apply bg-primary
+  @apply bg-primary;
 }
-.hamburgerIcon{
+.hamburgerIcon {
   color: white;
 }
-.hamburgerIcon:hover{
-  color:"#B88B05";
+.hamburgerIcon:hover {
+  color: "#B88B05";
 }
 
-.hamburger{
-  color:white;
+.hamburger {
+  color: white;
 }
