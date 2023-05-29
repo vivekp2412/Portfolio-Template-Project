@@ -1,3 +1,3 @@
-.ProductContainer{
-    @apply pt-20 bg-primary
+.ProductContainer {
+  @apply py-20 bg-primary;
 }

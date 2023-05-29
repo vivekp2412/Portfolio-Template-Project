@@ -1,6 +1,7 @@
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../Mobile-Navbar/style.module.css";
+import brand from "../../../assets/Navbar/Mobile-Navbar/logo.png";
 type Propstype = {
   event: () => void;
 };
@@ -12,7 +13,7 @@ function MobileNavbar(props: Propstype) {
       <div className={style.mobileNavbar}>
         <div className={style.logo_title}>
           <div className={style.logo}>
-            <img className={style.logo_img} src=""></img>
+            <img className={style.logo_img} src={brand}></img>
           </div>
           <div className={style.title}>BRAND NAME</div>
         </div>
