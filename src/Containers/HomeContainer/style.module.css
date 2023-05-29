@@ -1,0 +1,9 @@
+.homeContainer{
+    position: relative;
+}
+.Title{
+    position: absolute;
+    top:200px;
+    width: 100%;
+    margin: 0 auto;
+}

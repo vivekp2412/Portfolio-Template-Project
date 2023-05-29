@@ -7,7 +7,7 @@ import style from "../navbarContainer/style.module.css";
 
 //Navbar Container
 function navbarContainer() {
-  const [width, setWidth] = useState<Number>(window.innerWidth);
+  const [width, setWidth] = useState<number>(window.innerWidth);
   //Function hide/show Side Navbar
   function handleSidebar() {
     const classes = document.getElementById("mobileNavbar")?.classList;

@@ -1,0 +1,20 @@
+.title_and_button{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center; 
+}
+.title{
+    font-size: xx-large;
+    color: white;
+    font-weight: 700;
+}
+.button{
+    width: 50px;
+    background-color: white;
+    color: black;
+}
+.button:hover{
+    background-color: "#B88B05";
+    
+}
