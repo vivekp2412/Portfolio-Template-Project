@@ -1,0 +1,12 @@
+.Product_Navbar_container{
+  @apply border-b-2 border-secondary w-[80%] mx-auto flex justify-around items-baseline
+}
+.navoptions{
+    @apply flex justify-center items-center space-x-10 mt-10
+}
+.navoption{
+    @apply text-white text-xl
+}
+.navoption a{
+    @apply hover:text-secondary
+}

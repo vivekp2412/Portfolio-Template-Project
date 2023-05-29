@@ -10,7 +10,7 @@
 }
 .navbarContainer {
   height: 60px;
-  @apply border-solid border-white border-b-2 w-[100vw];
+  @apply bg-primary border-solid border-white border-b-2 w-[100vw];
 }
 .hamburger_logo{
   position: absolute;
@@ -23,7 +23,7 @@
   padding: 0 5px;
 }
 .brand {
-  @apply cursor-pointer text-xl tracking-widest text-white;
+  @apply cursor-pointer text-xl tracking-widest text-white font-bold;
 }
 .hamburger {
   /* position: absolute; */

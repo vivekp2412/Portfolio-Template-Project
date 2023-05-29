@@ -16,7 +16,7 @@
   @apply text-center;
 }
 .title {
-  @apply text-lg font-sans text-black;
+  @apply text-lg  text-black;
 }
 .navoptions {
   @apply flex flex-col space-y-10 w-32 text-black;

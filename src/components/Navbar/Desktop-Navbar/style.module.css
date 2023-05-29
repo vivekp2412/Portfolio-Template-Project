@@ -2,7 +2,7 @@
   @apply w-[100vw] bg-primary border-b-2 border-white;
 }
 .navbar {
-  @apply text-white mx-auto flex items-center justify-around font-sans font-bold text-sm;
+  @apply text-white mx-auto flex items-center justify-around  font-bold text-sm;
 }
 .navoptions {
   @apply flex flex-row;
