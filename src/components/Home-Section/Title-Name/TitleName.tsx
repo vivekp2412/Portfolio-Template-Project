@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import style from "../Title-Name/style.module.css";
 export default function TitleName() {
   return (
@@ -6,7 +7,14 @@ export default function TitleName() {
         PORTF<span className={style.O}>O</span>LIO
       </div>
       <div>
-        <button className={style.button}>Start Here</button>
+        <button
+          className={style.btn}
+          onClick={() => {
+            console.log("hi");
+          }}
+        >
+          <a href="#productSection">Start Here</a>
+        </button>
       </div>
     </div>
   );

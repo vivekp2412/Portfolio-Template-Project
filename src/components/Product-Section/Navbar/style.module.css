@@ -29,6 +29,7 @@
   padding: 5px;
   background-color: black;
   color: white;
+  outline: none;
 }
 @media screen and (max-width: 900px) {
   .Product_Navbar_container {

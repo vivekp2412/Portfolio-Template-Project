@@ -1,0 +1,51 @@
+.allimageContainer {
+  @apply flex flex-row flex-wrap m-10 bg-white justify-center items-center;
+}
+.button {
+  @apply text-secondary bg-black;
+}
+.imageContainer {
+  border: 2px solid black;
+  margin: 10px;
+}
+.card {
+  width: 400px;
+  height: 400px;
+  margin: 20px;
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+.media {
+  min-width: 400px;
+  height: 300px;
+}
+.modal Button {
+  color: black;
+}
+.table_img {
+  width: 80px;
+  height: 50px;
+}
+.modal Button:hover {
+  background-color: #b88b05 !important;
+  color: white !important;
+  border: none !important;
+}
+.modal {
+  width: 100vw;
+  height: 100vh;
+}
+table {
+  padding: 0 !important;
+}
+.title {
+  @apply text-lg font-extrabold text-center md:text-left my-5;
+}
+.action_link {
+  color: black;
+  cursor: pointer;
+}
+.action_link:hover {
+  @apply text-secondary;
+}

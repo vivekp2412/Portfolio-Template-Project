@@ -1,4 +1,9 @@
-.Caro_img{
-    height: 450px;
-    width: 100%;
+.Caro_img {
+  height: 750px;
+  width: 100%;
+  object-fit: contain;
+  margin: 10px;
+}
+.Caro_img {
+  @apply h-[100%] md:h-[750px];
 }

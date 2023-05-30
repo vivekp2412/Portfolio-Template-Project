@@ -1,0 +1,69 @@
+.mobileNavbarContainer {
+  z-index: 100;
+  overflow: hidden;
+}
+.mobileNavbar {
+  position: relative;
+  @apply bg-white h-[100vh] w-[65vw] min-w-[200px]  flex flex-col py-20 items-center space-y-10;
+}
+.logo_title {
+  @apply space-y-10 text-center cursor-pointer text-4xl flex flex-col justify-center items-center font-bold;
+}
+.logo_img {
+  @apply w-24 h-24 rounded-full;
+}
+.logo {
+  @apply text-center;
+}
+.title {
+  @apply text-lg  text-black;
+}
+.navoptions {
+  @apply flex flex-col space-y-10 w-32 text-black;
+}
+.navoption {
+  position: relative;
+  transition: all 1s;
+  @apply min-w-full border-b-2 border-black text-center
+    cursor-pointer hover:text-primary;
+}
+
+.navoption_hover {
+  position: absolute;
+  @apply bg-secondary;
+  height: 0%;
+  width: 100%;
+  top: 100%;
+  transition: all 0.2s;
+}
+
+.navoption:hover .navoption_hover {
+  height: 100%;
+  top: 0%;
+  opacity: 0.7;
+}
+
+.iconContainer {
+  position: absolute;
+  top: -33px;
+  right: 0px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.closeSliderIcon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  color: black;
+}
+.closeSliderIcon:hover {
+  color: "#B88B05";
+}
+@media screen and (min-width: 1024px) {
+  .mobileNavbarContainer {
+    display: none;
+  }
+}

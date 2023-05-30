@@ -1,27 +1,18 @@
 import "./App.css";
-import HomeContainer from "./Containers/HomeContainer/HomeContainer";
-import ProductContainer from "../src/Containers/ProductContainer/ProductContainer";
-import NavbarContainer from "./Containers/navbarContainer/NavbarContainer";
-import WorkContainer from "./Containers/WorkContainer/WorkContainer";
-import ContactContainer from "./Containers/ContactContainer/ContactContainer";
-import FooterContainer from "./Containers/FooterContainer/FooterContainer";
+
+import PortfolioContainer from "./Containers/PortfolioContainer/PortfolioContainer";
+import AdminContainer from "./Containers/AdminContainer/AdminContainer/AdminContainer";
+import HomeSection from "./components/Admin-Section/Home-Section/HomeSection";
+import ProductSection from "./components/Admin-Section/Product-Section/ProductSection";
+import WorkSection from "./components/Admin-Section/Work-Section/WorkSection";
+import ContactSection from "./components/Admin-Section/Contact-Section/ConatactSection";
+import Routes from "./Routes/RouteComponent";
+import RouteComponent from "./Routes/RouteComponent";
+
 function App() {
   return (
     <>
-      <NavbarContainer />
-      <div id="homeSection">
-        <HomeContainer />
-      </div>
-      <div id="productSection">
-        <ProductContainer />
-      </div>
-      <div id="workSection">
-        <WorkContainer />
-      </div>
-      <div id="contactSection">
-        <ContactContainer />
-      </div>
-      <FooterContainer />
+      <RouteComponent />
     </>
   );
 }
