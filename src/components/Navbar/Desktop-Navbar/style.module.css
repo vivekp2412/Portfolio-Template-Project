@@ -14,7 +14,7 @@
 .navoption a {
   @apply hover:text-secondary cursor-pointer hover:underline;
 }
-.brand {
+.title {
   @apply cursor-pointer text-xl tracking-widest;
 }
 @media screen and (max-width: 550px) {

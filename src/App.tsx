@@ -9,10 +9,18 @@ function App() {
   return (
     <>
       <NavbarContainer />
-      <HomeContainer />
-      <ProductContainer />
-      <WorkContainer />
-      <ContactContainer />
+      <div id="homeSection">
+        <HomeContainer />
+      </div>
+      <div id="productSection">
+        <ProductContainer />
+      </div>
+      <div id="workSection">
+        <WorkContainer />
+      </div>
+      <div id="contactSection">
+        <ContactContainer />
+      </div>
       <FooterContainer />
     </>
   );

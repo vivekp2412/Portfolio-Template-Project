@@ -6,7 +6,7 @@ function ProductCard() {
     <>
       <div className={style.card}>
         <img
-          src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80"
+          src="https://jubilantconsumer.com/wp-content/themes/jubilant/assets/img/product.png"
           alt=""
         />
         <div className={style.cardContent}>

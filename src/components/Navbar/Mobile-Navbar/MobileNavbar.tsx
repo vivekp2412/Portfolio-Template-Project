@@ -15,7 +15,9 @@ function MobileNavbar(props: Propstype) {
           <div className={style.logo}>
             <img className={style.logo_img} src={brand}></img>
           </div>
-          <div className={style.title}>BRAND NAME</div>
+          <span className={style.title}>
+            PORTF<span style={{ color: "#B88B05" }}>O</span>LIO
+          </span>
         </div>
         <div>
           <ul className={style.navoptions}>
@@ -24,11 +26,11 @@ function MobileNavbar(props: Propstype) {
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>
-              <a href="#productsSection">PRODUCTS</a>
+              <a href="#productSection">PRODUCTS</a>
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>
-              <a href="#myworkSection">MY WORK</a>
+              <a href="#workSection">MY WORK</a>
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>

@@ -41,6 +41,7 @@
   color: black;
   padding: 8px;
   transition: all 0.3s;
+  border-radius: 5%;
 }
 .button:hover {
   background-color: #b88b05;
