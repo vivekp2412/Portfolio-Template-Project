@@ -4,6 +4,7 @@ import ProductContainer from "../src/Containers/ProductContainer/ProductContaine
 import NavbarContainer from "./Containers/navbarContainer/NavbarContainer";
 import WorkContainer from "./Containers/WorkContainer/WorkContainer";
 import ContactContainer from "./Containers/ContactContainer/ContactContainer";
+import FooterContainer from "./Containers/FooterContainer/FooterContainer";
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
       <ProductContainer />
       <WorkContainer />
       <ContactContainer />
+      <FooterContainer />
     </>
   );
 }

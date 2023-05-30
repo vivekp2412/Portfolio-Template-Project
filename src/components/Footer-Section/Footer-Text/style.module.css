@@ -1,0 +1,9 @@
+.title {
+  @apply cursor-pointer text-xl tracking-widest text-black;
+}
+.subHead {
+  @apply text-sm my-6;
+}
+.footerContainer {
+  @apply text-center;
+}
