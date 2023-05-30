@@ -1,0 +1,30 @@
+.headerContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  @apply text-white items-center w-[100%] flex-wrap pb-20 md:justify-center md:mx-auto;
+}
+.card {
+  @apply flex m-5 text-base justify-center;
+}
+.details {
+  @apply mx-5 w-[100%] max-w-[250px];
+}
+.information {
+  @apply text-gray-500;
+}
+.icon {
+  fill: #b88b05;
+  height: 40px;
+  color: #b88b05;
+}
+@media screen and (max-width: 1400px) {
+  .headerContainer {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+  }
+}
+@media screen and (max-width: 650px) {
+  .headerContainer {
+    grid-template-columns: 1fr;
+  }
+}

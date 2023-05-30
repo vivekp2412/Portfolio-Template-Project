@@ -3,6 +3,7 @@ import HomeContainer from "./Containers/HomeContainer/HomeContainer";
 import ProductContainer from "../src/Containers/ProductContainer/ProductContainer";
 import NavbarContainer from "./Containers/navbarContainer/NavbarContainer";
 import WorkContainer from "./Containers/WorkContainer/WorkContainer";
+import ContactContainer from "./Containers/ContactContainer/ContactContainer";
 function App() {
   return (
     <>
@@ -10,6 +11,7 @@ function App() {
       <HomeContainer />
       <ProductContainer />
       <WorkContainer />
+      <ContactContainer />
     </>
   );
 }
