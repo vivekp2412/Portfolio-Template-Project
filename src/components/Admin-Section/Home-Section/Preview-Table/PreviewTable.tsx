@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import { dataref } from "../../../../firebase";
 import { Space, Table, Tag } from "antd";
 import { Button, Modal } from "antd";
-import style from "../Preview-Images/style.module.css";
+import style from "../Preview-Table/style.module.css";
 import type { ColumnsType } from "antd/es/table";
 import { Switch } from "antd";
 //Type Declaration
@@ -43,7 +43,7 @@ async function getData() {
   return originalArray;
 }
 //Preview Component
-function PreviewImage() {
+function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<DataType[]>();
@@ -147,4 +147,4 @@ function PreviewImage() {
   );
 }
 
-export default PreviewImage;
+export default PreviewTable;

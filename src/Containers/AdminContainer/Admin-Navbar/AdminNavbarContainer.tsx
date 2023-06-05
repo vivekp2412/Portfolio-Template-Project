@@ -1,6 +1,6 @@
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import DesktopNavbar from "../../../components/Admin-Section/Navbar/Desktop-Navbar/Navbar";
 import MobileNavbar from "../../../components/Admin-Section/Navbar/Mobile-Navbar/MobileNavbar";
 
