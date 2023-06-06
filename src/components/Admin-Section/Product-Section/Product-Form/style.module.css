@@ -15,7 +15,8 @@
 }
 .button_modal:hover {
   outline: none;
-  @apply bg-secondary text-white;
+  border: none;
+  @apply bg-secondary text-white !important;
 }
 .button_container {
   @apply flex flex-row justify-end;

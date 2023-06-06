@@ -25,6 +25,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-owl-carousel": "^2.3.3",
     "react-router-dom": "^6.11.2",
+    "react-uuid": "^2.0.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { dataref } from "../../../../firebase";
 import { Space, Table, Tag } from "antd";
 import { Button, Modal } from "antd";
