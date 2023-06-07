@@ -16,7 +16,6 @@ const deleteAndRearrangeArray = async (id: string) => {
   try {
     const snapshot = await dataref.ref("Carousel").once("value");
     let dataArray = snapshot.val().image;
-    console.log(dataArray);
     const indexToDelete = dataArray.findIndex(
       (object: { imageId: string; image: string }) => {
         return object.imageId == id;
@@ -25,7 +24,6 @@ const deleteAndRearrangeArray = async (id: string) => {
     dataArray.splice(indexToDelete, 1);
 
     await dataref.ref("Carousel").set({ image: dataArray });
-    console.log("Array rearranged successfully.");
   } catch (error) {
     console.error("Error rearranging the array:", error);
   }
