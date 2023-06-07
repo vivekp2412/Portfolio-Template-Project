@@ -18,7 +18,6 @@ function Carousell() {
         const carousel = await dataref.ref("Carousel").once("value");
         const data = carousel.val().image;
         const imageActive = data.filter((x: Datatype) => x.active == true);
-        console.log(imageActive);
         if (imageActive.length > 0) {
           setimageArray(imageActive);
         }
@@ -44,7 +43,6 @@ function Carousell() {
       </div>,
     ];
   }
-  console.log(images);
 
   return (
     <Carousel autoplay>

@@ -33,3 +33,6 @@
 .bottomline {
   @apply border-b-2 border-secondary my-5;
 }
+.error {
+  color: red;
+}

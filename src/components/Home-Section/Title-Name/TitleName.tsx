@@ -7,12 +7,7 @@ export default function TitleName() {
         PORTF<span className={style.O}>O</span>LIO
       </div>
       <div>
-        <button
-          className={style.btn}
-          onClick={() => {
-            console.log("hi");
-          }}
-        >
+        <button className={style.btn} onClick={() => {}}>
           <a href="#productSection">Start Here</a>
         </button>
       </div>
