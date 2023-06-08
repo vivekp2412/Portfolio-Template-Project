@@ -1,6 +1,25 @@
-.addButton {
-  background-color: blue;
+.UploadButton {
+  padding: 3px;
+  outline: 0.5px solid black;
+  border-radius: 5px;
 }
+
 .error {
   color: red;
+}
+.buttonWrapper {
+  margin: 0 auto;
+}
+.actionButton {
+  margin: 0 20px;
+}
+.actionButton:hover {
+  color: blue;
+}
+.UploadWrapper {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.image {
+  margin: 12px auto;
 }

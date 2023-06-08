@@ -43,3 +43,12 @@
     max-width: 100%;
   }
 }
+.selectMenu {
+  background-color: black;
+  color: white;
+  width: 70px;
+  padding: 10px;
+}
+.selectOption:hover {
+  background-color: #b88b05;
+}

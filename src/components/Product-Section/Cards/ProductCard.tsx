@@ -1,22 +1,16 @@
-import React from "react";
 import style from "../Cards/style.module.css";
 
-function ProductCard() {
+function ProductCard(props) {
+  const { data } = props;
+  console.log(data);
+  const imgSrc = data.Image[0].dataURL;
   return (
     <>
       <div className={style.card}>
-        <img
-          src="https://jubilantconsumer.com/wp-content/themes/jubilant/assets/img/product.png"
-          alt=""
-        />
+        <img src={imgSrc} alt="" />
         <div className={style.cardContent}>
-          <h2>Card Heading</h2>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
-            exercitationem iste, voluptatum, quia explicabo laboriosam rem
-            adipisci voluptates cumque, veritatis atque nostrum corrupti ipsa
-            asperiores harum? Dicta odio aut hic.
-          </p>
+          <h2>{data.productName}</h2>
+          <p>{data.productDescription}</p>
           <a href="#" className={style.button}>
             Find out more
             <span className={style.material_symbol_outlined}>

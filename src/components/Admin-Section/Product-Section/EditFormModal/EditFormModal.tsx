@@ -1,46 +1,40 @@
-import React, { useRef, useState } from "react";
-import style from "../Product-Form/style.module.css";
-import { Modal, Form, Input, Select, Button, Divider, Space } from "antd";
-import { message } from "antd";
-import { useEffect } from "react";
-import { dataref } from "../../../../firebase";
 import { PlusOutlined } from "@ant-design/icons";
-import { ImageUpload } from "../Image-Upload/ImageUpload";
-import { addProduct, fetchProductsData } from "../../../../slices/productSlice";
+import { Button, Divider, Form, Input, Modal, Select, Space } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { dataref } from "../../../../firebase";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { useSelector } from "react-redux";
-interface Datatype {
-  productImage: File;
-  productId: string;
-  productDescription: string;
-  productCategory: string;
-  productName: string;
-  ImageUrl: string;
-}
-
-//Modal Component
-const ProductForm = (props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [productArray, setProductArray] = useState<Datatype[]>();
+import {
+  fetchCategories,
+  updateProduct,
+} from "../../../../slices/productSlice";
+import style from "../Product-Form/style.module.css";
+import { ImageUpload } from "../Image-Upload/ImageUpload";
+let initialImg: string | null = null;
+function EditFormModal(props) {
+  const { setIsModalOpen, isModalOpen, productId } = props;
   const [items, setItems] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([]);
   const [uniqueId, setUniqueId] = useState("");
-  const formRef = useRef(null);
-  const [imageUrls, setImageurl] = useState<{}[]>([]);
+  const [imageUrls, setImageurl] = useState();
   const [imageErr, setImageErr] = useState<boolean>(false);
   const [images, setImages] = useState([]);
-  const dispatch = useAppDispatch();
+  const formRef = useRef(null);
 
   const categories = useAppSelector((state) => state.product.categories);
   useEffect(() => {
     setItems(categories);
   }, []);
   const productList = useAppSelector((state) => state.product.productList);
-  function geturls(array) {
-    setImageurl(array);
+  console.log(categories);
+
+  const [filteredArray] = productList.filter(
+    (data) => data.productId == productId
+  );
+  if (filteredArray) {
+    initialImg = filteredArray.Image[0].dataURL;
   }
+  const prevdata = filteredArray;
   const addItem = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
@@ -51,61 +45,39 @@ const ProductForm = (props) => {
       Categories: [...items, name],
     });
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const products = await dataref.ref("Products").once("value");
-        if (products.val() == undefined) {
-          setProductArray([]);
-        } else {
-          setProductArray(products.val().productList);
-        }
-      } catch (error) {
-        console.log("Error fetching data from Firebase:", error);
-      }
-    };
-    fetchData();
-  }, []);
-  //showmodal
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  //handleOk function of modal
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  // handle cancel button of modal
-  const handleCancel = () => {
-    // console.log("ji");
-
-    setIsModalOpen(false);
-  };
+  function geturls(array) {
+    console.log(array[0].dataURL);
+    setImageurl(array[0].dataURL);
+    initialImg = null;
+  }
 
   const onFinish = (values: any) => {
-    if (images.length != 0) {
-      setImageErr(false);
-      let data = {
+    let data;
+    if (imageUrls == "") {
+      data = {
+        ...prevdata,
         ...values,
-        productId: uniqueId,
-        Image: imageUrls,
+        Image: [{ dataURL: initialImg }],
       };
-      if (productArray) {
-        dispatch(addProduct(data));
-        setProductArray([...productArray, data]);
-      }
-      form.resetFields();
-      setImages([]);
-      handleOk();
-      setFileList([]);
     } else {
-      setImageErr(true);
+      data = {
+        ...prevdata,
+        ...values,
+        Image: [{ dataURL: imageUrls }],
+      };
     }
-  };
 
-  const onReset = () => {
-    setImages([]);
-    setFileList([]);
+    console.log(data.Image[0].dataURL);
+    dispatch(updateProduct(data));
     form.resetFields();
+    handleOk();
+  };
+  const handleImageError = () => {
+    setImageErr(false);
+  };
+  const onReset = () => {
+    form.resetFields();
+    setIsModalOpen(false);
   };
 
   const handleSelect = (e: string) => {
@@ -114,28 +86,23 @@ const ProductForm = (props) => {
     setUniqueId(id.toUpperCase() + uniqueNumber.slice(-4));
   };
 
-  const handleImageError = () => {
-    setImageErr(false);
+  const handleCancel = () => {
+    onReset();
+    setIsModalOpen(false);
   };
 
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
   return (
-    <>
-      <div className={style.modal_button_container}>
-        <button
-          onClick={showModal}
-          className={`${style.button_modal} ${style.top_button}`}
-        >
-          Add Product
-        </button>
-      </div>
-
+    <div>
       <Modal
-        title="Add Details"
-        footer={null}
+        title="Edit Form"
         open={isModalOpen}
         onOk={handleOk}
-        maskClosable={false}
         onCancel={handleCancel}
+        className={style.modal}
+        footer={null}
       >
         <>
           <ImageUpload
@@ -144,14 +111,22 @@ const ProductForm = (props) => {
             setImages={setImages}
             handleImageError={handleImageError}
           />
-          {imageErr && <div className={style.error}>Required</div>}
+          {!imageUrls && (
+            <img
+              src={initialImg ?? imageUrls}
+              className={style.prevImage}
+              style={{ margin: "10px auto" }}
+              width={100}
+              height={100}
+            />
+          )}
           <Form
             ref={formRef}
             form={form}
             name="control-hooks"
             onFinish={onFinish}
             style={{ maxWidth: 600 }}
-            initialValues={props.values}
+            initialValues={filteredArray}
           >
             <Form.Item
               name="productName"
@@ -209,7 +184,7 @@ const ProductForm = (props) => {
                 <Button
                   htmlType="submit"
                   className={style.button_modal}
-                  onClick={onFinish}
+                  // onClick={onFinish}
                 >
                   Submit
                 </Button>
@@ -218,14 +193,15 @@ const ProductForm = (props) => {
                   onClick={onReset}
                   className={style.button_modal}
                 >
-                  Reset
+                  Close
                 </Button>
               </div>
             </Form.Item>
           </Form>
         </>
       </Modal>
-    </>
+    </div>
   );
-};
-export default ProductForm;
+}
+
+export default EditFormModal;

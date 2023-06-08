@@ -1,3 +1,9 @@
+import {
+  DeleteFilled,
+  DeleteOutlined,
+  EditFilled,
+  FileAddFilled,
+} from "@ant-design/icons";
 import React from "react";
 import { useEffect, useState } from "react";
 
@@ -7,7 +13,7 @@ export const ImageUpload = (props) => {
   const { images, setImages, handleImageError } = props;
 
   const [error, setError] = useState<string | null>(null);
-  const maxNumber = 4;
+  const maxNumber = 1;
 
   const onChange = (
     imageList: ImageListType,
@@ -43,17 +49,38 @@ export const ImageUpload = (props) => {
           dragProps,
         }) => (
           // write your building UI
-          <div className="upload__image-wrapper">
-            <button onClick={onImageUpload} {...dragProps}>
-              Click or Drop here
+          <div className={style.UploadWrapper}>
+            <button
+              className={style.UploadButton}
+              onClick={onImageUpload}
+              {...dragProps}
+            >
+              <FileAddFilled style={{ fontSize: "30px" }} />
             </button>
             &nbsp;
             {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image.dataURL} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
+              <div key={index}>
+                <img
+                  src={image.dataURL}
+                  className={style.image}
+                  alt=""
+                  width="100"
+                />
+                <div className={style.buttonWrapper}>
+                  <button
+                    className={style.actionButton}
+                    onClick={() => onImageUpdate(index)}
+                  >
+                    {/* <EditFilled /> */}
+                    Edit
+                  </button>
+                  <button
+                    className={style.actionButton}
+                    onClick={() => onImageRemove(index)}
+                  >
+                    {/* <DeleteFilled /> */}
+                    Remove
+                  </button>
                 </div>
               </div>
             ))}
