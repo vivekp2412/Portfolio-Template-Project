@@ -10,12 +10,13 @@ import Routes from "./Routes/RouteComponent";
 import RouteComponent from "./Routes/RouteComponent";
 import { useEffect } from "react";
 import { useAppDispatch } from "./Hooks/Hooks";
-import { fetchProductsData } from "./slices/productSlice";
+import { fetchCategories, fetchProductsData } from "./slices/productSlice";
 
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchProductsData());
+    dispatch(fetchCategories());
   }, []);
   return <RouteComponent />;
 }

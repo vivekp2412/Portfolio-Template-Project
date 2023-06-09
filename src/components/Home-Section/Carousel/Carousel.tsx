@@ -45,7 +45,7 @@ function Carousell() {
   }
 
   return (
-    <Carousel autoplay>
+    <Carousel autoplay className={style.carousel}>
       {isloading && <h1 className={style.Caro_img}>Loading</h1>}
       {images}
     </Carousel>

@@ -8,10 +8,12 @@ import { useEffect } from "react";
 
 export default function ProductContainer() {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(fetchProductsData());
     dispatch(fetchCategories());
   }, []);
+
   return (
     <div className={style.ProductContainer}>
       <ProductTitle />

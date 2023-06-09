@@ -1,3 +1,4 @@
 .ProductContainer {
+  min-height: 800px;
   @apply py-20 bg-primary;
 }

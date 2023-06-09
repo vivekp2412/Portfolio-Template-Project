@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
 import style from "../Product-Form/style.module.css";
 import { Modal, Form, Input, Select, Button, Divider, Space } from "antd";
-import { message } from "antd";
 import { useEffect } from "react";
 import { dataref } from "../../../../firebase";
 import { PlusOutlined } from "@ant-design/icons";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
-import { addProduct, fetchProductsData } from "../../../../slices/productSlice";
+import {
+  addCategory,
+  addProduct,
+  fetchCategories,
+} from "../../../../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { useSelector } from "react-redux";
 interface Datatype {
   productImage: File;
   productId: string;
@@ -20,9 +22,10 @@ interface Datatype {
 
 //Modal Component
 const ProductForm = (props) => {
+  let categories = useAppSelector((state) => state.product.categories);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productArray, setProductArray] = useState<Datatype[]>();
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<string[]>(categories);
   const [name, setName] = useState("");
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState([]);
@@ -33,10 +36,10 @@ const ProductForm = (props) => {
   const [images, setImages] = useState([]);
   const dispatch = useAppDispatch();
 
-  const categories = useAppSelector((state) => state.product.categories);
   useEffect(() => {
     setItems(categories);
-  }, []);
+  }, [categories]);
+
   const productList = useAppSelector((state) => state.product.productList);
   function geturls(array) {
     setImageurl(array);
@@ -46,11 +49,11 @@ const ProductForm = (props) => {
   ) => {
     e.preventDefault();
     setItems([...items, name]);
+    dispatch(addCategory([...items, name]));
+
     setName("");
-    dataref.ref("Products Categories").set({
-      Categories: [...items, name],
-    });
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -65,6 +68,7 @@ const ProductForm = (props) => {
       }
     };
     fetchData();
+    dispatch(fetchCategories());
   }, []);
   //showmodal
   const showModal = () => {
@@ -76,8 +80,6 @@ const ProductForm = (props) => {
   };
   // handle cancel button of modal
   const handleCancel = () => {
-    // console.log("ji");
-
     setIsModalOpen(false);
   };
 
@@ -198,7 +200,7 @@ const ProductForm = (props) => {
                     </Space>
                   </>
                 )}
-                options={categories.map((item) => ({
+                options={items.map((item) => ({
                   label: item,
                   value: item,
                 }))}

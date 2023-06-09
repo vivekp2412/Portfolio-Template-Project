@@ -1,24 +1,31 @@
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
 import style from "../Cards/style.module.css";
-
 function ProductCard(props) {
   const { data } = props;
-  console.log(data);
   const imgSrc = data.Image[0].dataURL;
   return (
     <>
-      <div className={style.card}>
-        <img src={imgSrc} alt="" />
-        <div className={style.cardContent}>
-          <h2>{data.productName}</h2>
-          <p>{data.productDescription}</p>
-          <a href="#" className={style.button}>
-            Find out more
-            <span className={style.material_symbol_outlined}>
-              arrow_right_alt
-            </span>
-          </a>
-        </div>
-      </div>
+      <Card className={style.productCard}>
+        <CardHeader color="blue-gray" className={style.imageContainer}>
+          <img className={style.image} src={imgSrc} alt="" />
+        </CardHeader>
+        <CardBody className={style.cardBody}>
+          <Typography color="blue-gray" className={style.name}>
+            {data.productName}
+          </Typography>
+          <Typography className={style.description}>
+            {data.productDescription}
+          </Typography>
+          <Button className={style.button}>Read More</Button>
+        </CardBody>
+      </Card>
     </>
   );
 }

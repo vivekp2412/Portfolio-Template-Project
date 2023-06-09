@@ -6,7 +6,6 @@ function AdminProduct() {
   return (
     <div className={style.Container}>
       <div className={style.productContainer}>
-        {/* <ProductSection /> */}
         <ProductForm />
         <PreviewTable />
       </div>

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { dataref } from "../../../../firebase";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import {
+  addCategory,
   fetchCategories,
   updateProduct,
 } from "../../../../slices/productSlice";
@@ -11,8 +12,9 @@ import style from "../Product-Form/style.module.css";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
 let initialImg: string | null = null;
 function EditFormModal(props) {
+  const categories = useAppSelector((state) => state.product.categories);
   const { setIsModalOpen, isModalOpen, productId } = props;
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<string[]>(categories);
   const [name, setName] = useState("");
   const [form] = Form.useForm();
   const [uniqueId, setUniqueId] = useState("");
@@ -20,13 +22,11 @@ function EditFormModal(props) {
   const [imageErr, setImageErr] = useState<boolean>(false);
   const [images, setImages] = useState([]);
   const formRef = useRef(null);
-
-  const categories = useAppSelector((state) => state.product.categories);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     setItems(categories);
-  }, []);
+  }, [categories]);
   const productList = useAppSelector((state) => state.product.productList);
-  console.log(categories);
 
   const [filteredArray] = productList.filter(
     (data) => data.productId == productId
@@ -40,13 +40,11 @@ function EditFormModal(props) {
   ) => {
     e.preventDefault();
     setItems([...items, name]);
+    dispatch(addCategory([...items, name]));
+
     setName("");
-    dataref.ref("Products Categories").set({
-      Categories: [...items, name],
-    });
   };
   function geturls(array) {
-    console.log(array[0].dataURL);
     setImageurl(array[0].dataURL);
     initialImg = null;
   }
@@ -67,7 +65,6 @@ function EditFormModal(props) {
       };
     }
 
-    console.log(data.Image[0].dataURL);
     dispatch(updateProduct(data));
     form.resetFields();
     handleOk();
@@ -173,7 +170,7 @@ function EditFormModal(props) {
                     </Space>
                   </>
                 )}
-                options={categories.map((item) => ({
+                options={items.map((item) => ({
                   label: item,
                   value: item,
                 }))}

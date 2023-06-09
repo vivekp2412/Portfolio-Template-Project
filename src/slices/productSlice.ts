@@ -30,11 +30,13 @@ export const fetchProductsData = createAsyncThunk(
 export const productSlice = createSlice({
     name: "products",
     initialState:{
+        // showProductSection:false,
         productList:[],
         pending:false,
         editform:{},
         filteredCategory:"all",
         searchedProducts:[],
+        searchQuery:"",
         categories:[]
     },
     reducers: {
@@ -71,9 +73,8 @@ export const productSlice = createSlice({
         searchProduct(state,action){
             let searchquery =  action.payload.searchquery;
             let searchBy =  action.payload.searchBy;
-           
+            state.searchQuery=searchquery;
             const filteredArray=state.productList.filter((product)=>{
-                console.log(product[searchBy],searchquery);
                 
                if(product[searchBy].includes(searchquery)) {
                 return product
@@ -82,28 +83,40 @@ export const productSlice = createSlice({
             })
             state.searchedProducts=filteredArray;
             
+        },
+        addCategory(state,action){
+          state.categories=action.payload;
+          dataref.ref("Products Categories").set({
+            Categories:state.categories
+          });
         }
     },
     extraReducers:(builder)=>{
         builder.addCase(fetchProductsData.pending,(state)=>{
             state.pending=true;
 
+
         })
         .addCase(fetchProductsData.fulfilled,(state,action)=>{
-            state.pending=true;
+            state.pending=false;
+            
             state.productList=action.payload;
+            // state.showProductSection=true
 
         })
         .addCase(fetchProductsData.rejected,(state)=>{
             state.pending=false;
+            // state.showProductSection=false
+
 
         })
         .addCase(fetchCategories.fulfilled,(state,action)=>{
+          
             state.categories=action.payload
 
         })
     }
 
 })
-export const {addProduct,deleteProduct,updateProduct,changeFilterCategory,searchProduct} = productSlice.actions 
+export const {addProduct,deleteProduct,updateProduct,changeFilterCategory,searchProduct,addCategory} = productSlice.actions 
 export default productSlice.reducer

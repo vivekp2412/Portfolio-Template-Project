@@ -1,24 +1,25 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import style from "../Navbar/style.module.css";
-import { Select } from "antd";
 import {
   changeFilterCategory,
   searchProduct,
 } from "../../../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../../../Hooks/Hooks";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useDebounce from "../../../Hooks/useDebounce";
-
+import { ConfigProvider, Select } from "antd";
 export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const debouncedSearchQuery = useDebounce(searchQuery, 2000);
-  const dispatch = useAppDispatch();
-  const categories = useAppSelector((state) => state.product.categories);
 
-  const handleChange = (e) => {
-    dispatch(changeFilterCategory(e.target.value));
-    console.log(e.target.value);
+  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
+  const dispatch = useAppDispatch();
+  let categories = useAppSelector((state) => state.product.categories);
+  const selectoptions = categories.map((category) => {
+    return { value: category, label: category };
+  });
+  const handleChange = (value) => {
+    dispatch(changeFilterCategory(value));
   };
 
   useEffect(() => {
@@ -29,16 +30,26 @@ export default function Navbar() {
       })
     );
   }, [debouncedSearchQuery]);
-  const options = categories.map((x) => (
-    <option className={style.selectOption} value={x}>
-      {x}
-    </option>
-  ));
   return (
     <div className={style.Product_Navbar_container}>
-      <select className={style.selectMenu} onChange={handleChange}>
-        {options}
-      </select>
+      <div>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#b88b05",
+            },
+          }}
+        >
+          <Select
+            className={style.select}
+            defaultValue="all"
+            style={{ width: 200, padding: 10 }}
+            dropdownStyle={{ backgroundColor: "white" }}
+            onChange={handleChange}
+            options={[{ value: "all", label: "All" }, ...selectoptions]}
+          />
+        </ConfigProvider>
+      </div>
       <div className={style.searchbar}>
         <input
           type="text"

@@ -1,4 +1,3 @@
-import React from "react";
 import style from "../HomeContainer/style.module.css";
 import Carousell from "../../components/Home-Section/Carousel/Carousel";
 import TitleName from "../../components/Home-Section/Title-Name/TitleName";
