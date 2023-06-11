@@ -5,6 +5,9 @@ import { Modal } from "antd";
 import { Formik, Form, ErrorMessage } from "formik";
 import { useEffect } from "react";
 import { dataref } from "../../../../firebase";
+import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
+import { addImage } from "../../../../slices/homeSlice";
+
 interface Datatype {
   image: string;
   imageId: string;
@@ -16,27 +19,29 @@ function idGenerator() {
 }
 //Modal Component
 const FormModal = () => {
+  const dispatch=useAppDispatch();
+  const initialImage= useAppSelector((state)=>state.home.allImages);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgurl] = useState("");
   const imgref: React.MutableRefObject<HTMLInputElement | null> =
     useRef<HTMLInputElement>(null);
-  const [imageArray, setImageArray] = useState<Datatype[]>();
+  const [imageArray, setImageArray] = useState(initialImage);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const carousel = await dataref.ref("Carousel").once("value");
-        if (carousel.val() == undefined) {
-          setImageArray([]);
-        } else {
-          setImageArray(carousel.val().image);
-        }
-      } catch (error) {
-        console.log("Error fetching data from Firebase:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const carousel = await dataref.ref("Carousel").once("value");
+  //       if (carousel.val() == undefined) {
+  //         setImageArray([]);
+  //       } else {
+  //         setImageArray(carousel.val().image);
+  //       }
+  //     } catch (error) {
+  //       console.log("Error fetching data from Firebase:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
   //showmodal
   const showModal = () => {
     setIsModalOpen(true);
@@ -111,9 +116,7 @@ const FormModal = () => {
             }
             setImageArray([...imageArray, imageData]);
             if (imageArray != undefined) {
-              dataref.ref("Carousel").set({
-                image: [...imageArray, imageData],
-              });
+              dispatch(addImage(imageData));
             }
             imgref.current!.value = "";
             setImgurl("");

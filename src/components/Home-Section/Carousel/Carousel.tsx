@@ -3,6 +3,8 @@ import style from "../Carousel/style.module.css";
 
 import { dataref } from "../../../firebase";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../../Hooks/Hooks";
+import Loader from "../../Comman/Loader/Loader";
 interface Datatype {
   image: string;
   imagfeId: string;
@@ -10,45 +12,33 @@ interface Datatype {
 }
 function Carousell() {
   const [imageArray, setimageArray] = useState([]);
-  const [isloading, setIsloading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const carousel = await dataref.ref("Carousel").once("value");
-        const data = carousel.val().image;
-        const imageActive = data.filter((x: Datatype) => x.active == true);
-        if (imageActive.length > 0) {
-          setimageArray(imageActive);
-        }
-        setIsloading(false);
-      } catch (error) {
-        console.log("Error fetching data from Firebase:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  let images = imageArray.map((src: Datatype) => {
+  // const [isloading, setIsloading] = useState(true);
+ const pending =  useAppSelector((state)=>state.home.pending);
+ const allimages=useAppSelector((state)=>state.home.allImages);
+ const imageToShow = allimages.filter((x)=>x.active==true);
+ 
+  let images = imageToShow.map((src: Datatype) => {
     return (
       <div>
         <img src={src.image} className={style.Caro_img}></img>
       </div>
     );
   });
-  if (images.length == 0 && isloading == false) {
+  if (images.length == 0 && pending == false) {
     images = [
       <div>
-        <h1 className={style.Caro_img}>No Data</h1>
+        <h1 className={style.Caro_img} style={{color:"wheat"}}>No Data</h1>
       </div>,
     ];
   }
-
+console.log(pending);
   return (
+    <>
+    {pending && <div className={style.loader}><Loader/></div>}
     <Carousel autoplay className={style.carousel}>
-      {isloading && <h1 className={style.Caro_img}>Loading</h1>}
       {images}
     </Carousel>
+    </>
   );
 }
 

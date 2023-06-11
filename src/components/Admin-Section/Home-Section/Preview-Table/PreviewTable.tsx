@@ -5,6 +5,8 @@ import { Button, Modal } from "antd";
 import style from "../Preview-Table/style.module.css";
 import type { ColumnsType } from "antd/es/table";
 import { Switch } from "antd";
+import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
+import { updateState } from "../../../../slices/homeSlice";
 //Type Declaration
 interface DataType {
   imageId: string;
@@ -29,41 +31,19 @@ const deleteAndRearrangeArray = async (id: string) => {
   }
 };
 //Fetch data
-async function getData() {
-  const snapshot = await dataref.ref("Carousel").once("value");
-  let originalArray: DataType[];
 
-  if (snapshot.val()) {
-    originalArray = snapshot.val().image;
-  } else {
-    originalArray = [];
-  }
-  return originalArray;
-}
 //Preview Component
 function PreviewTable() {
+  const data=useAppSelector((state)=>state.home.allImages);
+  const pending = useAppSelector((state)=>state.home.pending);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<DataType[]>();
   const [modalimg, setModalimg] = useState<string>();
-  //Switch Change handler
+  const dispatch=  useAppDispatch();
+  // Switch Change handler
   const onChange = async (checked: boolean, id: string) => {
-    const storedData = await getData();
-    const index = storedData.findIndex((x) => {
-      return x.imageId == id;
-    });
-    storedData[index].active = checked;
-    setData(storedData);
-    await dataref.ref("Carousel").set({ image: storedData });
+    dispatch(updateState({checked,id}))  
   };
-  useEffect(() => {
-    async function fetchdata() {
-      const fetchedData = await getData();
-      setData(fetchedData);
-      setIsLoading(false);
-    }
-    fetchdata();
-  }, []);
+
   const columns: ColumnsType<DataType> = [
     {
       title: "Image Id",
@@ -99,7 +79,12 @@ function PreviewTable() {
           </p>
           <p
             className={style.action_link}
-            onClick={() => deleteAndRearrangeArray(record.imageId)}
+            onClick={() => { 
+              if(confirm("Are You sure want to delete")==true){
+                deleteAndRearrangeArray(record.imageId)
+              }
+            }
+            }
           >
             Delete
           </p>
@@ -138,7 +123,7 @@ function PreviewTable() {
         className={style.table}
         columns={columns}
         dataSource={data}
-        loading={isLoading}
+        loading={pending}
         pagination={false}
       />
     </>

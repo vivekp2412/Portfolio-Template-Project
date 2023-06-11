@@ -1,9 +1,10 @@
 .homeContainer {
   position: relative;
+  /* min-height: 400px; */
 }
 .Title {
   position: absolute;
-  top: 200px;
+  top: 250px;
   width: 100%;
   margin: 0 auto;
   z-index: 11;
@@ -15,4 +16,9 @@
   height: 100%;
   position: absolute;
   top: 0;
+}
+@media screen and (max-width:500px) {
+  .Title{
+    top:120px
+  }
 }

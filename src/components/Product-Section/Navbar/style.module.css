@@ -24,6 +24,25 @@
 .searchButton:hover {
   background-color: white;
 }
+.searchSection{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: baseline;
+  gap: 20px;
+}
+.Options:hover{
+background-color: #b88b05;
+color: aqua;
+}
+/* .selectOptions{
+  color: white;
+  background-color: blue;
+}
+.selectOptions:hover{
+  background-color:black;
+  color: white;
+} */
 .searchbar input {
   border-bottom: 2px solid white;
   padding: 5px;
@@ -42,4 +61,22 @@
   .searchbar {
     max-width: 100%;
   }
+}
+@media screen and (max-width:496px) {
+  .searchbar input{
+    max-width: 100%;
+  }
+  .select{
+    width: 75%;
+  }
+  .category_selectMenu{
+    margin-top: 10px;
+    width: 75%;
+  }
+  .searchSection{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
 }

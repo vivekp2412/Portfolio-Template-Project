@@ -36,7 +36,6 @@
   gap: 10px;
 }
 .btn {
-  /* width: 120; */
   background-color: white;
   color: black;
   padding: 7px 13px;
@@ -46,4 +45,9 @@
 .btn:hover {
   background-color: #b88b05;
   color: white;
+}
+@media screen and (max-width:500px) {
+  .btn{
+    padding: 2px 5px;
+  }
 }

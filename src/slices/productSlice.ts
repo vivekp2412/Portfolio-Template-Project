@@ -1,5 +1,4 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import { object } from "yup";
 import { dataref } from "../firebase";
 
 export const fetchProductsData = createAsyncThunk(
@@ -41,7 +40,11 @@ export const productSlice = createSlice({
     },
     reducers: {
         addProduct(state,action){
-            state.productList.push(action.payload);
+            // prompt("Product Added Successfully");
+            // state.productList.push(action.payload);
+            state.productList=[...state.productList,action.payload];
+            console.log(state.productList);
+            
             dataref.ref("Products").set({
                 productList:state.productList
             })
@@ -50,10 +53,12 @@ export const productSlice = createSlice({
             const indexToDelete = state.productList.findIndex((object) => {
                 return object.productId == action.payload;
               });
-              state.productList.splice(indexToDelete,1);
+             state.productList= state.productList.splice(indexToDelete,1);
               dataref.ref("Products").set({
                 productList:state.productList
               })
+            // prompt("Product deleted Successfully");
+
               
         },
         updateProduct(state,action){
@@ -63,6 +68,7 @@ export const productSlice = createSlice({
             dataref.ref("Products").set({
                 productList:state.productList
             });
+            // prompt("Product updated Successfully");
             
 
         },
@@ -74,14 +80,17 @@ export const productSlice = createSlice({
             let searchquery =  action.payload.searchquery;
             let searchBy =  action.payload.searchBy;
             state.searchQuery=searchquery;
-            const filteredArray=state.productList.filter((product)=>{
+            if(searchBy){
+
+              const filteredArray=state.productList.filter((product)=>{
                 
-               if(product[searchBy].includes(searchquery)) {
-                return product
-                
-               }
-            })
-            state.searchedProducts=filteredArray;
+                if(product[searchBy].includes(searchquery)) {
+                  return product
+                  
+                }
+              })
+              state.searchedProducts=filteredArray;
+            }
             
         },
         addCategory(state,action){

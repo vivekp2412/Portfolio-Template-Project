@@ -1,8 +1,10 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import productReducer from "../slices/productSlice"
+import homeReducer from "../slices/homeSlice"
 const store = configureStore({
     reducer:{
-        product:productReducer
+        product:productReducer,
+        home:homeReducer
     },
 })
 

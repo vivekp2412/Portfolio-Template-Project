@@ -48,6 +48,14 @@ const ProductForm = (props) => {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
     e.preventDefault();
+    let categoryExists = items.filter((category)=>
+     category.toUpperCase()==name.toUpperCase()
+    )
+    
+    if(categoryExists.length > 0){
+      alert("Category already present");
+      return;
+    }
     setItems([...items, name]);
     dispatch(addCategory([...items, name]));
 

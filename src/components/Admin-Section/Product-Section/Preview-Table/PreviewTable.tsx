@@ -63,7 +63,7 @@ function PreviewTable() {
           >
             Update
           </a>
-          <a onClick={() => dispatch(deleteProduct(record.productId))}>
+          <a onClick={() => {if(confirm("Are you sure want to delete")==true){ dispatch(deleteProduct(record.productId))}}}>
             Delete
           </a>
         </Space>

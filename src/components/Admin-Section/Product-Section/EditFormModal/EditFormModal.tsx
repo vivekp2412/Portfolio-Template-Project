@@ -18,7 +18,7 @@ function EditFormModal(props) {
   const [name, setName] = useState("");
   const [form] = Form.useForm();
   const [uniqueId, setUniqueId] = useState("");
-  const [imageUrls, setImageurl] = useState();
+  const [imageUrls, setImageurl] = useState("");
   const [imageErr, setImageErr] = useState<boolean>(false);
   const [images, setImages] = useState([]);
   const formRef = useRef(null);
@@ -39,6 +39,14 @@ function EditFormModal(props) {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
     e.preventDefault();
+    let categoryExists = items.filter((category)=>
+    category.toUpperCase()==name.toUpperCase()
+   )
+   
+   if(categoryExists.length > 0){
+     alert("Category already present");
+     return;
+   }
     setItems([...items, name]);
     dispatch(addCategory([...items, name]));
 
@@ -57,12 +65,14 @@ function EditFormModal(props) {
         ...values,
         Image: [{ dataURL: initialImg }],
       };
+      
     } else {
       data = {
         ...prevdata,
         ...values,
         Image: [{ dataURL: imageUrls }],
       };
+
     }
 
     dispatch(updateProduct(data));

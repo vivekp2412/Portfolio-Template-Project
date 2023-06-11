@@ -1,7 +1,7 @@
 .headerContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  @apply text-white items-center w-[100%] flex-wrap pb-20 md:justify-center md:mx-auto;
+  @apply text-white items-center w-[100%] flex-wrap pb-3 md:justify-center md:mx-auto;
 }
 .card {
   @apply flex m-5 text-base justify-center;

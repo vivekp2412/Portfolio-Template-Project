@@ -2,7 +2,6 @@
   height: 750px;
   width: 100%;
   object-fit: cover;
-  margin: 10px;
   background-color: black;
 }
 .Caro_img {
@@ -10,4 +9,10 @@
 }
 .carousel {
   background-color: black;
+}
+.loader{
+  position: absolute;
+  top: 150px;
+  left: 45%;
+  @apply h-[750px]; 
 }

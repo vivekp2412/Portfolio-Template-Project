@@ -3,22 +3,18 @@ import ProductTitle from "../../components/Product-Section/Section-Title/Product
 import Navbar from "../../components/Product-Section/Navbar/Navbar";
 import CardContainer from "../../components/Product-Section/CardContainer/CardContainer";
 import { fetchCategories, fetchProductsData } from "../../slices/productSlice";
-import { useAppDispatch } from "../../Hooks/Hooks";
+import { useAppDispatch, useAppSelector } from "../../Hooks/Hooks";
 import { useEffect } from "react";
+import Paginate from "../../components/Comman/Paginate/Paginate";
 
 export default function ProductContainer() {
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchProductsData());
-    dispatch(fetchCategories());
-  }, []);
 
   return (
     <div className={style.ProductContainer}>
       <ProductTitle />
       <Navbar />
-      <CardContainer />
+      <CardContainer  />
     </div>
   );
 }
