@@ -3,8 +3,6 @@ import style from "../Modal/style.module.css";
 import * as yup from "yup";
 import { Modal } from "antd";
 import { Formik, Form, ErrorMessage } from "formik";
-import { useEffect } from "react";
-import { dataref } from "../../../../firebase";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import { addImage } from "../../../../slices/homeSlice";
 

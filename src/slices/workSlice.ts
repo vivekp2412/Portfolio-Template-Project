@@ -1,48 +1,47 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { dataref } from "../firebase";
 export const fetchCarouselData = createAsyncThunk(
-  "/fetchCarousell",
+  "/fetchWork",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await dataref.ref("Carousel").once("value");
-      const data = response.val().image;
+      const response = await dataref.ref("Our Work").once("value");
+      const data = response.val().works;
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-export const homeSlice = createSlice({
-  name: "Home",
+export const workSlice = createSlice({
+  name: "Work",
   initialState: {
     pending: true,
-    allImages: [],
-    // imagesToShow:[]
+    allWorks: [],
   },
   reducers: {
     addImage(state, action) {
-      state.allImages = [...state.allImages, action.payload];
-      dataref.ref("Carousel").set({
-        image: state.allImages,
+      state.allWorks = [...state.allWorkd, action.payload];
+      dataref.ref("Our Work").set({
+        image: state.allWorks,
       });
     },
     deleteImage(state, action) {
-      const indexToDelete = state.allImages.findIndex((object) => {
-        return object.imageId == action.payload;
+      const indexToDelete = state.allWorks.findIndex((object) => {
+        return object.workId == action.payload;
       });
-      state.allImages = state.allImages.splice(indexToDelete, 1);
-      dataref.ref("Carousel").set({
-        image: state.allImages,
+      state.allWorks = state.allWorks.splice(indexToDelete, 1);
+      dataref.ref("Our Work").set({
+    works: state.allWorks,
       });
     },
     updateState(state, action) {
         const id =action.payload.id;
         const checked = action.payload.checked;
-      const index = state.allImages.findIndex((image) => {
-        return image.imageId == id;
+      const index = state.allWorks.findIndex((image) => {
+        return image.workId == id;
       });
-      state.allImages[index].active=checked;
-      dataref.ref("Carousel").set({image:state.allImages});
+      state.allWorks[index].active=checked;
+      dataref.ref("Our Work").set({works:state.allWorks});
     },
   },
   extraReducers: (builder) => {
@@ -53,7 +52,7 @@ export const homeSlice = createSlice({
       .addCase(fetchCarouselData.fulfilled, (state, action) => {
         state.pending = false;
 
-        state.allImages = action.payload;
+        state.allWorks = action.payload;
         // state.showProductSection=true
       })
       .addCase(fetchCarouselData.rejected, (state) => {
@@ -62,5 +61,5 @@ export const homeSlice = createSlice({
       });
   },
 });
-export const { addImage, deleteImage,updateState } = homeSlice.actions;
-export default homeSlice.reducer;
+export const { addImage, deleteImage,updateState } = workSlice.actions;
+export default workSlice.reducer;
