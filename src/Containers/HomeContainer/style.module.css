@@ -1,6 +1,6 @@
 .homeContainer {
   position: relative;
-  /* min-height: 400px; */
+  min-height: 750px;
 }
 .Title {
   position: absolute;
@@ -17,8 +17,8 @@
   position: absolute;
   top: 0;
 }
-@media screen and (max-width:500px) {
-  .Title{
-    top:120px
+@media screen and (max-width: 500px) {
+  .Title {
+    top: 120px;
   }
 }

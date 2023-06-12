@@ -53,7 +53,7 @@ export const productSlice = createSlice({
             const indexToDelete = state.productList.findIndex((object) => {
                 return object.productId == action.payload;
               });
-             state.productList= state.productList.splice(indexToDelete,1);
+             state.productList.splice(indexToDelete,1);
               dataref.ref("Products").set({
                 productList:state.productList
               })

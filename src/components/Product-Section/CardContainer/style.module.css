@@ -8,13 +8,13 @@
   gap: 4rem;
   /* min-height: 570px; */
 }
-.paginate{
+.paginate {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
   color: white;
 }
-.active{
+.active {
   color: #b88b05;
 }

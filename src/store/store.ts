@@ -1,10 +1,12 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import productReducer from "../slices/productSlice"
 import homeReducer from "../slices/homeSlice"
+import authReducer from "../slices/authSlice";
 const store = configureStore({
     reducer:{
         product:productReducer,
-        home:homeReducer
+        home:homeReducer,
+        auth:authReducer
     },
 })
 

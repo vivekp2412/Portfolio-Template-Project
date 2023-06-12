@@ -1,18 +1,12 @@
 .Caro_img {
-  height: 750px;
-  width: 100%;
-  object-fit: cover;
-  background-color: black;
-}
-.Caro_img {
-  @apply h-[100%] md:h-[750px];
+  @apply w-[100%] max-h-[750px] object-cover;
 }
 .carousel {
   background-color: black;
 }
-.loader{
+.loader {
   position: absolute;
-  top: 150px;
-  left: 45%;
-  @apply h-[750px]; 
+  top: 30%;
+  left: 50%;
+  @apply h-[750px];
 }
