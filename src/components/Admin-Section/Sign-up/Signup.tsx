@@ -1,41 +1,118 @@
-import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../../firebase";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../Hooks/Hooks";
-import { signUpUser } from "../../../slices/authSlice";
-function Signup() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+import { loginUser, signUpUser } from "../../../slices/authSlice";
+import { Input, Button, Form } from "antd";
+const Password = Input.Password;
+import loginImage from "../../../assets/Login/user-interface.png";
+import style from "../Login-Page/style.module.css";
+function Login() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  function signup(e) {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+  function onFinish(values) {
+    console.log(values);
+
+    createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {
         dispatch(signUpUser(userCredentials));
+        navigate("/admin/home");
       })
       .catch((error) => {
         alert(error.message);
-        console.log(error);
       });
   }
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
+
   return (
-    <div>
-      <form onSubmit={signup}>
-        <input
-          type="text"
+    <div className={style.formContainer}>
+      <Form
+        name="basic"
+        layout={"vertical"}
+        className={style.form}
+        // labelCol={{ span: 10 }}
+        // wrapperCol={{ span: 48 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        // autoComplete="off"
+      >
+        <div className={style.loginPhoto}>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              {" "}
+              <g id="style=bulk">
+                {" "}
+                <g id="profile">
+                  {" "}
+                  <path
+                    id="vector (Stroke)"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M6.75 6.5C6.75 3.6005 9.1005 1.25 12 1.25C14.8995 1.25 17.25 3.6005 17.25 6.5C17.25 9.3995 14.8995 11.75 12 11.75C9.1005 11.75 6.75 9.3995 6.75 6.5Z"
+                    fill="#000000"
+                  ></path>{" "}
+                  <path
+                    id="rec (Stroke)"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M4.25 18.5714C4.25 15.6325 6.63249 13.25 9.57143 13.25H14.4286C17.3675 13.25 19.75 15.6325 19.75 18.5714C19.75 20.8792 17.8792 22.75 15.5714 22.75H8.42857C6.12081 22.75 4.25 20.8792 4.25 18.5714Z"
+                    fill="#BFBFBF"
+                  ></path>{" "}
+                </g>{" "}
+              </g>{" "}
+            </g>
+          </svg>
+        </div>
+        <div className={style.formTitle}>Sign Up</div>
+
+        <Form.Item
+          className={style.field}
+          label="Email"
           name="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
+          rules={[{ required: true, message: "Please input your Email!" }]}
+        >
+          <Input type="email" />
+        </Form.Item>
+
+        <Form.Item
+          className={style.field}
+          label="Password"
           name="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input type="password" />
+        </Form.Item>
+
+        <div className={style.btnContainer}>
+          <button className={style.submitBtn} type="submit">
+            Submit
+          </button>
+        </div>
+        {/* <div className={style.btnContainer}> */}
+        <Link to="/admin/login" className={style.link} type="submit">
+          Already Registered? Login
+        </Link>
+        {/* </div> */}
+      </Form>
     </div>
   );
 }
 
-export default Signup;
+export default Login;
