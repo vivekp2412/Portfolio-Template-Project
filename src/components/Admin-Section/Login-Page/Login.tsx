@@ -80,6 +80,7 @@ function Login() {
         <div className={style.formTitle}>Welcome Back!</div>
 
         <Form.Item
+          style={{marginBottom:"10px"}}
           className={style.field}
           label="Email"
           name="email"
@@ -89,6 +90,7 @@ function Login() {
         </Form.Item>
 
         <Form.Item
+          style={{margin:"10px"}}
           className={style.field}
           label="Password"
           name="password"
@@ -102,10 +104,14 @@ function Login() {
             Submit
           </button>
         </div>
+        <div className={style.formFooter}>Dont Have Account ?
+
+        <br/>
+        <Link to="/admin/signup" className={style.link} >
+        Sign Up
+        </Link> 
+        </div>
         {/* <div className={style.btnContainer}> */}
-        <Link to="/admin/signup" className={style.link} type="submit">
-          Dont have Account? Sign Up
-        </Link>
         {/* </div> */}
       </Form>
     </div>

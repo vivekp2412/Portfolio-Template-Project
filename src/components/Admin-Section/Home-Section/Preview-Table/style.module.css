@@ -46,6 +46,12 @@ table {
   color: black;
   cursor: pointer;
 }
+.action_link_delete{  
+cursor: pointer;
+}
+.action_link_delete:hover{  
+  color: red;
+}
 .action_link:hover {
   @apply text-secondary;
 }

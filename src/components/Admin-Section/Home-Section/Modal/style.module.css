@@ -28,6 +28,7 @@
 }
 .errorMessage {
   color: red;
+  text-align: center
 }
 .bottomline {
   @apply border-b-2 border-secondary my-5;

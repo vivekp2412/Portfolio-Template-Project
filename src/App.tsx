@@ -12,7 +12,11 @@ function App() {
     dispatch(fetchCategories());
     dispatch(fetchCarouselData());
   }, []);
-  return <RouteComponent />;
+  return<>
+
+
+  <RouteComponent />;
+  </> 
 }
 
 export default App;

@@ -20,7 +20,6 @@ interface DataType {
 function PreviewTable() {
   const pending = useAppSelector((state) => state.home.pending);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDisable, setIsDisable] = useState(false);
   const [modalimg, setModalimg] = useState<string>();
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.home.allImages);
@@ -57,7 +56,7 @@ function PreviewTable() {
       render: (_, record) => (
         <Space size="middle">
           <Switch
-            disabled={isDisable}
+            // disabled={isDisable}
             checked={record.active}
             onChange={(checked) => onChange(checked, record.imageId)}
           />

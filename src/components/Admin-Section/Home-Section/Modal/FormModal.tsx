@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { dataref } from "../../../../firebase";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import { addImage } from "../../../../slices/homeSlice";
+import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 
 interface Datatype {
   image: string;
@@ -23,10 +24,15 @@ const FormModal = () => {
   const initialImage = useAppSelector((state) => state.home.allImages);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgUrl, setImgurl] = useState("");
+  const [imageErr, setImageErr] = useState<boolean>(false);
+  const [images, setImages] = useState([]);
+  const [imageUrls, setImageurl] = useState<{}[]>([]);
   const imgref: React.MutableRefObject<HTMLInputElement | null> =
     useRef<HTMLInputElement>(null);
   const [imageArray, setImageArray] = useState(initialImage);
-
+  const handleImageError = () => {
+    setImageErr(false);
+  };
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -82,7 +88,28 @@ const FormModal = () => {
       }),
   });
   //initialValue of Form
-  const initialvalue = { image: "" };
+  function geturls(array) {
+    setImageurl(array);
+  }
+function handleSubmit(){
+     if (images.length != 0) {
+      setImageErr(false);
+      let data ={
+        image:imageUrls[0].dataURL,
+        imageId:idGenerator(),
+        active:true
+      }
+      dispatch(addImage(data))
+      setImages([]);
+      handleOk();
+    }else{
+      setImageErr(true)
+    }
+}  
+const onReset = () => {
+  setImageErr(false)
+  setImages([]);
+};
 
   return (
     <>
@@ -99,11 +126,11 @@ const FormModal = () => {
         footer={null}
         open={isModalOpen}
         onOk={handleOk}
-        closable={false}
+        // closable={false}
         maskClosable={false}
         onCancel={handleCancel}
       >
-        <Formik
+        {/* <Formik
           initialValues={initialvalue}
           onSubmit={(values) => {
             let imageData = {
@@ -168,18 +195,27 @@ const FormModal = () => {
                     }}
                   </ErrorMessage>
                 </div>
-                <div className={style.button_container}>
-                  <button type="submit" className={style.button_modal}>
-                    Ok
-                  </button>
-                  <button type="reset" className={style.button_modal}>
-                    Close
-                  </button>
-                </div>
+               
               </Form>
             );
           }}
-        </Formik>
+        </Formik> */}
+         <ImageUpload
+            geturl={geturls}
+            images={images}
+            setImages={setImages}
+            handleImageError={handleImageError}
+          />
+          {imageErr && <div className={style.errorMessage}>Required</div>}
+
+           <div className={style.button_container}>
+                  <button type="submit" onClick={handleSubmit} className={style.button_modal}>
+                    Ok
+                  </button>
+                  <button type="reset" className={style.button_modal} onClick={onReset}>
+                    Reset
+                  </button>
+                </div>
       </Modal>
     </>
   );

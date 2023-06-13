@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { dataref } from "../firebase";
+import { toast } from "react-toastify";
+
 export const fetchCarouselData = createAsyncThunk(
   "/fetchCarousell",
   async (_, { rejectWithValue }) => {
@@ -20,7 +22,7 @@ export const homeSlice = createSlice({
   },
   reducers: {
     addImage(state, action) {
-      
+      toast.success('Image Added Successfully');
       state.allImages = [...state.allImages, action.payload];
       dataref.ref("Carousel").set({
         image: state.allImages,
@@ -31,19 +33,27 @@ export const homeSlice = createSlice({
         return object.imageId == action.payload;
       });
       state.allImages.splice(indexToDelete, 1);
+      toast.success("Image Deleted Successfully");
       dataref.ref("Carousel").set({
         image: state.allImages,
       });
     },
     updateState(state, action) {
-        const id =action.payload.id;
-        const checked = action.payload.checked;
-      const index = state.allImages.findIndex((image) => {
-        return image.imageId == id;
-      });
-      state.allImages[index].active=checked;
-      dataref.ref("Carousel").set({image:state.allImages});
-    },
+      const id =action.payload.id;
+      const checked = action.payload.checked;
+    const index = state.allImages.findIndex((image) => {
+      return image.imageId == id;
+    });
+    state.allImages[index].active=checked;
+    if(checked){
+      toast.success(`"Image Id:"${id} "is Active"`)
+    }else{
+      toast.success(`"Image Id:"${id} "is Inactive"`)
+
+    }
+    dataref.ref("Carousel").set({image:state.allImages});
+  },
+
   },
   extraReducers: (builder) => {
     builder

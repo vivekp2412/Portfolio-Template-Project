@@ -19,10 +19,8 @@ function ProductCard(props) {
         }}
       >
         <div className={style.overlay}>
-          <div className={style.items}></div>
           <div className={style.head}>
-            <p>
-              Product Name : <br />
+            <p className={style.productName}>
               {data.productName}
             </p>
           </div>
@@ -30,7 +28,7 @@ function ProductCard(props) {
           <div className={`${style.items} ${style.cart}`}>
             <span>
               <hr />
-              <a href="">Read More</a>
+              <a className={style.readMore} href="">Read More</a>
             </span>
           </div>
         </div>

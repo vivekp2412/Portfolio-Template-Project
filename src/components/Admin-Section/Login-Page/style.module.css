@@ -73,7 +73,7 @@ Input {
 }
 .link {
   color: #b88b05;
-  font-weight: 900;
+  font-weight: 600;
   font-size: medium;
 }
 .link:hover {
@@ -83,4 +83,16 @@ Input {
   .field Input {
     width: 100%;
   }
+}
+.formFooter{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.ant-form-item-explain-error {
+  color: blue;
+  font-size: 12px;
+  margin-top: 4px;
 }

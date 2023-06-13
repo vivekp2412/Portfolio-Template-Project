@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { dataref } from "../firebase";
+import { toast } from "react-toastify";
 
 export const fetchProductsData = createAsyncThunk(
     'yourSlice/fetchData',
@@ -40,7 +41,7 @@ export const productSlice = createSlice({
     },
     reducers: {
         addProduct(state,action){
-            // prompt("Product Added Successfully");
+            toast.success("Product Added Successfully");
             // state.productList.push(action.payload);
             state.productList=[...state.productList,action.payload];
             console.log(state.productList);
@@ -50,14 +51,14 @@ export const productSlice = createSlice({
             })
         },
         deleteProduct(state,action){
-            const indexToDelete = state.productList.findIndex((object) => {
-                return object.productId == action.payload;
-              });
-             state.productList.splice(indexToDelete,1);
+          const indexToDelete = state.productList.findIndex((object) => {
+            return object.productId == action.payload;
+          });
+          state.productList.splice(indexToDelete,1);
+          toast.success("Product deleted Successfully");
               dataref.ref("Products").set({
                 productList:state.productList
               })
-            // prompt("Product deleted Successfully");
 
               
         },
@@ -65,10 +66,10 @@ export const productSlice = createSlice({
             let id  = action.payload.productId;
             const indexToUpdate = state.productList.findIndex((x)=> x.productId==id);
             state.productList[indexToUpdate]=action.payload;
+            toast.success("Product updated Successfully");
             dataref.ref("Products").set({
                 productList:state.productList
             });
-            // prompt("Product updated Successfully");
             
 
         },

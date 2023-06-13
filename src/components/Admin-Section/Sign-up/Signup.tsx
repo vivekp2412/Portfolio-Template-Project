@@ -86,6 +86,7 @@ function Login() {
           className={style.field}
           label="Email"
           name="email"
+          style={{marginBottom:"10px"}}
           rules={[{ required: true, message: "Please input your Email!" }]}
         >
           <Input type="email" />
@@ -93,6 +94,7 @@ function Login() {
 
         <Form.Item
           className={style.field}
+          style={{marginBottom:"10px"}}
           label="Password"
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
@@ -105,10 +107,15 @@ function Login() {
             Submit
           </button>
         </div>
+        <div className={style.formFooter}>
+          ALready Have Account ?
+          <br />
+          <Link to="/admin/login" className={style.link}>
+            Login
+          </Link>
+        </div>
         {/* <div className={style.btnContainer}> */}
-        <Link to="/admin/login" className={style.link} type="submit">
-          Already Registered? Login
-        </Link>
+       
         {/* </div> */}
       </Form>
     </div>
