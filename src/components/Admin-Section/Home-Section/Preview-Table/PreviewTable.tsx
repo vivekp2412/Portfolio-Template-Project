@@ -6,43 +6,39 @@ import style from "../Preview-Table/style.module.css";
 import type { ColumnsType } from "antd/es/table";
 import { Switch } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { updateState } from "../../../../slices/homeSlice";
+import { deleteImage, updateState } from "../../../../slices/homeSlice";
 //Type Declaration
 interface DataType {
   imageId: string;
   image: string;
   active: boolean;
 }
-//Delete function for data
-const deleteAndRearrangeArray = async (id: string) => {
-  try {
-    const snapshot = await dataref.ref("Carousel").once("value");
-    let dataArray = snapshot.val().image;
-    const indexToDelete = dataArray.findIndex(
-      (object: { imageId: string; image: string }) => {
-        return object.imageId == id;
-      }
-    );
-    dataArray.splice(indexToDelete, 1);
 
-    await dataref.ref("Carousel").set({ image: dataArray });
-  } catch (error) {
-    console.error("Error rearranging the array:", error);
-  }
-};
 //Fetch data
 
 //Preview Component
 function PreviewTable() {
-  const data=useAppSelector((state)=>state.home.allImages);
-  const pending = useAppSelector((state)=>state.home.pending);
+  const pending = useAppSelector((state) => state.home.pending);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDisable, setIsDisable] = useState(false);
   const [modalimg, setModalimg] = useState<string>();
-  const dispatch=  useAppDispatch();
+  const dispatch = useAppDispatch();
+  const data = useAppSelector((state) => state.home.allImages);
   // Switch Change handler
-  const onChange = async (checked: boolean, id: string) => {
-    dispatch(updateState({checked,id}))  
+  // useEffect(() => {
+  //   let filteredArray = data.filter((data) => {
+  //     return data.active == true;
+  //   });
+  //   if (filteredArray.length > 3) {
+  //     console.log("jo");
+
+  //     setIsDisable(true);
+  //   }
+  // }, [data]);
+  const onChange = (checked: boolean, id: string) => {
+    dispatch(updateState({ checked, id }));
   };
+  console.log(data);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -61,6 +57,7 @@ function PreviewTable() {
       render: (_, record) => (
         <Space size="middle">
           <Switch
+            disabled={isDisable}
             checked={record.active}
             onChange={(checked) => onChange(checked, record.imageId)}
           />
@@ -78,13 +75,12 @@ function PreviewTable() {
             View
           </p>
           <p
-            className={style.action_link}
-            onClick={() => { 
-              if(confirm("Are You sure want to delete")==true){
-                deleteAndRearrangeArray(record.imageId)
+            className={style.action_link_delete}
+            onClick={() => {
+              if (confirm("Are You sure want to delete") == true) {
+                dispatch(deleteImage(record.imageId));
               }
-            }
-            }
+            }}
           >
             Delete
           </p>

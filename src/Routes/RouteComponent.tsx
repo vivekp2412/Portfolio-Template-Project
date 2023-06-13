@@ -10,8 +10,11 @@ import AdminProduct from "../Containers/AdminContainer/Admin-Product/AdminProduc
 import Login from "../components/Admin-Section/Login-Page/Login";
 import Signup from "../components/Admin-Section/Sign-up/Signup";
 import ProtectedRoute from "./ProtectedRoute";
+import { useAppSelector } from "../Hooks/Hooks";
+import LoginContainer from "../Containers/Login-Container/LoginContainer";
 
 function RouteComponent() {
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   return (
     <div>
       <Routes>
@@ -19,12 +22,21 @@ function RouteComponent() {
         <Route path="/admin" element={<AdminContainer />}>
           <Route
             path="home"
-            element={<ProtectedRoute component={HomeSection} />}
+            element={
+              <ProtectedRoute>
+                <HomeSection />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="products"
-            element={<ProtectedRoute component={ProductSection} />}
+            element={
+              <ProtectedRoute>
+                <AdminProduct />
+              </ProtectedRoute>
+            }
           />
+
           <Route
             path="works"
             element={<ProtectedRoute component={WorkSection} />}
@@ -34,8 +46,8 @@ function RouteComponent() {
             element={<ProtectedRoute component={ContactSection} />}
           />
         </Route>
+        <Route path="/admin/login" element={<LoginContainer />} />
         <Route path="/admin/signup" element={<Signup />} />
-        <Route path="/admin/login" element={<Login />} />
       </Routes>
     </div>
   );

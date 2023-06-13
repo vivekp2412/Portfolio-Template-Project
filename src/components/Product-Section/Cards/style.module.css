@@ -1,46 +1,90 @@
-.productCard {
+.container {
+  /* width: 350px; */
+  height: 350px;
+  /* margin: auto; */
   background-color: white;
-  width: 350px;
-  height: 250px;
-  flex-direction: column;
-  justify-content: space-around;
+  background-size: cover;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 5px #000;
+  box-shadow: 0 0 5px #000;
 }
-.image {
-  width: 100%;
+.overlay {
+  /* width: 100%; */
   height: 100%;
-  object-fit: cover;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr 2fr 1fr;
+  background: rgba(77, 77, 77, 0.9);
+  color: white;
+  opacity: 0;
+  transition: all 0.5s;
+  font-family: "Playfair Display", serif;
 }
-.imageContainer {
+.items {
+  letter-spacing: 3px;
+}
+.head {
+  font-size: 2rem;
+  width: 100%;
+  line-height: 40px;
+  transform: translateY(40px);
+  transition: all 0.7s;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 60%;
+  align-items: center;
 }
-.name {
-  font-size: larger;
-  font-weight: 600;
+.cart hr {
+  display: block;
+  width: 0;
+  border: none;
+  border-bottom: solid 2px #fef5df;
+  bottom: 0;
+  transition: all 0.5s;
 }
-.cardBody {
-  padding: 20px !important;
+.price {
+  font-size: 22px;
+  line-height: 10px;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s;
+}
+.price .old {
+  text-decoration: line-through;
+  color: #b3b3b3;
+}
+.cart {
+  font-size: 20px;
+  opacity: 0;
+  letter-spacing: 1px;
+  font-family: "Lato", sans-serif;
   display: flex;
-  height: 40%;
-  flex-direction: column;
-  gap: 5px;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.description {
-  height: 150px;
-  overflow: hidden;
-  position: relative;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(40px);
+  transition: all 0.7s;
 }
 
-.button {
-  padding: 0.3rem 0.5rem;
-  background-color: white;
-  color: black;
+.cart a:hover {
+  color: #b88b05;
 }
-.button:hover {
-  background-color: #b88b05;
-  color: white;
+.container:hover .overlay {
+  opacity: 1;
+}
+.container:hover .overlay .head {
+  transform: translateY(0px);
+}
+.container:hover .overlay hr {
+  width: 100%;
+  transition-delay: 0.4s;
+}
+.container:hover .overlay .price {
+  transform: translateY(0px);
+  transition-delay: 0.3s;
+  opacity: 1;
+}
+.container:hover .overlay .cart {
+  transform: translateY(0px);
+  transition-delay: 0.6s;
+  opacity: 1;
 }

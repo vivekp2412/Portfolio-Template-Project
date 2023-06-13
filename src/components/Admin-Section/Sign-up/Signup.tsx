@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase";
+import { useAppDispatch } from "../../../Hooks/Hooks";
+import { signUpUser } from "../../../slices/authSlice";
 function Signup() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const dispatch = useAppDispatch();
+
   function signup(e) {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        console.log(userCredentials);
+        dispatch(signUpUser(userCredentials));
       })
       .catch((error) => {
+        alert(error.message);
         console.log(error);
       });
   }

@@ -17,21 +17,21 @@ export const homeSlice = createSlice({
   initialState: {
     pending: true,
     allImages: [],
-    // imagesToShow:[]
   },
   reducers: {
     addImage(state, action) {
+      
       state.allImages = [...state.allImages, action.payload];
       dataref.ref("Carousel").set({
         image: state.allImages,
-      });
+      })
     },
     deleteImage(state, action) {
       const indexToDelete = state.allImages.findIndex((object) => {
         return object.imageId == action.payload;
       });
-      state.allImages = state.allImages.splice(indexToDelete, 1);
-      dataref.ref("Products").set({
+      state.allImages.splice(indexToDelete, 1);
+      dataref.ref("Carousel").set({
         image: state.allImages,
       });
     },
@@ -52,7 +52,8 @@ export const homeSlice = createSlice({
       })
       .addCase(fetchCarouselData.fulfilled, (state, action) => {
         state.pending = false;
-
+        console.log("hi");
+        
         state.allImages = action.payload;
         // state.showProductSection=true
       })

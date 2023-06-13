@@ -13,29 +13,14 @@ const authSlice= createSlice({
     },
     reducers:{
         loginUser(state,action){
-            let email=action.payload.email;
-            let password=action.payload.password;
-            console.log(email,password);
-            
-            const navigate = 
-            signInWithEmailAndPassword(auth, email, password)
-            .then((userCredentials) => {
-              state.isAuthenticated=true;
-              state.userInfo=userCredentials.user;
-              navigate("/");
-            })
-            .catch((error) => {
-              console.log(error.message);
-            });
+            state.isAuthenticated=true;
+            state.userInfo = action.payload.user;
             
         },
         signUpUser(state,action){
-            let email=action.email;
-            let password=action.password;
-            createUserWithEmailAndPassword(auth,email,password).then((userCredentials)=>{
-             state.isAuthenticated=true;
-             state.userInfo=userCredentials.user;
-            })
+            state.isAuthenticated=true;
+            state.userInfo=action.payload.user;
+         
             
         }
     }

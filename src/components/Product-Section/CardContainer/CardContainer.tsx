@@ -6,6 +6,7 @@ import ProductCard from "../Cards/ProductCard";
 import ReactPaginate from "react-paginate";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Col, Row } from "antd";
 
 function CardContainer() {
   const productList = useAppSelector((state) => state.product.productList);
@@ -58,9 +59,13 @@ function CardContainer() {
           <h1 style={{ color: "white" }}>No Data Found</h1>
         ) : (
           <>
-            {currentProducts.map((product) => (
-              <ProductCard key={product.id} data={product} />
-            ))}
+            <Row gutter={[36, 36]}>
+              {currentProducts.map((product) => (
+                <Col xs={24} xl={8} sm={12}>
+                  <ProductCard key={product.id} data={product} />
+                </Col>
+              ))}
+            </Row>
           </>
         )}
       </div>

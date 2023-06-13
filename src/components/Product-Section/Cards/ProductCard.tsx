@@ -11,20 +11,30 @@ function ProductCard(props) {
   const imgSrc = data.Image[0].dataURL;
   return (
     <>
-      <Card className={style.productCard}>
-        <CardHeader color="blue-gray" className={style.imageContainer}>
-          <img className={style.image} src={imgSrc} alt="" />
-        </CardHeader>
-        <CardBody className={style.cardBody}>
-          <Typography color="blue-gray" className={style.name}>
-            {data.productName}
-          </Typography>
-          <Typography className={style.description}>
-            {data.productDescription}
-          </Typography>
-          <Button className={style.button}>Read More</Button>
-        </CardBody>
-      </Card>
+      <div
+        className={style.container}
+        style={{
+          backgroundImage: `url(${imgSrc})`,
+          backgroundSize: "100% 100%",
+        }}
+      >
+        <div className={style.overlay}>
+          <div className={style.items}></div>
+          <div className={style.head}>
+            <p>
+              Product Name : <br />
+              {data.productName}
+            </p>
+          </div>
+
+          <div className={`${style.items} ${style.cart}`}>
+            <span>
+              <hr />
+              <a href="">Read More</a>
+            </span>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

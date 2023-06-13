@@ -1,5 +1,5 @@
 .Caro_img {
-  @apply w-[100%] max-h-[750px] object-cover;
+  @apply w-[100%] max-h-[750px];
 }
 .carousel {
   background-color: black;
