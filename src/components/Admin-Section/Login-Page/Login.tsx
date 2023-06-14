@@ -26,19 +26,23 @@ function Login() {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-
+  const validatePassword = (_, value) => {
+    if (value && value.length < 8) {
+      return Promise.reject(
+        new Error("Password must be at least 8 characters long")
+      );
+    }
+    return Promise.resolve();
+  };
   return (
     <div className={style.formContainer}>
       <Form
         name="basic"
         layout={"vertical"}
         className={style.form}
-        // labelCol={{ span: 10 }}
-        // wrapperCol={{ span: 48 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        // autoComplete="off"
       >
         <div className={style.loginPhoto}>
           <svg
@@ -80,21 +84,24 @@ function Login() {
         <div className={style.formTitle}>Welcome Back!</div>
 
         <Form.Item
-          style={{marginBottom:"10px"}}
           className={style.field}
+          style={{ maxHeight: "60px" }}
           label="Email"
           name="email"
-          rules={[{ required: true, message: "Please input your Email!" }]}
+          rules={[{ required: true, message: "Please Enter your Email!" }]}
         >
           <Input type="email" />
         </Form.Item>
 
         <Form.Item
-          style={{margin:"10px"}}
           className={style.field}
+          style={{ maxHeight: "60px" }}
           label="Password"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[
+            { required: true, message: "Please Enter your password!" },
+            { validator: validatePassword },
+          ]}
         >
           <Input type="password" />
         </Form.Item>
@@ -104,12 +111,12 @@ function Login() {
             Submit
           </button>
         </div>
-        <div className={style.formFooter}>Dont Have Account ?
-
-        <br/>
-        <Link to="/admin/signup" className={style.link} >
-        Sign Up
-        </Link> 
+        <div className={style.formFooter}>
+          Dont Have Account ?
+          <br />
+          <Link to="/admin/signup" className={style.link}>
+            Sign Up
+          </Link>
         </div>
         {/* <div className={style.btnContainer}> */}
         {/* </div> */}

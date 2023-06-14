@@ -1,12 +1,6 @@
 .cardContainer {
   width: 80%;
   margin: 2rem auto;
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 4rem; */
-  /* min-height: 570px; */
 }
 .paginate {
   display: flex;
@@ -17,4 +11,12 @@
 }
 .active {
   color: #b88b05;
+}
+.loader {
+  color: white;
+  min-height: 150px;
+  display: flex;
+  /* margin: 10px auto; */
+  justify-content: center;
+  align-items: center;
 }

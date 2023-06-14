@@ -54,9 +54,13 @@ function CardContainer() {
   return (
     <>
       <div className={style.cardContainer}>
-        {loading && <Loader />}
+        {loading && (
+          <div className={style.loader}>
+            <Loader />
+          </div>
+        )}
         {!loading && !currentProducts.length ? (
-          <h1 style={{ color: "white" }}>No Data Found</h1>
+          <h1 className={style.loader}>No Data Found</h1>
         ) : (
           <>
             <Row gutter={[36, 36]}>

@@ -1,9 +1,9 @@
 .formContainer {
   background-color: #e4e0e0;
   width: 100%;
+  padding: 2rem;
   height: 100vh;
   display: flex;
-  padding: 2rem;
   justify-content: center;
   align-items: center;
 }
@@ -43,14 +43,18 @@
   width: 100vw;
   max-width: 350px;
 }
-
+.password {
+  width: 100vw;
+  max-width: 350px;
+}
 .form {
   position: relative;
   background-color: white;
   width: 100%;
   max-width: 400px;
   border-radius: 5px;
-  padding: 1rem;
+  padding: 3rem 1rem;
+
   box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
   display: flex;
   flex-direction: column;
@@ -83,16 +87,16 @@ Input {
   .field Input {
     width: 100%;
   }
+  .password {
+    width: 93%;
+  }
 }
-.formFooter{
+
+.formFooter {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 5px;
-}
-.ant-form-item-explain-error {
-  color: blue;
-  font-size: 12px;
-  margin-top: 4px;
+  font-weight: 600;
 }

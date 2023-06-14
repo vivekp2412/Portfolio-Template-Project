@@ -1,5 +1,5 @@
 .navbarContainer {
-  @apply bg-primary border-b-2 border-white;
+  @apply border-b-2 border-white;
 }
 .navbar {
   @apply text-white mx-auto flex items-center justify-around  font-bold text-sm;

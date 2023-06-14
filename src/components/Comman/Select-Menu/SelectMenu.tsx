@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../Hooks/Hooks";
-import { changeFilterCategory } from "../../../slices/productSlice";
+import {
+  changeFilterCategory,
+  searchProduct,
+} from "../../../slices/productSlice";
 import style from "./selectStyle.module.css";
 
 const SelectMenu: React.FC = (props) => {
@@ -10,6 +13,7 @@ const SelectMenu: React.FC = (props) => {
   let options = props.options;
   const getSearchByValue = props.searchBy;
   const getFilterByValue = props.filterBy;
+  const searchQuery = props.searchQuery;
   // getFilterByValue(option);
   useEffect(() => {
     if (getFilterByValue) {
@@ -20,6 +24,7 @@ const SelectMenu: React.FC = (props) => {
     setSelectedOption(option);
     if (getSearchByValue) {
       getSearchByValue(option);
+      // dispatch(searchProduct(se))
     } else {
       getFilterByValue(option);
     }
@@ -45,7 +50,7 @@ const SelectMenu: React.FC = (props) => {
         role="option"
         onClick={() => handleOptionClick(option)}
       >
-        {option}
+        {`Product ` + option.slice(7)}
       </li>
     );
   });
@@ -59,7 +64,15 @@ const SelectMenu: React.FC = (props) => {
       >
         <ul className={style.dropdown__filter} role="listbox" tabIndex={-1}>
           <li className={style.dropdown__filter_selected} aria-selected="true">
-            {getFilterByValue ? `Category : ${selectedOption}` : selectedOption}
+            {getFilterByValue ? (
+              `Category : ${selectedOption}`
+            ) : (
+              <>
+                {selectedOption === "Search By"
+                  ? "Search By"
+                  : `Product ${selectedOption.slice(7)}`}
+              </>
+            )}
             <svg
               viewBox="0 0 24 24"
               fill="none"

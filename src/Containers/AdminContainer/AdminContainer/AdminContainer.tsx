@@ -6,8 +6,8 @@ import {
   fetchProductsData,
 } from "../../../slices/productSlice";
 import AdminNavbarContainer from "../Admin-Navbar/AdminNavbarContainer";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function AdminContainer() {
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -17,18 +17,7 @@ function AdminContainer() {
   return (
     <div>
       <AdminNavbarContainer />
-      <ToastContainer
-position="bottom-left"
-autoClose={2000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="dark"
-/>
+
       <Outlet />
     </div>
   );

@@ -1,3 +1,16 @@
 .table {
   padding: 0 !important;
 }
+.action_update:hover {
+  color: blue;
+}
+.action_delete:hover {
+  color: red;
+}
+.tableContainer {
+  overflow: auto;
+  padding: 2rem;
+}
+.title {
+  @apply text-lg font-extrabold text-center md:text-left my-5;
+}

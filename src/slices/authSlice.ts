@@ -21,7 +21,6 @@ const authSlice= createSlice({
         },
         signUpUser(state,action){
             toast.success("Signed in Successfully");
-
             state.isAuthenticated=true;
             state.userInfo=action.payload.user;
          

@@ -2,6 +2,7 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../Mobile-Navbar/style.module.css";
 import brand from "../../../../assets/Navbar/Mobile-Navbar/logo.png";
+import { Link } from "react-router-dom";
 type Propstype = {
   event: () => void;
 };
@@ -23,19 +24,19 @@ function MobileNavbar(props: Propstype) {
         <div>
           <ul className={style.navoptions}>
             <li className={style.navoption}>
-              <a href="#homeSection">HOME</a>
+              <Link to="/admin/home">HOME</Link>
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>
-              <a href="#productSection">PRODUCTS</a>
+              <Link to="/admin/products">PRODUCTS</Link>
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>
-              <a href="#workSection">MY WORK</a>
+              <Link to="/admin/works">MY WORK</Link>
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>
-              <a href="#contactSection">CONTACT US</a>
+              <Link to="/admin/contact">CONTACT US</Link>
               <div className={style.navoption_hover}></div>
             </li>
           </ul>

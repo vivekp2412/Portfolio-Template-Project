@@ -21,7 +21,14 @@ export default function Navbar() {
   let categories = useAppSelector((state) => state.product.categories);
 
   function getSearchBy(value) {
+    console.log(debouncedSearchQuery);
     setSearchBy(value);
+    dispatch(
+      searchProduct({
+        searchquery: debouncedSearchQuery,
+        searchBy: value,
+      })
+    );
   }
   function getFilterBy(value) {
     dispatch(changeFilterCategory(value));
@@ -43,6 +50,7 @@ export default function Navbar() {
   return (
     <div className={style.Product_Navbar_container}>
       <SelectMenu
+        searchQuery={searchQuery}
         options={["productName", "productId"]}
         searchBy={getSearchBy}
         initialValue="Search By"

@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import style from "../Image-Upload/style.module.css";
 export const ImageUpload = (props) => {
-  const { images, setImages, handleImageError } = props;
+  const { images, setImages, handleImageError, imageError } = props;
 
   const [error, setError] = useState<string | null>(null);
   const maxNumber = 1;
@@ -27,6 +27,7 @@ export const ImageUpload = (props) => {
     props.geturl(imageList, error);
     setImages(imageList as never[]);
   };
+  console.log(images);
 
   return (
     <div className="App">
@@ -37,7 +38,7 @@ export const ImageUpload = (props) => {
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}
-        acceptType={["jpg", "gif", "png"]}
+        acceptType={["jpg", "jpeg", "png"]}
       >
         {({
           imageList,
@@ -49,42 +50,70 @@ export const ImageUpload = (props) => {
           dragProps,
         }) => (
           // write your building UI
-          <div className={style.UploadWrapper}>
-            <button
-              className={style.UploadButton}
-              onClick={onImageUpload}
-              {...dragProps}
-            >
-              <FileAddFilled style={{ fontSize: "30px" }} />
-            </button>
-            &nbsp;
-            {imageList.map((image, index) => (
-              <div key={index}>
-                <img
-                  src={image.dataURL}
-                  className={style.image}
-                  alt=""
-                  width="100"
-                />
-                <div className={style.buttonWrapper}>
-                  <button
-                    className={style.actionButton}
-                    onClick={() => onImageUpdate(index)}
-                  >
-                    {/* <EditFilled /> */}
-                    Edit
-                  </button>
-                  <button
-                    className={style.actionButton}
-                    onClick={() => onImageRemove(index)}
-                  >
-                    {/* <DeleteFilled /> */}
-                    Remove
-                  </button>
+          <>
+            <div className={style.UploadWrapper}>
+              {!images.length && (
+                <div
+                  className={style.UploadButton}
+                  onClick={onImageUpload}
+                  {...dragProps}
+                >
+                  <div className={style.uploadIcon}>
+                    <p className={style.uploadText}>
+                      Upload{" "}
+                      <svg
+                        style={{ display: "inline" }}
+                        fill="#000000"
+                        width="15px"
+                        height="15px"
+                        viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9 3.793V9H7V3.864L5.914 4.95 4.5 3.536 8.036 0l.707.707.707.707 2.121 2.122-1.414 1.414L9 3.793zM16 11v5H0v-5h2v3h12v-3h2z"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                    </p>
+                    <p className={style.instruction}>
+                      (Allowed Format: JPG,JPEG,PNG)
+                    </p>
+                  </div>
+                  {imageError && (
+                    <div className={style.errorMessage}>Image is Required</div>
+                  )}
                 </div>
-              </div>
-            ))}
-          </div>
+              )}
+              &nbsp;
+              {imageList.map((image, index) => (
+                <div key={index}>
+                  <img
+                    src={image.dataURL}
+                    className={style.image}
+                    alt=""
+                    height="100"
+                    width="300"
+                  />
+                  <div className={style.buttonWrapper}>
+                    <button
+                      className={style.actionButton}
+                      onClick={() => onImageUpdate(index)}
+                    >
+                      {/* <EditFilled /> */}
+                      Edit
+                    </button>
+                    <button
+                      className={style.actionButton}
+                      onClick={() => onImageRemove(index)}
+                    >
+                      {/* <DeleteFilled /> */}
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </ImageUploading>
     </div>

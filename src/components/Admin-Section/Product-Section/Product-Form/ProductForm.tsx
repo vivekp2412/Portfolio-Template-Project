@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import style from "../Product-Form/style.module.css";
 import { Modal, Form, Input, Select, Button, Divider, Space } from "antd";
+const { TextArea } = Input;
 import { useEffect } from "react";
 import { dataref } from "../../../../firebase";
 import { PlusOutlined } from "@ant-design/icons";
@@ -48,11 +49,11 @@ const ProductForm = (props) => {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
     e.preventDefault();
-    let categoryExists = items.filter((category)=>
-     category.toUpperCase()==name.toUpperCase()
-    )
-    
-    if(categoryExists.length > 0){
+    let categoryExists = items.filter(
+      (category) => category.toUpperCase() == name.toUpperCase()
+    );
+
+    if (categoryExists.length > 0) {
       alert("Category already present");
       return;
     }
@@ -116,6 +117,7 @@ const ProductForm = (props) => {
     setImages([]);
     setFileList([]);
     form.resetFields();
+    handleImageError();
   };
 
   const handleSelect = (e: string) => {
@@ -153,11 +155,13 @@ const ProductForm = (props) => {
             images={images}
             setImages={setImages}
             handleImageError={handleImageError}
+            imageError={imageErr}
           />
-          {imageErr && <div className={style.error}>Required</div>}
+
           <Form
             ref={formRef}
             form={form}
+            layout="vertical"
             name="control-hooks"
             onFinish={onFinish}
             style={{ maxWidth: 600 }}
@@ -175,7 +179,7 @@ const ProductForm = (props) => {
               label="Product Description"
               rules={[{ required: true }]}
             >
-              <Input />
+              <TextArea rows={4} cols={4} />
             </Form.Item>
             <Form.Item
               name="productCategory"
@@ -183,7 +187,7 @@ const ProductForm = (props) => {
               rules={[{ required: true }]}
             >
               <Select
-                style={{ width: 350 }}
+                style={{ maxWidth: "100%" }}
                 onChange={handleSelect}
                 placeholder="Select category"
                 dropdownRender={(menu) => (
@@ -219,7 +223,7 @@ const ProductForm = (props) => {
                 <Button
                   htmlType="submit"
                   className={style.button_modal}
-                  onClick={onFinish}
+                  // onClick={onFinish}
                 >
                   Submit
                 </Button>

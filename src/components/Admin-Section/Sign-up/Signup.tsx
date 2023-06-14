@@ -10,24 +10,31 @@ import { Input, Button, Form } from "antd";
 const Password = Input.Password;
 import loginImage from "../../../assets/Login/user-interface.png";
 import style from "../Login-Page/style.module.css";
+import { toast } from "react-toastify";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   function onFinish(values) {
-    console.log(values);
-
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {
         dispatch(signUpUser(userCredentials));
         navigate("/admin/home");
       })
       .catch((error) => {
-        alert(error.message);
+        toast.error(error.message, {
+          position: "top-right",
+        });
       });
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
+  };
+  const validatePassword = (_, value) => {
+    if (value && value.length < 8) {
+      return Promise.reject(new Error("Atleast 8 characters Required"));
+    }
+    return Promise.resolve();
   };
 
   return (
@@ -84,22 +91,26 @@ function Login() {
 
         <Form.Item
           className={style.field}
+          style={{ maxHeight: "60px" }}
           label="Email"
           name="email"
-          style={{marginBottom:"10px"}}
-          rules={[{ required: true, message: "Please input your Email!" }]}
+          rules={[{ required: true, message: "Please Enter your Email!" }]}
         >
           <Input type="email" />
         </Form.Item>
 
         <Form.Item
           className={style.field}
-          style={{marginBottom:"10px"}}
+          style={{ maxHeight: "60px" }}
           label="Password"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[
+            { required: true, message: "Please Enter your password!" },
+            { validator: validatePassword },
+          ]}
         >
-          <Input type="password" />
+          <Input.Password className={style.password} />
+          {/* <Input type="password" /> */}
         </Form.Item>
 
         <div className={style.btnContainer}>
@@ -108,14 +119,14 @@ function Login() {
           </button>
         </div>
         <div className={style.formFooter}>
-          ALready Have Account ?
+          Already Have Account ?
           <br />
           <Link to="/admin/login" className={style.link}>
             Login
           </Link>
         </div>
         {/* <div className={style.btnContainer}> */}
-       
+
         {/* </div> */}
       </Form>
     </div>

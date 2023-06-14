@@ -1,4 +1,5 @@
 import firebase from "firebase/compat/app";
+import {getFirestore} from "firebase/firestore"
 import "firebase/compat/database";
 import {initializeApp} from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -12,7 +13,8 @@ const firebaseConfig = {
   appId: "1:379818682476:web:1210fb694ec6189a2d1049",
   measurementId: "G-8T9HTBZLXR",
 };
-  const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+export const db =  getFirestore(app);
 firebase.initializeApp(firebaseConfig);
 export const dataref = firebase.database();
 export default firebase;

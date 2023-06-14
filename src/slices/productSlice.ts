@@ -19,8 +19,13 @@ export const fetchProductsData = createAsyncThunk(
     async (_, { rejectWithValue }) => {
       try {
         const response = await dataref.ref("Products Categories").once("value")
-        const data = response.val().Categories
-        return data;
+        if(response.val()){
+
+          const data = response.val().Categories
+          return data;
+        }else{
+          return []
+        }
       } catch (error) {
         return rejectWithValue(error.message);
       }
@@ -81,11 +86,13 @@ export const productSlice = createSlice({
             let searchquery =  action.payload.searchquery;
             let searchBy =  action.payload.searchBy;
             state.searchQuery=searchquery;
+            let upprcseSearch = searchquery.toUpperCase(); 
             if(searchBy){
 
               const filteredArray=state.productList.filter((product)=>{
-                
-                if(product[searchBy].includes(searchquery)) {
+                let productProperty=product[searchBy];
+                let upprcseProperty =  productProperty.toUpperCase();
+                if(upprcseProperty.includes(upprcseSearch)) {
                   return product
                   
                 }

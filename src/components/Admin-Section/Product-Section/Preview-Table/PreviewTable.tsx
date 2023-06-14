@@ -5,6 +5,8 @@ import style from "../Preview-Table/style.module.css";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import EditFormModal from "../EditFormModal/EditFormModal";
 import uuid from "react-uuid";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { deleteProduct } from "../../../../slices/productSlice";
 import Loader from "../../../Comman/Loader/Loader";
 
@@ -55,17 +57,36 @@ function PreviewTable() {
       title: "Action",
       render: (_, record) => (
         <Space size="middle">
-          <a
+          <p
+            className={style.action_update}
             onClick={() => {
               setProductId(record.productId);
               setIsModalOpen(true);
             }}
           >
             Update
-          </a>
-          <a onClick={() => {if(confirm("Are you sure want to delete")==true){ dispatch(deleteProduct(record.productId))}}}>
+          </p>
+          <p
+            className={style.action_delete}
+            onClick={() => {
+              confirmAlert({
+                title: "Deleting Image",
+                message: "Are you sure to do this.",
+                buttons: [
+                  {
+                    label: "Yes",
+                    onClick: () => dispatch(deleteProduct(record.productId)),
+                  },
+                  {
+                    label: "No",
+                    onClick: () => {},
+                  },
+                ],
+              });
+            }}
+          >
             Delete
-          </a>
+          </p>
         </Space>
       ),
     },
@@ -81,14 +102,15 @@ function PreviewTable() {
         productId={productId}
         key={uuid()}
       />
-
-      <Table
-        className={style.table}
-        columns={columns}
-        loading={pending}
-        dataSource={productList}
-        pagination={false}
-      />
+      <div className={style.tableContainer}>
+        <Table
+          className={style.table}
+          columns={columns}
+          loading={pending}
+          dataSource={productList}
+          pagination={false}
+        />
+      </div>
     </>
   );
 }
