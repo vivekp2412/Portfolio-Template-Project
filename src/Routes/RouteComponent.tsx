@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import ContactSection from "../components/Admin-Section/Contact-Section/ConatactSection";
 import HomeSection from "../Containers/AdminContainer/Admin-Home/HomeSection";
 import ProductSection from "../components/Admin-Section/Product-Section/ProductSection";
-import WorkSection from "../components/Admin-Section/Work-Section/WorkSection";
+
 import AdminContainer from "../Containers/AdminContainer/AdminContainer/AdminContainer";
 import HomeContainer from "../Containers/HomeContainer/HomeContainer";
 import PortfolioContainer from "../Containers/PortfolioContainer/PortfolioContainer";
@@ -12,6 +12,7 @@ import Signup from "../components/Admin-Section/Sign-up/Signup";
 import ProtectedRoute from "./ProtectedRoute";
 import { useAppSelector } from "../Hooks/Hooks";
 import LoginContainer from "../Containers/Login-Container/LoginContainer";
+import AdminOurWorkContainer from "../Containers/AdminContainer/Admin-OurWork/AdminOurWorkContainer";
 
 function RouteComponent() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
@@ -39,7 +40,11 @@ function RouteComponent() {
 
           <Route
             path="works"
-            element={<ProtectedRoute component={WorkSection} />}
+            element={
+              <ProtectedRoute>
+                <AdminOurWorkContainer />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="contact"

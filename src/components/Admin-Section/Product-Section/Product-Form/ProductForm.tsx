@@ -93,6 +93,8 @@ const ProductForm = (props) => {
   };
 
   const onFinish = (values: any) => {
+    console.log(values);
+
     if (images.length != 0) {
       setImageErr(false);
       let data = {
@@ -104,8 +106,8 @@ const ProductForm = (props) => {
         dispatch(addProduct(data));
         setProductArray([...productArray, data]);
       }
-      form.resetFields();
-      setImages([]);
+      form.resetFields;
+
       handleOk();
       setFileList([]);
     } else {

@@ -1,0 +1,6 @@
+.Container {
+  @apply py-20  text-black w-[100%] mx-auto;
+}
+.workContainer {
+  @apply w-[100%]  md:w-[60%] mx-auto;
+}
