@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import productReducer from "../slices/productSlice"
 import homeReducer from "../slices/homeSlice"
 import authReducer from "../slices/authSlice";
+import workReducer from "../slices/workSlice"
 // import { serializableCheck } from "redux-starter-kit"; // Import the serializableCheck middleware
 
 // const middleware = [
@@ -16,7 +17,8 @@ const store = configureStore({
     reducer:{
         product:productReducer,
         home:homeReducer,
-        auth:authReducer
+        auth:authReducer,
+        work:workReducer
     },
 })
 
