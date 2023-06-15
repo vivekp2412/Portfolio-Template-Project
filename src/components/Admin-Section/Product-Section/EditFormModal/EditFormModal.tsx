@@ -10,6 +10,7 @@ import {
 } from "../../../../slices/productSlice";
 import style from "../Product-Form/style.module.css";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
+const TextArea = Input.TextArea;
 let initialImg: string | null = null;
 function EditFormModal(props) {
   const categories = useAppSelector((state) => state.product.categories);
@@ -39,14 +40,14 @@ function EditFormModal(props) {
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
     e.preventDefault();
-    let categoryExists = items.filter((category)=>
-    category.toUpperCase()==name.toUpperCase()
-   )
-   
-   if(categoryExists.length > 0){
-     alert("Category already present");
-     return;
-   }
+    let categoryExists = items.filter(
+      (category) => category.toUpperCase() == name.toUpperCase()
+    );
+
+    if (categoryExists.length > 0) {
+      alert("Category already present");
+      return;
+    }
     setItems([...items, name]);
     dispatch(addCategory([...items, name]));
 
@@ -65,14 +66,12 @@ function EditFormModal(props) {
         ...values,
         Image: [{ dataURL: initialImg }],
       };
-      
     } else {
       data = {
         ...prevdata,
         ...values,
         Image: [{ dataURL: imageUrls }],
       };
-
     }
 
     dispatch(updateProduct(data));
@@ -122,9 +121,8 @@ function EditFormModal(props) {
             <img
               src={initialImg ?? imageUrls}
               className={style.prevImage}
-              style={{ margin: "10px auto" }}
-              width={100}
-              height={100}
+              // style={{ margin: "10px auto" }}
+              height={106}
             />
           )}
           <Form
@@ -134,6 +132,7 @@ function EditFormModal(props) {
             onFinish={onFinish}
             style={{ maxWidth: 600 }}
             initialValues={filteredArray}
+            layout="vertical"
           >
             <Form.Item
               name="productName"
@@ -147,7 +146,7 @@ function EditFormModal(props) {
               label="Product Description"
               rules={[{ required: true }]}
             >
-              <Input />
+              <TextArea rows={4} cols={4} />
             </Form.Item>
             <Form.Item
               name="productCategory"
@@ -155,7 +154,7 @@ function EditFormModal(props) {
               rules={[{ required: true }]}
             >
               <Select
-                style={{ width: 350 }}
+                style={{ maxWidth: "100%" }}
                 onChange={handleSelect}
                 placeholder="Select category"
                 dropdownRender={(menu) => (

@@ -34,7 +34,7 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-      <RouteComponent />;
+      <RouteComponent />
     </>
   );
 }

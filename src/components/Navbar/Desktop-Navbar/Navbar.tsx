@@ -1,6 +1,14 @@
+import { confirmAlert } from "react-confirm-alert";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../Hooks/Hooks";
 import style from "../Desktop-Navbar/style.module.css";
 //Desktop Navbar
 function DesktopNavbar() {
+  // const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const navigate = useNavigate();
+  const logIn = () => {
+    navigate("/admin/login");
+  };
   return (
     <>
       <div className={style.navbarContainer}>
@@ -21,6 +29,10 @@ function DesktopNavbar() {
             <li className={style.navoption}>
               <a href="#contactSection">CONTACT US</a>
             </li>
+
+            <button className={style.navBtn} onClick={() => logIn()}>
+              LOG IN
+            </button>
           </ul>
         </div>
       </div>

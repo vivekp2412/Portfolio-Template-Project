@@ -11,6 +11,9 @@
   transition: all 0.3s;
   @apply p-5 sm:px-[2rem];
 }
+.navoption:active {
+  color: #b88b05;
+}
 .navoption a {
   @apply hover:text-secondary cursor-pointer hover:underline;
 }
@@ -21,4 +24,16 @@
   .navbarContainer {
     display: none;
   }
+}
+.navBtn {
+  margin-left: 50px;
+  background-color: #b88b05;
+  color: white;
+  height: 35px;
+  align-self: center;
+  justify-self: end;
+  padding: 5px 10px;
+  /* position: absolute; */
+  /* top: 0; */
+  /* right: 10px; */
 }

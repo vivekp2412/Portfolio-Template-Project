@@ -6,7 +6,11 @@ import { Formik, Form, ErrorMessage } from "formik";
 import { useEffect } from "react";
 import { dataref } from "../../../../firebase";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { addImage, addImageData } from "../../../../slices/homeSlice";
+import {
+  addImage,
+  addImageData,
+  fetchCarouselData,
+} from "../../../../slices/homeSlice";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 interface Datatype {
   image: string;
@@ -43,7 +47,7 @@ const FormModal = () => {
   function geturls(array) {
     setImageurl(array);
   }
-  function handleSubmit() {
+  async function handleSubmit() {
     if (images.length != 0) {
       setImageErr(false);
       let data = {
@@ -52,7 +56,8 @@ const FormModal = () => {
         active: true,
       };
       // dispatch(addImage(data));
-      dispatch(addImageData(data));
+      dispatch(addImage(data));
+      // await dispatch(fetchCarouselData());
       setImages([]);
       handleOk();
     } else {

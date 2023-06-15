@@ -12,8 +12,6 @@ function Login() {
   const dispatch = useAppDispatch();
 
   function onFinish(values) {
-    console.log(values);
-
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {
         dispatch(loginUser(userCredentials));
@@ -103,7 +101,9 @@ function Login() {
             { validator: validatePassword },
           ]}
         >
-          <Input type="password" />
+          <Input.Password className={style.password} />
+
+          {/* <Input type="password" /> */}
         </Form.Item>
 
         <div className={style.btnContainer}>

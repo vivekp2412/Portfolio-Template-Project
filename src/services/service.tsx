@@ -19,8 +19,18 @@ class DataService {
     const data = doc(db, collectionName, id);
     return updateDoc(data, updatedRecipe);
   };
+  updateImageToggle = (id: string, updatedStatus: any, collectionName: any) => {
+    console.log("hi");
+
+    const data = doc(db, collectionName, id);
+    console.log("updated");
+
+    return updateDoc(data, { ...data, active: updatedStatus });
+  };
   deleteData = (id, collectionName: any) => {
     const data = doc(db, collectionName, id);
+    console.log(data);
+
     return deleteDoc(data);
   };
   getAllData = (collectionName: any) => {

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isPending } from "@reduxjs/toolkit";
 import { Action } from "@remix-run/router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -10,7 +10,8 @@ const authSlice= createSlice({
     name:"Auth Slice",
     initialState:{
         isAuthenticated:false,
-        userInfo:{}
+        userInfo:{},
+        pending:true,
     },
     reducers:{
         loginUser(state,action){
@@ -23,11 +24,14 @@ const authSlice= createSlice({
             toast.success("Signed in Successfully");
             state.isAuthenticated=true;
             state.userInfo=action.payload.user;
-         
+        },
+        logoutUser(state,action){
+            toast.success("Logged  out Successfully");
+            state.isAuthenticated=false;
             
         }
         
     }
 })
-export const {signUpUser,loginUser}=authSlice.actions;
+export const {signUpUser,loginUser,logoutUser}=authSlice.actions;
 export default authSlice.reducer;

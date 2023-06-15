@@ -94,7 +94,7 @@ function PreviewTable() {
 
   return (
     <>
-      <div style={{ fontWeight: "bolder" }}>Preview Images</div>
+      <div className={style.title}>Preview Images</div>
 
       <EditFormModal
         setIsModalOpen={setIsModalOpen}

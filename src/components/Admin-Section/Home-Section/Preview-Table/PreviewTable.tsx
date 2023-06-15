@@ -9,16 +9,18 @@ import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import {
   deleteImage,
   deleteImageData,
+  fetchCarouselData,
+  updateImageData,
   updateState,
 } from "../../../../slices/homeSlice";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 //Type Declaration
-interface DataType {
-  imageId: string;
-  image: string;
-  active: boolean;
-}
+// interface DataType {
+//   imageId: string;
+//   image: string;
+//   active: boolean;
+// }
 
 //Fetch data
 
@@ -27,9 +29,8 @@ function PreviewTable() {
   const pending = useAppSelector((state) => state.home.pending);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalimg, setModalimg] = useState<string>();
-  const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.home.allImages);
-  console.log(data);
+  const dispatch = useAppDispatch();
 
   // Switch Change handler
   // useEffect(() => {
@@ -44,6 +45,7 @@ function PreviewTable() {
   // }, [data]);
   const onChange = (checked: boolean, id: string) => {
     dispatch(updateState({ checked, id }));
+    // dispatch(updateState(id, checked));
   };
   console.log(data);
 
@@ -95,7 +97,10 @@ function PreviewTable() {
                 buttons: [
                   {
                     label: "Yes",
-                    onClick: () => dispatch(deleteImageData(record.imageId)),
+                    onClick: () => {
+                      console.log(record);
+                      dispatch(deleteImage(record.docId));
+                    },
                   },
                   {
                     label: "No",

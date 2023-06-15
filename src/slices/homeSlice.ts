@@ -9,42 +9,16 @@ export const fetchCarouselData = createAsyncThunk(
   "/fetchCarousel",
   async (_, { rejectWithValue }) => {
     try {
-      const querySnapshot = await getDocs(collection(db, "Carousel"));
-      const data = querySnapshot.docs.map((doc) => ({ imageId: doc.id, ...doc.data() }));
-      console.log(data)
+      const data = (await dataref.ref("Carousel").once("value")).val().image;
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
-export const addImageData = createAsyncThunk(
-  "/addImageData",
-  async (imageData, { rejectWithValue }) => {
-    try {
-      await Dataservice.addData(imageData,"Carousel");
-      return imageData
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-export const deleteImageData = createAsyncThunk(
-  "/deleteImageData",
-  async (imageId, { rejectWithValue }) => {
-    try {
-      // const docRef= await addDoc(collection(db, "Carousel"),imageData);
-      await Dataservice.deleteData(imageId,"Carousel");
-      return imageId;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
 
 export const homeSlice = createSlice({
-  name: "Home",
+  name: "home",
   initialState: {
     pending: true,
     allImages: [],
@@ -74,12 +48,7 @@ export const homeSlice = createSlice({
       return image.imageId == id;
     });
     state.allImages[index].active=checked;
-    if(checked){
-      toast.success(`"Image Id:"${id} "is Active"`)
-    }else{
-      toast.success(`"Image Id:"${id} "is Inactive"`)
-
-    }
+  
     dataref.ref("Carousel").set({image:state.allImages});
   },
 
@@ -91,27 +60,12 @@ export const homeSlice = createSlice({
       })
       .addCase(fetchCarouselData.fulfilled, (state, action) => {
         state.pending = false;
-        
         state.allImages = action.payload;
       })
       .addCase(fetchCarouselData.rejected, (state) => {
         state.pending = false;
       })
-      .addCase(addImageData.fulfilled, (state, action) => {
-        state.allImages=[...state.allImages,action.payload]
-        toast.success('Image Added Successfully');
-      })
-      .addCase(addImageData.rejected, (state, action) => {
-        const error = action.payload;
-        toast.error(`Failed to add image: ${error}`);
-      })
-      .addCase(deleteImageData.fulfilled,(state,action)=>{
-        const indexToDelete = state.allImages.findIndex((object) => {
-          return object.imageId == action.payload;
-        });
-        state.allImages.splice(indexToDelete, 1);
-        toast.success("Image Deleted Successfully");
-      });
+     
   },
 });
 export const { addImage, deleteImage,updateState } = homeSlice.actions;
