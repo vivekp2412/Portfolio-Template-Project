@@ -30,6 +30,7 @@ function PreviewTable() {
   const workList = useAppSelector((state) => state.work.allWorks);
   const pending = useAppSelector((state) => state.work.pending);
   const dispatch = useAppDispatch();
+console.log(workList[0].image);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -42,13 +43,13 @@ function PreviewTable() {
     },
     {
       title: "Work Description",
-      dataIndex: "WorkDesc",
+      dataIndex: "workDesc",
     },
     {
       title: "Image",
-      dataIndex: "Image",
-      render: (record) => (
-        <img src={record[0].dataURL} style={{ width: 120, height: 120 }} />
+      dataIndex: "image",
+      render: (_,record) => (
+        <img src={record.image} style={{ width: 120, height: 120 }} />
       ),
     },
     {
@@ -104,7 +105,7 @@ function PreviewTable() {
         <Table
           className={style.table}
           columns={columns}
-          loading={pending}
+          // loading={pending}
           dataSource={workList}
           pagination={false}
         />

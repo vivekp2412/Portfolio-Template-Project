@@ -1,0 +1,27 @@
+.table {
+    padding: 0 !important;
+  }
+  .action_update:hover {
+    cursor: pointer;
+    color: blue;
+  }
+  .action_delete:hover {
+    cursor: pointer;
+    color: red;
+  }
+  .tableContainer {
+    overflow: auto;
+    padding: 2rem;
+  }
+  .title {
+    @apply text-lg font-extrabold text-center md:text-left my-5;
+    font-size: large;
+    font-weight: 800;
+    text-align: left;
+  }
+  @media screen and (max-width: 768px) {
+    .title {
+      text-align: center;
+    }
+  }
+  
