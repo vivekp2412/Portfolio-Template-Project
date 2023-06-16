@@ -26,6 +26,8 @@ function PreviewTable() {
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState<string>();
   const productList = useAppSelector((state) => state.product.productList);
+  console.log(productList);
+
   const pending = useAppSelector((state) => state.product.pending);
   const dispatch = useAppDispatch();
 
@@ -49,8 +51,8 @@ function PreviewTable() {
     {
       title: "Product Image",
       dataIndex: "Image",
-      render: (record) => (
-        <img src={record[0].dataURL} style={{ width: 120, height: 120 }} />
+      render: (_, record) => (
+        <img src={record.Image} style={{ width: 120, height: 120 }} />
       ),
     },
     {

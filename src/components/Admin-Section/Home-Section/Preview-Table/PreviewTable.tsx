@@ -30,6 +30,8 @@ function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalimg, setModalimg] = useState<string>();
   const data = useAppSelector((state) => state.home.allImages);
+  console.log(data);
+
   const dispatch = useAppDispatch();
 
   // Switch Change handler

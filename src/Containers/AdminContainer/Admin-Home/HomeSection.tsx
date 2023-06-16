@@ -9,13 +9,9 @@ import style from "../Admin-Home/style.module.css";
 function HomeSection() {
   const dispatch = useAppDispatch();
   const allImages = useAppSelector((state) => state.home.allImages);
-  // useEffect(() => {
-  //   console.log("home rerendere");
-  //   const fetchCarousel = async () => {
-  //     await dispatch(fetchCarouselData());
-  //   };
-  //   fetchCarousel();
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchCarouselData());
+  }, []);
   return (
     <div className={style.Container}>
       <div className={style.homeSection}>

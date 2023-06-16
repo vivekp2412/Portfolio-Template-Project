@@ -10,6 +10,8 @@ export const fetchCarouselData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = (await dataref.ref("Carousel").once("value")).val().image;
+      console.log(data);
+      
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -20,7 +22,7 @@ export const fetchCarouselData = createAsyncThunk(
 export const homeSlice = createSlice({
   name: "home",
   initialState: {
-    pending: true,
+    pending: false,
     allImages: [],
   },
   reducers: {

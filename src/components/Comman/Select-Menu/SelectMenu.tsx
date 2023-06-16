@@ -14,6 +14,7 @@ const SelectMenu: React.FC = (props) => {
   const getSearchByValue = props.searchBy;
   const getFilterByValue = props.filterBy;
   const searchQuery = props.searchQuery;
+  let selectOptions;
   // getFilterByValue(option);
   useEffect(() => {
     if (getFilterByValue) {
@@ -43,17 +44,31 @@ const SelectMenu: React.FC = (props) => {
       setIsDropdownOpen(false);
     }
   };
-  const selectOptions = options?.map((option) => {
-    return (
-      <li
-        className={style.dropdown__select_option}
-        role="option"
-        onClick={() => handleOptionClick(option)}
-      >
-        {`Product ` + option.slice(7)}
-      </li>
-    );
-  });
+  if (getSearchByValue == undefined) {
+    selectOptions = options?.map((option) => {
+      return (
+        <li
+          className={style.dropdown__select_option}
+          role="option"
+          onClick={() => handleOptionClick(option)}
+        >
+          {option}
+        </li>
+      );
+    });
+  } else {
+    selectOptions = options?.map((option) => {
+      return (
+        <li
+          className={style.dropdown__select_option}
+          role="option"
+          onClick={() => handleOptionClick(option)}
+        >
+          {`Product ` + option.slice(7)}
+        </li>
+      );
+    });
+  }
 
   return (
     <div className={style.dropdown}>
@@ -98,44 +113,7 @@ const SelectMenu: React.FC = (props) => {
           </li>
           {isDropdownOpen && (
             <li>
-              <ul className={style.dropdown__select}>
-                {/* <li
-                  className={style.dropdown__select_option}
-                  role="option"
-                  onClick={() => handleOptionClick("Option 1")}
-                >
-                  Option 1
-                </li>
-                <li
-                  className={style.dropdown__select_option}
-                  role="option"
-                  onClick={() => handleOptionClick("Option 2")}
-                >
-                  Option 2
-                </li>
-                <li
-                  className={style.dropdown__select_option}
-                  role="option"
-                  onClick={() => handleOptionClick("Option 3")}
-                >
-                  Option 3
-                </li>
-                <li
-                  className={style.dropdown__select_option}
-                  role="option"
-                  onClick={() => handleOptionClick("Option 4")}
-                >
-                  Option 4
-                </li>
-                <li
-                  className={style.dropdown__select_option}
-                  role="option"
-                  onClick={() => handleOptionClick("Option 5")}
-                >
-                  Option 5
-                </li> */}
-                {selectOptions}
-              </ul>
+              <ul className={style.dropdown__select}>{selectOptions}</ul>
             </li>
           )}
         </ul>

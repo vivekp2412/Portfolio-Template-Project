@@ -6,19 +6,24 @@ import { fetchCategories, fetchProductsData } from "./slices/productSlice";
 import { fetchCarouselData } from "./slices/homeSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { fetchWorkData } from "./slices/workSlice";
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        await dispatch(fetchProductsData());
-        await dispatch(fetchCategories());
-        await dispatch(fetchCarouselData());
-      } catch (err) {
-        alert(err);
-      }
-    };
-    fetch();
+    // const fetch = async () => {
+    //   try {
+    //     await dispatch(fetchProductsData());
+    //     await dispatch(fetchCategories());
+    //     await dispatch(fetchCarouselData());
+    //   } catch (err) {
+    //     alert(err);
+    //   }
+    // };
+    // fetch();
+    fetchCarouselData();
+    fetchProductsData();
+    fetchCategories();
+    fetchWorkData();
   }, []);
   return (
     <>

@@ -117,7 +117,7 @@ export const productSlice = createSlice({
         .addCase(fetchProductsData.fulfilled,(state,action)=>{
             state.pending=false;
             
-            state.productList=action.payload;
+            state.productList=action.payload??[];
             // state.showProductSection=true
 
         })

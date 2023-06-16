@@ -10,29 +10,29 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { deleteProduct } from "../../../../slices/productSlice";
 import Loader from "../../../Comman/Loader/Loader";
 import { deleteWork } from "../../../../slices/workSlice";
-import EditFormModal from "../../Product-Section/EditFormModal/EditFormModal";
+import EditFormModal from "../EditFormModal/EditFormModal";
 
 //Type Declaration
-interface DataType {
-  productImage: File[];
-  productId: string;
-  productCategory: string;
-  productName: string;
-  productDescription: string;
-  ImageUrl: string;
-}
+// interface DataType {
+//   productImage: File[];
+//   productId: string;
+//   productCategory: string;
+//   productName: string;
+//   productDescription: string;
+//   ImageUrl: string;
+// }
 //Delete function for data
 //Preview Component
 function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [productId, setProductId] = useState<string>();
+  const [workId, setWorkId] = useState<string>();
   const workList = useAppSelector((state) => state.work.allWorks);
   const pending = useAppSelector((state) => state.work.pending);
   const dispatch = useAppDispatch();
-console.log(workList[0].image);
+  console.log(workList);
 
-  const columns: ColumnsType<DataType> = [
+  const columns = [
     {
       title: "Work Id",
       dataIndex: "workId",
@@ -48,7 +48,7 @@ console.log(workList[0].image);
     {
       title: "Image",
       dataIndex: "image",
-      render: (_,record) => (
+      render: (_, record) => (
         <img src={record.image} style={{ width: 120, height: 120 }} />
       ),
     },
@@ -59,7 +59,7 @@ console.log(workList[0].image);
           <p
             className={style.action_update}
             onClick={() => {
-              setProductId(record.workId);
+              setWorkId(record.workId);
               setIsModalOpen(true);
             }}
           >
@@ -98,14 +98,14 @@ console.log(workList[0].image);
       <EditFormModal
         setIsModalOpen={setIsModalOpen}
         isModalOpen={isModalOpen}
-        productId={productId}
+        workId={workId}
         key={uuid()}
       />
       <div className={style.tableContainer}>
         <Table
           className={style.table}
           columns={columns}
-          // loading={pending}
+          loading={pending}
           dataSource={workList}
           pagination={false}
         />

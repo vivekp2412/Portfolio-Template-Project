@@ -5,8 +5,13 @@ export const fetchWorkData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await dataref.ref("Our Work").once("value");
-      const data = response.val().works;
-      return data;
+      if(response.val()){
+
+        const data = response.val().works;
+        return data;
+      }else{
+        return[]
+      }
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -15,7 +20,7 @@ export const fetchWorkData = createAsyncThunk(
 export const workSlice = createSlice({
   name: "Work",
   initialState: {
-    pending: true,
+    pending: false,
     allWorks: [],
   },
   reducers: {
@@ -35,12 +40,11 @@ export const workSlice = createSlice({
       });
     },
     updateWork(state, action) {
-        const id =action.payload.id;
-        const checked = action.payload.checked;
-      const index = state.allWorks.findIndex((image) => {
-        return image.workId == id;
+        const id =action.payload.workId;
+      const index = state.allWorks.findIndex((work) => {
+        return work.workId == id;
       });
-      state.allWorks[index].active=checked;
+      state.allWorks[index]=action.payload;
       dataref.ref("Our Work").set({works:state.allWorks});
     },
   },
@@ -51,7 +55,8 @@ export const workSlice = createSlice({
       })
       .addCase(fetchWorkData.fulfilled, (state, action) => {
         state.pending = false;
-
+   console.log("fullfilled");
+   
         state.allWorks = action.payload;
       })
       .addCase(fetchWorkData.rejected, (state) => {

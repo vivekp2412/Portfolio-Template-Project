@@ -19,6 +19,7 @@ export default function Navbar() {
   const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const dispatch = useAppDispatch();
   let categories = useAppSelector((state) => state.product.categories);
+  console.log(categories);
 
   function getSearchBy(value) {
     console.log(debouncedSearchQuery);

@@ -12,6 +12,13 @@ import {
   fetchCategories,
 } from "../../../../slices/productSlice";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
+const storage = getStorage();
 interface Datatype {
   productImage: File;
   productId: string;
@@ -100,14 +107,25 @@ const ProductForm = (props) => {
       let data = {
         ...values,
         productId: uniqueId,
-        Image: imageUrls,
+        // Image: imageUrls,
       };
       if (productArray) {
-        dispatch(addProduct(data));
+        const storageRef = ref(storage, `Products/${uniqueId}`);
+        uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
+          console.log("Uploaded a base64 string!");
+          getDownloadURL(storageRef).then((downloadURL) => {
+            data = {
+              ...data,
+              Image: downloadURL,
+            };
+            console.log(data);
+            dispatch(addProduct(data));
+          });
+        });
         setProductArray([...productArray, data]);
       }
-      form.resetFields;
-
+      form.resetFields();
+      setImages([]);
       handleOk();
       setFileList([]);
     } else {

@@ -3,6 +3,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Card from "../Work-Card/Card";
 import "../Carousel/style.css";
+import { useAppSelector } from "../../../Hooks/Hooks";
 //Owl Carousel Settings
 const options = {
   margin: 30,
@@ -38,27 +39,26 @@ const options = {
   },
 };
 function Carousell() {
+  const allWorks = useAppSelector((state) => state.work.allWorks);
+  console.log(allWorks);
+
+  const works = allWorks.map((work) => {
+    return (
+      <div>
+        <Card
+          workTitle={work.workTitle}
+          workDesc={work.workDesc}
+          image={work.image}
+        />
+      </div>
+    );
+  });
+  console.log(works);
+
   return (
     <div>
       <OwlCarousel className="slider-items owl-carousel" {...options}>
-        <div>
-          <Card />
-        </div>
-        <div>
-          <Card />
-        </div>
-        <div>
-          <Card />
-        </div>
-        <div>
-          <Card />
-        </div>
-        <div>
-          <Card />
-        </div>
-        <div>
-          <Card />
-        </div>
+        {works}
       </OwlCarousel>
     </div>
   );

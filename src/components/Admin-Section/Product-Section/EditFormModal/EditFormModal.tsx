@@ -8,6 +8,13 @@ import {
   fetchCategories,
   updateProduct,
 } from "../../../../slices/productSlice";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
+const storage = getStorage();
 import style from "../Product-Form/style.module.css";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
 const TextArea = Input.TextArea;
@@ -28,14 +35,14 @@ function EditFormModal(props) {
     setItems(categories);
   }, [categories]);
   const productList = useAppSelector((state) => state.product.productList);
-
-  const [filteredArray] = productList.filter(
-    (data) => data.productId == productId
-  );
-  if (filteredArray) {
-    initialImg = filteredArray.Image[0].dataURL;
+  let filteredArray;
+  if (productList.length > 0) {
+    [filteredArray] = productList.filter((data) => data.productId == productId);
+    if (filteredArray) {
+      initialImg = filteredArray.Image;
+    }
+    const prevdata = filteredArray;
   }
-  const prevdata = filteredArray;
   const addItem = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
@@ -64,14 +71,22 @@ function EditFormModal(props) {
       data = {
         ...prevdata,
         ...values,
-        Image: [{ dataURL: initialImg }],
+        Image: initialImg,
       };
     } else {
-      data = {
-        ...prevdata,
-        ...values,
-        Image: [{ dataURL: imageUrls }],
-      };
+      const storageRef = ref(storage, `Products/Edited ${uniqueId}`);
+      uploadString(storageRef, imageUrls, "data_url").then(() => {
+        console.log("Uploaded a base64 string!");
+        getDownloadURL(storageRef).then((downloadURL) => {
+          data = {
+            ...prevdata,
+            ...values,
+            Image: downloadURL,
+          };
+          console.log(data);
+          dispatch(updateProduct(data));
+        });
+      });
     }
 
     dispatch(updateProduct(data));

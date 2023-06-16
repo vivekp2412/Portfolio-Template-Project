@@ -1,4 +1,3 @@
-
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Divider, Form, Input, Modal, Select, Space } from "antd";
 import React, { useEffect, useRef, useState } from "react";
@@ -9,8 +8,9 @@ import {
   fetchCategories,
   updateProduct,
 } from "../../../../slices/productSlice";
-import style from "../Product-Form/style.module.css";
+import style from "../Work-Form/style.module.css";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
+import { updateWork } from "../../../../slices/workSlice";
 
 const TextArea = Input.TextArea;
 let initialImg: string | null = null;
@@ -26,15 +26,15 @@ function EditFormModal(props) {
   const [images, setImages] = useState([]);
   const formRef = useRef(null);
   const dispatch = useAppDispatch();
- 
+
   const workList = useAppSelector((state) => state.work.allWorks);
 
-  const [filteredArray] = productList.filter(
-    (data) => data.workId == workId
-  );
+  const [filteredArray] = workList.filter((data) => data.workId == workId);
   if (filteredArray) {
-    initialImg = filteredArray.Image[0].dataURL;
+    initialImg = filteredArray.image;
   }
+  console.log(filteredArray);
+
   const prevdata = filteredArray;
   const addItem = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
@@ -74,7 +74,7 @@ function EditFormModal(props) {
       };
     }
 
-    dispatch(updateProduct(data));
+    dispatch(updateWork(data));
     form.resetFields();
     handleOk();
   };
@@ -135,55 +135,18 @@ function EditFormModal(props) {
             layout="vertical"
           >
             <Form.Item
-              name="productName"
-              label="Product Name"
+              name="workTitle"
+              label="Work Title"
               rules={[{ required: true }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
-              name="productDescription"
-              label="Product Description"
+              name="workDesc"
+              label="Work Description"
               rules={[{ required: true }]}
             >
               <TextArea rows={4} cols={4} />
-            </Form.Item>
-            <Form.Item
-              name="productCategory"
-              label="Category"
-              rules={[{ required: true }]}
-            >
-              <Select
-                style={{ maxWidth: "100%" }}
-                onChange={handleSelect}
-                placeholder="Select category"
-                dropdownRender={(menu) => (
-                  <>
-                    {menu}
-                    <Divider style={{ margin: "8px 0" }} />
-                    <Space style={{ padding: "0 8px 4px" }}>
-                      <input
-                        name="productCategory"
-                        id="productCategory"
-                        placeholder="enter category"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                      <Button
-                        type="text"
-                        icon={<PlusOutlined />}
-                        onClick={addItem}
-                      >
-                        Add New
-                      </Button>
-                    </Space>
-                  </>
-                )}
-                options={items.map((item) => ({
-                  label: item,
-                  value: item,
-                }))}
-              />
             </Form.Item>
             <Form.Item>
               <div className={style.button_container}>

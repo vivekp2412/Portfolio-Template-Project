@@ -7,6 +7,14 @@ import { useEffect } from "react";
 import { dataref } from "../../../../firebase";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
+const storage = getStorage();
+
+import {
   addImage,
   addImageData,
   fetchCarouselData,
@@ -48,15 +56,28 @@ const FormModal = () => {
     setImageurl(array);
   }
   async function handleSubmit() {
+    let firebaseImgUrl = "";
+    let data = {
+      imageId: idGenerator(),
+      active: true,
+    };
     if (images.length != 0) {
       setImageErr(false);
-      let data = {
-        image: imageUrls[0].dataURL,
-        imageId: idGenerator(),
-        active: true,
-      };
+      const storageRef = ref(storage, `images/${idGenerator()}`);
+      uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
+        console.log("Uploaded a base64 string!");
+        getDownloadURL(storageRef).then((downloadURL) => {
+          firebaseImgUrl = downloadURL;
+          data = {
+            ...data,
+            image: firebaseImgUrl,
+          };
+          console.log(data);
+          dispatch(addImage(data));
+        });
+      });
+
       // dispatch(addImage(data));
-      dispatch(addImage(data));
       // await dispatch(fetchCarouselData());
       setImages([]);
       handleOk();
