@@ -5,8 +5,9 @@ export const fetchWorkData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await dataref.ref("Our Work").once("value");
-      if(response.val()){
-
+      if(true){
+        console.log("hi");
+        
         const data = response.val().works;
         return data;
       }else{
@@ -44,6 +45,8 @@ export const workSlice = createSlice({
       const index = state.allWorks.findIndex((work) => {
         return work.workId == id;
       });
+      console.log(index);
+      
       state.allWorks[index]=action.payload;
       dataref.ref("Our Work").set({works:state.allWorks});
     },

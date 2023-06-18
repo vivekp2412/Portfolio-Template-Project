@@ -68,6 +68,8 @@ export const productSlice = createSlice({
               
         },
         updateProduct(state,action){
+          console.log(action.payload);
+          
             let id  = action.payload.productId;
             const indexToUpdate = state.productList.findIndex((x)=> x.productId==id);
             state.productList[indexToUpdate]=action.payload;

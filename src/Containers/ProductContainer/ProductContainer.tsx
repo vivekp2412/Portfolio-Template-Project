@@ -11,7 +11,7 @@ export default function ProductContainer() {
   useEffect(() => {
     dispatch(fetchProductsData());
     dispatch(fetchCategories());
-  });
+  },[]);
   return (
     <div className={style.ProductContainer}>
       <ProductTitle />

@@ -12,6 +12,13 @@ import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import { addImage, fetchCarouselData } from "../../../../slices/homeSlice";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 import { addWork } from "../../../../slices/workSlice";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
+const storage = getStorage();
 interface Datatype {
   image: string;
   imageId: string;
@@ -56,15 +63,25 @@ const WorkFormModal = () => {
     if (images.length != 0) {
       setImageErr(false);
       let data = {
-        image: imageUrls[0].dataURL,
+        // image: imageUrls[0].dataURL,
         workId: idGenerator(),
         workTitle: values.WorkTitle,
         workDesc: values.WorkDescription,
       };
+      const storageRef = ref(storage, `Wroks/${idGenerator()}`);
+      uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
+        console.log("Uploaded a base64 string!");
+        getDownloadURL(storageRef).then((downloadURL) => {
+          data = {
+            ...data,
+            Image: downloadURL,
+          };
+          console.log(data);
+          dispatch(addWork(data));
+        });
+      });
       // dispatch(addImage(data));
-      console.log(data);
 
-      dispatch(addWork(data));
       // await dispatch(fetchCarouselData());
       form.resetFields();
       setImages([]);
@@ -72,7 +89,7 @@ const WorkFormModal = () => {
     } else {
       setImageErr(true);
     }
-  }
+    }
   const onReset = () => {
     setImageErr(false);
     setImages([]);

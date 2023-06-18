@@ -49,7 +49,7 @@ function PreviewTable() {
       title: "Image",
       dataIndex: "image",
       render: (_, record) => (
-        <img src={record.image} style={{ width: 120, height: 120 }} />
+        <img src={record.Image} style={{ width: 120, height: 120 }} />
       ),
     },
     {

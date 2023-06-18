@@ -83,7 +83,7 @@ const ProductForm = (props) => {
         console.log("Error fetching data from Firebase:", error);
       }
     };
-    fetchData();
+    // fetchData();
     dispatch(fetchCategories());
   }, []);
   //showmodal

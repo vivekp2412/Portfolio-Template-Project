@@ -18,8 +18,8 @@ const storage = getStorage();
 import style from "../Product-Form/style.module.css";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
 const TextArea = Input.TextArea;
-let initialImg: string | null = null;
 function EditFormModal(props) {
+  let initialImg: string | null = null;
   const categories = useAppSelector((state) => state.product.categories);
   const { setIsModalOpen, isModalOpen, productId } = props;
   const [items, setItems] = useState<string[]>(categories);
@@ -37,11 +37,11 @@ function EditFormModal(props) {
   const productList = useAppSelector((state) => state.product.productList);
   let filteredArray;
   if (productList.length > 0) {
-    [filteredArray] = productList.filter((data) => data.productId == productId);
-    if (filteredArray) {
-      initialImg = filteredArray.Image;
+    filteredArray = productList.filter((data) => data.productId == productId);
+    if (filteredArray.length>0) {
+      initialImg = filteredArray[0].Image;
     }
-    const prevdata = filteredArray;
+    const prevdata = filteredArray[0];
   }
   const addItem = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
@@ -69,17 +69,19 @@ function EditFormModal(props) {
     let data;
     if (imageUrls == "") {
       data = {
-        ...prevdata,
+        ...filteredArray[0],
         ...values,
         Image: initialImg,
       };
+      dispatch(updateProduct(data));
+
     } else {
       const storageRef = ref(storage, `Products/Edited ${uniqueId}`);
       uploadString(storageRef, imageUrls, "data_url").then(() => {
         console.log("Uploaded a base64 string!");
         getDownloadURL(storageRef).then((downloadURL) => {
           data = {
-            ...prevdata,
+            ...filteredArray[0],
             ...values,
             Image: downloadURL,
           };
@@ -89,7 +91,6 @@ function EditFormModal(props) {
       });
     }
 
-    dispatch(updateProduct(data));
     form.resetFields();
     handleOk();
   };
@@ -146,7 +147,7 @@ function EditFormModal(props) {
             name="control-hooks"
             onFinish={onFinish}
             style={{ maxWidth: 600 }}
-            initialValues={filteredArray}
+            initialValues={filteredArray[0]}
             layout="vertical"
           >
             <Form.Item

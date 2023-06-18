@@ -8,6 +8,13 @@ import {
   fetchCategories,
   updateProduct,
 } from "../../../../slices/productSlice";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
+const storage = getStorage();
 import style from "../Work-Form/style.module.css";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 import { updateWork } from "../../../../slices/workSlice";
@@ -26,16 +33,16 @@ function EditFormModal(props) {
   const [images, setImages] = useState([]);
   const formRef = useRef(null);
   const dispatch = useAppDispatch();
-
+  
   const workList = useAppSelector((state) => state.work.allWorks);
+  let filteredArray;
+  if(workList.length>0){
 
-  const [filteredArray] = workList.filter((data) => data.workId == workId);
-  if (filteredArray) {
-    initialImg = filteredArray.image;
-  }
-  console.log(filteredArray);
-
-  const prevdata = filteredArray;
+    filteredArray = workList.filter((data) => data.workId == workId);
+    if (filteredArray.length>0) {
+      initialImg = filteredArray[0].Image;
+    }
+  } 
   const addItem = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
@@ -60,21 +67,33 @@ function EditFormModal(props) {
 
   const onFinish = (values: any) => {
     let data;
+    console.log(filteredArray[0]);
+    console.log(values);
+    
     if (imageUrls == "") {
       data = {
-        ...prevdata,
+        ...filteredArray[0],
         ...values,
-        Image: [{ dataURL: initialImg }],
+        Image:initialImg,
       };
+      console.log(data);
+      dispatch(updateWork(data));
     } else {
-      data = {
-        ...prevdata,
-        ...values,
-        Image: [{ dataURL: imageUrls }],
-      };
+      const storageRef = ref(storage, `Work/Edited ${uniqueId}`);
+      uploadString(storageRef, imageUrls, "data_url").then(() => {
+        console.log("Uploaded a base64 string!");
+        getDownloadURL(storageRef).then((downloadURL) => {
+          data = {
+            ...filteredArray[0],
+            ...values,
+            Image: downloadURL,
+          };
+          console.log(data);
+          dispatch(updateWork(data));
+        });
+      });
     }
 
-    dispatch(updateWork(data));
     form.resetFields();
     handleOk();
   };
@@ -131,7 +150,7 @@ function EditFormModal(props) {
             name="control-hooks"
             onFinish={onFinish}
             style={{ maxWidth: 600 }}
-            initialValues={filteredArray}
+            initialValues={filteredArray[0]}
             layout="vertical"
           >
             <Form.Item

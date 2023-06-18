@@ -5,18 +5,25 @@ import { useAppSelector } from "../../../Hooks/Hooks";
 function Card(props) {
   return (
     <div>
-      <div className={style.row}>
+      {/* <div className={style.row}> */}
         <div className={style.card}>
           <img
             src={props.image}
             alt="work-Image"
             className={style.workImg}
           ></img>
-          <h4>{props.workTitle}</h4>
+          <div className={style.title}>
+          {props.workTitle}
+
+          </div>
+          <div className={style.desc}>
           <p>{props.workDesc}</p>
+
+          </div>
+
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

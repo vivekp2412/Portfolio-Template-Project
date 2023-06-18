@@ -8,7 +8,7 @@ import {
 import style from "../Cards/style.module.css";
 function ProductCard(props) {
   const { data } = props;
-  const imgSrc = data.Image[0].dataURL;
+  const imgSrc = data.Image;
   return (
     <>
       <div

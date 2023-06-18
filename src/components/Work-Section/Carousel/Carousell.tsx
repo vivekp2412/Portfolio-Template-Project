@@ -1,67 +1,67 @@
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
-import Card from "../Work-Card/Card";
-import "../Carousel/style.css";
-import { useAppSelector } from "../../../Hooks/Hooks";
-//Owl Carousel Settings
-const options = {
-  margin: 30,
-  responsiveClass: true,
-  nav: true,
-  autoplay: false,
-  navText: [
-    `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-10 h-10">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>
-`,
-    `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-10 h-10">
-<path strokeLinecap="round" strokeLinejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>`,
-  ],
-  smartSpeed: 1000,
-  responsive: {
-    0: {
-      items: 1,
-    },
-    400: {
-      items: 1,
-    },
-    600: {
-      items: 2,
-    },
-    700: {
-      items: 2,
-    },
-    1000: {
-      items: 3,
-    },
-  },
-};
-function Carousell() {
-  const allWorks = useAppSelector((state) => state.work.allWorks);
-  console.log(allWorks);
+import React, { useRef } from 'react';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+import style from "../Carousel/style.module.css"
+import { useAppSelector } from '../../../Hooks/Hooks';
+import Card from '../Work-Card/Card';
+import Loader from '../../Comman/Loader/Loader';
+SwiperCore.use([Navigation, Pagination]);
 
-  const works = allWorks.map((work) => {
-    return (
-      <div>
-        <Card
-          workTitle={work.workTitle}
-          workDesc={work.workDesc}
-          image={work.image}
-        />
-      </div>
-    );
-  });
-  console.log(works);
+const Carousel = () => {
+  const swiperRef = useRef(); // Reference to the Swiper instance
+  const works =  useAppSelector((state)=>state.work.allWorks)
+  const pending =  useAppSelector((state)=>state.work.pending);
+  const breakpoints = {
+    // Define your breakpoints
+  };
+
+  // const handlePrev = () => {
+  //   if (swiperRef.current && swiperRef.current.swiper) {
+  //     swiperRef.current.swiper.slidePrev();
+  //   }
+  // };
+
+  // const handleNext = () => {
+  //   if (swiperRef.current && swiperRef.current.swiper) {
+  //     swiperRef.current.swiper.slideNext();
+  //   }
+  // };
 
   return (
-    <div>
-      <OwlCarousel className="slider-items owl-carousel" {...options}>
-        {works}
-      </OwlCarousel>
-    </div>
-  );
-}
+   <>
+    <div className={style.cardContainer}>
+    {pending &&<div className={style.loader}> <Loader/></div>}
+    {(!pending && works.length==0) && <h1>Data not found</h1>}
+      <Swiper
+        // ref={swiperRef} // Assign the ref to the Swiper component
+        breakpoints={breakpoints}
+        navigation={true}
+        
+        pagination={{ clickable: true }}
+        // scrollbar={{ draggable: true }}
+        onSwiper={(swiper) => (swiperRef.current = swiper)} // Save the Swiper instance to the ref
+        onSlideChange={() => console.log('slide change')}
+        >
+        {works.map((work, index) => (
+          <SwiperSlide key={index}>
+            <Card
+              workTitle={work.workTitle}
+              workDesc={work.workDesc}
+              image={work.Image}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-export default Carousell;
+    
+    </div>
+            </> 
+  );
+};
+
+export default Carousel;
+
+
+
+
