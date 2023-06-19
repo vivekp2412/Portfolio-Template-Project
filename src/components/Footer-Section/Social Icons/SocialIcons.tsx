@@ -1,10 +1,12 @@
 import React from "react";
 import style from "../Social Icons/style.module.css";
+import { useAppSelector } from "../../../Hooks/Hooks";
 function SocialIcons() {
+  const data =  useAppSelector((state)=>state.contact.contactDetails);
   return (
     <div className={style.all_Icon_Container}>
       <div className={style.iconContainer}>
-        <a href="#">
+        <a href={data["Faceook Url"]}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={style.icon}
@@ -18,7 +20,7 @@ function SocialIcons() {
         </a>
       </div>
       <div className={style.iconContainer}>
-        <a href="#">
+        <a href={data["Instagram Url"]}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={style.icon}
@@ -30,7 +32,7 @@ function SocialIcons() {
         </a>
       </div>
       <div className={style.icon}>
-        <a href="#">
+        <a href={data["Twitter Url"]}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={style.icon}

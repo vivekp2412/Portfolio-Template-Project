@@ -4,6 +4,7 @@ import { useAppSelector } from "../../../Hooks/Hooks";
 import style from "../Desktop-Navbar/style.module.css";
 //Desktop Navbar
 function DesktopNavbar() {
+  const data = useAppSelector((state)=>state.contact.contactDetails);
   // const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
   const logIn = () => {
@@ -14,7 +15,8 @@ function DesktopNavbar() {
       <div className={style.navbarContainer}>
         <div className={style.navbar}>
           <span className={style.title}>
-            PORTF<span style={{ color: "#B88B05" }}>O</span>LIO
+            {/* PORTF<span style={{ color: "#B88B05" }}>O</span>LIO */}
+            {data["Portfolio Name"]}
           </span>
           <ul className={style.navoptions}>
             <li className={style.navoption}>

@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { dataref, db } from "../firebase";
 import { toast } from "react-toastify";
-import { async } from "@firebase/util";
-import { addDoc, collection, doc,getDoc, getDocs } from "firebase/firestore";
-import Dataservice from "../services/service"
 
 export const fetchCarouselData = createAsyncThunk(
   "/fetchCarousel",

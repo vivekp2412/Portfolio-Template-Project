@@ -19,13 +19,16 @@
 }
 .button {
   border-radius: 5%;
-  @apply border-2 border-white text-white p-1 md:p-3 hover:bg-white hover:text-primary;
+  @apply border-2 border-white text-white p-1 md:p-3 hover:bg-white hover:text-primary my-6;
 }
 .area {
-  @apply flex justify-start items-center;
+  @apply flex justify-start items-start flex-col;
 }
 .area textarea {
   width: 100%;
+}
+.error{
+  color: red;
 }
 @media screen and (max-width: 624px) {
   .form {

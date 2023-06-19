@@ -16,6 +16,7 @@
   fill: #b88b05;
   height: 40px;
   color: #b88b05;
+  cursor: pointer;
 }
 @media screen and (max-width: 1400px) {
   .headerContainer {

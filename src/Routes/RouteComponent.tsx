@@ -13,6 +13,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { useAppSelector } from "../Hooks/Hooks";
 import LoginContainer from "../Containers/Login-Container/LoginContainer";
 import AdminOurWorkContainer from "../Containers/AdminContainer/Admin-OurWork/AdminOurWorkContainer";
+import AdminContact from "../Containers/AdminContainer/Admin-Contact/AdminContact";
 
 function RouteComponent() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
@@ -48,7 +49,11 @@ function RouteComponent() {
           />
           <Route
             path="contact"
-            element={<ProtectedRoute component={ContactSection} />}
+            element={
+              <ProtectedRoute>
+                <AdminContact />
+              </ProtectedRoute>
+            }
           />
         </Route>
         <Route path="/admin/login" element={<LoginContainer />} />
