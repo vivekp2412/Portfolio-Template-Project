@@ -79,6 +79,7 @@ Input {
   color: #b88b05;
   font-weight: 600;
   font-size: medium;
+  cursor: pointer;
 }
 .link:hover {
   color: cornflowerblue;

@@ -22,12 +22,12 @@
   @apply border-2 border-white text-white p-1 md:p-3 hover:bg-white hover:text-primary my-6;
 }
 .area {
-  @apply flex justify-start items-start flex-col;
+  @apply flex justify-start items-start flex-col my-4;
 }
 .area textarea {
   width: 100%;
 }
-.error{
+.error {
   color: red;
 }
 @media screen and (max-width: 624px) {

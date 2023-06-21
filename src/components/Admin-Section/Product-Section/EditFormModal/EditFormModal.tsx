@@ -38,7 +38,7 @@ function EditFormModal(props) {
   let filteredArray;
   if (productList.length > 0) {
     filteredArray = productList.filter((data) => data.productId == productId);
-    if (filteredArray.length>0) {
+    if (filteredArray.length > 0) {
       initialImg = filteredArray[0].Image;
     }
     const prevdata = filteredArray[0];
@@ -74,7 +74,6 @@ function EditFormModal(props) {
         Image: initialImg,
       };
       dispatch(updateProduct(data));
-
     } else {
       const storageRef = ref(storage, `Products/Edited ${uniqueId}`);
       uploadString(storageRef, imageUrls, "data_url").then(() => {
@@ -147,7 +146,7 @@ function EditFormModal(props) {
             name="control-hooks"
             onFinish={onFinish}
             style={{ maxWidth: 600 }}
-            initialValues={filteredArray[0]}
+            initialValues={filteredArray?.length > 0 && filteredArray[0]}
             layout="vertical"
           >
             <Form.Item

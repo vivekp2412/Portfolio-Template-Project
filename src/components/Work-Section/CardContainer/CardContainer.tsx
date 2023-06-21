@@ -6,11 +6,11 @@ import Card from "../Work-Card/Card";
 import { SwiperSlide } from "swiper/react";
 function CardContainer() {
   const allWorks = useAppSelector((state) => state.work.allWorks);
-  const works = allWorks.map((work,index) => {
+  const works = allWorks.map((work, index) => {
     console.log(work);
-    
+
     return (
-      <SwiperSlide key={index} style={{width:"100%"}}>
+      <SwiperSlide key={index} style={{ width: "100%" }}>
         <Card
           workTitle={work.workTitle}
           workDesc={work.workDesc}
@@ -19,10 +19,7 @@ function CardContainer() {
       </SwiperSlide>
     );
   });
-  useEffect(()=>{
-    console.log("hi");
-    
-   },[allWorks])
+
   return (
     <div className={style.cardContainer}>
       <Carousell works={works} />

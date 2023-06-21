@@ -1,16 +1,21 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../Hooks/Hooks";
 import { loginUser } from "../../../slices/authSlice";
 import { Input, Button, Form } from "antd";
 const Password = Input.Password;
+
 import loginImage from "../../../assets/Login/user-interface.png";
 import style from "../Login-Page/style.module.css";
+import { toast } from "react-toastify";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  const [form] = Form.useForm();
   function onFinish(values) {
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {
@@ -32,9 +37,22 @@ function Login() {
     }
     return Promise.resolve();
   };
+
+  const handleResetPassword = (value) => {
+    let email = value;
+
+    console.log(email);
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => toast("Reset Password Link Sent Successfully"))
+      .catch((err) => {
+        toast(err.message);
+      });
+  };
   return (
     <div className={style.formContainer}>
       <Form
+        form={form}
         name="basic"
         layout={"vertical"}
         className={style.form}
@@ -105,7 +123,12 @@ function Login() {
 
           {/* <Input type="password" /> */}
         </Form.Item>
-
+        <div
+          className={style.link}
+          onClick={() => handleResetPassword(form.getFieldValue("email"))}
+        >
+          Forget password ?
+        </div>
         <div className={style.btnContainer}>
           <button className={style.submitBtn} type="submit">
             Submit
@@ -118,8 +141,6 @@ function Login() {
             Sign Up
           </Link>
         </div>
-        {/* <div className={style.btnContainer}> */}
-        {/* </div> */}
       </Form>
     </div>
   );

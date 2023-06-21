@@ -42,7 +42,7 @@ function PreviewTable() {
       dataIndex: "workTitle",
     },
     {
-      title: "Work Description",
+      title: "Description",
       dataIndex: "workDesc",
     },
     {

@@ -1,15 +1,17 @@
 import "./App.css";
 import RouteComponent from "./Routes/RouteComponent";
-import { useEffect } from "react";
-import { useAppDispatch } from "./Hooks/Hooks";
+import { Suspense, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./Hooks/Hooks";
 import { fetchCategories, fetchProductsData } from "./slices/productSlice";
 import { fetchCarouselData } from "./slices/homeSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchWorkData } from "./slices/workSlice";
 import { fetchContactData } from "./slices/contactSlice";
+import Loader from "./components/Comman/Loader/Loader";
 function App() {
   const dispatch = useAppDispatch();
+  // const pending = useAppSelector((state) => state.contact.pending);
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -22,27 +24,28 @@ function App() {
       }
     };
     fetch();
-    // fetchCarouselData();
-    // fetchProductsData();
-    // fetchCategories();
-    // fetchWorkData();
-    // fetchContactData();
   }, []);
   return (
     <>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <RouteComponent />
+      {/* {pending ? (
+        <h1>hi</h1>
+      ) : ( */}
+      <>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <RouteComponent />
+      </>
+      {/* )} */}
     </>
   );
 }

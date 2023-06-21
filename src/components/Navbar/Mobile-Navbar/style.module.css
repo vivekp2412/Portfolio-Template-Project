@@ -59,11 +59,19 @@
   height: 30px;
   color: black;
 }
-.closeSliderIcon:hover{
-  color:"#B88B05";
+.closeSliderIcon:hover {
+  color: "#B88B05";
 }
 @media screen and (min-width: 550px) {
   .mobileNavbarContainer {
     display: none;
   }
+}
+.navBtn {
+  background-color: #b88b05;
+  color: white;
+  height: 35px;
+  align-self: center;
+  justify-self: end;
+  padding: 5px 10px;
 }

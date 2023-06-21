@@ -20,7 +20,7 @@
 .title {
   @apply cursor-pointer text-xl tracking-widest;
 }
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 1024px) {
   .navbarContainer {
     display: none;
   }
@@ -33,7 +33,4 @@
   align-self: center;
   justify-self: end;
   padding: 5px 10px;
-  /* position: absolute; */
-  /* top: 0; */
-  /* right: 10px; */
 }

@@ -4,10 +4,15 @@ import TitleName from "../../components/Home-Section/Title-Name/TitleName";
 import { useEffect } from "react";
 import { useAppDispatch } from "../../Hooks/Hooks";
 import { fetchCarouselData } from "../../slices/homeSlice";
+import { fetchContactData } from "../../slices/contactSlice";
 export default function HomeContainer() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchCarouselData());
+    const fetch = async () => {
+      await dispatch(fetchCarouselData());
+      await dispatch(fetchContactData());
+    };
+    fetch();
   }, []);
   return (
     <div className={style.homeContainer}>

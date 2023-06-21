@@ -2,12 +2,17 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../Mobile-Navbar/style.module.css";
 import brand from "../../../assets/Navbar/Mobile-Navbar/logo.png";
+import { useNavigate } from "react-router-dom";
 type Propstype = {
   event: () => void;
 };
 //Mobile Screen Side navbar
 function MobileNavbar(props: Propstype) {
   const closeSideBar = props.event;
+  const navigate = useNavigate();
+  const logIn = () => {
+    navigate("/admin/login");
+  };
   return (
     <div id="" className={style.mobilenavbarContainer}>
       <div className={style.mobileNavbar}>
@@ -37,6 +42,9 @@ function MobileNavbar(props: Propstype) {
               <a href="#contactSection">CONTACT US</a>
               <div className={style.navoption_hover}></div>
             </li>
+            <button className={style.navBtn} onClick={() => logIn()}>
+              LOG IN
+            </button>
           </ul>
         </div>
         <div className={style.iconContainer}>

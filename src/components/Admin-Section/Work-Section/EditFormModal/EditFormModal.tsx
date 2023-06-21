@@ -33,16 +33,15 @@ function EditFormModal(props) {
   const [images, setImages] = useState([]);
   const formRef = useRef(null);
   const dispatch = useAppDispatch();
-  
+
   const workList = useAppSelector((state) => state.work.allWorks);
   let filteredArray;
-  if(workList.length>0){
-
+  if (workList.length > 0) {
     filteredArray = workList.filter((data) => data.workId == workId);
-    if (filteredArray.length>0) {
+    if (filteredArray.length > 0) {
       initialImg = filteredArray[0].Image;
     }
-  } 
+  }
   const addItem = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
@@ -69,12 +68,12 @@ function EditFormModal(props) {
     let data;
     console.log(filteredArray[0]);
     console.log(values);
-    
+
     if (imageUrls == "") {
       data = {
         ...filteredArray[0],
         ...values,
-        Image:initialImg,
+        Image: initialImg,
       };
       console.log(data);
       dispatch(updateWork(data));
@@ -150,7 +149,7 @@ function EditFormModal(props) {
             name="control-hooks"
             onFinish={onFinish}
             style={{ maxWidth: 600 }}
-            initialValues={filteredArray[0]}
+            initialValues={filteredArray?.length > 0 && filteredArray[0]}
             layout="vertical"
           >
             <Form.Item

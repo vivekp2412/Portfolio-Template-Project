@@ -1,22 +1,23 @@
-.submitbtn{
-    background-color: #b88b05 !important;
-    color: white !important;
-    border: none !important;
+.activebtn {
+  background-color: #b88b05 !important;
+  color: white !important;
+  border: none !important;
 }
-.editbtn{
-    color: black !important;
+.resetbtn {
+  background-color: rgb(218, 47, 47) !important;
+  color: white !important;
+  border: none !important;
 }
-.editbtn:hover{
-    /* border: none !important; */
-    border: black !important;
-    color: black !important;
+.btnContainer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
 }
-.btnContainer{
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
+.disabled {
+  background-color: white !important;
+  color: gray !important;
 }
-.disabled{
-    background-color: white !important;
-    color: gray !important;
+.formContainer {
+  padding: 10px;
+  @apply w-[90%] md:w-[50%];
 }

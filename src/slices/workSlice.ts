@@ -35,7 +35,11 @@ export const workSlice = createSlice({
       const indexToDelete = state.allWorks.findIndex((object) => {
         return object.workId == action.payload;
       });
-      state.allWorks = state.allWorks.splice(indexToDelete, 1);
+      console.log(indexToDelete);
+      
+      state.allWorks.splice(indexToDelete, 1);
+      console.log(state.allWorks);
+      
       dataref.ref("Our Work").set({
     works: state.allWorks,
       });

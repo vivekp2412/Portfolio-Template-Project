@@ -30,7 +30,7 @@ function navbarContainer() {
   return (
     <div className={style.navbarContainer}>
       <DesktopNavbar />
-      {width! < 550 && (
+      {width! < 1024 && (
         <div className={style.hamburger_logo}>
           <span className={style.brand}>
             PORTF<span style={{ color: "#B88B05" }}>O</span>LIO

@@ -22,28 +22,27 @@ export const contactSlice = createSlice({
     pending: false,
     contactDetails:{
         // productName:"vi"
+        ["Portfolio Name"]:""
     },
   },
   reducers: {
     addDetails(state, action) {
-      toast.success('Deatils Added Successfully');
+      toast.success('Detials Updated Successfully');
       state.contactDetails =action.payload;
     
       dataref.ref("Contact Details").set({
         contactDetails: state.contactDetails,
       })
     },
+    resetDetails(state,action){
+      state.contactDetails={};
+      dataref.ref("Contact Details").set({
+        contactDetails: state.contactDetails,
+      });
+      toast.success('Detials reset Successfully');
+
+    }
    
-//     updateState(state, action) {
-//       const id =action.payload.id;
-//       const checked = action.payload.checked;
-//     const index = state.allImages.findIndex((image) => {
-//       return image.imageId == id;
-//     });
-//     state.allImages[index].active=checked;
-  
-//     dataref.ref("Carousel").set({image:state.allImages});
-//   },
 
   },
   extraReducers: (builder) => {
@@ -63,5 +62,5 @@ export const contactSlice = createSlice({
      
   },
 });
-export const { addDetails } = contactSlice.actions;
+export const { addDetails,resetDetails } = contactSlice.actions;
 export default contactSlice.reducer;
