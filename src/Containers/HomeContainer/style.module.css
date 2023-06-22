@@ -17,8 +17,13 @@
   position: absolute;
   top: 0;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .Title {
     top: 120px;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .homeContainer {
+    min-height: 0;
   }
 }

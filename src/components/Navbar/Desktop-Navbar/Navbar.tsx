@@ -78,6 +78,9 @@ function DesktopNavbar() {
                 CONTACT US
               </a>
             </li>
+            <button className={style.navBtn} onClick={() => logIn()}>
+              LOG IN
+            </button>
           </ul>
         </div>
       </div>
