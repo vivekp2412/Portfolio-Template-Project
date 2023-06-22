@@ -14,6 +14,7 @@ import { useAppSelector } from "../Hooks/Hooks";
 import LoginContainer from "../Containers/Login-Container/LoginContainer";
 import AdminOurWorkContainer from "../Containers/AdminContainer/Admin-OurWork/AdminOurWorkContainer";
 import AdminContact from "../Containers/AdminContainer/Admin-Contact/AdminContact";
+import ProductDetail from "../components/Product-Detail/Product Detail";
 
 function RouteComponent() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
@@ -21,6 +22,7 @@ function RouteComponent() {
     <div>
       <Routes>
         <Route path="/" element={<PortfolioContainer />}></Route>
+        <Route path="/products/:id" element={<ProductDetail />}></Route>
         <Route path="/admin" element={<AdminContainer />}>
           <Route
             path="home"
@@ -56,8 +58,8 @@ function RouteComponent() {
             }
           />
         </Route>
+
         <Route path="/admin/login" element={<LoginContainer />} />
-        <Route path="/admin/signup" element={<Signup />} />
       </Routes>
     </div>
   );

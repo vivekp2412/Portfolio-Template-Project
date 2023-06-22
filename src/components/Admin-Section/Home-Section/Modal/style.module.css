@@ -10,6 +10,7 @@
   padding: 5px;
   border-radius: 2%;
 }
+
 .modal_button_container {
   @apply flex justify-center md:justify-end my-3;
 }
@@ -28,7 +29,7 @@
 }
 .errorMessage {
   color: red;
-  text-align: center
+  text-align: center;
 }
 .bottomline {
   @apply border-b-2 border-secondary my-5;

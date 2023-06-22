@@ -130,7 +130,7 @@ const FormModal = () => {
                 onClick={handleSubmit}
                 className={style.button_modal}
               >
-                Ok
+                Add
               </button>
               <button
                 type="reset"

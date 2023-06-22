@@ -178,7 +178,7 @@ function EditFormModal(props) {
                     className={style.button_modal}
                     // onClick={onFinish}
                   >
-                    Submit
+                    Edit
                   </Button>
                   <Button
                     htmlType="button"

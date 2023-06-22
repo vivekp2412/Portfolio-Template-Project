@@ -211,12 +211,8 @@ function EditFormModal(props) {
               </Form.Item>
               <Form.Item>
                 <div className={style.button_container}>
-                  <Button
-                    htmlType="submit"
-                    className={style.button_modal}
-                    // onClick={onFinish}
-                  >
-                    Submit
+                  <Button htmlType="submit" className={style.button_modal}>
+                    Edit
                   </Button>
                   <Button
                     htmlType="button"

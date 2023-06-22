@@ -5,9 +5,13 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../../Hooks/Hooks";
+import { selectProduct } from "../../../slices/productSlice";
 import style from "../Cards/style.module.css";
 function ProductCard(props) {
   const { data } = props;
+  const dispatch = useAppDispatch();
   const imgSrc = data.Image;
   return (
     <>
@@ -20,15 +24,19 @@ function ProductCard(props) {
       >
         <div className={style.overlay}>
           <div className={style.head}>
-            <p className={style.productName}>
-              {data.productName}
-            </p>
+            <p className={style.productName}>{data.productName}</p>
           </div>
 
           <div className={`${style.items} ${style.cart}`}>
             <span>
               <hr />
-              <a className={style.readMore} href="">Read More</a>
+              <NavLink
+                className={style.readMore}
+                to={`/products/${data.productId}`}
+                onClick={() => dispatch(selectProduct(data.productId))}
+              >
+                Read More
+              </NavLink>
             </span>
           </div>
         </div>

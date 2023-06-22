@@ -234,12 +234,8 @@ const ProductForm = (props) => {
               </Form.Item>
               <Form.Item>
                 <div className={style.button_container}>
-                  <Button
-                    htmlType="submit"
-                    className={style.button_modal}
-                    // onClick={onFinish}
-                  >
-                    Submit
+                  <Button htmlType="submit" className={style.button_modal}>
+                    Add
                   </Button>
                   <Button
                     htmlType="button"

@@ -152,7 +152,7 @@ const WorkFormModal = () => {
                     className={style.button_modal}
                     //   onClick={handleSubmit}
                   >
-                    Submit
+                    Add
                   </Button>
                   <Button
                     htmlType="button"

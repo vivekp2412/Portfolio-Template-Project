@@ -42,7 +42,8 @@ export const productSlice = createSlice({
         filteredCategory:"all",
         searchedProducts:[],
         searchQuery:"",
-        categories:[]
+        categories:[],
+        selectedProduct:{}
     },
     reducers: {
         addProduct(state,action){
@@ -105,6 +106,17 @@ export const productSlice = createSlice({
           dataref.ref("Products Categories").set({
             Categories:state.categories
           });
+        },
+        selectProduct(state,action){
+          let id =  action.payload;
+          const selectedProduct =  state.productList.filter((product)=>{
+            if( product.productId==id){
+              return product;
+            }
+          });
+          // console.log(selectedProduct);
+          
+          state.selectedProduct=selectedProduct[0];
         }
     },
     extraReducers:(builder)=>{
@@ -132,5 +144,5 @@ export const productSlice = createSlice({
     }
 
 })
-export const {addProduct,deleteProduct,updateProduct,changeFilterCategory,searchProduct,addCategory} = productSlice.actions 
+export const {addProduct,deleteProduct,updateProduct,changeFilterCategory,searchProduct,addCategory,selectProduct} = productSlice.actions 
 export default productSlice.reducer
