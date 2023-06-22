@@ -32,9 +32,7 @@ function Login() {
         });
       });
   }
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
+  const onFinishFailed = (errorInfo: any) => {};
   const validatePassword = (_, value) => {
     if (value && value.length < 8) {
       return Promise.reject(new Error("Atleast 8 characters Required"));

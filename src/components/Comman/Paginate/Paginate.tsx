@@ -6,7 +6,6 @@ import ProductCard from "../../Product-Section/Cards/ProductCard";
 import style from "../../Product-Section/CardContainer/style.module.css";
 function Paginate({ itemsPerPage }) {
   const productList = useAppSelector((state) => state.product.productList);
-  console.log(productList);
   const [itemOffset, setItemOffset] = useState(0);
 
   const searchQuery = useAppSelector((state) => state.product.searchQuery);

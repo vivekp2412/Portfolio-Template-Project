@@ -77,14 +77,12 @@ function EditFormModal(props) {
         ...values,
         Image: initialImg,
       };
-      console.log(data);
       dispatch(updateWork(data));
       form.resetFields();
       handleOk();
     } else {
       const storageRef = ref(storage, `Work/Edited ${uniqueId}`);
       uploadString(storageRef, imageUrls, "data_url").then(() => {
-        console.log("Uploaded a base64 string!");
         getDownloadURL(storageRef).then((downloadURL) => {
           setLoading(false);
           data = {
@@ -92,7 +90,6 @@ function EditFormModal(props) {
             ...values,
             Image: downloadURL,
           };
-          console.log(data);
           dispatch(updateWork(data));
           form.resetFields();
           handleOk();

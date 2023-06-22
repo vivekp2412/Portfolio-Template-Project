@@ -28,7 +28,7 @@ const Carousel = () => {
           navigation={true}
           pagination={{ clickable: true }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          onSlideChange={() => console.log("slide change")}
+          onSlideChange={() => {}}
         >
           {works.map((work, index) => (
             <SwiperSlide key={index}>

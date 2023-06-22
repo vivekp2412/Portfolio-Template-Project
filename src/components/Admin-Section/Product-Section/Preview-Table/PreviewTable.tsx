@@ -31,7 +31,6 @@ function PreviewTable() {
 
   const pending = useAppSelector((state) => state.product.pending);
   const dispatch = useAppDispatch();
-  const MAX_DESCRIPTION_LENGTH = 50;
   const columns: ColumnsType<DataType> = [
     {
       title: "Product Id",

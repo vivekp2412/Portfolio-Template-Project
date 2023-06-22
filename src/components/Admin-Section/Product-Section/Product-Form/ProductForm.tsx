@@ -102,7 +102,6 @@ const ProductForm = (props) => {
       if (productList) {
         const storageRef = ref(storage, `Products/${uniqueId}`);
         uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
-          console.log("Uploaded a base64 string!");
           getDownloadURL(storageRef).then((downloadURL) => {
             setLoading(false);
 
@@ -110,7 +109,6 @@ const ProductForm = (props) => {
               ...data,
               Image: downloadURL,
             };
-            console.log(data);
             dispatch(addProduct(data));
             form.resetFields();
             setImages([]);
@@ -120,8 +118,6 @@ const ProductForm = (props) => {
         });
       }
     } else {
-      console.log("err");
-
       setImageErr(true);
     }
   };

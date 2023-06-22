@@ -48,7 +48,6 @@ export const productSlice = createSlice({
         addProduct(state,action){
             toast.success("Product Added Successfully");
             state.productList=[...state.productList,action.payload];
-            console.log(state.productList);
             
             dataref.ref("Products").set({
                 productList:state.productList
@@ -67,7 +66,6 @@ export const productSlice = createSlice({
               
         },
         updateProduct(state,action){
-          console.log(action.payload);
           
             let id  = action.payload.productId;
             const indexToUpdate = state.productList.findIndex((x)=> x.productId==id);

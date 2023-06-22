@@ -69,14 +69,12 @@ const WorkFormModal = () => {
       };
       const storageRef = ref(storage, `Wroks/${idGenerator()}`);
       uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
-        console.log("Uploaded a base64 string!");
         getDownloadURL(storageRef).then((downloadURL) => {
           setLoading(false);
           data = {
             ...data,
             Image: downloadURL,
           };
-          console.log(data);
           dispatch(addWork(data));
           form.resetFields();
           setImages([]);

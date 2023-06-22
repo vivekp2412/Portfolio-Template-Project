@@ -69,7 +69,6 @@ const FormModal = () => {
       setImageErr(false);
       const storageRef = ref(storage, `images/${idGenerator()}`);
       uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
-        console.log("Uploaded a base64 string!");
         getDownloadURL(storageRef).then((downloadURL) => {
           firebaseImgUrl = downloadURL;
           setLoading(false);
@@ -77,7 +76,6 @@ const FormModal = () => {
             ...data,
             image: firebaseImgUrl,
           };
-          console.log(data);
           dispatch(addImage(data));
 
           setImages([]);

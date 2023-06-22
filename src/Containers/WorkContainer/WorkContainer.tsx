@@ -8,11 +8,9 @@ import style from "../WorkContainer/style.module.css";
 function WorkContainer() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const fetch = async()=>{
-
-      console.log("work fetch");
+    const fetch = async () => {
       await dispatch(fetchWorkData());
-    }
+    };
     fetch();
   }, []);
   const allWorks = useAppSelector((state) => state.work.allWorks);
@@ -21,7 +19,7 @@ function WorkContainer() {
     <div className={style.workContainer}>
       <WorkTitle />
       {/* <CardContainer /> */}
-      <Carousell/>
+      <Carousell />
     </div>
   );
 }

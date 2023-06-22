@@ -13,7 +13,6 @@ export default function ContactForm() {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const initialData = useAppSelector((state) => state.contact.contactDetails);
-  console.log(initialData);
 
   useEffect(() => {
     // Fetch initial data if not available
@@ -29,7 +28,6 @@ export default function ContactForm() {
     return Promise.resolve();
   };
   function onFinish(values) {
-    console.log(values);
     setIsFormDisable(true);
     dispatch(addDetails(values));
   }

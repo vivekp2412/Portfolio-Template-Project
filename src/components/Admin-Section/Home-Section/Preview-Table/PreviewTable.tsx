@@ -30,7 +30,6 @@ function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalimg, setModalimg] = useState<string>();
   const data = useAppSelector((state) => state.home.allImages);
-  console.log(data);
 
   const dispatch = useAppDispatch();
 
@@ -40,7 +39,6 @@ function PreviewTable() {
   //     return data.active == true;
   //   });
   //   if (filteredArray.length > 3) {
-  //     console.log("jo");
 
   //     setIsDisable(true);
   //   }
@@ -49,7 +47,6 @@ function PreviewTable() {
     dispatch(updateState({ checked, id }));
     // dispatch(updateState(id, checked));
   };
-  console.log(data);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -100,7 +97,6 @@ function PreviewTable() {
                   {
                     label: "Yes",
                     onClick: () => {
-                      console.log(record);
                       dispatch(deleteImage(record.docId));
                     },
                   },

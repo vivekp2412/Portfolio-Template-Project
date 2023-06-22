@@ -1,9 +1,5 @@
 import { createSlice, isPending } from "@reduxjs/toolkit";
-import { Action } from "@remix-run/router";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+
 import { toast } from "react-toastify";
 
 const authSlice= createSlice({

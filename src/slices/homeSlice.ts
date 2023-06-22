@@ -7,7 +7,6 @@ export const fetchCarouselData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = (await dataref.ref("Carousel").once("value")).val().image;
-      console.log(data);
       
       return data;
     } catch (error) {

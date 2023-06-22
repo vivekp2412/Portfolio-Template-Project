@@ -7,7 +7,6 @@ export const fetchContactData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = (await dataref.ref("Contact Details").once("value")).val().contactDetails;
-      console.log(data);
       
       return data;
     } catch (error) {
@@ -52,7 +51,6 @@ export const contactSlice = createSlice({
       })
       .addCase(fetchContactData.fulfilled, (state, action) => {
         state.pending = false;
-        console.log("fullfilled");
         
         state.contactDetails = action.payload;
       })

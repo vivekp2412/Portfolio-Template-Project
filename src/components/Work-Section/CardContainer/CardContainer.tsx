@@ -7,8 +7,6 @@ import { SwiperSlide } from "swiper/react";
 function CardContainer() {
   const allWorks = useAppSelector((state) => state.work.allWorks);
   const works = allWorks.map((work, index) => {
-    console.log(work);
-
     return (
       <SwiperSlide key={index} style={{ width: "100%" }}>
         <Card

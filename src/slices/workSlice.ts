@@ -7,7 +7,6 @@ export const fetchWorkData = createAsyncThunk(
     try {
       const response = await dataref.ref("Our Work").once("value");
       if(true){
-        console.log("hi");
         
         const data = response.val().works;
         return data;
@@ -37,10 +36,8 @@ export const workSlice = createSlice({
       const indexToDelete = state.allWorks.findIndex((object) => {
         return object.workId == action.payload;
       });
-      console.log(indexToDelete);
       
       state.allWorks.splice(indexToDelete, 1);
-      console.log(state.allWorks);
       
       dataref.ref("Our Work").set({
     works: state.allWorks,
@@ -53,7 +50,6 @@ export const workSlice = createSlice({
       const index = state.allWorks.findIndex((work) => {
         return work.workId == id;
       });
-      console.log(index);
       
       state.allWorks[index]=action.payload;
       dataref.ref("Our Work").set({works:state.allWorks});
@@ -68,7 +64,6 @@ export const workSlice = createSlice({
       })
       .addCase(fetchWorkData.fulfilled, (state, action) => {
         state.pending = false;
-   console.log("fullfilled");
    
         state.allWorks = action.payload;
       })

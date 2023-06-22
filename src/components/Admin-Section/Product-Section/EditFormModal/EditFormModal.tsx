@@ -84,7 +84,6 @@ function EditFormModal(props) {
     } else {
       const storageRef = ref(storage, `Products/Edited ${uniqueId}`);
       uploadString(storageRef, imageUrls, "data_url").then(() => {
-        console.log("Uploaded a base64 string!");
         getDownloadURL(storageRef).then((downloadURL) => {
           setLoading(false);
           data = {

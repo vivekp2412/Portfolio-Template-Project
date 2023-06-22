@@ -16,7 +16,6 @@ function Carousell() {
   const pending = useAppSelector((state) => state.home.pending);
   const allimages = useAppSelector((state) => state.home.allImages);
   const imageToShow = allimages.filter((x) => x.active == true);
-  console.log(imageToShow);
 
   let images = imageToShow.map((src: Datatype) => {
     return (

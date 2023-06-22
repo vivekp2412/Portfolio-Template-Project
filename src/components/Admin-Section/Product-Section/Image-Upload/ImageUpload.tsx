@@ -27,7 +27,6 @@ export const ImageUpload = (props) => {
     props.geturl(imageList, error);
     setImages(imageList as never[]);
   };
-  console.log(images);
 
   return (
     <div className="App">

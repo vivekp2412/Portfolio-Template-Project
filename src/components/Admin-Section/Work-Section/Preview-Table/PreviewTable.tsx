@@ -21,7 +21,6 @@ function PreviewTable() {
   const dispatch = useAppDispatch();
   const [expanded, setExpanded] = useState(false);
   const [expandId, setExpandId] = useState();
-  console.log(workList);
 
   const columns = [
     {
