@@ -47,7 +47,6 @@ export const productSlice = createSlice({
     reducers: {
         addProduct(state,action){
             toast.success("Product Added Successfully");
-            // state.productList.push(action.payload);
             state.productList=[...state.productList,action.payload];
             console.log(state.productList);
             
@@ -120,12 +119,10 @@ export const productSlice = createSlice({
             state.pending=false;
             
             state.productList=action.payload??[];
-            // state.showProductSection=true
 
         })
         .addCase(fetchProductsData.rejected,(state)=>{
             state.pending=false;
-            // state.showProductSection=false
 
 
         })

@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../Mobile-Navbar/style.module.css";
 import brand from "../../../assets/Navbar/Mobile-Navbar/logo.png";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../Hooks/Hooks";
 type Propstype = {
   event: () => void;
 };
 //Mobile Screen Side navbar
 function MobileNavbar(props: Propstype) {
   const closeSideBar = props.event;
+  const data = useAppSelector((state) => state.contact.contactDetails);
   const navigate = useNavigate();
   const logIn = () => {
     navigate("/admin/login");
@@ -21,7 +23,12 @@ function MobileNavbar(props: Propstype) {
             <img className={style.logo_img} src={brand}></img>
           </div>
           <span className={style.title}>
-            PORTF<span style={{ color: "#B88B05" }}>O</span>LIO
+            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+            {}
+            <span style={{ color: "#B88b05" }}>
+              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+            </span>
+            {data["Portfolio Name"].slice(4).toUpperCase()}
           </span>
         </div>
         <div>

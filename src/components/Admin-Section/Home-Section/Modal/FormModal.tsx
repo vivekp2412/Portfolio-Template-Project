@@ -20,6 +20,7 @@ import {
   fetchCarouselData,
 } from "../../../../slices/homeSlice";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
+import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 interface Datatype {
   image: string;
   imageId: string;
@@ -35,6 +36,8 @@ const FormModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageErr, setImageErr] = useState<boolean>(false);
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState();
+
   const [imageUrls, setImageurl] = useState<{}[]>([]);
 
   const handleImageError = () => {
@@ -56,6 +59,7 @@ const FormModal = () => {
     setImageurl(array);
   }
   async function handleSubmit() {
+    setLoading(true);
     let firebaseImgUrl = "";
     let data = {
       imageId: idGenerator(),
@@ -68,20 +72,20 @@ const FormModal = () => {
         console.log("Uploaded a base64 string!");
         getDownloadURL(storageRef).then((downloadURL) => {
           firebaseImgUrl = downloadURL;
+          setLoading(false);
           data = {
             ...data,
             image: firebaseImgUrl,
           };
           console.log(data);
           dispatch(addImage(data));
+
+          setImages([]);
+          handleOk();
         });
       });
-
-      // dispatch(addImage(data));
-      // await dispatch(fetchCarouselData());
-      setImages([]);
-      handleOk();
     } else {
+      setLoading(false);
       setImageErr(true);
     }
   }
@@ -108,26 +112,38 @@ const FormModal = () => {
         maskClosable={false}
         onCancel={handleCancel}
       >
-        <ImageUpload
-          geturl={geturls}
-          images={images}
-          setImages={setImages}
-          handleImageError={handleImageError}
-          imageError={imageErr}
-        />
+        {loading ? (
+          <>
+            <ModalLoader />
+          </>
+        ) : (
+          <>
+            <ImageUpload
+              geturl={geturls}
+              images={images}
+              setImages={setImages}
+              handleImageError={handleImageError}
+              imageError={imageErr}
+            />
 
-        <div className={style.button_container}>
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            className={style.button_modal}
-          >
-            Ok
-          </button>
-          <button type="reset" className={style.button_modal} onClick={onReset}>
-            Reset
-          </button>
-        </div>
+            <div className={style.button_container}>
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className={style.button_modal}
+              >
+                Ok
+              </button>
+              <button
+                type="reset"
+                className={style.button_modal}
+                onClick={onReset}
+              >
+                Reset
+              </button>
+            </div>
+          </>
+        )}
       </Modal>
     </>
   );

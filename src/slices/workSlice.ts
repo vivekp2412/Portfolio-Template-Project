@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { dataref } from "../firebase";
 export const fetchWorkData = createAsyncThunk(
   "/fetchWork",
@@ -30,6 +31,7 @@ export const workSlice = createSlice({
       dataref.ref("Our Work").set({
         works: state.allWorks,
       });
+      toast.success("New Work Added Successfully");
     },
     deleteWork(state, action) {
       const indexToDelete = state.allWorks.findIndex((object) => {
@@ -43,6 +45,8 @@ export const workSlice = createSlice({
       dataref.ref("Our Work").set({
     works: state.allWorks,
       });
+      toast.success(" Work Deleted Successfully");
+
     },
     updateWork(state, action) {
         const id =action.payload.workId;
@@ -53,6 +57,8 @@ export const workSlice = createSlice({
       
       state.allWorks[index]=action.payload;
       dataref.ref("Our Work").set({works:state.allWorks});
+      toast.success("Updated Successfully");
+
     },
   },
   extraReducers: (builder) => {

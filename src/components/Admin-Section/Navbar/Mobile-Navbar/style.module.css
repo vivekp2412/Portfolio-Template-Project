@@ -30,7 +30,7 @@
 
 .navoption_hover {
   position: absolute;
-  @apply bg-secondary;
+  /* @apply bg-secondary; */
   height: 0%;
   width: 100%;
   top: 100%;
@@ -74,4 +74,7 @@
   align-self: center;
   justify-self: end;
   padding: 5px 10px;
+}
+.activeLink {
+  color: #b88b05;
 }

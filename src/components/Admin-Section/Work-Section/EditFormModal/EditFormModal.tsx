@@ -18,6 +18,8 @@ const storage = getStorage();
 import style from "../Work-Form/style.module.css";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 import { updateWork } from "../../../../slices/workSlice";
+import { faL } from "@fortawesome/free-solid-svg-icons";
+import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 
 const TextArea = Input.TextArea;
 let initialImg: string | null = null;
@@ -30,6 +32,7 @@ function EditFormModal(props) {
   const [uniqueId, setUniqueId] = useState("");
   const [imageUrls, setImageurl] = useState("");
   const [imageErr, setImageErr] = useState<boolean>(false);
+  const [loading, setLoading] = useState();
   const [images, setImages] = useState([]);
   const formRef = useRef(null);
   const dispatch = useAppDispatch();
@@ -66,8 +69,7 @@ function EditFormModal(props) {
 
   const onFinish = (values: any) => {
     let data;
-    console.log(filteredArray[0]);
-    console.log(values);
+    setLoading(true);
 
     if (imageUrls == "") {
       data = {
@@ -82,6 +84,7 @@ function EditFormModal(props) {
       uploadString(storageRef, imageUrls, "data_url").then(() => {
         console.log("Uploaded a base64 string!");
         getDownloadURL(storageRef).then((downloadURL) => {
+          setLoading(false);
           data = {
             ...filteredArray[0],
             ...values,
@@ -89,12 +92,11 @@ function EditFormModal(props) {
           };
           console.log(data);
           dispatch(updateWork(data));
+          form.resetFields();
+          handleOk();
         });
       });
     }
-
-    form.resetFields();
-    handleOk();
   };
   const handleImageError = () => {
     setImageErr(false);
@@ -128,64 +130,69 @@ function EditFormModal(props) {
         className={style.modal}
         footer={null}
       >
-        <>
-          <ImageUpload
-            geturl={geturls}
-            images={images}
-            setImages={setImages}
-            handleImageError={handleImageError}
-          />
-          {!imageUrls && (
-            <img
-              src={initialImg ?? imageUrls}
-              className={style.prevImage}
-              // style={{ margin: "10px auto" }}
-              height={106}
+        {loading ? (
+          <>
+            <ModalLoader />
+          </>
+        ) : (
+          <>
+            <ImageUpload
+              geturl={geturls}
+              images={images}
+              setImages={setImages}
+              handleImageError={handleImageError}
             />
-          )}
-          <Form
-            ref={formRef}
-            form={form}
-            name="control-hooks"
-            onFinish={onFinish}
-            style={{ maxWidth: 600 }}
-            initialValues={filteredArray?.length > 0 && filteredArray[0]}
-            layout="vertical"
-          >
-            <Form.Item
-              name="workTitle"
-              label="Work Title"
-              rules={[{ required: true }]}
+            {!imageUrls && (
+              <img
+                src={initialImg ?? imageUrls}
+                className={style.prevImage}
+                height={106}
+              />
+            )}
+            <Form
+              ref={formRef}
+              form={form}
+              name="control-hooks"
+              onFinish={onFinish}
+              style={{ maxWidth: 600 }}
+              initialValues={filteredArray?.length > 0 && filteredArray[0]}
+              layout="vertical"
             >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="workDesc"
-              label="Work Description"
-              rules={[{ required: true }]}
-            >
-              <TextArea rows={4} cols={4} />
-            </Form.Item>
-            <Form.Item>
-              <div className={style.button_container}>
-                <Button
-                  htmlType="submit"
-                  className={style.button_modal}
-                  // onClick={onFinish}
-                >
-                  Submit
-                </Button>
-                <Button
-                  htmlType="button"
-                  onClick={onReset}
-                  className={style.button_modal}
-                >
-                  Close
-                </Button>
-              </div>
-            </Form.Item>
-          </Form>
-        </>
+              <Form.Item
+                name="workTitle"
+                label="Work Title"
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                name="workDesc"
+                label="Work Description"
+                rules={[{ required: true }]}
+              >
+                <TextArea rows={4} cols={4} />
+              </Form.Item>
+              <Form.Item>
+                <div className={style.button_container}>
+                  <Button
+                    htmlType="submit"
+                    className={style.button_modal}
+                    // onClick={onFinish}
+                  >
+                    Submit
+                  </Button>
+                  <Button
+                    htmlType="button"
+                    onClick={onReset}
+                    className={style.button_modal}
+                  >
+                    Close
+                  </Button>
+                </div>
+              </Form.Item>
+            </Form>
+          </>
+        )}
       </Modal>
     </div>
   );

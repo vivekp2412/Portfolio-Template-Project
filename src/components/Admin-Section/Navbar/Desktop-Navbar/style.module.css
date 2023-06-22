@@ -35,3 +35,6 @@
   justify-self: end;
   padding: 5px 10px;
 }
+.activeLink {
+  color: #b88b05;
+}

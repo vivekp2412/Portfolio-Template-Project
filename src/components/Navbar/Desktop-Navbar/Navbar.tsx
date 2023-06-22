@@ -12,13 +12,16 @@ function DesktopNavbar() {
   const logIn = () => {
     navigate("/admin/login");
   };
-  const [activelink, setActiveLink] = useState();
+  const [activeSection, setActiveSection] = useState("homeSection");
+
+  const handleSetActiveSection = (sectionId) => {
+    setActiveSection(sectionId);
+  };
   return (
     <>
       <div className={style.navbarContainer}>
         <div className={style.navbar}>
           <span className={style.title}>
-            {/* PORTF<span style={{ color: "#B88B05" }}>O</span>LIO */}
             {data["Portfolio Name"].slice(0, 3).toUpperCase()}
             {}
             <span style={{ color: "#B88b05" }}>
@@ -27,30 +30,54 @@ function DesktopNavbar() {
             {data["Portfolio Name"].slice(4).toUpperCase()}
           </span>
           <ul className={style.navoptions}>
-            <li className={style.navoption}>
-              <a href="#homeSection" onClick={setActiveLink("Home")}>
+            <li
+              className={`${style.navoption} ${
+                activeSection === "homeSection" ? style.activeLink : ""
+              }`}
+            >
+              <a
+                href="#homeSection"
+                onClick={() => handleSetActiveSection("homeSection")}
+              >
                 HOME
               </a>
             </li>
-            <li className={style.navoption}>
-              <a href="#productSection" onClick={setActiveLink("Products")}>
+            <li
+              className={`${style.navoption} ${
+                activeSection === "productSection" ? style.activeLink : ""
+              }`}
+            >
+              <a
+                href="#productSection"
+                onClick={() => handleSetActiveSection("productSection")}
+              >
                 PRODUCTS
               </a>
             </li>
-            <li className={style.navoption}>
-              <a href="#workSection" onClick={setActiveLink("Work")}>
+            <li
+              className={`${style.navoption} ${
+                activeSection === "workSection" ? style.activeLink : ""
+              }`}
+            >
+              <a
+                href="#workSection"
+                onClick={() => handleSetActiveSection("workSection")}
+              >
                 MY WORK
               </a>
             </li>
-            <li className={style.navoption}>
-              <a href="#contactSection" onClick={setActiveLink("Contact")}>
+            <li
+              className={`${style.navoption} ${
+                activeSection === "contactSection" ? style.activeLink : ""
+              }`}
+            >
+              <a
+                href="#contactSection"
+                onClick={() => handleSetActiveSection("contactSection")}
+              >
                 CONTACT US
               </a>
             </li>
-
-            <button className={style.navBtn} onClick={() => logIn()}>
-              LOG IN
-            </button>
           </ul>
         </div>
       </div>

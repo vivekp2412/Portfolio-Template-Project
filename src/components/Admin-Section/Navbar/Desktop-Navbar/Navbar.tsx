@@ -15,6 +15,7 @@ import style from "../Desktop-Navbar/style.module.css";
 //Desktop Navbar
 function DesktopNavbar() {
   const isAuthentucated = useAppSelector((state) => state.auth.isAuthenticated);
+  const data = useAppSelector((state) => state.contact.contactDetails);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const logOut = () => {
@@ -28,25 +29,61 @@ function DesktopNavbar() {
         toast(err.message);
       });
   };
+
   return (
     <>
       <div className={style.navbarContainer}>
         <div className={style.navbar}>
           <span className={style.title}>
-            PORTF<span style={{ color: "#B88B05" }}>O</span>LIO-ADMIN
+            {/* PORTF<span style={{ color: "#B88B05" }}>O</span>LIO-ADMIN */}
+            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+            {}
+            <span style={{ color: "#B88b05" }}>
+              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+            </span>
+            {data["Portfolio Name"].slice(4).toUpperCase()}
+            -ADMIN
           </span>
           <ul className={style.navoptions}>
             <li className={style.navoption}>
-              <NavLink to={`/admin/home`}>HOME</NavLink>
+              <NavLink
+                to={`/admin/home`}
+                className={({ isActive }) =>
+                  isActive ? `${style.activeLink}` : ""
+                }
+              >
+                HOME
+              </NavLink>
             </li>
             <li className={style.navoption}>
-              <NavLink to={`/admin/products`}>PRODUCTS</NavLink>
+              <NavLink
+                to={`/admin/products`}
+                className={({ isActive }) =>
+                  isActive ? `${style.activeLink}` : ""
+                }
+              >
+                PRODUCTS
+              </NavLink>
             </li>
             <li className={style.navoption}>
-              <NavLink to={`/admin/works`}>WORK</NavLink>
+              <NavLink
+                to={`/admin/works`}
+                className={({ isActive }) =>
+                  isActive ? `${style.activeLink}` : ""
+                }
+              >
+                WORK
+              </NavLink>
             </li>
             <li className={style.navoption}>
-              <NavLink to={`/admin/contact`}>CONTACT US</NavLink>
+              <NavLink
+                to={`/admin/contact`}
+                className={({ isActive }) =>
+                  isActive ? `${style.activeLink}` : ""
+                }
+              >
+                CONTACT US
+              </NavLink>
             </li>
             {isAuthentucated && (
               <button

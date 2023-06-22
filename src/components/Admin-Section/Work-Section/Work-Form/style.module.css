@@ -42,3 +42,7 @@
   height: 106px;
   margin: 10px auto;
 }
+.blur-effect {
+  filter: blur(4px);
+  pointer-events: none;
+}

@@ -18,6 +18,7 @@ import {
   uploadString,
   getDownloadURL,
 } from "firebase/storage";
+import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 const storage = getStorage();
 interface Datatype {
   productImage: File;
@@ -34,6 +35,8 @@ const ProductForm = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productArray, setProductArray] = useState<Datatype[]>();
   const [items, setItems] = useState<string[]>(categories);
+  const [loading, setLoading] = useState();
+
   const [name, setName] = useState("");
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState([]);
@@ -71,19 +74,6 @@ const ProductForm = (props) => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const products = await dataref.ref("Products").once("value");
-        if (products.val() == undefined) {
-          setProductArray([]);
-        } else {
-          setProductArray(products.val().productList);
-        }
-      } catch (error) {
-        console.log("Error fetching data from Firebase:", error);
-      }
-    };
-    // fetchData();
     dispatch(fetchCategories());
   }, []);
   //showmodal
@@ -100,7 +90,7 @@ const ProductForm = (props) => {
   };
 
   const onFinish = (values: any) => {
-    console.log(values);
+    setLoading(true);
 
     if (images.length != 0) {
       setImageErr(false);
@@ -109,11 +99,15 @@ const ProductForm = (props) => {
         productId: uniqueId,
         // Image: imageUrls,
       };
-      if (productArray) {
+      console.log("jere");
+
+      if (productList) {
         const storageRef = ref(storage, `Products/${uniqueId}`);
         uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
           console.log("Uploaded a base64 string!");
           getDownloadURL(storageRef).then((downloadURL) => {
+            setLoading(false);
+
             data = {
               ...data,
               Image: downloadURL,
@@ -122,13 +116,15 @@ const ProductForm = (props) => {
             dispatch(addProduct(data));
           });
         });
-        setProductArray([...productArray, data]);
+        // setProductArray([...productArray, data]);
       }
       form.resetFields();
       setImages([]);
       handleOk();
       setFileList([]);
     } else {
+      console.log("err");
+
       setImageErr(true);
     }
   };
@@ -169,95 +165,101 @@ const ProductForm = (props) => {
         maskClosable={false}
         onCancel={handleCancel}
       >
-        <>
-          <ImageUpload
-            geturl={geturls}
-            images={images}
-            setImages={setImages}
-            handleImageError={handleImageError}
-            imageError={imageErr}
-          />
+        {loading ? (
+          <>
+            <ModalLoader />
+          </>
+        ) : (
+          <>
+            <ImageUpload
+              geturl={geturls}
+              images={images}
+              setImages={setImages}
+              handleImageError={handleImageError}
+              imageError={imageErr}
+            />
 
-          <Form
-            ref={formRef}
-            form={form}
-            layout="vertical"
-            name="control-hooks"
-            onFinish={onFinish}
-            style={{ maxWidth: 600 }}
-            initialValues={props.values}
-          >
-            <Form.Item
-              name="productName"
-              label="Product Name"
-              rules={[{ required: true }]}
+            <Form
+              ref={formRef}
+              form={form}
+              layout="vertical"
+              name="control-hooks"
+              onFinish={onFinish}
+              style={{ maxWidth: 600 }}
+              initialValues={props.values}
             >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="productDescription"
-              label="Product Description"
-              rules={[{ required: true }]}
-            >
-              <TextArea rows={4} cols={4} />
-            </Form.Item>
-            <Form.Item
-              name="productCategory"
-              label="Category"
-              rules={[{ required: true }]}
-            >
-              <Select
-                style={{ maxWidth: "100%" }}
-                onChange={handleSelect}
-                placeholder="Select category"
-                dropdownRender={(menu) => (
-                  <>
-                    {menu}
-                    <Divider style={{ margin: "8px 0" }} />
-                    <Space style={{ padding: "0 8px 4px" }}>
-                      <input
-                        name="productCategory"
-                        id="productCategory"
-                        placeholder="enter category"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                      <Button
-                        type="text"
-                        icon={<PlusOutlined />}
-                        onClick={addItem}
-                      >
-                        Add New
-                      </Button>
-                    </Space>
-                  </>
-                )}
-                options={items.map((item) => ({
-                  label: item,
-                  value: item,
-                }))}
-              />
-            </Form.Item>
-            <Form.Item>
-              <div className={style.button_container}>
-                <Button
-                  htmlType="submit"
-                  className={style.button_modal}
-                  // onClick={onFinish}
-                >
-                  Submit
-                </Button>
-                <Button
-                  htmlType="button"
-                  onClick={onReset}
-                  className={style.button_modal}
-                >
-                  Reset
-                </Button>
-              </div>
-            </Form.Item>
-          </Form>
-        </>
+              <Form.Item
+                name="productName"
+                label="Product Name"
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                name="productDescription"
+                label="Product Description"
+                rules={[{ required: true }]}
+              >
+                <TextArea rows={4} cols={4} />
+              </Form.Item>
+              <Form.Item
+                name="productCategory"
+                label="Category"
+                rules={[{ required: true }]}
+              >
+                <Select
+                  style={{ maxWidth: "100%" }}
+                  onChange={handleSelect}
+                  placeholder="Select category"
+                  dropdownRender={(menu) => (
+                    <>
+                      {menu}
+                      <Divider style={{ margin: "8px 0" }} />
+                      <Space style={{ padding: "0 8px 4px" }}>
+                        <input
+                          name="productCategory"
+                          id="productCategory"
+                          placeholder="enter category"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                        <Button
+                          type="text"
+                          icon={<PlusOutlined />}
+                          onClick={addItem}
+                        >
+                          Add New
+                        </Button>
+                      </Space>
+                    </>
+                  )}
+                  options={items.map((item) => ({
+                    label: item,
+                    value: item,
+                  }))}
+                />
+              </Form.Item>
+              <Form.Item>
+                <div className={style.button_container}>
+                  <Button
+                    htmlType="submit"
+                    className={style.button_modal}
+                    // onClick={onFinish}
+                  >
+                    Submit
+                  </Button>
+                  <Button
+                    htmlType="button"
+                    onClick={onReset}
+                    className={style.button_modal}
+                  >
+                    Reset
+                  </Button>
+                </div>
+              </Form.Item>
+            </Form>
+          </>
+        )}
       </Modal>
     </>
   );

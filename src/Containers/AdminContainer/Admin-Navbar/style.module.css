@@ -28,7 +28,7 @@
   padding: 0 25px;
 }
 .brand {
-  @apply cursor-pointer text-xl tracking-widest text-white font-bold;
+  @apply cursor-pointer  text-[1rem]  tracking-widest text-white font-bold;
 }
 .hamburger {
   width: 30px;

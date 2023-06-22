@@ -12,22 +12,28 @@ const Password = Input.Password;
 import loginImage from "../../../assets/Login/user-interface.png";
 import style from "../Login-Page/style.module.css";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import ModalLoader from "../../Comman/Modal-Loader/ModalLoader";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState();
   const [form] = Form.useForm();
   function onFinish(values) {
+    setLoading(true);
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {
+        setLoading(false);
         dispatch(loginUser(userCredentials));
         navigate("/admin/home");
       })
       .catch((error) => {
-        alert(error.message);
+        setLoading(false);
+        toast(error.message);
       });
   }
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    toast("Failed:", errorInfo);
   };
   const validatePassword = (_, value) => {
     if (value && value.length < 8) {
@@ -120,13 +126,12 @@ function Login() {
           ]}
         >
           <Input.Password className={style.password} />
-
-          {/* <Input type="password" /> */}
         </Form.Item>
         <div
           className={style.link}
           onClick={() => handleResetPassword(form.getFieldValue("email"))}
         >
+          {loading && <ModalLoader />}
           Forget password ?
         </div>
         <div className={style.btnContainer}>

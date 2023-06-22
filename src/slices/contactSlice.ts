@@ -27,7 +27,7 @@ export const contactSlice = createSlice({
   },
   reducers: {
     addDetails(state, action) {
-      toast.success('Detials Updated Successfully');
+      toast.success('Details Updated Successfully');
       state.contactDetails =action.payload;
     
       dataref.ref("Contact Details").set({
@@ -39,7 +39,7 @@ export const contactSlice = createSlice({
       dataref.ref("Contact Details").set({
         contactDetails: state.contactDetails,
       });
-      toast.success('Detials reset Successfully');
+      toast.success('Details reset Successfully');
 
     }
    

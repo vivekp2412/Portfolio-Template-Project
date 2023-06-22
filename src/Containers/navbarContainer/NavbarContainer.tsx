@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import DesktopNavbar from "../../components/Navbar/Desktop-Navbar/Navbar";
 import MobileNavbar from "../../components/Navbar/Mobile-Navbar/MobileNavbar";
+import { useAppSelector } from "../../Hooks/Hooks";
 import style from "../navbarContainer/style.module.css";
 
 //Navbar Container
 function navbarContainer() {
   const [width, setWidth] = useState<number>(window.innerWidth);
+  const data = useAppSelector((state) => state.contact.contactDetails);
   //Function hide/show Side Navbar
   function handleSidebar() {
     const classes = document.getElementById("mobileNavbar")?.classList;
@@ -33,7 +35,12 @@ function navbarContainer() {
       {width! < 1024 && (
         <div className={style.hamburger_logo}>
           <span className={style.brand}>
-            PORTF<span style={{ color: "#B88B05" }}>O</span>LIO
+            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+            {}
+            <span style={{ color: "#B88b05" }}>
+              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+            </span>
+            {data["Portfolio Name"].slice(4).toUpperCase()}
           </span>
           <div className={style.hamburger}>
             <FontAwesomeIcon

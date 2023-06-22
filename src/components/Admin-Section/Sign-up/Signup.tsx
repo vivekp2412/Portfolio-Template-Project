@@ -11,17 +11,22 @@ const Password = Input.Password;
 import loginImage from "../../../assets/Login/user-interface.png";
 import style from "../Login-Page/style.module.css";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import ModalLoader from "../../Comman/Modal-Loader/ModalLoader";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  const [loading, setLoading] = useState();
   function onFinish(values) {
+    setLoading(true);
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {
+        setLoading(false);
         dispatch(signUpUser(userCredentials));
         navigate("/admin/home");
       })
       .catch((error) => {
+        setLoading(false);
         toast.error(error.message, {
           position: "top-right",
         });
@@ -43,12 +48,9 @@ function Login() {
         name="basic"
         layout={"vertical"}
         className={style.form}
-        // labelCol={{ span: 10 }}
-        // wrapperCol={{ span: 48 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        // autoComplete="off"
       >
         <div className={style.loginPhoto}>
           <svg
@@ -134,6 +136,7 @@ function Login() {
         >
           <Input.Password className={style.password} />
         </Form.Item>
+        {loading && <ModalLoader />}
         <div className={style.btnContainer}>
           <button className={style.submitBtn} type="submit">
             Submit

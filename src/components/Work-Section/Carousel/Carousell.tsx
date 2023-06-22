@@ -26,14 +26,6 @@ const Carousel = () => {
         )}
         <Swiper
           navigation={true}
-          breakpoints={{
-            768: {
-              navigation: {
-                nextEl: null,
-                prevEl: null,
-              },
-            },
-          }}
           pagination={{ clickable: true }}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           onSlideChange={() => console.log("slide change")}

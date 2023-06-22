@@ -86,7 +86,7 @@ export default function ContactForm() {
           <TextArea rows={3} cols={4} />
         </Form.Item>
 
-        <Form.Item name="isNumberDifferent" valuePropName="checked">
+        <Form.Item name="isNumberDifferent">
           <Checkbox
             onChange={(value) => setShowPhoneNumber(value.target.checked)}
           >
@@ -98,7 +98,12 @@ export default function ContactForm() {
             <Form.Item
               name="Whatsapp Number"
               label="WhatsApp No."
-              rules={[{ required: true }]}
+              rules={[
+                { required: true },
+                {
+                  validator: validatePhoneNumber,
+                },
+              ]}
             >
               <Input />
             </Form.Item>

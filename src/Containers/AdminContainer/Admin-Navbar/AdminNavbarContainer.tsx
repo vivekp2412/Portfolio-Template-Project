@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import DesktopNavbar from "../../../components/Admin-Section/Navbar/Desktop-Navbar/Navbar";
 import MobileNavbar from "../../../components/Admin-Section/Navbar/Mobile-Navbar/MobileNavbar";
+import { useAppSelector } from "../../../Hooks/Hooks";
 
 import style from "../Admin-Navbar/style.module.css";
 
 //Navbar Container
 function AdminNavbarContainer() {
   const [width, setWidth] = useState<number>(window.innerWidth);
+  const data = useAppSelector((state) => state.contact.contactDetails);
   //Function hide/show Side Navbar
   function handleSidebar() {
     const classes = document.getElementById("mobileNavbar")?.classList;
@@ -33,9 +35,15 @@ function AdminNavbarContainer() {
       <DesktopNavbar />
       {width! < 1024 && (
         <div className={style.hamburger_logo}>
-          <span className={style.brand}>
-            PORTF<span style={{ color: "#B88B05" }}>O</span>LIO ADMIN
-          </span>
+          <h1 className={style.brand}>
+            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+            {}
+            <span style={{ color: "#B88b05" }}>
+              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+            </span>
+            {data["Portfolio Name"].slice(4).toUpperCase()}
+            -ADMIN
+          </h1>
           <div className={style.hamburger}>
             <FontAwesomeIcon
               icon={faBars}

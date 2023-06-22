@@ -2,7 +2,7 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../Mobile-Navbar/style.module.css";
 import brand from "../../../../assets/Navbar/Mobile-Navbar/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
@@ -16,6 +16,7 @@ type Propstype = {
 function MobileNavbar(props: Propstype) {
   const closeSideBar = props.event;
   const isAuthentucated = useAppSelector((state) => state.auth.isAuthenticated);
+  const data = useAppSelector((state) => state.contact.contactDetails);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const logOut = () => {
@@ -37,26 +38,59 @@ function MobileNavbar(props: Propstype) {
             <img className={style.logo_img} src={brand}></img>
           </div>
           <span className={style.title}>
-            PORTF<span style={{ color: "#B88B05" }}>O</span>LIO
+            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+            {}
+            <span style={{ color: "#B88b05" }}>
+              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+            </span>
+            {data["Portfolio Name"].slice(4).toUpperCase()}
             <p>Admin</p>
           </span>
         </div>
         <div>
           <ul className={style.navoptions}>
             <li className={style.navoption}>
-              <Link to="/admin/home">HOME</Link>
+              <NavLink
+                to="/admin/home"
+                className={({ isActive }) =>
+                  isActive ? `${style.activeLink}` : ""
+                }
+              >
+                HOME
+              </NavLink>
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>
-              <Link to="/admin/products">PRODUCTS</Link>
+              <NavLink
+                to="/admin/products"
+                className={({ isActive }) =>
+                  isActive ? `${style.activeLink}` : ""
+                }
+              >
+                PRODUCTS
+              </NavLink>
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>
-              <Link to="/admin/works">MY WORK</Link>
+              <NavLink
+                to="/admin/works"
+                className={({ isActive }) =>
+                  isActive ? `${style.activeLink}` : ""
+                }
+              >
+                MY WORK
+              </NavLink>
               <div className={style.navoption_hover}></div>
             </li>
             <li className={style.navoption}>
-              <Link to="/admin/contact">CONTACT US</Link>
+              <NavLink
+                to="/admin/contact"
+                className={({ isActive }) =>
+                  isActive ? `${style.activeLink}` : ""
+                }
+              >
+                CONTACT US
+              </NavLink>
               <div className={style.navoption_hover}></div>
             </li>
             {isAuthentucated && (
