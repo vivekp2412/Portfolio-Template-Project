@@ -34,7 +34,6 @@ export default function ContactForm() {
     dispatch(addDetails(values));
   }
   const onReset = () => {
-    console.log("hi");
     dispatch(resetDetails());
     form.resetFields();
   };

@@ -21,8 +21,6 @@ const ContactForm = () => {
   const data = useAppSelector((state) => state.contact.contactDetails);
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(data);
-
     if (data["Recieve Mail"]) {
       const mailtoURL = `mailto:${
         data.Email
@@ -33,14 +31,11 @@ const ContactForm = () => {
       )}%0D%0ANumber: ${encodeURIComponent(
         values.number
       )}%0D%0AMessage: ${encodeURIComponent(values.message)}`;
-      window.open(
-        "mailto:email@example.com?subject=Hello%20from%20Abstract!&body=Just%20popped%20in%20to%20say%20hello"
-      );
 
-      window.location.href = mailtoLink;
+      window.open(mailtoURL);
+      resetForm();
     }
     if (data["Recieve Whatsapp"]) {
-      const whatsappNumber = `+91${data["Whatsapp Number"]}`; // Replace with your WhatsApp number
       const messageText = `Name: ${values.name}%0A Email: ${values.email} Number: ${values.number}  Message: ${values.message}`;
       const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
         messageText
@@ -48,8 +43,6 @@ const ContactForm = () => {
 
       window.open(whatsappURL);
     }
-    //email
-    //whatsapp
 
     resetForm();
   };
@@ -60,69 +53,64 @@ const ContactForm = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
+        validateOnBlur={false}
       >
-        <Form>
-          <div className={style.name_email_number}>
-            <div className={style.field}>
+        {({ errors, touched }) => (
+          <Form>
+            <div className={style.name_email_number}>
+              <div className={style.field}>
+                <Field
+                  className={style.input}
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                />
+                {errors.name && touched.name && (
+                  <div className={style.error}>{errors.name}</div>
+                )}
+              </div>
+              <div className={style.field}>
+                <Field
+                  className={style.input}
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                />
+                {errors.email && touched.email && (
+                  <div className={style.error}>{errors.email}</div>
+                )}
+              </div>
+              <div className={style.field}>
+                <Field
+                  className={style.input}
+                  type="text"
+                  name="number"
+                  placeholder="Number"
+                />
+                {errors.number && touched.number && (
+                  <div className={style.error}>{errors.number}</div>
+                )}
+              </div>
+            </div>
+            <div className={style.area}>
               <Field
                 className={style.input}
-                type="text"
-                name="name"
-                placeholder="Name"
+                component="textarea"
+                name="message"
+                placeholder="Message"
+                rows={5}
               />
-              <ErrorMessage
-                name="name"
-                component="div"
-                className={style.error}
-              />
+              {errors.message && touched.message && (
+                <div className={style.error}>{errors.message}</div>
+              )}
             </div>
-            <div className={style.field}>
-              <Field
-                className={style.input}
-                type="text"
-                name="email"
-                placeholder="Email"
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className={style.error}
-              />
+            <div>
+              <button className={style.button} type="submit">
+                Send Message
+              </button>
             </div>
-            <div className={style.field}>
-              <Field
-                className={style.input}
-                type="text"
-                name="number"
-                placeholder="Number"
-              />
-              <ErrorMessage
-                name="number"
-                component="div"
-                className={style.error}
-              />
-            </div>
-          </div>
-          <div className={style.area}>
-            <Field
-              className={style.input}
-              component="textarea"
-              name="message"
-              placeholder="Message"
-              rows={5}
-            />
-            <ErrorMessage
-              name="message"
-              component="div"
-              className={style.error}
-            />
-          </div>
-          <div>
-            <button className={style.button} type="submit">
-              Send Message
-            </button>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </div>
   );

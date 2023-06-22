@@ -77,7 +77,10 @@ function EditFormModal(props) {
         ...values,
         Image: initialImg,
       };
+      setLoading(false);
       dispatch(updateProduct(data));
+      form.resetFields();
+      handleOk();
     } else {
       const storageRef = ref(storage, `Products/Edited ${uniqueId}`);
       uploadString(storageRef, imageUrls, "data_url").then(() => {
@@ -89,7 +92,6 @@ function EditFormModal(props) {
             ...values,
             Image: downloadURL,
           };
-          console.log(data);
           dispatch(updateProduct(data));
           form.resetFields();
           handleOk();
@@ -145,7 +147,6 @@ function EditFormModal(props) {
               <img
                 src={initialImg ?? imageUrls}
                 className={style.prevImage}
-                // style={{ margin: "10px auto" }}
                 height={106}
               />
             )}

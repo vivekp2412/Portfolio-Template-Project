@@ -23,14 +23,15 @@ interface DataType {
 //Preview Component
 function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [expandId, setExpandId] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState<string>();
   const productList = useAppSelector((state) => state.product.productList);
-  console.log(productList);
 
   const pending = useAppSelector((state) => state.product.pending);
   const dispatch = useAppDispatch();
-
+  const MAX_DESCRIPTION_LENGTH = 50;
   const columns: ColumnsType<DataType> = [
     {
       title: "Product Id",
@@ -41,9 +42,36 @@ function PreviewTable() {
       dataIndex: "productName",
     },
     {
-      title: "Product description",
+      title: "Product Description",
       dataIndex: "productDescription",
+      render: (text, record) => {
+        return (
+          <div>
+            {expanded && record.productId == expandId ? (
+              <div>{text}</div>
+            ) : (
+              <div className={style.ellipsisTwoLines}>{text}</div>
+            )}
+            {text.length > 50 && (
+              <span
+                className={style.readMoreLink}
+                onClick={() => {
+                  setExpandId(record.productId);
+                  setExpanded(!expanded);
+                }}
+              >
+                {expanded && record.productId == expandId ? (
+                  <a style={{ color: "blue" }}>Read Less</a>
+                ) : (
+                  <a style={{ color: "blue" }}>Read More</a>
+                )}
+              </span>
+            )}
+          </div>
+        );
+      },
     },
+
     {
       title: "Product Category",
       dataIndex: "productCategory",
@@ -62,8 +90,8 @@ function PreviewTable() {
           <p
             className={style.action_update}
             onClick={() => {
-              setProductId(record.productId);
               setIsModalOpen(true);
+              setProductId(record.productId);
             }}
           >
             Update
@@ -93,7 +121,9 @@ function PreviewTable() {
       ),
     },
   ];
-
+  const expandable = {
+    expandedRowRender: (record) => <div>{record.productDescription}</div>,
+  };
   return (
     <>
       <div className={style.title}>Preview Images</div>
@@ -111,6 +141,8 @@ function PreviewTable() {
           loading={pending}
           dataSource={productList}
           pagination={false}
+          // expandable={expandable}
+          // expandRowByClick={true}
         />
       </div>
     </>

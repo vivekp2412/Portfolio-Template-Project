@@ -79,6 +79,8 @@ function EditFormModal(props) {
       };
       console.log(data);
       dispatch(updateWork(data));
+      form.resetFields();
+      handleOk();
     } else {
       const storageRef = ref(storage, `Work/Edited ${uniqueId}`);
       uploadString(storageRef, imageUrls, "data_url").then(() => {

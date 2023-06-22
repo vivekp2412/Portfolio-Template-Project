@@ -4,6 +4,7 @@ import style from "../Mobile-Navbar/style.module.css";
 import brand from "../../../assets/Navbar/Mobile-Navbar/logo.png";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../Hooks/Hooks";
+import { useEffect, useState } from "react";
 type Propstype = {
   event: () => void;
 };
@@ -14,6 +15,11 @@ function MobileNavbar(props: Propstype) {
   const navigate = useNavigate();
   const logIn = () => {
     navigate("/admin/login");
+  };
+  const [activeSection, setActiveSection] = useState();
+
+  const handleSetActiveSection = (sectionId) => {
+    setActiveSection(sectionId);
   };
   return (
     <div id="" className={style.mobilenavbarContainer}>
@@ -33,21 +39,53 @@ function MobileNavbar(props: Propstype) {
         </div>
         <div>
           <ul className={style.navoptions}>
-            <li className={style.navoption}>
-              <a href="#homeSection">HOME</a>
-              <div className={style.navoption_hover}></div>
+            <li
+              className={`${style.navoption} ${
+                activeSection === "homeSection" ? style.activeLink : ""
+              }`}
+            >
+              <a
+                href="#homeSection"
+                onClick={() => handleSetActiveSection("homeSection")}
+              >
+                HOME
+              </a>
             </li>
-            <li className={style.navoption}>
-              <a href="#productSection">PRODUCTS</a>
-              <div className={style.navoption_hover}></div>
+            <li
+              className={`${style.navoption} ${
+                activeSection === "productSection" ? style.activeLink : ""
+              }`}
+            >
+              <a
+                href="#productSection"
+                onClick={() => handleSetActiveSection("productSection")}
+              >
+                PRODUCTS
+              </a>
             </li>
-            <li className={style.navoption}>
-              <a href="#workSection">MY WORK</a>
-              <div className={style.navoption_hover}></div>
+            <li
+              className={`${style.navoption} ${
+                activeSection === "workSection" ? style.activeLink : ""
+              }`}
+            >
+              <a
+                href="#workSection"
+                onClick={() => handleSetActiveSection("workSection")}
+              >
+                MY WORK
+              </a>
             </li>
-            <li className={style.navoption}>
-              <a href="#contactSection">CONTACT US</a>
-              <div className={style.navoption_hover}></div>
+            <li
+              className={`${style.navoption} ${
+                activeSection === "contactSection" ? style.activeLink : ""
+              }`}
+            >
+              <a
+                href="#contactSection"
+                onClick={() => handleSetActiveSection("contactSection")}
+              >
+                CONTACT US
+              </a>
             </li>
             <button className={style.navBtn} onClick={() => logIn()}>
               LOG IN

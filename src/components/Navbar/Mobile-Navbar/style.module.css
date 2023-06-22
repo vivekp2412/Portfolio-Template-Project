@@ -23,18 +23,9 @@
 }
 .navoption {
   position: relative;
-  transition: all 1s;
+  /* transition: all 1s; */
   @apply min-w-full border-b-2 border-black text-center
     cursor-pointer hover:text-primary;
-}
-
-.navoption_hover {
-  position: absolute;
-  @apply bg-secondary;
-  height: 0%;
-  width: 100%;
-  top: 100%;
-  transition: all 0.2s;
 }
 
 .navoption:hover .navoption_hover {
@@ -74,4 +65,7 @@
   align-self: center;
   justify-self: end;
   padding: 5px 10px;
+}
+.activeLink {
+  color: #b88b05;
 }

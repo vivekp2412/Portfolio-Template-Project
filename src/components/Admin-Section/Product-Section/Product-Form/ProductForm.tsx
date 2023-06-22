@@ -97,9 +97,7 @@ const ProductForm = (props) => {
       let data = {
         ...values,
         productId: uniqueId,
-        // Image: imageUrls,
       };
-      console.log("jere");
 
       if (productList) {
         const storageRef = ref(storage, `Products/${uniqueId}`);
@@ -114,14 +112,13 @@ const ProductForm = (props) => {
             };
             console.log(data);
             dispatch(addProduct(data));
+            form.resetFields();
+            setImages([]);
+            handleOk();
+            setFileList([]);
           });
         });
-        // setProductArray([...productArray, data]);
       }
-      form.resetFields();
-      setImages([]);
-      handleOk();
-      setFileList([]);
     } else {
       console.log("err");
 

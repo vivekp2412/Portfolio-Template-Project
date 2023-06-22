@@ -21,6 +21,7 @@
   border-radius: 5%;
   @apply border-2 border-white text-white p-1 md:p-3 hover:bg-white hover:text-primary my-6;
 }
+
 .area {
   @apply flex justify-start items-start flex-col my-4;
 }

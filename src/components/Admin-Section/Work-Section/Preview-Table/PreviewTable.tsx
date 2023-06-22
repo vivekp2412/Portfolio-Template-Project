@@ -12,17 +12,6 @@ import Loader from "../../../Comman/Loader/Loader";
 import { deleteWork } from "../../../../slices/workSlice";
 import EditFormModal from "../EditFormModal/EditFormModal";
 
-//Type Declaration
-// interface DataType {
-//   productImage: File[];
-//   productId: string;
-//   productCategory: string;
-//   productName: string;
-//   productDescription: string;
-//   ImageUrl: string;
-// }
-//Delete function for data
-//Preview Component
 function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +19,8 @@ function PreviewTable() {
   const workList = useAppSelector((state) => state.work.allWorks);
   const pending = useAppSelector((state) => state.work.pending);
   const dispatch = useAppDispatch();
+  const [expanded, setExpanded] = useState(false);
+  const [expandId, setExpandId] = useState();
   console.log(workList);
 
   const columns = [
@@ -44,6 +35,32 @@ function PreviewTable() {
     {
       title: "Description",
       dataIndex: "workDesc",
+      render: (text, record) => {
+        return (
+          <div>
+            {expanded && record.workId == expandId ? (
+              <div>{text}</div>
+            ) : (
+              <div className={style.ellipsisTwoLines}>{text}</div>
+            )}
+            {text.length > 50 && (
+              <span
+                className={style.readMoreLink}
+                onClick={() => {
+                  setExpandId(record.workId);
+                  setExpanded(!expanded);
+                }}
+              >
+                {expanded && record.workId == expandId ? (
+                  <a style={{ color: "blue" }}>Read Less</a>
+                ) : (
+                  <a style={{ color: "blue" }}>Read More</a>
+                )}
+              </span>
+            )}
+          </div>
+        );
+      },
     },
     {
       title: "Image",
