@@ -20,15 +20,26 @@ export const contactSlice = createSlice({
   initialState: {
     pending: false,
     contactDetails:{
-        // productName:"vi"
-        ["Portfolio Name"]:""
+        ["Portfolio Name"]:"",
+        Address:"",
+        Email:"",
+        ["Instagram Url"]:"",
+        ["Facebook Url"]:"",
+        ["Twitter Url"]:"",
+        ["Recieve Email"]:false,
+        ["Recieve Whatsapp"]:false,
+        ["Whatsapp Number"]:"",
+        isNumberDifferent:false,
     },
   },
   reducers: {
     addDetails(state, action) {
       toast.success('Details Updated Successfully');
-      state.contactDetails =action.payload;
-    
+      console.log("action",action.payload);
+      let details =action.payload;
+      state.contactDetails ={...state.contactDetails,...details};
+      console.log(state.contactDetails);
+      
       dataref.ref("Contact Details").set({
         contactDetails: state.contactDetails,
       })

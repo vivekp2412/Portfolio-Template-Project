@@ -10,15 +10,13 @@ const authSlice= createSlice({
         pending:true,
     },
     reducers:{
-        loginUser(state,action){
-            toast.success("Logged in Successfully");
+        loginUser(state){
             state.isAuthenticated=true;
             // state.userInfo = action.payload.user;
             
         },
       
         logoutUser(state,action){
-            toast.success("Logged  out Successfully");
             state.isAuthenticated=false;
             
         }

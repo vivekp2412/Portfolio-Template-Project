@@ -9,10 +9,12 @@ const TextArea = Input.TextArea;
 
 export default function ContactForm() {
   const [isFormDisable, setIsFormDisable] = useState(true);
-  const [showPhoneNumber, setShowPhoneNumber] = useState();
+  const initialData = useAppSelector((state) => state.contact.contactDetails);
+  const [showPhoneNumber, setShowPhoneNumber] = useState(
+    initialData.isNumberDifferent
+  );
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  const initialData = useAppSelector((state) => state.contact.contactDetails);
 
   useEffect(() => {
     // Fetch initial data if not available
@@ -29,7 +31,9 @@ export default function ContactForm() {
   };
   function onFinish(values) {
     setIsFormDisable(true);
-    dispatch(addDetails(values));
+    console.log(values);
+
+    dispatch(addDetails({ ...values, isNumberDifferent: showPhoneNumber }));
   }
   const onReset = () => {
     dispatch(resetDetails());
@@ -38,6 +42,7 @@ export default function ContactForm() {
   if (!initialData) {
     return <div>Loading...</div>;
   }
+  console.log(initialData);
 
   return (
     <div className={style.formContainer}>
@@ -50,19 +55,18 @@ export default function ContactForm() {
         name="control-hooks"
         onReset={onReset}
         onFinish={onFinish}
-        // style={{ maxWidth: 1000 }}
       >
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24} md={12}>
             <Form.Item
               name="Portfolio Name"
               label="Portfolio Name"
-              rules={[{ required: true }]}
+              rules={[{ required: true, max: 20 }]}
             >
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={24} md={12}>
             <Form.Item
               name="Email"
               label="Email Address"
@@ -83,7 +87,7 @@ export default function ContactForm() {
           <TextArea rows={3} cols={4} />
         </Form.Item>
 
-        <Form.Item name="isNumberDifferent">
+        <Form.Item name="isNumberDifferent" valuePropName="checked">
           <Checkbox
             onChange={(value) => setShowPhoneNumber(value.target.checked)}
           >

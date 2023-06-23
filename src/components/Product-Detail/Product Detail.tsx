@@ -8,22 +8,26 @@ function ProductDetail() {
 
   return (
     <div className={style.Container}>
-      <div className={style.imageContainer}>
-        <img src={data.Image}></img>
-        <h1>{data.productName}</h1>
-      </div>
-      <div className={style.detailsContainer}>
-        <div className={style.id}>
-          <p>Product ID</p>
-          <h1>{data.productId}</h1>
+      <div className={style.productDetailContainer}>
+        <div className={style.detailsContainer}>
+          <div className={style.productName}>
+            <h1>{data.productName}</h1>
+          </div>
+          <div className={style.id}>
+            <p>Product ID</p>
+            <h1>{data.productId}</h1>
+          </div>
+          <div className={style.category}>
+            <p>Category</p>
+            <p>{data.productCategory}</p>
+          </div>
+          <div className={style.description}>
+            <p>Description</p>
+            <p>{data.productDescription}</p>
+          </div>
         </div>
-        <div className={style.category}>
-          <p>Category</p>
-          <p>{data.productCategory}</p>
-        </div>
-        <div className={style.description}>
-          <p>Description</p>
-          <p>{data.productDescription}</p>
+        <div className={style.imageContainer}>
+          <img src={data.Image} className={style.image}></img>
         </div>
       </div>
     </div>

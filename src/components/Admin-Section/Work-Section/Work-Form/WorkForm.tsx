@@ -141,7 +141,7 @@ const WorkFormModal = () => {
               <Form.Item
                 name="WorkDescription"
                 label="Work Description"
-                rules={[{ required: true }]}
+                rules={[{ required: true, max: 140 }]}
               >
                 <TextArea rows={4} cols={4} />
               </Form.Item>

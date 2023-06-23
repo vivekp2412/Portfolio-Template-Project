@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { fetchWorkData } from "./slices/workSlice";
 import { fetchContactData } from "./slices/contactSlice";
 import Loader from "./components/Comman/Loader/Loader";
+import { auth } from "./firebase";
+import { loginUser } from "./slices/authSlice";
 function App() {
   const dispatch = useAppDispatch();
   // const pending = useAppSelector((state) => state.contact.pending);
@@ -24,12 +26,16 @@ function App() {
       }
     };
     fetch();
+    const listener = auth.onAuthStateChanged((user) => {
+      if (!user) {
+      } else {
+        dispatch(loginUser());
+      }
+    });
+    return () => listener();
   }, []);
   return (
     <>
-      {/* {pending ? (
-        <h1>hi</h1>
-      ) : ( */}
       <>
         <ToastContainer
           position="bottom-left"

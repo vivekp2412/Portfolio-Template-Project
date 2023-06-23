@@ -24,6 +24,8 @@ function Login() {
       .then((userCredentials) => {
         setLoading(false);
         dispatch(loginUser());
+        toast.success("Logged in Successfully");
+
         navigate("/admin/home");
       })
       .catch((error) => {

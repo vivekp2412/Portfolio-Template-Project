@@ -14,7 +14,7 @@ function HomeSection() {
   }, []);
   return (
     <div className={style.Container}>
-      <div className={style.homeSection}>
+      <div className={style.homeContainer}>
         <FormModal />
         <PreviewTable />
       </div>

@@ -1,6 +1,15 @@
 import React, { useRef, useState } from "react";
 import style from "../Product-Form/style.module.css";
-import { Modal, Form, Input, Select, Button, Divider, Space } from "antd";
+import {
+  Modal,
+  Form,
+  Input,
+  Select,
+  Button,
+  Divider,
+  Space,
+  Switch,
+} from "antd";
 const { TextArea } = Input;
 import { useEffect } from "react";
 import { dataref } from "../../../../firebase";

@@ -85,7 +85,7 @@ function PreviewTable() {
             }}
           >
             <svg
-              fill="#000000"
+              className={`${style.svg_icon} ${style.edit}`}
               version="1.1"
               id="Capa_1"
               xmlns="http://www.w3.org/2000/svg"
@@ -135,16 +135,17 @@ function PreviewTable() {
             }}
           >
             <svg
-              width="25px"
-              height="25px"
+              className={`${style.svg_icon} ${style.delete}`}
+              width="30px"
+              height="30px"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 d="M6 5H18M9 5V5C10.5769 3.16026 13.4231 3.16026 15 5V5M9 20H15C16.1046 20 17 19.1046 17 18V9C17 8.44772 16.5523 8 16 8H8C7.44772 8 7 8.44772 7 9V18C7 19.1046 7.89543 20 9 20Z"
-                stroke="#000000"
-                stroke-width="2"
+                stroke=""
+                stroke-width="1"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
@@ -165,14 +166,16 @@ function PreviewTable() {
         workId={workId}
         key={uuid()}
       />
-      <div className={style.tableContainer}>
-        <Table
-          className={style.table}
-          columns={columns}
-          loading={pending}
-          dataSource={workList}
-          pagination={false}
-        />
+      <div className={style.mainTableContainer}>
+        <div className={style.tableContainer}>
+          <Table
+            className={style.table}
+            columns={columns}
+            loading={pending}
+            dataSource={workList}
+            pagination={false}
+          />
+        </div>
       </div>
     </>
   );

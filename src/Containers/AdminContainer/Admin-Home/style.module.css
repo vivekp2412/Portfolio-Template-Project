@@ -1,6 +1,11 @@
 .Container {
   @apply py-20  text-black w-[100%] mx-auto;
 }
-.homeSection {
-  @apply w-[100%]  md:w-[60%] mx-auto;
+.homeContainer {
+  @apply w-[70%] mx-auto;
+}
+@media screen and (max-width: 1050px) {
+  .homeContainer {
+    width: 95%;
+  }
 }

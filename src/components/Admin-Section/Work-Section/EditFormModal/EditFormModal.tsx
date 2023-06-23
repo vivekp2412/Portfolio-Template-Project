@@ -167,7 +167,7 @@ function EditFormModal(props) {
               <Form.Item
                 name="workDesc"
                 label="Work Description"
-                rules={[{ required: true }]}
+                rules={[{ required: true, max: 140 }]}
               >
                 <TextArea rows={4} cols={4} />
               </Form.Item>

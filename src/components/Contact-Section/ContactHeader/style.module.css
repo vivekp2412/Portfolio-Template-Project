@@ -1,6 +1,11 @@
-.headerContainer {
-  display: grip;
+.headerContainer_4 {
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  @apply text-white items-center w-[100%] flex-wrap pb-3 md:justify-center md:mx-auto;
+}
+.headerContainer_3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   @apply text-white items-center w-[100%] flex-wrap pb-3 md:justify-center md:mx-auto;
 }
 .card {
@@ -19,13 +24,15 @@
   cursor: pointer;
 }
 @media screen and (max-width: 1400px) {
-  .headerContainer {
+  .headerContainer_4,
+  .headerContainer_3 {
     display: grid;
     grid-template-columns: 2fr 2fr;
   }
 }
 @media screen and (max-width: 650px) {
-  .headerContainer {
+  .headerContainer_4,
+  .headerContainer_3 {
     grid-template-columns: 1fr;
   }
 }

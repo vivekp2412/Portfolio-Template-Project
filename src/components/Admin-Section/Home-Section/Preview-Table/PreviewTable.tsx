@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { dataref } from "../../../../firebase";
-import { Space, Table, Tag } from "antd";
+import { Image, Space, Table, Tag } from "antd";
 import { Button, Modal } from "antd";
 import style from "../Preview-Table/style.module.css";
 import type { ColumnsType } from "antd/es/table";
@@ -57,7 +57,12 @@ function PreviewTable() {
       title: "Image",
       dataIndex: "image",
       render: (_, record) => (
-        <img className={style.table_img} src={record.image} />
+        <Image
+          width={100}
+          height={70}
+          className={style.table_img}
+          src={record.image}
+        />
       ),
     },
     {
@@ -65,7 +70,6 @@ function PreviewTable() {
       render: (_, record) => (
         <Space size="middle">
           <Switch
-            // disabled={isDisable}
             checked={record.active}
             onChange={(checked) => onChange(checked, record.imageId)}
           />
@@ -79,9 +83,7 @@ function PreviewTable() {
           <p
             className={style.action_link}
             onClick={() => showModal(record.image)}
-          >
-            View
-          </p>
+          ></p>
           <p
             className={style.action_link_delete}
             // onClick={() => {
@@ -108,7 +110,21 @@ function PreviewTable() {
               });
             }}
           >
-            Delete
+            <svg
+              className={`${style.svg_icon} ${style.delete}`}
+              width="30px"
+              height="30px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 5H18M9 5V5C10.5769 3.16026 13.4231 3.16026 15 5V5M9 20H15C16.1046 20 17 19.1046 17 18V9C17 8.44772 16.5523 8 16 8H8C7.44772 8 7 8.44772 7 9V18C7 19.1046 7.89543 20 9 20Z"
+                stroke-width="1"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </p>
         </Space>
       ),
@@ -141,14 +157,16 @@ function PreviewTable() {
       >
         <img src={modalimg}></img>
       </Modal>
-      <div className={style.tableContainer}>
-        <Table
-          className={style.table}
-          columns={columns}
-          dataSource={data}
-          loading={pending}
-          pagination={false}
-        />
+      <div className={style.mainTableContainer}>
+        <div className={style.tableContainer}>
+          <Table
+            className={style.table}
+            columns={columns}
+            dataSource={data}
+            loading={pending}
+            pagination={false}
+          />
+        </div>
       </div>
     </>
   );

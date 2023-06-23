@@ -42,3 +42,6 @@
   height: 106px;
   margin: 10px auto;
 }
+.btn_switch {
+  @apply flex justify-between;
+}

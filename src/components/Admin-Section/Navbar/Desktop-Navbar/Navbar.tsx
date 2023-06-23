@@ -23,6 +23,8 @@ function DesktopNavbar() {
     signOut(auth)
       .then(() => {
         dispatch(logoutUser());
+        toast.success("Logged out Successfully");
+
         navigate("/admin/login");
       })
       .catch((err) => {
@@ -34,16 +36,17 @@ function DesktopNavbar() {
     <>
       <div className={style.navbarContainer}>
         <div className={style.navbar}>
-          <span className={style.title}>
-            {/* PORTF<span style={{ color: "#B88B05" }}>O</span>LIO-ADMIN */}
-            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
-            {}
-            <span style={{ color: "#B88b05" }}>
-              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+          {data["Portfolio Name"] && (
+            <span className={style.title}>
+              {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+              {}
+              <span style={{ color: "#B88b05" }}>
+                {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+              </span>
+              {data["Portfolio Name"].slice(4).toUpperCase()}
+              -ADMIN
             </span>
-            {data["Portfolio Name"].slice(4).toUpperCase()}
-            -ADMIN
-          </span>
+          )}
           <ul className={style.navoptions}>
             <li className={style.navoption}>
               <NavLink
