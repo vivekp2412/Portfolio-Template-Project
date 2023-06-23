@@ -1,5 +1,5 @@
 .headerContainer {
-  display: grid;
+  display: grip;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   @apply text-white items-center w-[100%] flex-wrap pb-3 md:justify-center md:mx-auto;
 }

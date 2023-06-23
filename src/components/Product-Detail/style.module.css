@@ -1,0 +1,9 @@
+.Container{
+    @apply w-[100%] md:w-[80%] flex justify-center items-center gap-5 flex-wrap md:flex-nowrap mx-auto my-5 px-5 
+}
+.detailsContainer{
+    @apply flex flex-col justify-center items-center gap-5
+}
+.imageContainer{
+    @apply w-[400px] h-[400px]
+}

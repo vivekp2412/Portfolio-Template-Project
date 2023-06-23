@@ -59,7 +59,7 @@ function ContactHeader() {
           <div className={style.information}>{data.Email}</div>
         </div>
       </div>
-      <div className={style.card}>
+      {/* <div className={style.card}>
         <div className={style.icon}>
           <a href="">
             <svg
@@ -82,7 +82,7 @@ function ContactHeader() {
           <div className={style.title}>CONTACT US</div>
           <div className={style.information}>{data["Phone Number"]}</div>
         </div>
-      </div>
+      </div> */}
       <div className={style.card}>
         <div className={style.icon}>
           <a href={`wa.me/+91${data["Whatsapp Number"]}`} target="_blank">
