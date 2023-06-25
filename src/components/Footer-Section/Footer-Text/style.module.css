@@ -1,5 +1,5 @@
 .title {
-  @apply cursor-pointer text-xl tracking-widest text-black;
+  @apply cursor-pointer text-xl tracking-widest text-primary;
 }
 .subHead {
   @apply text-sm my-6;

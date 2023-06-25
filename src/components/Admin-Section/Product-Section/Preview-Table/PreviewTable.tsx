@@ -7,7 +7,7 @@ import EditFormModal from "../EditFormModal/EditFormModal";
 import uuid from "react-uuid";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { deleteProduct } from "../../../../slices/productSlice";
+import { deleteProduct, showSection } from "../../../../slices/productSlice";
 import Loader from "../../../Comman/Loader/Loader";
 
 //Type Declaration
@@ -22,13 +22,14 @@ interface DataType {
 //Delete function for data
 //Preview Component
 function PreviewTable() {
+  const showProductSection=useAppSelector((state)=>state.product.showProductSection);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [expandId, setExpandId] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [productId, setProductId] = useState<string>();
   const productList = useAppSelector((state) => state.product.productList);
-
+  const [switchStatus,setSwitchStatus]=useState(showProductSection);
   const pending = useAppSelector((state) => state.product.pending);
   const dispatch = useAppDispatch();
   const columns: ColumnsType<DataType> = [
@@ -173,7 +174,13 @@ function PreviewTable() {
   };
   return (
     <>
-      <div className={style.title}>Preview Images</div>
+    <div className={style.table_header}>
+
+      <div className={style.title}>Preview Table</div>
+      {!pending &&
+      <div className={style.switch}><span>Show Section</span> <Switch style={{backgroundColor:showProductSection ?"blue" :"gray"}} checked={showProductSection} checkedChildren="On" unCheckedChildren="Off" onChange={(e)=>{ setSwitchStatus(e); dispatch(showSection(e))}} /></div>
+      }
+      </div>
 
       <EditFormModal
         setIsModalOpen={setIsModalOpen}

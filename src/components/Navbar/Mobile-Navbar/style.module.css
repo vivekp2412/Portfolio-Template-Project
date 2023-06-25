@@ -16,10 +16,10 @@
   @apply text-center;
 }
 .title {
-  @apply text-lg  text-black;
+  @apply text-lg  text-primary;
 }
 .navoptions {
-  @apply flex flex-col space-y-10 w-32 text-black;
+  @apply flex flex-col space-y-10 w-32 text-primary;
 }
 .navoption {
   position: relative;

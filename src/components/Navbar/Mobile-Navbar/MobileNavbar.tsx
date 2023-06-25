@@ -12,13 +12,15 @@ type Propstype = {
 function MobileNavbar(props: Propstype) {
   const closeSideBar = props.event;
   const data = useAppSelector((state) => state.contact.contactDetails);
+  const showProductSection = useAppSelector((state)=>state.product.showProductSection);
+  const showWorkSection = useAppSelector((state)=>state.work.showWorkSection);
   const navigate = useNavigate();
   const logIn = () => {
     navigate("/admin/login");
   };
-  const [activeSection, setActiveSection] = useState();
+  const [activeSection, setActiveSection] = useState<string>();
 
-  const handleSetActiveSection = (sectionId) => {
+  const handleSetActiveSection = (sectionId:string) => {
     setActiveSection(sectionId);
   };
   return (
@@ -51,30 +53,34 @@ function MobileNavbar(props: Propstype) {
                 HOME
               </a>
             </li>
+            {showProductSection && 
             <li
-              className={`${style.navoption} ${
-                activeSection === "productSection" ? style.activeLink : ""
-              }`}
+            className={`${style.navoption} ${
+              activeSection === "productSection" ? style.activeLink : ""
+            }`}
             >
               <a
                 href="#productSection"
                 onClick={() => handleSetActiveSection("productSection")}
-              >
+                >
                 PRODUCTS
               </a>
             </li>
+              }
+              {showWorkSection && 
             <li
-              className={`${style.navoption} ${
-                activeSection === "workSection" ? style.activeLink : ""
-              }`}
+            className={`${style.navoption} ${
+              activeSection === "workSection" ? style.activeLink : ""
+            }`}
             >
               <a
                 href="#workSection"
                 onClick={() => handleSetActiveSection("workSection")}
-              >
+                >
                 MY WORK
               </a>
             </li>
+              }
             <li
               className={`${style.navoption} ${
                 activeSection === "contactSection" ? style.activeLink : ""

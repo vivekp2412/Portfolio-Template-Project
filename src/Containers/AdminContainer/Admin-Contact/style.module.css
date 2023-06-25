@@ -1,5 +1,5 @@
 .Container{
-    @apply py-20  text-black w-[100%] mx-auto;
+    @apply py-20  text-primary w-[100%] mx-auto;
 
 }
 .formContainer{

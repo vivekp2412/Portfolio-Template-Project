@@ -16,15 +16,15 @@
   @apply text-center;
 }
 .title {
-  @apply text-lg  text-black;
+  @apply text-lg  text-primary;
 }
 .navoptions {
-  @apply flex flex-col space-y-10 w-32 text-black;
+  @apply flex flex-col space-y-10 w-32 text-primary;
 }
 .navoption {
   position: relative;
   transition: all 1s;
-  @apply min-w-full border-b-2 border-black text-center
+  @apply min-w-full border-b-2 border-primary text-center
     cursor-pointer hover:text-primary;
 }
 
@@ -57,7 +57,7 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
-  color: black;
+@apply text-primary
 }
 .closeSliderIcon:hover {
   color: "#B88B05";

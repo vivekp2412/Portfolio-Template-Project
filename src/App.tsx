@@ -21,6 +21,7 @@ function App() {
         await dispatch(fetchCategories());
         await dispatch(fetchCarouselData());
         await dispatch(fetchContactData());
+        await dispatch(fetchWorkData());
       } catch (err) {
         alert(err);
       }

@@ -7,13 +7,15 @@ export const fetchProductsData = createAsyncThunk(
     async (_, { rejectWithValue }) => {
       try {
         const response = await dataref.ref("Products").once("value")
-        const data = response.val().productList
-        return data;
+        const productList = response.val().productList;
+        const showProductSection = response.val().show;
+        return {productList,showProductSection};
       } catch (error) {
         return rejectWithValue(error.message);
       }
     }
   );
+
   export const fetchCategories = createAsyncThunk(
     'yourSlice/fetchCategories',
     async (_, { rejectWithValue }) => {
@@ -35,7 +37,7 @@ export const fetchProductsData = createAsyncThunk(
 export const productSlice = createSlice({
     name: "products",
     initialState:{
-        // showProductSection:false,
+        showProductSection:true,
         productList:[],
         pending:false,
         editform:{},
@@ -65,6 +67,14 @@ export const productSlice = createSlice({
               })
 
               
+        },
+        showSection(state,action){
+          console.log(action.payload);
+          
+          state.showProductSection=action.payload;
+          dataref.ref("Products").update({
+            show:state.showProductSection
+          })
         },
         updateProduct(state,action){
           
@@ -128,7 +138,8 @@ export const productSlice = createSlice({
         .addCase(fetchProductsData.fulfilled,(state,action)=>{
             state.pending=false;
             
-            state.productList=action.payload??[];
+            state.productList=action.payload.productList??[];
+            state.showProductSection=action.payload.showProductSection
 
         })
         .addCase(fetchProductsData.rejected,(state)=>{
@@ -144,5 +155,5 @@ export const productSlice = createSlice({
     }
 
 })
-export const {addProduct,deleteProduct,updateProduct,changeFilterCategory,searchProduct,addCategory,selectProduct} = productSlice.actions 
+export const {addProduct,deleteProduct,showSection,updateProduct,changeFilterCategory,searchProduct,addCategory,selectProduct} = productSlice.actions 
 export default productSlice.reducer

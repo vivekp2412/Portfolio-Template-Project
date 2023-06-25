@@ -18,7 +18,7 @@ table {
   @apply text-lg font-extrabold text-center md:text-left my-5;
 }
 .action_link {
-  color: black;
+  @apply text-primary;
   cursor: pointer;
 }
 .action_link_delete {
@@ -84,5 +84,5 @@ table {
 }
 
 .svg_icon {
-  stroke: black;
+  @apply stroke-primary;
 }

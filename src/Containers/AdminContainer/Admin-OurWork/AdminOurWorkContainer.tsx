@@ -8,7 +8,7 @@ import { fetchWorkData } from "../../../slices/workSlice";
 function AdminOurWorkContainer() {
   const dispatch = useAppDispatch();
   useEffect(()=>{
-   dispatch(fetchWorkData());
+  //  dispatch(fetchWorkData());
   },[])
   return (
     <div className={style.Container}>

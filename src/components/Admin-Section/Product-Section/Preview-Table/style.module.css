@@ -85,5 +85,14 @@
 }
 
 .svg_icon {
-  stroke: black;
+  @apply stroke-primary
+}
+.table_header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.table_header{
+  @apply flex flex-wrap  my-5 md:justify-between md:flex-wrap items-center 
 }

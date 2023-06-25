@@ -6,15 +6,16 @@ import style from "../Desktop-Navbar/style.module.css";
 //Desktop Navbar
 function DesktopNavbar() {
   const data = useAppSelector((state) => state.contact.contactDetails);
-
-  // const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const showProductSection = useAppSelector((state)=>state.product.showProductSection);
+  const showWorkSection = useAppSelector((state)=>state.work.showWorkSection);
+  
   const navigate = useNavigate();
   const logIn = () => {
     navigate("/admin/login");
   };
-  const [activeSection, setActiveSection] = useState("homeSection");
+  const [activeSection, setActiveSection] = useState<string>("homeSection");
 
-  const handleSetActiveSection = (sectionId) => {
+  const handleSetActiveSection = (sectionId:string) => {
     setActiveSection(sectionId);
   };
   return (
@@ -42,30 +43,34 @@ function DesktopNavbar() {
                 HOME
               </a>
             </li>
+            {showProductSection && 
             <li
-              className={`${style.navoption} ${
-                activeSection === "productSection" ? style.activeLink : ""
-              }`}
+            className={`${style.navoption} ${
+              activeSection === "productSection" ? style.activeLink : ""
+            }`}
             >
               <a
                 href="#productSection"
                 onClick={() => handleSetActiveSection("productSection")}
-              >
+                >
                 PRODUCTS
               </a>
             </li>
+              }
+              {showWorkSection && 
             <li
-              className={`${style.navoption} ${
-                activeSection === "workSection" ? style.activeLink : ""
-              }`}
+            className={`${style.navoption} ${
+              activeSection === "workSection" ? style.activeLink : ""
+            }`}
             >
               <a
                 href="#workSection"
                 onClick={() => handleSetActiveSection("workSection")}
-              >
+                >
                 MY WORK
               </a>
             </li>
+              }
             <li
               className={`${style.navoption} ${
                 activeSection === "contactSection" ? style.activeLink : ""

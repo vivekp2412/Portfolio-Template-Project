@@ -12,11 +12,11 @@ import { fetchWorkData } from "../../../slices/workSlice";
 function AdminContainer() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchProductsData());
-    dispatch(fetchCategories());
-    dispatch(fetchWorkData());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchProductsData());
+  //   dispatch(fetchCategories());
+  //   dispatch(fetchWorkData());
+  // }, []);
   return (
     <div>
       {isAuthenticated && <AdminNavbarContainer />}

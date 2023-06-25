@@ -18,6 +18,7 @@ export const fetchContactData = createAsyncThunk(
 export const contactSlice = createSlice({
   name: "contact",
   initialState: {
+  
     pending: false,
     contactDetails:{
         ["Portfolio Name"]:"",
@@ -29,6 +30,7 @@ export const contactSlice = createSlice({
         ["Recieve Email"]:false,
         ["Recieve Whatsapp"]:false,
         ["Whatsapp Number"]:"",
+        ["Phone Number"]:"",
         isNumberDifferent:false,
     },
   },
@@ -44,6 +46,7 @@ export const contactSlice = createSlice({
         contactDetails: state.contactDetails,
       })
     },
+    
     resetDetails(state,action){
       state.contactDetails={};
       dataref.ref("Contact Details").set({

@@ -8,8 +8,11 @@ export const fetchWorkData = createAsyncThunk(
       const response = await dataref.ref("Our Work").once("value");
       if(true){
         
-        const data = response.val().works;
-        return data;
+        const workList = response.val().works;
+        const showWorkSection = response.val().show;
+        console.log(showWorkSection);
+        
+        return {workList,showWorkSection};
       }else{
         return[]
       }
@@ -21,7 +24,8 @@ export const fetchWorkData = createAsyncThunk(
 export const workSlice = createSlice({
   name: "Work",
   initialState: {
-    pending: false,
+    showWorkSection:false,
+    pending: true,
     allWorks: [],
   },
   reducers: {
@@ -45,6 +49,14 @@ export const workSlice = createSlice({
       toast.success(" Work Deleted Successfully");
 
     },
+    showSection(state,action){
+      console.log(action.payload);
+      
+      state.showWorkSection=action.payload;
+      dataref.ref("Our Work").update({
+        show:state.showWorkSection
+      })
+    },
     updateWork(state, action) {
         const id =action.payload.workId;
       const index = state.allWorks.findIndex((work) => {
@@ -65,12 +77,13 @@ export const workSlice = createSlice({
       .addCase(fetchWorkData.fulfilled, (state, action) => {
         state.pending = false;
    
-        state.allWorks = action.payload;
+        state.allWorks = action.payload.workList;
+        state.showWorkSection=action.payload.showWorkSection;
       })
       .addCase(fetchWorkData.rejected, (state) => {
         state.pending = false;
       });
   },
 });
-export const { addWork, deleteWork,updateWork } = workSlice.actions;
+export const { addWork, deleteWork,showSection,updateWork } = workSlice.actions;
 export default workSlice.reducer;

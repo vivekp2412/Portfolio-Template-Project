@@ -23,8 +23,10 @@
   margin: 12px auto;
 }
 .uploadIcon {
+  @apply border-solid border-2 border-primary;
   cursor: pointer;
-  border: 2px dashed black;
+  border: 2px dashed primary;
+
   max-width: 300px;
   margin: 10px auto;
   height: 106px;

@@ -1,6 +1,6 @@
 .title {
   background: none;
-  width: 9.5ch;
+  width: 10ch;
   animation: type 2.5s steps(25), blink 0.5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
@@ -37,10 +37,11 @@
 }
 .btn {
   background-color: white;
-  color: black;
+  
   padding: 7px 13px;
   transition: all 0.3s;
   border-radius: 5%;
+  @apply text-primary
 }
 .btn:hover {
   background-color: #b88b05;

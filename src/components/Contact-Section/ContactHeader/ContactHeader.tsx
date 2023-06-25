@@ -1,9 +1,23 @@
 import { useAppSelector } from "../../../Hooks/Hooks";
 import style from "../ContactHeader/style.module.css";
+interface ContactDetails {
+  ["Portfolio Name"]:string,
+  Address:string,
+  Email:string,
+  ["Instagram Url"]:string,
+  ["Facebook Url"]:string,
+  ["Twitter Url"]:string,
+  ["Recieve Email"]:boolean,
+  ["Recieve Whatsapp"]:boolean,
+  ["Whatsapp Number"]:string,
+  ["Phone Number"]:string,
+
+  isNumberDifferent:boolean,
+}
 function ContactHeader() {
   const currentDomain = window.location.hostname;
-  const data = useAppSelector((state) => state.contact.contactDetails);
-  const whatappLink = `https:/wa.me/+91${data["Whatapp Number"]}`;
+  const data:ContactDetails = useAppSelector((state) => state.contact.contactDetails);
+  const whatappLink:string = `https:/wa.me/+91${data["Whatsapp Number"]}`;
   return (
     <div
       className={

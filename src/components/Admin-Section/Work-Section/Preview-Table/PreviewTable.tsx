@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Image, Space, Table } from "antd";
+import { Image, Space, Switch, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import style from "../Preview-Table/style.module.css";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
@@ -9,19 +9,21 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { deleteProduct } from "../../../../slices/productSlice";
 import Loader from "../../../Comman/Loader/Loader";
-import { deleteWork } from "../../../../slices/workSlice";
+import { deleteWork, showSection } from "../../../../slices/workSlice";
 import EditFormModal from "../EditFormModal/EditFormModal";
 
 function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [switchStatus,setSwitchStatus]=useState();
+
   const [workId, setWorkId] = useState<string>();
   const workList = useAppSelector((state) => state.work.allWorks);
   const pending = useAppSelector((state) => state.work.pending);
   const dispatch = useAppDispatch();
   const [expanded, setExpanded] = useState(false);
   const [expandId, setExpandId] = useState();
-
+  const showWorkSection =  useAppSelector((state)=>state.work.showWorkSection)
   const columns = [
     {
       title: "Work Id",
@@ -158,7 +160,13 @@ function PreviewTable() {
 
   return (
     <>
-      <div className={style.title}>Preview Images</div>
+      <div className={style.table_header}>
+
+<div className={style.title}>Preview Table</div>
+{!pending && 
+<div className={style.switch}><span>Show Section</span> <Switch style={{backgroundColor:showWorkSection ?"blue" :"gray"}} checked={showWorkSection} checkedChildren="On" unCheckedChildren="Off" onChange={(e)=>{ setSwitchStatus(e); dispatch(showSection(e))}} /></div>
+}
+</div>
 
       <EditFormModal
         setIsModalOpen={setIsModalOpen}
