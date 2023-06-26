@@ -8,7 +8,7 @@ export default function TitleName() {
       <h1 className={style.title}>
         <>
           PORTF
-          <span style={{ color: "#B88b05" }}>O</span>
+          <span className={style.secondary_text}>O</span>
           LIO
         </>
       </h1>

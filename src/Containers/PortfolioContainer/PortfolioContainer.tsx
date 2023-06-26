@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ContactContainer from "../ContactContainer/ContactContainer";
 import FooterContainer from "../FooterContainer/FooterContainer";
 import HomeContainer from "../HomeContainer/HomeContainer";
@@ -8,26 +8,32 @@ import WorkContainer from "../WorkContainer/WorkContainer";
 import { useAppSelector } from "../../Hooks/Hooks";
 
 function PortfolioContainer() {
-  const showProductSection = useAppSelector((state)=>state.product.showProductSection);
-  const showWorkSection = useAppSelector((state)=>state.work.showWorkSection);
- console.log(showWorkSection);
- 
- 
+  const showProductSection = useAppSelector(
+    (state) => state.product.showProductSection
+  );
+  const showWorkSection = useAppSelector((state) => state.work.showWorkSection);
+  console.log(showWorkSection);
+  useEffect(() => {
+    let themeValue = localStorage.getItem("theme");
+    document.documentElement.setAttribute("data-theme", themeValue);
+  });
+
   return (
     <div>
       <NavbarContainer />
       <div id="homeSection">
         <HomeContainer />
       </div>
-      {showProductSection && 
-      <div id="productSection">
-        <ProductContainer />
-      </div>}
-      {showWorkSection && 
-      <div id="workSection">
-        <WorkContainer />
-      </div>
-      }
+      {showProductSection && (
+        <div id="productSection">
+          <ProductContainer />
+        </div>
+      )}
+      {showWorkSection && (
+        <div id="workSection">
+          <WorkContainer />
+        </div>
+      )}
       <div id="contactSection">
         <ContactContainer />
       </div>

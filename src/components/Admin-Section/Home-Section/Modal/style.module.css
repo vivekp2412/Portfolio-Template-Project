@@ -1,14 +1,14 @@
 .title {
-  @apply text-primary text-4xl border-b-2 border-secondary p-5 mb-5;
+  @apply text-black text-4xl border-b-2 border-secondary p-5 mb-5;
 }
 .button_modal {
-  outline: 1px solid gray;
-  background-color: white;
+  /* outline: 1px solid gray; */
+  background-color: var(--color-secondary);
   width: 120px;
   margin: 5px 10px;
   padding: 5px;
   border-radius: 2%;
-  @apply text-primary
+  @apply text-white;
 }
 
 .modal_button_container {

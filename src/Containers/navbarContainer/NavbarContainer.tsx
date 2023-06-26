@@ -29,32 +29,36 @@ function navbarContainer() {
   useEffect(() => {
     window.addEventListener("resize", updateWidth);
   }, []);
+  console.log(width);
+
   return (
     <div className={style.navbarContainer}>
       <DesktopNavbar />
-      {width! < 1024 && (
-        <div className={style.hamburger_logo}>
-          <span className={style.brand}>
-            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
-            {}
-            <span style={{ color: "#B88b05" }}>
-              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+      {width < 1024 && (
+        <>
+          <div className={style.hamburger_logo}>
+            <span className={style.brand}>
+              {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+              {}
+              <span className={style.secondary_text}>
+                {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+              </span>
+              {data["Portfolio Name"].slice(4).toUpperCase()}
             </span>
-            {data["Portfolio Name"].slice(4).toUpperCase()}
-          </span>
-          <div className={style.hamburger}>
-            <FontAwesomeIcon
-              icon={faBars}
-              size="2xl"
-              className={style.hamburgerIcon}
-              onClick={handleSidebar}
-            />
+            <div className={style.hamburger}>
+              <FontAwesomeIcon
+                icon={faBars}
+                size="2xl"
+                className={style.hamburgerIcon}
+                onClick={handleSidebar}
+              />
+            </div>
           </div>
-        </div>
+          <div id="mobileNavbar" className={style.hide}>
+            <MobileNavbar event={handleSidebar} />
+          </div>
+        </>
       )}
-      <div id="mobileNavbar" className={style.hide}>
-        <MobileNavbar event={handleSidebar} />
-      </div>
     </div>
   );
 }

@@ -146,7 +146,7 @@ function PreviewTable() {
 
   return (
     <>
-      <div className={style.title}>Preview Images</div>
+      <div className={style.title}>Preview Table</div>
       <Modal
         title="Image"
         open={isModalOpen}

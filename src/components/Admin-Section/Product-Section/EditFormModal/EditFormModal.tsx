@@ -204,7 +204,7 @@ function EditFormModal(props) {
                     </>
                   )}
                   options={items.map((item) => ({
-                    label: item,
+                    label: item
                     value: item,
                   }))}
                 />
@@ -217,7 +217,7 @@ function EditFormModal(props) {
                   <Button
                     htmlType="button"
                     onClick={onReset}
-                    className={style.button_modal}
+                    className={style.button_modal_secondary}
                   >
                     Close
                   </Button>

@@ -105,7 +105,7 @@ const ContactForm = () => {
               )}
             </div>
             <div>
-              <button className={style.button} type="submit">
+              <button className={style.submit_btn} type="submit">
                 Send Message
               </button>
             </div>

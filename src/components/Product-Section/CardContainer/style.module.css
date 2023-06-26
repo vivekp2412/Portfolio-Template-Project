@@ -10,13 +10,16 @@
   color: white;
 }
 .active {
-  color: #b88b05;
+  color: var(--color-secondary);
 }
 .loader {
-  color: white;
   min-height: 150px;
   display: flex;
-  /* margin: 10px auto; */
   justify-content: center;
   align-items: center;
+}
+.nav_svg {
+  width: 40px;
+  height: 40px;
+  stroke: var(--color-ternary);
 }

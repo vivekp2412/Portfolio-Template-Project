@@ -23,7 +23,7 @@
   padding: 0.3rem 0.5rem;
 }
 .submitBtn:hover {
-  background-color: #b88b05;
+  background-color: var(--color-secondary);
   color: white !important;
   border: none !important;
   outline: none;
@@ -76,7 +76,7 @@ Input {
   width: 100%;
 }
 .link {
-  color: #b88b05;
+  color: var(--color-secondary);
   font-weight: 600;
   font-size: medium;
   cursor: pointer;

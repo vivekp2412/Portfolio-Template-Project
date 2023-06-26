@@ -2,7 +2,7 @@
   @apply border-b-2 border-white;
 }
 .navbar {
-  @apply text-white mx-auto flex items-center justify-around  font-bold text-sm;
+  @apply text-ternary mx-auto flex items-center justify-around  font-bold text-sm;
 }
 .navoptions {
   @apply flex flex-row;
@@ -14,10 +14,7 @@
 .navoption a {
   @apply hover:text-secondary cursor-pointer hover:underline;
 }
-.navBtn {
-  background-color: #b88b05;
-  color: white;
-}
+
 .title {
   @apply cursor-pointer text-xl tracking-widest;
 }
@@ -28,7 +25,7 @@
 }
 .navBtn {
   margin-left: 50px;
-  background-color: #b88b05;
+  background-color: var(--color-secondary);
   color: white;
   height: 35px;
   align-self: center;
@@ -36,5 +33,8 @@
   padding: 5px 10px;
 }
 .activeLink {
-  color: #b88b05;
+  color: var(--color-secondary);
+}
+.secondary_text {
+  @apply text-secondary;
 }

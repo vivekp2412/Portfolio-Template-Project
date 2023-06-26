@@ -40,7 +40,7 @@
 }
 
 .title {
-  @apply text-lg font-extrabold text-center md:text-left my-5;
+  @apply text-lg text-black font-extrabold text-center md:text-left my-5;
   font-size: large;
   font-weight: 800;
   text-align: left;
@@ -84,14 +84,17 @@
 }
 
 .svg_icon {
-  @apply stroke-primary;
+  @apply stroke-black;
 }
-.table_header{
+.table_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
-.table_header{
-  @apply flex flex-wrap  my-5 md:justify-between md:flex-wrap items-center 
+.table_header {
+  @apply flex flex-wrap  my-5 md:justify-between md:flex-wrap items-center;
+}
+.switch {
+  @apply text-black;
 }

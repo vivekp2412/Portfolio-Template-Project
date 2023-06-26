@@ -1,8 +1,5 @@
 .container {
-  /* width: 350px; */
-
   height: 350px;
-  /* margin: auto; */
   background-color: white;
   background-size: cover;
   cursor: pointer;
@@ -17,7 +14,7 @@
   align-items: center;
   gap: 40px;
   background: rgba(46, 46, 46, 0.7);
-  color: white;
+  color: var(--color-primary);
   opacity: 0;
   transition: all 0.5s;
   font-family: "Playfair Display", serif;
@@ -57,10 +54,10 @@
 }
 
 .cart a:hover {
-  color: #b88b05;
+  color: var(--color-secondary);
 }
 .container:hover .overlay {
-  opacity: 1;
+  opacity: 0.8;
 }
 .container:hover .overlay .head {
   transform: translateY(0px);

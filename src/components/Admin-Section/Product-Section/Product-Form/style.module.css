@@ -2,20 +2,22 @@
   @apply text-primary text-4xl border-b-2 border-secondary p-5 mb-5;
 }
 .button_modal {
-  @apply text-primary;
-  outline: 1px solid gray;
-  background-color: white;
-
+  background-color: var(--color-secondary) !important;
   width: 120px;
   margin: 5px 10px;
   padding: 5px;
   border-radius: 2%;
+  @apply text-white;
+}
+.button_container .button_modal_secondary {
+  /* @apply text-black bg-white !important; */
+  background-color: white !important;
+  color: black !important;
 }
 .modal_button_container {
   @apply flex justify-center md:justify-end my-3;
 }
 .button_modal:hover {
-  outline: none;
   border: none;
   @apply bg-secondary text-white !important;
 }
@@ -33,6 +35,7 @@
   text-align: center;
   margin: 0 auto;
 }
+
 .bottomline {
   @apply border-b-2 border-secondary my-5;
 }

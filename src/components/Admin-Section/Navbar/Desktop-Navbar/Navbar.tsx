@@ -40,7 +40,7 @@ function DesktopNavbar() {
             <span className={style.title}>
               {data["Portfolio Name"].slice(0, 3).toUpperCase()}
               {}
-              <span style={{ color: "#B88b05" }}>
+              <span className={style.secondary_text}>
                 {data["Portfolio Name"].slice(3, 4).toUpperCase()}
               </span>
               {data["Portfolio Name"].slice(4).toUpperCase()}

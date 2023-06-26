@@ -10,7 +10,8 @@
   z-index: 11;
 }
 .overlay {
-  background-color: #0000006b;
+  background-color: var(--color-ternary);
+  opacity: 0.3;
   width: 100%;
   z-index: 10;
   height: 100%;

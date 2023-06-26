@@ -11,7 +11,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: #ffd700;
+  background: var(--color-secondary);
   position: absolute;
   opacity: 0;
   left: 0;

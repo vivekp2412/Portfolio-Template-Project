@@ -5,25 +5,24 @@
   @apply flex justify-center items-center space-x-3 md:space-x-7 mt-10;
 }
 .navoption {
-  @apply text-white text-sm md:text-xl;
+  @apply text-ternary text-sm md:text-xl;
 }
 .navoption a {
   @apply hover:text-secondary;
 }
 .searchbar {
-  /* max-width: 100px; */
   display: flex;
   margin-bottom: 1rem;
 }
 .searchButton {
-  color: #b88b05;
+  color: var(--color-secondary);
   width: 40px;
   padding: 10px;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid var(--color-ternary);
 }
-.searchButton:hover {
-  background-color: white;
-}
+/* .searchButton:hover {
+  background-color: var(--color-ternary);
+} */
 .searchSection {
   display: flex;
   flex-direction: row;
@@ -32,7 +31,7 @@
   gap: 20px;
 }
 .Options:hover {
-  background-color: #b88b05;
+  background-color: var(--color-secondary);
   color: aqua;
 }
 .category_selectMenu {
@@ -40,25 +39,18 @@
   justify-content: center;
   align-items: center;
 }
-/* .selectOptions{
-  color: white;
-  background-color: blue;
-}
-.selectOptions:hover{
-  background-color:black;
-  color: white;
-} */
+
 .category_label {
-  color: white;
+  color: var(--color-ternary);
 }
 .selectDropmenu {
   margin: 0 5px;
 }
 .searchbar input {
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid var(--color-ternary);
   padding: 5px;
-  background-color: black;
-  color: white;
+  background-color: var(--color-primary);
+  /* color: white; */
   outline: none;
 }
 @media screen and (max-width: 900px) {

@@ -15,11 +15,12 @@
   @apply flex flex-col justify-center items-center md:flex-row md:justify-between;
 }
 .input {
-  @apply bg-primary text-white border-[0.3px] border-gray-400 p-2 w-[100%];
+  @apply bg-primary text-ternary border-[0.3px] border-gray-400 p-2 w-[100%];
 }
-.button {
-  border-radius: 5%;
-  @apply border-2 border-white text-white p-1 md:p-3 hover:bg-white hover:text-primary my-6;
+.submit_btn {
+  /* border-radius: 5%; */
+  background-color: var(--color-secondary) !important;
+  @apply text-primary p-1 md:p-3 hover:text-primary my-6;
 }
 
 .area {

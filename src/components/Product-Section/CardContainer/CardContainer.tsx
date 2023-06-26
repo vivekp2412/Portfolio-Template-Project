@@ -81,8 +81,7 @@ function CardContainer() {
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
-            stroke="currentColor"
-            class="w-10 h-10"
+            className={style.nav_svg}
           >
             <path
               strokeLinecap="round"
@@ -97,8 +96,7 @@ function CardContainer() {
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
-            stroke="currentColor"
-            class="w-10 h-10"
+            className={style.nav_svg}
           >
             <path
               strokeLinecap="round"

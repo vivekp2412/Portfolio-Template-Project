@@ -6,16 +6,18 @@ import style from "../Desktop-Navbar/style.module.css";
 //Desktop Navbar
 function DesktopNavbar() {
   const data = useAppSelector((state) => state.contact.contactDetails);
-  const showProductSection = useAppSelector((state)=>state.product.showProductSection);
-  const showWorkSection = useAppSelector((state)=>state.work.showWorkSection);
-  
+  const showProductSection = useAppSelector(
+    (state) => state.product.showProductSection
+  );
+  const showWorkSection = useAppSelector((state) => state.work.showWorkSection);
+
   const navigate = useNavigate();
   const logIn = () => {
     navigate("/admin/login");
   };
   const [activeSection, setActiveSection] = useState<string>("homeSection");
 
-  const handleSetActiveSection = (sectionId:string) => {
+  const handleSetActiveSection = (sectionId: string) => {
     setActiveSection(sectionId);
   };
   return (
@@ -25,7 +27,7 @@ function DesktopNavbar() {
           <span className={style.title}>
             {data["Portfolio Name"].slice(0, 3).toUpperCase()}
             {}
-            <span style={{ color: "#B88b05" }}>
+            <span className={style.secondary_text}>
               {data["Portfolio Name"].slice(3, 4).toUpperCase()}
             </span>
             {data["Portfolio Name"].slice(4).toUpperCase()}
@@ -43,34 +45,34 @@ function DesktopNavbar() {
                 HOME
               </a>
             </li>
-            {showProductSection && 
-            <li
-            className={`${style.navoption} ${
-              activeSection === "productSection" ? style.activeLink : ""
-            }`}
-            >
-              <a
-                href="#productSection"
-                onClick={() => handleSetActiveSection("productSection")}
+            {showProductSection && (
+              <li
+                className={`${style.navoption} ${
+                  activeSection === "productSection" ? style.activeLink : ""
+                }`}
+              >
+                <a
+                  href="#productSection"
+                  onClick={() => handleSetActiveSection("productSection")}
                 >
-                PRODUCTS
-              </a>
-            </li>
-              }
-              {showWorkSection && 
-            <li
-            className={`${style.navoption} ${
-              activeSection === "workSection" ? style.activeLink : ""
-            }`}
-            >
-              <a
-                href="#workSection"
-                onClick={() => handleSetActiveSection("workSection")}
+                  PRODUCTS
+                </a>
+              </li>
+            )}
+            {showWorkSection && (
+              <li
+                className={`${style.navoption} ${
+                  activeSection === "workSection" ? style.activeLink : ""
+                }`}
+              >
+                <a
+                  href="#workSection"
+                  onClick={() => handleSetActiveSection("workSection")}
                 >
-                MY WORK
-              </a>
-            </li>
-              }
+                  MY WORK
+                </a>
+              </li>
+            )}
             <li
               className={`${style.navoption} ${
                 activeSection === "contactSection" ? style.activeLink : ""
@@ -86,6 +88,22 @@ function DesktopNavbar() {
             <button className={style.navBtn} onClick={() => logIn()}>
               LOG IN
             </button>
+            <li>
+              <select
+                name="cars"
+                id="cars"
+                onChange={(e) => {
+                  let value = e.target.value;
+                  localStorage.setItem("theme", value);
+                  document.documentElement.setAttribute("data-theme", value);
+                }}
+              >
+                <option value="dark">dark</option>
+                <option value="light">light</option>
+                <option value="blue">blue</option>
+                {/* <option value="audi">Audi</option> */}
+              </select>
+            </li>
           </ul>
         </div>
       </div>

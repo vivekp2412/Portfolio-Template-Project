@@ -1,12 +1,16 @@
 .activebtn {
-  background-color: #b88b05 !important;
+  background-color: var(--color-secondary) !important;
   color: white !important;
   border: none !important;
 }
 .resetbtn {
-  background-color: rgb(218, 47, 47) !important;
-  color: white !important;
+  /* background-color: rgb(218, 47, 47) !important; */
+  color: black !important;
   border: none !important;
+}
+.resetbtn:hover {
+  outline: 1px solid red;
+  color: var(--color-secondary) !important;
 }
 .btnContainer {
   display: flex;
@@ -14,8 +18,9 @@
   gap: 10px;
 }
 .disabled {
-  background-color: white !important;
-  color: gray !important;
+  background-color: gray !important;
+  color: white !important;
+  opacity: 0.5;
 }
 .formContainer {
   padding: 10px;

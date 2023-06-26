@@ -4,7 +4,8 @@
 }
 .mobileNavbar {
   position: relative;
-  @apply bg-white h-[100vh] w-[65vw] min-w-[200px]  flex flex-col py-20 items-center space-y-10;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  @apply bg-primary h-[100vh] w-[300px] min-w-[200px]  flex flex-col py-20 items-center space-y-10;
 }
 .logo_title {
   @apply space-y-10 text-center cursor-pointer text-4xl flex flex-col justify-center items-center font-bold;
@@ -16,16 +17,16 @@
   @apply text-center;
 }
 .title {
-  @apply text-lg  text-primary;
+  @apply text-lg  text-ternary;
 }
 .navoptions {
-  @apply flex flex-col space-y-10 w-32 text-primary;
+  @apply flex flex-col space-y-10 w-32 text-ternary;
 }
 .navoption {
   position: relative;
   /* transition: all 1s; */
-  @apply min-w-full border-b-2 border-black text-center
-    cursor-pointer hover:text-primary;
+  @apply min-w-full border-b-2 border-ternary text-center
+    cursor-pointer hover:text-secondary;
 }
 
 .navoption:hover .navoption_hover {
@@ -48,18 +49,21 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
-  color: black;
+  color: var(--color-ternary);
 }
 .closeSliderIcon:hover {
-  color: "#B88B05";
+  color: var(--color-secondary);
 }
-@media screen and (min-width: 550px) {
+.secondary_text {
+  @apply text-secondary;
+}
+@media (min-width: 1024px) {
   .mobileNavbarContainer {
     display: none;
   }
 }
 .navBtn {
-  background-color: #b88b05;
+  background-color: var(--color-secondary);
   color: white;
   height: 35px;
   align-self: center;
@@ -67,5 +71,6 @@
   padding: 5px 10px;
 }
 .activeLink {
-  color: #b88b05;
+  color: var(--color-secondary);
+  font-weight: 600;
 }

@@ -54,7 +54,6 @@ export default function Navbar() {
         initialValue="Search By"
       />
       <div className={style.searchSection}>
-        {/* <div className={style.category_label}>Search By:</div> */}
         <div className={style.searchbar}>
           <input
             type="text"

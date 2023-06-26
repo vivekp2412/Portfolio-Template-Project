@@ -2,11 +2,14 @@
   @apply w-[100%] max-h-[750px];
 }
 .carousel {
-  background-color: black;
+  background-color: var(--color-ternary);
 }
 .loader {
   position: absolute;
   top: 30%;
   left: 50%;
   @apply h-[750px];
+}
+.secondary_text {
+  @apply text-secondary;
 }

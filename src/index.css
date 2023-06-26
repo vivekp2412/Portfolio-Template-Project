@@ -4,6 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root[data-theme="light"] {
+    --color-primary: #010101;
+    --color-secondary: #b88b05;
+    --color-ternary: #ffffff;
+  }
+  :root[data-theme="dark"] {
+    --color-secondary: #e66060;
+    --color-primary: #f7e6e6;
+    --color-ternary: gray;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

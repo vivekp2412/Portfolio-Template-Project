@@ -8,12 +8,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchWorkData } from "./slices/workSlice";
 import { fetchContactData } from "./slices/contactSlice";
-import Loader from "./components/Comman/Loader/Loader";
 import { auth } from "./firebase";
 import { loginUser } from "./slices/authSlice";
+import tailwindConfig from "../tsconfig.json";
 function App() {
   const dispatch = useAppDispatch();
-  // const pending = useAppSelector((state) => state.contact.pending);
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -35,6 +35,7 @@ function App() {
     });
     return () => listener();
   }, []);
+
   return (
     <>
       <>
