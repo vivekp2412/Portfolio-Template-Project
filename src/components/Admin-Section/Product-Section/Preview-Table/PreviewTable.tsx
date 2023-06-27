@@ -43,6 +43,10 @@ function PreviewTable() {
       dataIndex: "productName",
     },
     {
+      title: "Product Price",
+      dataIndex: "productPrice",
+    },
+    {
       title: "Product Description",
       dataIndex: "productDescription",
       render: (text, record) => {

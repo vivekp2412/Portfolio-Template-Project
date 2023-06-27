@@ -88,22 +88,7 @@ function DesktopNavbar() {
             <button className={style.navBtn} onClick={() => logIn()}>
               LOG IN
             </button>
-            <li>
-              <select
-                name="cars"
-                id="cars"
-                onChange={(e) => {
-                  let value = e.target.value;
-                  localStorage.setItem("theme", value);
-                  document.documentElement.setAttribute("data-theme", value);
-                }}
-              >
-                <option value="dark">dark</option>
-                <option value="light">light</option>
-                <option value="blue">blue</option>
-                {/* <option value="audi">Audi</option> */}
-              </select>
-            </li>
+           
           </ul>
         </div>
       </div>

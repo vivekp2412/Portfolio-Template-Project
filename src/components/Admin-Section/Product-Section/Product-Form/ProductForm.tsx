@@ -28,6 +28,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
+import { number } from "yup";
 const storage = getStorage();
 interface Datatype {
   productImage: File;
@@ -197,6 +198,29 @@ const ProductForm = (props) => {
               >
                 <Input />
               </Form.Item>
+             
+              <Form.Item
+  name="productPrice"
+  label="Product Price (INR)"
+  rules={[
+    { required: true, message: 'Please enter the product price.' },
+    {
+      type: 'number',
+      message: 'Please enter a valid number for the product price.',
+      transform: (value) => parseFloat(value), // Convert the input value to a float number
+    },
+    {
+      validator: (_, value) => {
+        if (value >= 0) {
+          return Promise.resolve(); // Value is valid, resolve the promise
+        }
+        return Promise.reject('Please enter a positive value for the product price.'); // Value is invalid, reject the promise with an error message
+      },
+    },
+  ]}
+>
+  <Input />
+</Form.Item>
               <Form.Item
                 name="productDescription"
                 label="Product Description"
@@ -243,13 +267,13 @@ const ProductForm = (props) => {
               </Form.Item>
               <Form.Item>
                 <div className={style.button_container}>
-                  <Button htmlType="submit" className={style.button_modal}>
+                  <Button htmlType="submit" className={style.button_modal_primary}>
                     Add
                   </Button>
                   <Button
                     htmlType="button"
                     onClick={onReset}
-                    className={style.button_modal}
+                    className={ style.button_modal_secondary}
                   >
                     Reset
                   </Button>

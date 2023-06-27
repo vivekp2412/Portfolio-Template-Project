@@ -13,7 +13,10 @@ import { auth } from "../../../firebase";
 function AdminContainer() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const dispatch = useAppDispatch();
-
+ useEffect(()=>{
+  const theme = localStorage.getItem("theme");
+  document.documentElement.setAttribute("data-theme",theme);
+ })
   return (
     <div>
       {isAuthenticated && <AdminNavbarContainer />}

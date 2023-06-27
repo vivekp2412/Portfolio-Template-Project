@@ -97,7 +97,7 @@ const WorkFormModal = () => {
       <div className={style.modal_button_container}>
         <button
           onClick={showModal}
-          className={`${style.button_modal} ${style.top_button}`}
+          className={`${style.button_modal_primary} ${style.top_button}`}
         >
           Add New Work
         </button>
@@ -149,7 +149,7 @@ const WorkFormModal = () => {
                 <div className={style.button_container}>
                   <Button
                     htmlType="submit"
-                    className={style.button_modal}
+                    className={style.button_modal_primary}
                     //   onClick={handleSubmit}
                   >
                     Add
@@ -157,7 +157,7 @@ const WorkFormModal = () => {
                   <Button
                     htmlType="button"
                     onClick={onReset}
-                    className={style.button_modal}
+                    className={style.button_modal_secondary}
                   >
                     Reset
                   </Button>

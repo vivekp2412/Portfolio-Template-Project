@@ -2,7 +2,7 @@
   @apply w-[100vw] h-[100vh] flex justify-center items-center;
 }
 .section {
-  @apply text-gray-400  overflow-hidden bg-primary;
+  @apply text-gray-400  overflow-hidden bg-primary min-h-screen;
 }
 .Container {
   @apply container px-5 py-24 mx-auto;
@@ -11,7 +11,7 @@
   @apply lg:w-4/5 mx-auto flex flex-wrap;
 }
 .img {
-  @apply lg:w-1/2 w-full object-cover object-center rounded border mt-6;
+  @apply lg:w-1/2 w-full object-contain object-center rounded mt-6;
 }
 .detailContainer {
   @apply lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0;
@@ -20,7 +20,7 @@
   @apply text-sm  text-secondary tracking-widest;
 }
 .name {
-  @apply text-ternary text-3xl my-5 font-medium mb-1;
+  @apply text-secondary text-3xl my-5 font-medium mb-1;
 }
 .desc {
   @apply leading-relaxed;

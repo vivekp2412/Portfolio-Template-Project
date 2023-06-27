@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 @layer base {
-  :root[data-theme="light"] {
-    --color-primary: #010101;
-    --color-secondary: #b88b05;
-    --color-ternary: #ffffff;
+  :root[data-theme="blue"] {
+    --color-primary: #d7d8e4;
+    --color-secondary: #6e6ce0;
+    --color-ternary: gray;
   }
-  :root[data-theme="dark"] {
+  :root[data-theme="pink"] {
     --color-secondary: #e66060;
     --color-primary: #f7e6e6;
     --color-ternary: gray;

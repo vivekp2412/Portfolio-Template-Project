@@ -37,10 +37,10 @@
 }
 .btn {
   background-color: var(--color-secondary);
-
+  border-radius: 6px;
   padding: 7px 13px;
   transition: all 0.3s;
-  border-radius: 5%;
+  /* border-radius: 5%; */
   @apply text-primary;
 }
 .secondary_text {

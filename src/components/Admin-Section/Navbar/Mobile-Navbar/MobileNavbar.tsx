@@ -34,14 +34,14 @@ function MobileNavbar(props: Propstype) {
     <div id="" className={style.mobilenavbarContainer}>
       <div className={style.mobileNavbar}>
         <div className={style.logo_title}>
-          <div className={style.logo}>
+          {/* <div className={style.logo}>
             <img className={style.logo_img} src={brand}></img>
-          </div>
+          </div> */}
           {data["Portfolio Name"] && (
             <span className={style.title}>
               {data["Portfolio Name"].slice(0, 3).toUpperCase()}
               {}
-              <span style={{ color: "#B88b05" }}>
+              <span className={style.secondary_text}>
                 {data["Portfolio Name"].slice(3, 4).toUpperCase()}
               </span>
               {data["Portfolio Name"].slice(4).toUpperCase()}

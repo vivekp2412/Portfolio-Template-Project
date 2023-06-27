@@ -1,35 +1,54 @@
-import React, { useEffect, useState } from "react";
-import {
-  Navigate,
-  Outlet,
-  Route,
-  useLocation,
-  useParams,
-} from "react-router-dom";
-import { auth } from "../firebase";
-import { useAppSelector } from "../Hooks/Hooks";
-import Loader from "../components/Comman/Loader/Loader";
+import React, { useState, useEffect, useRef } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { auth } from '../firebase'; // Replace with your authentication library
 
-function ProtectedRoute({ children }) {
-  // let isAuth = useAppSelector((state) => state.auth.isAuthenticated);
-  //  const [loading,setLoading]=useState();\
-  const [isAuth, setIsAuth] = useState(true);
+const ProtectedRoute = ({ children }) => {
+  const [isAuth, setIsAuth] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const url = useLocation();
+  const logoutTimerRef = useRef(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const checkAuthStatus = (user) => {
       setIsInitialized(true);
       if (!user) {
         setIsAuth(false);
         <Navigate to="/admin/login" replace />;
       } else {
         setIsAuth(true);
+        resetLogoutTimer();
       }
+    };
+
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      checkAuthStatus(user);
     });
 
-    return () => unsubscribe();
+    resetLogoutTimer(); // Start the initial logout timer
+
+    const handleUserInteraction = () => {
+      resetLogoutTimer(); // Reset the logout timer on user interaction
+    };
+
+    document.addEventListener('mousedown', handleUserInteraction);
+    document.addEventListener('keydown', handleUserInteraction);
+
+    return () => {
+      unsubscribe();
+      document.removeEventListener('mousedown', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+    };
   }, [url.pathname]);
+
+  const resetLogoutTimer = () => {
+    clearTimeout(logoutTimerRef.current); // Clear the previous timer
+
+    logoutTimerRef.current = setTimeout(() => {
+      // Logout user after 15 minutes of inactivity
+      setIsAuth(false);
+      auth.signOut();
+    }, 15 * 60 * 1000); // 15 minutes in milliseconds
+  };
   if (!isInitialized) {
     return null;
   }

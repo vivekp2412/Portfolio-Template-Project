@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../../Hooks/Hooks";
 import { fetchCarouselData } from "../../../slices/homeSlice";
 
 import style from "../Admin-Home/style.module.css";
+import DefaultSpeedDial from "../../../components/Comman/Speed-Dial/SpeedDial";
+import Example from "../../../components/Comman/Speed-Dial/SpeedDial";
 function HomeSection() {
   const dispatch = useAppDispatch();
   const allImages = useAppSelector((state) => state.home.allImages);
@@ -16,6 +18,7 @@ function HomeSection() {
     <div className={style.Container}>
       <div className={style.homeContainer}>
         <FormModal />
+        <Example/>
         <PreviewTable />
       </div>
     </div>

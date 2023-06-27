@@ -166,6 +166,34 @@ function EditFormModal(props) {
                 <Input />
               </Form.Item>
               <Form.Item
+                name="productPrice"
+                label="Product Price (INR)"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter the product price.",
+                  },
+                  {
+                    type: "number",
+                    message:
+                      "Please enter a valid number for the product price.",
+                    transform: (value) => parseFloat(value), // Convert the input value to a float number
+                  },
+                  {
+                    validator: (_, value) => {
+                      if (value >= 0) {
+                        return Promise.resolve(); // Value is valid, resolve the promise
+                      }
+                      return Promise.reject(
+                        "Please enter a positive value for the product price."
+                      ); // Value is invalid, reject the promise with an error message
+                    },
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
                 name="productDescription"
                 label="Product Description"
                 rules={[{ required: true }]}
@@ -204,14 +232,17 @@ function EditFormModal(props) {
                     </>
                   )}
                   options={items.map((item) => ({
-                    label: item
+                    label: item,
                     value: item,
                   }))}
                 />
               </Form.Item>
               <Form.Item>
                 <div className={style.button_container}>
-                  <Button htmlType="submit" className={style.button_modal}>
+                  <Button
+                    htmlType="submit"
+                    className={style.button_modal_primary}
+                  >
                     Edit
                   </Button>
                   <Button

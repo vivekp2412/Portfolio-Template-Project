@@ -1,13 +1,19 @@
 .title {
   @apply text-primary text-4xl border-b-2 border-secondary p-5 mb-5;
 }
-.button_modal {
-  background-color: var(--color-secondary);
-  width: 14 0px;
-  margin: 5px 10px;
-  padding: 5px;
-  border-radius: 2%;
-  @apply text-white;
+.button_modal_primary{
+  background-color: var(--color-secondary) !important;
+  color: white !important;
+  outline: none !important;
+  border: none !important;
+  margin:  0 10px;
+  max-width: 140px;
+  /* padding: 5px 5px; */
+  border-radius: 6px;
+}
+.button_modal_secondary:hover{
+  color: rgb(230, 78, 78) !important;
+  border: 1px solid rgb(230, 78, 78) !important;
 }
 .modal_button_container {
   @apply flex justify-center md:justify-end my-3;
@@ -44,4 +50,8 @@
 .blur-effect {
   filter: blur(4px);
   pointer-events: none;
+}
+.top_button{
+  width: 140px;
+  padding: 5px 5px;
 }

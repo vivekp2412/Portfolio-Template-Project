@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import style from "../Modal/style.module.css";
 import * as yup from "yup";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 import { Formik, Form, ErrorMessage } from "formik";
 import { useEffect } from "react";
 import { dataref } from "../../../../firebase";
@@ -97,7 +97,7 @@ const FormModal = () => {
       <div className={style.modal_button_container}>
         <button
           onClick={showModal}
-          className={`${style.button_modal} ${style.top_button}`}
+          className={`${style.button_modal_primary} ${style.top_button}`}
         >
           Add Image
         </button>
@@ -125,20 +125,20 @@ const FormModal = () => {
             />
 
             <div className={style.button_container}>
-              <button
-                type="submit"
+              <Button
+                htmlType="submit"
                 onClick={handleSubmit}
-                className={style.button_modal}
+                className={style.button_modal_primary}
               >
                 Add
-              </button>
-              <button
-                type="reset"
-                className={style.button_modal}
+              </Button>
+              <Button
+                htmlType="reset"
+                className={style.button_modal_secondary}
                 onClick={onReset}
               >
                 Reset
-              </button>
+              </Button>
             </div>
           </>
         )}

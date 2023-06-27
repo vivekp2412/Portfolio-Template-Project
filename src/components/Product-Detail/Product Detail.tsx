@@ -15,7 +15,8 @@ if (!data) {
   // Render a loading state or an error message when data is undefined
   return <div className={style.loaderContainer} >
     
-    <Loader></Loader>;
+    {/* <Loader></Loader>; */}
+    <h1>NO Data found</h1>
     </div>
 }
 function handleShare(){
@@ -53,7 +54,7 @@ const renderReadMoreButton = () => {
 
           <img
             src={data.Image}
-            style={{maxHeight:"500px", objectFit:"cover"}}
+            style={{maxHeight:"500px", objectFit:"contain"}}
             className={`${style.img} ${
     showFullDescription ? 'lg:w-full' : ''
   }`}
@@ -73,7 +74,7 @@ const renderReadMoreButton = () => {
               
               </div>
             <div className="flex">
-              <span className={style.price}>$58.00</span>
+              <span className={style.price}>Rs.{data.productPrice}</span>
               {/* <button className={style.button}>
                 Button
               </button> */}

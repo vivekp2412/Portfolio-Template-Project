@@ -12,12 +12,15 @@ import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import { logoutUser } from "../../../../slices/authSlice";
 import style from "../Desktop-Navbar/style.module.css";
+import { useState } from "react";
+import DefaultSpeedDial from "../../../Comman/Speed-Dial/SpeedDial";
 //Desktop Navbar
 function DesktopNavbar() {
   const isAuthentucated = useAppSelector((state) => state.auth.isAuthenticated);
   const data = useAppSelector((state) => state.contact.contactDetails);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [isOpen,setIsOpen]=useState(false);
   const logOut = () => {
     const auth = getAuth();
     signOut(auth)
@@ -31,7 +34,10 @@ function DesktopNavbar() {
         toast(err.message);
       });
   };
-
+  function toggleSidebar() {
+    setIsOpen(!isOpen);
+    
+  }
   return (
     <>
       <div className={style.navbarContainer}>
@@ -111,8 +117,27 @@ function DesktopNavbar() {
                 LOGOUT
               </button>
             )}
+             <li>
+              <select
+                name="cars"
+                id="cars"
+                onChange={(e) => {
+                  let value = e.target.value;
+                  localStorage.setItem("theme", value);
+                  document.documentElement.setAttribute("data-theme", value);
+                }}
+              >
+                <option value="pink">pink</option>
+                {/* <option value="light">light</option> */}
+                <option value="blue">blue</option>
+              </select>
+            </li>
+            <li>
+
+            </li>
           </ul>
         </div>
+      {/* <DefaultSpeedDial/> */}
       </div>
     </>
   );

@@ -6,19 +6,27 @@
   width: 120px;
   margin: 5px 10px;
   padding: 5px;
-  border-radius: 2%;
+
+  border-radius: 6px;
   @apply text-white;
 }
-.button_container .button_modal_secondary {
-  /* @apply text-black bg-white !important; */
-  background-color: white !important;
-  color: black !important;
+.button_modal_primary{
+  background-color: var(--color-secondary) !important;
+  color: white !important;
+  outline: none !important;
+  border: none !important;
+  margin:  0 10px;
 }
+.button_modal_secondary:hover{
+  color: rgb(230, 78, 78) !important;
+  border: 1px solid rgb(230, 78, 78) !important;
+}
+
 .modal_button_container {
   @apply flex justify-center md:justify-end my-3;
 }
 .button_modal:hover {
-  border: none;
+  /* border: none; */
   @apply bg-secondary text-white !important;
 }
 .button_container {
