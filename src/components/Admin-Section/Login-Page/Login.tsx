@@ -35,7 +35,11 @@ function Login() {
   }
   useEffect(() => {
     const theme = localStorage.getItem("theme");
-    document.documentElement.setAttribute("data-theme", theme);
+    if (!theme) {
+      document.documentElement.setAttribute("data-theme", "pink");
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
   }, []);
   const onFinishFailed = (errorInfo: any) => {
     toast("Failed:", errorInfo);

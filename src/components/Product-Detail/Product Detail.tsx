@@ -13,7 +13,11 @@ const ProductDetails = () => {
   useEffect(() => {
     setLoading(true);
     const theme = localStorage.getItem("theme");
-    document.documentElement.setAttribute("data-theme", theme);
+    if (!theme) {
+      document.documentElement.setAttribute("data-theme", "pink");
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
   }, []);
   setTimeout(() => {
     setLoading(false);
@@ -21,7 +25,8 @@ const ProductDetails = () => {
   if (loading) {
     return (
       <div className={style.loaderContainer}>
-        <Loader></Loader>;{/* <h1>NO Data found</h1> */}
+        <Loader></Loader>
+        {/* <h1>NO Data found</h1> */}
       </div>
     );
   }
