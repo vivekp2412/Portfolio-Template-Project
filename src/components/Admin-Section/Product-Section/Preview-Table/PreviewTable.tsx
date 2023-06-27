@@ -185,7 +185,11 @@ function PreviewTable() {
           <div className={style.switch}>
             <span>Show Section</span>{" "}
             <Switch
-              style={{ backgroundColor: showProductSection ? "blue" : "gray" }}
+              style={{
+                backgroundColor: showProductSection
+                  ? "var(--color-secondary)"
+                  : "gray",
+              }}
               checked={showProductSection}
               checkedChildren="On"
               unCheckedChildren="Off"

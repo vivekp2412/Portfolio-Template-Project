@@ -1,4 +1,4 @@
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import DesktopNavbar from "../../../components/Admin-Section/Navbar/Desktop-Navbar/Navbar";
@@ -11,6 +11,7 @@ import style from "../Admin-Navbar/style.module.css";
 function AdminNavbarContainer() {
   const [width, setWidth] = useState<number>(window.innerWidth);
   const data = useAppSelector((state) => state.contact.contactDetails);
+  const [showThemeMenu, setShowThemeMenu] = useState(false);
   //Function hide/show Side Navbar
   function handleSidebar() {
     const classes = document.getElementById("mobileNavbar")?.classList;
@@ -30,6 +31,9 @@ function AdminNavbarContainer() {
   useEffect(() => {
     window.addEventListener("resize", updateWidth);
   }, []);
+  function handleSlider() {
+    setShowThemeMenu(!showThemeMenu);
+  }
   return (
     <div className={style.navbarContainer}>
       <DesktopNavbar />

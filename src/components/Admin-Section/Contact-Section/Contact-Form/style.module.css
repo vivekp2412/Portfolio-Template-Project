@@ -2,6 +2,7 @@
   background-color: var(--color-secondary) !important;
   color: white !important;
   border: none !important;
+  font-weight: 600;
 }
 .resetbtn {
   /* background-color: rgb(218, 47, 47) !important; */

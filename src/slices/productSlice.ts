@@ -108,6 +108,21 @@ export const productSlice = createSlice({
                 }
               })
               state.searchedProducts=filteredArray;
+            }else{
+              const filteredArray=state.productList.filter((product)=>{
+                let productPropertyId=product.productId;
+                let productPropertyName=product.productName;
+
+                let upprcsePropertyId =  productPropertyId.toUpperCase();
+                let upprcsePropertyName =  productPropertyName.toUpperCase();
+
+                if(upprcsePropertyId.includes(upprcseSearch) || upprcsePropertyName.includes(upprcseSearch) ) {
+                  return product
+                  
+                }
+              })
+              state.searchedProducts=filteredArray;
+
             }
             
         },

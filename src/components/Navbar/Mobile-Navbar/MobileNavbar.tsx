@@ -29,9 +29,6 @@ function MobileNavbar(props: Propstype) {
     <div id="" className={style.mobilenavbarContainer}>
       <div className={style.mobileNavbar}>
         <div className={style.logo_title}>
-          {/* <div className={style.logo}>
-            <img className={style.logo_img} src={brand}></img>
-          </div> */}
           <span className={style.title}>
             {data["Portfolio Name"].slice(0, 3).toUpperCase()}
             {}
@@ -50,7 +47,10 @@ function MobileNavbar(props: Propstype) {
             >
               <a
                 href="#homeSection"
-                onClick={() => handleSetActiveSection("homeSection")}
+                onClick={() => {
+                  handleSetActiveSection("homeSection");
+                  closeSideBar();
+                }}
               >
                 HOME
               </a>
@@ -63,7 +63,10 @@ function MobileNavbar(props: Propstype) {
               >
                 <a
                   href="#productSection"
-                  onClick={() => handleSetActiveSection("productSection")}
+                  onClick={() => {
+                    handleSetActiveSection("productSection");
+                    closeSideBar();
+                  }}
                 >
                   PRODUCTS
                 </a>
@@ -77,7 +80,10 @@ function MobileNavbar(props: Propstype) {
               >
                 <a
                   href="#workSection"
-                  onClick={() => handleSetActiveSection("workSection")}
+                  onClick={() => {
+                    handleSetActiveSection("workSection");
+                    closeSideBar();
+                  }}
                 >
                   MY WORK
                 </a>
@@ -90,7 +96,10 @@ function MobileNavbar(props: Propstype) {
             >
               <a
                 href="#contactSection"
-                onClick={() => handleSetActiveSection("contactSection")}
+                onClick={() => {
+                  handleSetActiveSection("contactSection");
+                  closeSideBar();
+                }}
               >
                 CONTACT US
               </a>

@@ -14,7 +14,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 99;
+  z-index: 11;
   @apply bg-primary border-solid border-white border-b-2;
 }
 .secondary_text {

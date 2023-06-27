@@ -23,3 +23,6 @@
   height: 40px;
   stroke: var(--color-ternary);
 }
+.nav_svg:hover {
+  stroke: var(--color-secondary);
+}

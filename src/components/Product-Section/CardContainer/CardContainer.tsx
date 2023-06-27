@@ -4,8 +4,7 @@ import Loader from "../../Comman/Loader/Loader";
 import style from "../CardContainer/style.module.css";
 import ProductCard from "../Cards/ProductCard";
 import ReactPaginate from "react-paginate";
-import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { Col, Row } from "antd";
 
 function CardContainer() {

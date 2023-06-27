@@ -34,9 +34,6 @@ function MobileNavbar(props: Propstype) {
     <div id="" className={style.mobilenavbarContainer}>
       <div className={style.mobileNavbar}>
         <div className={style.logo_title}>
-          {/* <div className={style.logo}>
-            <img className={style.logo_img} src={brand}></img>
-          </div> */}
           {data["Portfolio Name"] && (
             <span className={style.title}>
               {data["Portfolio Name"].slice(0, 3).toUpperCase()}
@@ -57,6 +54,7 @@ function MobileNavbar(props: Propstype) {
                 className={({ isActive }) =>
                   isActive ? `${style.activeLink}` : ""
                 }
+                onClick={closeSideBar}
               >
                 HOME
               </NavLink>
@@ -68,6 +66,7 @@ function MobileNavbar(props: Propstype) {
                 className={({ isActive }) =>
                   isActive ? `${style.activeLink}` : ""
                 }
+                onClick={closeSideBar}
               >
                 PRODUCTS
               </NavLink>
@@ -79,6 +78,7 @@ function MobileNavbar(props: Propstype) {
                 className={({ isActive }) =>
                   isActive ? `${style.activeLink}` : ""
                 }
+                onClick={closeSideBar}
               >
                 MY WORK
               </NavLink>
@@ -90,6 +90,7 @@ function MobileNavbar(props: Propstype) {
                 className={({ isActive }) =>
                   isActive ? `${style.activeLink}` : ""
                 }
+                onClick={closeSideBar}
               >
                 CONTACT US
               </NavLink>

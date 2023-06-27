@@ -15,7 +15,7 @@ import EditFormModal from "../EditFormModal/EditFormModal";
 function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [switchStatus,setSwitchStatus]=useState();
+  const [switchStatus, setSwitchStatus] = useState();
 
   const [workId, setWorkId] = useState<string>();
   const workList = useAppSelector((state) => state.work.allWorks);
@@ -23,7 +23,7 @@ function PreviewTable() {
   const dispatch = useAppDispatch();
   const [expanded, setExpanded] = useState(false);
   const [expandId, setExpandId] = useState();
-  const showWorkSection =  useAppSelector((state)=>state.work.showWorkSection)
+  const showWorkSection = useAppSelector((state) => state.work.showWorkSection);
   const columns = [
     {
       title: "Work Id",
@@ -161,12 +161,27 @@ function PreviewTable() {
   return (
     <>
       <div className={style.table_header}>
-
-<div className={style.title}>Preview Table</div>
-{!pending && 
-<div className={style.switch}><span>Show Section</span> <Switch style={{backgroundColor:showWorkSection ?"blue" :"gray"}} checked={showWorkSection} checkedChildren="On" unCheckedChildren="Off" onChange={(e)=>{ setSwitchStatus(e); dispatch(showSection(e))}} /></div>
-}
-</div>
+        <div className={style.title}>Preview Table</div>
+        {!pending && (
+          <div className={style.switch}>
+            <span>Show Section</span>{" "}
+            <Switch
+              style={{
+                backgroundColor: showWorkSection
+                  ? "var(--color-secondary)"
+                  : "gray",
+              }}
+              checked={showWorkSection}
+              checkedChildren="On"
+              unCheckedChildren="Off"
+              onChange={(e) => {
+                setSwitchStatus(e);
+                dispatch(showSection(e));
+              }}
+            />
+          </div>
+        )}
+      </div>
 
       <EditFormModal
         setIsModalOpen={setIsModalOpen}

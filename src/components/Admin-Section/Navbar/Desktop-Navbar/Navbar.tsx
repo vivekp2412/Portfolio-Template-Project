@@ -20,7 +20,7 @@ function DesktopNavbar() {
   const data = useAppSelector((state) => state.contact.contactDetails);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [isOpen,setIsOpen]=useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const logOut = () => {
     const auth = getAuth();
     signOut(auth)
@@ -36,7 +36,6 @@ function DesktopNavbar() {
   };
   function toggleSidebar() {
     setIsOpen(!isOpen);
-    
   }
   return (
     <>
@@ -45,7 +44,6 @@ function DesktopNavbar() {
           {data["Portfolio Name"] && (
             <span className={style.title}>
               {data["Portfolio Name"].slice(0, 3).toUpperCase()}
-              {}
               <span className={style.secondary_text}>
                 {data["Portfolio Name"].slice(3, 4).toUpperCase()}
               </span>
@@ -94,50 +92,31 @@ function DesktopNavbar() {
                 CONTACT US
               </NavLink>
             </li>
-            {isAuthentucated && (
-              <button
-                className={style.navBtn}
-                onClick={() => {
-                  confirmAlert({
-                    title: "Logging Out User",
-                    message: "Are you sure to do this.",
-                    buttons: [
-                      {
-                        label: "Yes",
-                        onClick: () => logOut(),
-                      },
-                      {
-                        label: "No",
-                        onClick: () => {},
-                      },
-                    ],
-                  });
-                }}
-              >
-                LOGOUT
-              </button>
-            )}
-             <li>
-              <select
-                name="cars"
-                id="cars"
-                onChange={(e) => {
-                  let value = e.target.value;
-                  localStorage.setItem("theme", value);
-                  document.documentElement.setAttribute("data-theme", value);
-                }}
-              >
-                <option value="pink">pink</option>
-                {/* <option value="light">light</option> */}
-                <option value="blue">blue</option>
-              </select>
-            </li>
-            <li>
 
-            </li>
+            <button
+              className={style.navBtn}
+              onClick={() => {
+                confirmAlert({
+                  title: "Logging Out User",
+                  message: "Are you sure to do this.",
+                  buttons: [
+                    {
+                      label: "Yes",
+                      onClick: () => logOut(),
+                    },
+                    {
+                      label: "No",
+                      onClick: () => {},
+                    },
+                  ],
+                });
+              }}
+            >
+              LOGOUT
+            </button>
           </ul>
         </div>
-      {/* <DefaultSpeedDial/> */}
+        {/* <DefaultSpeedDial/> */}
       </div>
     </>
   );
