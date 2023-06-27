@@ -11,7 +11,7 @@
 }
 .overlay {
   background-color: var(--color-ternary);
-  opacity: 0.3;
+  opacity: 0.6;
   width: 100%;
   z-index: 10;
   height: 100%;
