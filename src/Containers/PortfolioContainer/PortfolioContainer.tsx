@@ -23,7 +23,11 @@ function PortfolioContainer() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     let themeValue = localStorage.getItem("theme");
-    document.documentElement.setAttribute("data-theme", themeValue);
+    if (!themeValue) {
+      document.documentElement.setAttribute("data-theme", "pink");
+    } else {
+      document.documentElement.setAttribute("data-theme", themeValue);
+    }
     // setLoading(true);
     const fetch = async () => {
       try {
