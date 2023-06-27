@@ -13,16 +13,17 @@
   justify-content: center;
   align-items: center;
 }
-.submitBtn {
+.loginBtn {
   @apply text-primary;
-  background-color: white;
+  background-color: var(--color-secondary) !important;
   width: 90px;
   border-radius: 5px;
-  outline: 0.5px solid gray;
+  font-weight: 600;
+  /* outline: 0.5px solid gray; */
   margin: 20px;
   padding: 0.3rem 0.5rem;
 }
-.submitBtn:hover {
+.loginBtn:hover {
   background-color: var(--color-secondary);
   color: white !important;
   border: none !important;

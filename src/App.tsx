@@ -1,6 +1,6 @@
 import "./App.css";
 import RouteComponent from "./Routes/RouteComponent";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./Hooks/Hooks";
 import { fetchCategories, fetchProductsData } from "./slices/productSlice";
 import { fetchCarouselData } from "./slices/homeSlice";
@@ -11,12 +11,14 @@ import { fetchContactData } from "./slices/contactSlice";
 import { auth } from "./firebase";
 import { loginUser } from "./slices/authSlice";
 import tailwindConfig from "../tsconfig.json";
+import Loader from "./components/Comman/Loader/Loader";
 function App() {
   const dispatch = useAppDispatch();
-
+  const [loadng, setLoading] = useState();
   useEffect(() => {
     const fetch = async () => {
       try {
+        setLoading(true);
         await dispatch(fetchProductsData());
         await dispatch(fetchCategories());
         await dispatch(fetchCarouselData());
@@ -27,15 +29,15 @@ function App() {
       }
     };
     fetch();
-    const listener = auth.onAuthStateChanged((user) => {
-      if (!user) {
-      } else {
-        dispatch(loginUser());
-      }
-    });
-    return () => listener();
+    setLoading(false);
+    // const listener = auth.onAuthStateChanged((user) => {
+    //   if (!user) {
+    //   } else {
+    //     dispatch(loginUser());
+    //   }
+    // });
+    // return () => listener();
   }, []);
-
   return (
     <>
       <>

@@ -21,6 +21,7 @@
   /* border-radius: 5%; */
   background-color: var(--color-secondary) !important;
   border-radius: 6px;
+  font-weight: 600;
   @apply text-primary p-1 md:p-3 hover:text-primary my-6;
 }
 

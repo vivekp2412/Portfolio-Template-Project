@@ -11,7 +11,7 @@ const Password = Input.Password;
 
 import style from "../Login-Page/style.module.css";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalLoader from "../../Comman/Modal-Loader/ModalLoader";
 function Login() {
   const navigate = useNavigate();
@@ -33,6 +33,10 @@ function Login() {
         toast(error.message);
       });
   }
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    document.documentElement.setAttribute("data-theme", theme);
+  }, []);
   const onFinishFailed = (errorInfo: any) => {
     toast("Failed:", errorInfo);
   };
@@ -135,7 +139,7 @@ function Login() {
             Forget password ?
           </div>
           <div className={style.btnContainer}>
-            <button className={style.submitBtn} type="submit">
+            <button className={style.loginBtn} type="submit">
               Login
             </button>
           </div>

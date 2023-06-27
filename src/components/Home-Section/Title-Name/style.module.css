@@ -40,7 +40,7 @@
   border-radius: 6px;
   padding: 7px 13px;
   transition: all 0.3s;
-  /* border-radius: 5%; */
+  font-weight: 600;
   @apply text-primary;
 }
 .secondary_text {

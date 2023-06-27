@@ -26,7 +26,7 @@
   @apply leading-relaxed;
 }
 .category {
-  @apply flex  mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5 text-secondary;
+  @apply flex  mt-6 items-center pb-5 border-b-2 border-black mb-5 text-secondary;
 }
 .price_download_share_container {
   @apply flex;
