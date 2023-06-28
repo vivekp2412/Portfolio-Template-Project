@@ -3,22 +3,25 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../../firebase";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../Hooks/Hooks";
 import { loginUser } from "../../../slices/authSlice";
-import { Input, Button, Form } from "antd";
-const Password = Input.Password;
+import { Input, Form } from "antd";
 
 import style from "../Login-Page/style.module.css";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import ModalLoader from "../../Comman/Modal-Loader/ModalLoader";
+interface FormValue{
+  email:string,
+  password:string
+}
 function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState<boolean>();
   const [form] = Form.useForm();
-  function onFinish(values) {
+  function onFinish(values:FormValue) {
     setLoading(true);
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredentials) => {
@@ -44,7 +47,7 @@ function Login() {
   const onFinishFailed = (errorInfo: any) => {
     toast("Failed:", errorInfo);
   };
-  const validatePassword = (_, value) => {
+  const validatePassword = (_:any, value:string) => {
     if (value && value.length < 8) {
       return Promise.reject(
         new Error("Password must be at least 8 characters long")
@@ -53,7 +56,7 @@ function Login() {
     return Promise.resolve();
   };
 
-  const handleResetPassword = (value) => {
+  const handleResetPassword = (value:string) => {
     let email = value;
 
     sendPasswordResetEmail(auth, email)

@@ -9,12 +9,18 @@ export const fetchCarouselData = createAsyncThunk(
       const data = (await dataref.ref("Carousel").once("value")).val().image;
       
       return data;
-    } catch (error) {
+    } catch (error:any) {
       return rejectWithValue(error.message);
     }
   }
 );
-
+interface Images{
+  dataURL:string
+}
+interface InitialStateType{
+  pending:boolean,
+  allImages:Images[]
+}
 export const homeSlice = createSlice({
   name: "home",
   initialState: {

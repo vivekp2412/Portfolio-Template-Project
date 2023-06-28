@@ -1,14 +1,17 @@
-import {
-  DeleteFilled,
-  DeleteOutlined,
-  EditFilled,
-  FileAddFilled,
-} from "@ant-design/icons";
-import React from "react";
-import { useEffect, useState } from "react";
+
+import {  useState } from "react";
 
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import style from "../Image-Upload/style.module.css";
+// interface ImageUrl{
+//   dataURL:string
+// }
+// interface PropsType{
+//   handleImageError:()=>void,
+//   images:ImageUrl[],
+//   setImages:(ImageUrl[])=>void,
+//   imageError:boolean
+// }
 export const ImageUpload = (props) => {
   const { images, setImages, handleImageError, imageError } = props;
 
@@ -17,13 +20,12 @@ export const ImageUpload = (props) => {
 
   const onChange = (
     imageList: ImageListType,
-    addUpdateIndex: number[] | undefined
   ) => {
     if (imageList.length != 0) {
       handleImageError();
     }
     setError("");
-    setImages(imageList as never[]);
+    setImages(imageList);
     props.geturl(imageList, error);
     setImages(imageList as never[]);
   };
@@ -42,13 +44,10 @@ export const ImageUpload = (props) => {
         {({
           imageList,
           onImageUpload,
-          onImageRemoveAll,
           onImageUpdate,
           onImageRemove,
-          isDragging,
           dragProps,
         }) => (
-          // write your building UI
           <>
             <div className={style.UploadWrapper}>
               {!images.length && (
@@ -104,11 +103,11 @@ export const ImageUpload = (props) => {
               version="1.1"
               id="Capa_1"
               xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
               width="20px"
               height="20px"
               viewBox="0 0 494.936 494.936"
-              xml:space="preserve"
+              xmlSpace="preserve"
             >
               <g>
                 <g>

@@ -1,8 +1,7 @@
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../Mobile-Navbar/style.module.css";
-import brand from "../../../../assets/Navbar/Mobile-Navbar/logo.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";

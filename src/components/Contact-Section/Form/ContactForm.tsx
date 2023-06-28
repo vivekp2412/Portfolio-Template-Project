@@ -48,10 +48,15 @@ const ContactForm = () => {
       resetForm();
     }
     if (data["Recieve Whatsapp"]) {
-      const messageText = `Name: ${values.name}%0A Email: ${values.email} Number: ${values.number}  Message: ${values.message}`;
-      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      console.log("hi");
+      
+      const messageText = `Name: ${values.name}
+      \nEmail: ${values.email}\nNumber: ${values.number}\nMessage: ${values.message}`;
+      const whatsappURL = `https://wa.me/91${data["Whatsapp Number"]}?text=${encodeURIComponent(
         messageText
       )}`;
+     
+
 
       window.open(whatsappURL);
     }

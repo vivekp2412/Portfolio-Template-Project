@@ -1,26 +1,22 @@
-import { useEffect, useState } from "react";
-import { dataref } from "../../../../firebase";
-import { Image, Space, Table, Tag } from "antd";
-import { Button, Modal } from "antd";
+import {  useState } from "react";
+import { Image, Space, Table } from "antd";
+import {  Modal } from "antd";
 import style from "../Preview-Table/style.module.css";
 import type { ColumnsType } from "antd/es/table";
 import { Switch } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import {
   deleteImage,
-  deleteImageData,
-  fetchCarouselData,
-  updateImageData,
   updateState,
 } from "../../../../slices/homeSlice";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 //Type Declaration
-// interface DataType {
-//   imageId: string;
-//   image: string;
-//   active: boolean;
-// }
+interface DataType {
+  imageId: string;
+  image: string;
+  active: boolean;
+}
 
 //Fetch data
 
@@ -32,20 +28,8 @@ function PreviewTable() {
   const data = useAppSelector((state) => state.home.allImages);
 
   const dispatch = useAppDispatch();
-
-  // Switch Change handler
-  // useEffect(() => {
-  //   let filteredArray = data.filter((data) => {
-  //     return data.active == true;
-  //   });
-  //   if (filteredArray.length > 3) {
-
-  //     setIsDisable(true);
-  //   }
-  // }, [data]);
   const onChange = (checked: boolean, id: string) => {
     dispatch(updateState({ checked, id }));
-    // dispatch(updateState(id, checked));
   };
 
   const columns: ColumnsType<DataType> = [
@@ -99,7 +83,7 @@ function PreviewTable() {
                   {
                     label: "Yes",
                     onClick: () => {
-                      dispatch(deleteImage(record.docId));
+                      dispatch(deleteImage(record.imageId));
                     },
                   },
                   {

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { dataref } from "../firebase";
 export const fetchWorkData = createAsyncThunk(
@@ -15,18 +15,34 @@ export const fetchWorkData = createAsyncThunk(
       }else{
         return[]
       }
-    } catch (error) {
+    } catch (error:any) {
       return rejectWithValue(error.message);
     }
   }
 );
+interface WorkType{
+  workTitle:string,
+  workDesc:string,
+  Image:string,
+  workId:string
+}
+interface FetchType{
+  workList:WorkType[],
+  showWorkSection:boolean
+}
+interface InitialStateType{
+  showWorkSection:boolean,
+  pending:boolean,
+  allWorks:WorkType[]
+}
+const initialState:InitialStateType={
+  showWorkSection:true,
+  pending:true,
+  allWorks:[]
+}
 export const workSlice = createSlice({
   name: "Work",
-  initialState: {
-    showWorkSection:false,
-    pending: true,
-    allWorks: [],
-  },
+  initialState,
   reducers: {
     addWork(state, action) {
       state.allWorks = [...state.allWorks, action.payload];

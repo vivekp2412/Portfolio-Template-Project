@@ -27,7 +27,7 @@ export const contactSlice = createSlice({
         ["Instagram Url"]:"",
         ["Facebook Url"]:"",
         ["Twitter Url"]:"",
-        ["Recieve Email"]:false,
+        ["Recieve Mail"]:false,
         ["Recieve Whatsapp"]:false,
         ["Whatsapp Number"]:"",
         ["Phone Number"]:"",
@@ -45,7 +45,7 @@ export const contactSlice = createSlice({
       })
     },
     
-    resetDetails(state,action){
+    resetDetails(state){
       state.contactDetails={};
       dataref.ref("Contact Details").set({
         contactDetails: state.contactDetails,

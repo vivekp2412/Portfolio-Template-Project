@@ -1,16 +1,12 @@
 import { getAuth, signOut } from "firebase/auth";
 import { confirmAlert } from "react-confirm-alert";
 import {
-  Link,
-  Navigate,
   NavLink,
-  useAsyncError,
-  useLocation,
   useNavigate,
 } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { loginUser, logoutUser } from "../../../../slices/authSlice";
+import { logoutUser } from "../../../../slices/authSlice";
 import style from "../Desktop-Navbar/style.module.css";
 import { useState } from "react";
 //Desktop Navbar
@@ -115,7 +111,6 @@ function DesktopNavbar() {
             </button>
           </ul>
         </div>
-        {/* <DefaultSpeedDial/> */}
       </div>
     </>
   );

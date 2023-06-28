@@ -1,12 +1,8 @@
-import { PlusOutlined } from "@ant-design/icons";
-import { Button, Divider, Form, Input, Modal, Select, Space } from "antd";
-import React, { useEffect, useRef, useState } from "react";
-import { dataref } from "../../../../firebase";
+import { Button,  Form, Input, Modal } from "antd";
+import React, {  useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import {
   addCategory,
-  fetchCategories,
-  updateProduct,
 } from "../../../../slices/productSlice";
 import {
   getStorage,
@@ -18,12 +14,22 @@ const storage = getStorage();
 import style from "../Work-Form/style.module.css";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 import { updateWork } from "../../../../slices/workSlice";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 
 const TextArea = Input.TextArea;
+interface WorkType{
+  workTitle:string,
+  workDesc:string,
+  Image:string,
+  workId:string
+}
+interface PropsType{
+  setIsModalOpen:(x:boolean)=>void,
+  isModalOpen:boolean,
+  workId:string
+}
 let initialImg: string | null = null;
-function EditFormModal(props) {
+function EditFormModal(props:PropsType) {
   const categories = useAppSelector((state) => state.product.categories);
   const { setIsModalOpen, isModalOpen, workId } = props;
   const [items, setItems] = useState<string[]>(categories);
@@ -32,13 +38,13 @@ function EditFormModal(props) {
   const [uniqueId, setUniqueId] = useState("");
   const [imageUrls, setImageurl] = useState("");
   const [imageErr, setImageErr] = useState<boolean>(false);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState<boolean>();
   const [images, setImages] = useState([]);
   const formRef = useRef(null);
   const dispatch = useAppDispatch();
 
   const workList = useAppSelector((state) => state.work.allWorks);
-  let filteredArray;
+  let filteredArray:WorkType[];
   if (workList.length > 0) {
     filteredArray = workList.filter((data) => data.workId == workId);
     if (filteredArray.length > 0) {

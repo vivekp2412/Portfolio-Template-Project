@@ -11,12 +11,12 @@ import { deleteProduct, showSection } from "../../../../slices/productSlice";
 
 //Type Declaration
 interface DataType {
-  productImage: File[];
   productId: string;
   productCategory: string;
   productName: string;
   productDescription: string;
-  ImageUrl: string;
+  productPrice:string,
+  Image: string;
 }
 //Delete function for data
 //Preview Component
@@ -26,9 +26,9 @@ function PreviewTable() {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [expandId, setExpandId] = useState();
+  const [expandId, setExpandId] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);
-  const [productId, setProductId] = useState<string>();
+  const [productId, setProductId] = useState<string>("");
   const productList = useAppSelector((state) => state.product.productList);
   const [switchStatus, setSwitchStatus] = useState(showProductSection);
   const pending = useAppSelector((state) => state.product.pending);
@@ -108,7 +108,7 @@ function PreviewTable() {
               version="1.1"
               id="Capa_1"
               xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
               width="20px"
               height="20px"
               viewBox="0 0 494.936 494.936"
@@ -175,7 +175,7 @@ function PreviewTable() {
     },
   ];
   const expandable = {
-    expandedRowRender: (record) => <div>{record.productDescription}</div>,
+    expandedRowRender: (record:DataType) => <div>{record.productDescription}</div>,
   };
   return (
     <>

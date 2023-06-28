@@ -1,11 +1,8 @@
-import React, { useRef, useState } from "react";
+import  {  useState } from "react";
 import style from "../Modal/style.module.css";
-import * as yup from "yup";
 import { Button, Modal } from "antd";
-import { Formik, Form, ErrorMessage } from "formik";
-import { useEffect } from "react";
-import { dataref } from "../../../../firebase";
-import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
+
+import { useAppDispatch } from "../../../../Hooks/Hooks";
 import {
   getStorage,
   ref,
@@ -16,8 +13,7 @@ const storage = getStorage();
 
 import {
   addImage,
-  addImageData,
-  fetchCarouselData,
+ 
 } from "../../../../slices/homeSlice";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
@@ -25,6 +21,9 @@ interface Datatype {
   image: string;
   imageId: string;
   active: true;
+}
+interface ImageURL{
+  dataURL:string
 }
 // Random Id generator
 function idGenerator() {
@@ -36,9 +35,9 @@ const FormModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageErr, setImageErr] = useState<boolean>(false);
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState<boolean>();
 
-  const [imageUrls, setImageurl] = useState<{}[]>([]);
+  const [imageUrl, setImageurl] = useState<ImageURL[]>([]);
 
   const handleImageError = () => {
     setImageErr(false);
@@ -55,7 +54,7 @@ const FormModal = () => {
     setIsModalOpen(false);
   };
 
-  function geturls(array) {
+  function geturls(array:ImageURL[]) {
     setImageurl(array);
   }
   async function handleSubmit() {
@@ -64,11 +63,12 @@ const FormModal = () => {
     let data = {
       imageId: idGenerator(),
       active: true,
+      image:""
     };
     if (images.length != 0) {
       setImageErr(false);
       const storageRef = ref(storage, `images/${idGenerator()}`);
-      uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
+      uploadString(storageRef, imageUrl[0].dataURL, "data_url").then(() => {
         getDownloadURL(storageRef).then((downloadURL) => {
           firebaseImgUrl = downloadURL;
           setLoading(false);

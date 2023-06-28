@@ -1,7 +1,6 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Divider, Form, Input, Modal, Select, Space } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import { dataref } from "../../../../firebase";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import {
   addCategory,
@@ -19,14 +18,30 @@ import style from "../Product-Form/style.module.css";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 const TextArea = Input.TextArea;
-function EditFormModal(props) {
+interface PropsType{
+  setIsModalOpen:(x:boolean)=>void,
+  isModalOpen:boolean,
+  productId:string
+}
+interface ImageURL{
+  dataURL:string
+}
+interface ProductType{
+  productName:string,
+  productCategory:string,
+  productDescription:string,
+  productPrice:string,
+  productId:string,
+  Image:string
+}
+function EditFormModal(props:PropsType) {
   let initialImg: string | null = null;
   const categories = useAppSelector((state) => state.product.categories);
   const { setIsModalOpen, isModalOpen, productId } = props;
   const [items, setItems] = useState<string[]>(categories);
   const [name, setName] = useState("");
   const [form] = Form.useForm();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState<boolean>();
 
   const [uniqueId, setUniqueId] = useState("");
   const [imageUrls, setImageurl] = useState("");
@@ -38,7 +53,7 @@ function EditFormModal(props) {
     setItems(categories);
   }, [categories]);
   const productList = useAppSelector((state) => state.product.productList);
-  let filteredArray;
+  let filteredArray:ProductType[];
   if (productList.length > 0) {
     filteredArray = productList.filter((data) => data.productId == productId);
     if (filteredArray.length > 0) {
@@ -63,7 +78,7 @@ function EditFormModal(props) {
 
     setName("");
   };
-  function geturls(array) {
+  function geturls(array:ImageURL[]) {
     setImageurl(array[0].dataURL);
     initialImg = null;
   }

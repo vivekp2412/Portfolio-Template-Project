@@ -1,7 +1,36 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { dataref } from "../firebase";
 import { toast } from "react-toastify";
-
+interface ProductType{
+  productName:string,
+  productCategory:string,
+  productDescription:string,
+  productPrice:string,
+  productId:string,
+  Image:string
+}
+interface InitialStateType{
+  showProductSection: boolean;
+  productList: ProductType[]; // Replace 'any' with the appropriate type for your product list
+  pending: boolean;
+  editform: any; // Replace 'any' with the appropriate type for your edit form
+  filteredCategory: string;
+  searchedProducts: ProductType[]; // Replace 'any' with the appropriate type for your searched products
+  searchQuery: string;
+  categories: string[]; // Replace 'any' with the appropriate type for your categories
+  selectedProduct: ProductType | null;
+}
+const initialState:InitialStateType={
+  showProductSection:true,
+  productList: [],
+  pending:false,
+  editform:{},
+  filteredCategory:"all",
+  searchedProducts:[],
+  searchQuery:"",
+  categories:[],
+  selectedProduct:null
+}
 export const fetchProductsData = createAsyncThunk(
     'yourSlice/fetchData',
     async (_, { rejectWithValue }) => {
@@ -10,7 +39,7 @@ export const fetchProductsData = createAsyncThunk(
         const productList = response.val().productList;
         const showProductSection = response.val().show;
         return {productList,showProductSection};
-      } catch (error) {
+      } catch (error:any) {
         return rejectWithValue(error.message);
       }
     }
@@ -28,7 +57,7 @@ export const fetchProductsData = createAsyncThunk(
         }else{
           return []
         }
-      } catch (error) {
+      } catch (error:any) {
         return rejectWithValue(error.message);
       }
     }
@@ -36,17 +65,7 @@ export const fetchProductsData = createAsyncThunk(
 
 export const productSlice = createSlice({
     name: "products",
-    initialState:{
-        showProductSection:true,
-        productList:[],
-        pending:false,
-        editform:{},
-        filteredCategory:"all",
-        searchedProducts:[],
-        searchQuery:"",
-        categories:[],
-        selectedProduct:{}
-    },
+    initialState,
     reducers: {
         addProduct(state,action){
             toast.success("Product Added Successfully");
@@ -92,8 +111,8 @@ export const productSlice = createSlice({
             state.filteredCategory=category;
         },
         searchProduct(state,action){
-            let searchquery =  action.payload.searchquery;
-            let searchBy =  action.payload.searchBy;
+            let searchquery:string =  action.payload.searchquery;
+            let searchBy:string =  action.payload.searchBy;
             state.searchQuery=searchquery;
             let upprcseSearch = searchquery.toUpperCase(); 
             if(searchBy){
@@ -132,13 +151,12 @@ export const productSlice = createSlice({
           });
         },
         selectProduct(state,action){
-          let id =  action.payload;
+          let id:string =  action.payload;
           const selectedProduct =  state.productList.filter((product)=>{
             if( product.productId==id){
               return product;
             }
           });
-          // console.log(selectedProduct);
           
           state.selectedProduct=selectedProduct[0];
         }
@@ -146,12 +164,9 @@ export const productSlice = createSlice({
     extraReducers:(builder)=>{
         builder.addCase(fetchProductsData.pending,(state)=>{
             state.pending=true;
-
-
         })
         .addCase(fetchProductsData.fulfilled,(state,action)=>{
             state.pending=false;
-            
             state.productList=action.payload.productList??[];
             state.showProductSection=action.payload.showProductSection
 

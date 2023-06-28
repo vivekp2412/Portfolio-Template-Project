@@ -12,7 +12,6 @@ import {
 } from "antd";
 const { TextArea } = Input;
 import { useEffect } from "react";
-import { dataref } from "../../../../firebase";
 import { PlusOutlined } from "@ant-design/icons";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
 import {
@@ -28,7 +27,6 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
-import { number } from "yup";
 const storage = getStorage();
 interface Datatype {
   productImage: File;
@@ -38,21 +36,23 @@ interface Datatype {
   productName: string;
   ImageUrl: string;
 }
+interface ImageUrl{
+  dataURL:string
+}
 
 //Modal Component
-const ProductForm = (props) => {
+const ProductForm = () => {
   let categories = useAppSelector((state) => state.product.categories);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [productArray, setProductArray] = useState<Datatype[]>();
   const [items, setItems] = useState<string[]>(categories);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState<boolean>();
 
   const [name, setName] = useState("");
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState([]);
   const [uniqueId, setUniqueId] = useState("");
   const formRef = useRef(null);
-  const [imageUrls, setImageurl] = useState<{}[]>([]);
+  const [imageUrls, setImageurl] = useState<ImageUrl[]>([]);
   const [imageErr, setImageErr] = useState<boolean>(false);
   const [images, setImages] = useState([]);
   const dispatch = useAppDispatch();
@@ -62,7 +62,7 @@ const ProductForm = (props) => {
   }, [categories]);
 
   const productList = useAppSelector((state) => state.product.productList);
-  function geturls(array) {
+  function geturls(array:ImageUrl[]) {
     setImageurl(array);
   }
   const addItem = (
@@ -189,7 +189,7 @@ const ProductForm = (props) => {
               name="control-hooks"
               onFinish={onFinish}
               style={{ maxWidth: 600 }}
-              initialValues={props.values}
+              // initialValues={props.values}
             >
               <Form.Item
                 name="productName"
