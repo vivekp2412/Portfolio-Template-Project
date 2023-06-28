@@ -10,7 +10,6 @@ export const fetchWorkData = createAsyncThunk(
         
         const workList = response.val().works;
         const showWorkSection = response.val().show;
-        console.log(showWorkSection);
         
         return {workList,showWorkSection};
       }else{
@@ -50,7 +49,6 @@ export const workSlice = createSlice({
 
     },
     showSection(state,action){
-      console.log(action.payload);
       
       state.showWorkSection=action.payload;
       dataref.ref("Our Work").update({

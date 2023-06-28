@@ -15,8 +15,6 @@ import { faCog } from "@fortawesome/free-solid-svg-icons";
 import style from "../AdminContainer/style.module.css";
 import ThemeSideBar from "../../../components/Comman/Theme-Sidebar/ThemeSideBar";
 function AdminContainer() {
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const dispatch = useAppDispatch();
   const [showThemeMenu, setShowThemeMenu] = useState(false);
   useEffect(() => {
     const theme = localStorage.getItem("theme");
@@ -35,7 +33,11 @@ function AdminContainer() {
     >
       <AdminNavbarContainer />
       <div className={style.settings} onClick={handleSideBar}>
-        <FontAwesomeIcon icon={faCog} size="x" className={style.settingsIcon} />
+        <FontAwesomeIcon
+          icon={faCog}
+          size="xl"
+          className={style.settingsIcon}
+        />
       </div>
       <Outlet />
       <div className={`${style.sideBar} ${showThemeMenu ? style.open : ""}`}>

@@ -2,7 +2,6 @@ import React from "react";
 import "../Theme-Card/style.css";
 function ThemeCard(props) {
   let { primary, secondary, ternary, clickEvent, name } = props;
-  console.log(name);
 
   return (
     <div className="Card_container" onClick={() => clickEvent(name)}>

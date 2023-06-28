@@ -1,4 +1,4 @@
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import style from "../Theme-Sidebar/style.module.css";
@@ -56,16 +56,16 @@ function ThemeSideBar(props) {
     );
   });
   return (
-    <div id="" className={style.mobilenavbarContainer}>
-      <div className={style.mobileNavbar}>
-        <div className={style.logo_title}>Theme Selector</div>
+    <div id="" className={style.themenavbarContainer}>
+      <div className={style.themeNavbar}>
+        <div className={style.title}>Theme Selector</div>
         <div>
           <ul className={style.navoptions}>{themes}</ul>
         </div>
         <div className={style.iconContainer}>
           <FontAwesomeIcon
             className={style.closeSliderIcon}
-            icon={faAngleLeft}
+            icon={faAngleRight}
             onClick={closeSideBar}
           />
         </div>

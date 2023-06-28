@@ -8,8 +8,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* color: var(--color-primary); */
-  /* z-index: 10; */
 }
 .settingsIcon {
   color: var(--color-primary);
@@ -28,16 +26,14 @@
   position: absolute;
 
   background-color: var(--color-secondary);
-  /* width: 50px; */
-  /* height: 50px; */
+
   top: 0px;
   min-height: 100vh;
-  right: -300px;
+  right: -325px;
   z-index: 100;
   transition: all 0.5s;
 }
 .open {
   right: 0;
   display: block;
-  /* opacity: 1; */
 }

@@ -43,3 +43,43 @@
 .share {
   @apply rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-auto;
 }
+.errorContainer {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: var(--color-secondary); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  background-color: var(--color-primary);
+  width: 50%;
+  height: 520px;
+}
+.svg {
+  height: 300px;
+  width: 300px;
+  fill: var(--color-primary);
+}
+.button_primary {
+  background-color: var(--color-secondary);
+  color: white;
+
+  margin: 0 10px;
+  min-width: 60px;
+  padding: 5px 25px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+@media screen and (max-width: 768px) {
+  .card {
+    width: 90%;
+    height: 50%;
+  }
+}

@@ -37,10 +37,8 @@ export const contactSlice = createSlice({
   reducers: {
     addDetails(state, action) {
       toast.success('Details Updated Successfully');
-      console.log("action",action.payload);
       let details =action.payload;
       state.contactDetails ={...state.contactDetails,...details};
-      console.log(state.contactDetails);
       
       dataref.ref("Contact Details").set({
         contactDetails: state.contactDetails,

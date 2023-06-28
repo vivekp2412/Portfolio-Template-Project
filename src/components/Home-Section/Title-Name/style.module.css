@@ -1,6 +1,6 @@
 .title {
   background: none;
-  width: 10.5ch;
+  width: 9.8ch;
   animation: type 2.5s steps(25), blink 0.5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;

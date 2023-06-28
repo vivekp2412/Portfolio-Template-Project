@@ -31,7 +31,6 @@ export default function ContactForm() {
   };
   function onFinish(values) {
     setIsFormDisable(true);
-    console.log(values);
 
     dispatch(addDetails({ ...values, isNumberDifferent: showPhoneNumber }));
   }
@@ -42,7 +41,6 @@ export default function ContactForm() {
   if (!initialData) {
     return <div>Loading...</div>;
   }
-  console.log(initialData);
 
   return (
     <div className={style.formContainer}>

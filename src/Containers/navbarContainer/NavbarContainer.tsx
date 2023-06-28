@@ -29,7 +29,6 @@ function navbarContainer() {
   useEffect(() => {
     window.addEventListener("resize", updateWidth);
   }, []);
-  console.log(width);
 
   return (
     <div className={style.navbarContainer}>

@@ -3,7 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import style from "../Form/style.module.css";
 import { useAppSelector } from "../../../Hooks/Hooks";
+import emailjs from "emailjs-com";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -22,17 +24,27 @@ const ContactForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     if (data["Recieve Mail"]) {
-      const mailtoURL = `mailto:${
-        data.Email
-      }?subject=Contact Form Submission&body=Name: ${encodeURIComponent(
-        values.name
-      )}%0D%0AEmail: ${encodeURIComponent(
-        values.email
-      )}%0D%0ANumber: ${encodeURIComponent(
-        values.number
-      )}%0D%0AMessage: ${encodeURIComponent(values.message)}`;
+      const templateParams = {
+        name: values.name,
+        email: values.email,
+        number: values.number,
+        message: values.message,
+      };
 
-      window.open(mailtoURL);
+      emailjs
+        .send(
+          "service_p6f1p08",
+          "template_bjg9g9j",
+          templateParams,
+          "LPQ_E_u9EI0W8gfEn"
+        )
+        .then(
+          (result) => {
+            toast("Mail Sent Successfully");
+            window.location.reload();
+          },
+          (error) => {}
+        );
       resetForm();
     }
     if (data["Recieve Whatsapp"]) {

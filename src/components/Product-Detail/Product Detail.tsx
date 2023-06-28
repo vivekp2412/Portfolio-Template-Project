@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../../Hooks/Hooks";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Comman/Loader/Loader";
 import style from "../Product-Detail/style.module.css";
 import { toast } from "react-toastify";
+import errorimg from "../../../src/assets/Error/No data.svg";
+import ErrorPage from "../Comman/Error_Page/ErrorPage";
 const ProductDetails = () => {
   const [loading, setLoading] = useState();
   let { id } = useParams();
   const productList = useAppSelector((state) => state.product.productList);
   const [data] = productList.filter((product) => product.productId == id);
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     const theme = localStorage.getItem("theme");
@@ -26,12 +29,11 @@ const ProductDetails = () => {
     return (
       <div className={style.loaderContainer}>
         <Loader></Loader>
-        {/* <h1>NO Data found</h1> */}
       </div>
     );
   }
   if (!data) {
-    return <h1>NO Data Found</h1>;
+    return <ErrorPage errorCode={"404"} errorMessage={"Data Not Found"} />;
   }
   function handleShare() {
     const url = window.location.href;

@@ -42,6 +42,7 @@
   padding: 0;
 }
 body {
+  overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
 }
 html {

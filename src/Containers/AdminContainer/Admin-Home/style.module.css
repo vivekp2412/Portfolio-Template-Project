@@ -1,7 +1,8 @@
 .Container {
-  @apply py-20  text-primary w-[100%] mx-auto;
+  @apply py-20 text-primary w-[100%] mx-auto;
 }
 .homeContainer {
+  overflow: hidden;
   @apply w-[70%] mx-auto;
 }
 @media screen and (max-width: 1050px) {

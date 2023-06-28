@@ -10,10 +10,9 @@ import {
 } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { logoutUser } from "../../../../slices/authSlice";
+import { loginUser, logoutUser } from "../../../../slices/authSlice";
 import style from "../Desktop-Navbar/style.module.css";
 import { useState } from "react";
-import DefaultSpeedDial from "../../../Comman/Speed-Dial/SpeedDial";
 //Desktop Navbar
 function DesktopNavbar() {
   const isAuthentucated = useAppSelector((state) => state.auth.isAuthenticated);

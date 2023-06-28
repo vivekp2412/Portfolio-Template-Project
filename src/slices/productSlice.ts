@@ -69,7 +69,6 @@ export const productSlice = createSlice({
               
         },
         showSection(state,action){
-          console.log(action.payload);
           
           state.showProductSection=action.payload;
           dataref.ref("Products").update({
@@ -110,11 +109,11 @@ export const productSlice = createSlice({
               state.searchedProducts=filteredArray;
             }else{
               const filteredArray=state.productList.filter((product)=>{
-                let productPropertyId=product.productId;
-                let productPropertyName=product.productName;
+                let productId=product.productId;
+                let productName=product.productName;
 
-                let upprcsePropertyId =  productPropertyId.toUpperCase();
-                let upprcsePropertyName =  productPropertyName.toUpperCase();
+                let upprcsePropertyId =  productId.toUpperCase();
+                let upprcsePropertyName =  productName.toUpperCase();
 
                 if(upprcsePropertyId.includes(upprcseSearch) || upprcsePropertyName.includes(upprcseSearch) ) {
                   return product

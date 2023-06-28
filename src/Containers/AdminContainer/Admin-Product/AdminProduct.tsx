@@ -1,15 +1,20 @@
 import PreviewTable from "../../../components/Admin-Section/Product-Section/Preview-Table/PreviewTable";
 import ProductForm from "../../../components/Admin-Section/Product-Section/Product-Form/ProductForm";
 import ProductSection from "../../../components/Admin-Section/Product-Section/ProductSection";
+import AdminNavbarContainer from "../Admin-Navbar/AdminNavbarContainer";
 import style from "../Admin-Product/style.module.css";
 function AdminProduct() {
   return (
-    <div className={style.Container}>
-      <div className={style.productContainer}>
-        <ProductForm />
-        <PreviewTable />
+    <>
+      <AdminNavbarContainer />
+
+      <div className={style.Container}>
+        <div className={style.productContainer}>
+          <ProductForm />
+          <PreviewTable />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
