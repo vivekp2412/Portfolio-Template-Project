@@ -1,15 +1,6 @@
 import React, { useRef, useState } from "react";
 import style from "../Product-Form/style.module.css";
-import {
-  Modal,
-  Form,
-  Input,
-  Select,
-  Button,
-  Divider,
-  Space,
-  Switch,
-} from "antd";
+import { Modal, Form, Input, Select, Button, Divider, Space } from "antd";
 const { TextArea } = Input;
 import { useEffect } from "react";
 import { PlusOutlined } from "@ant-design/icons";
@@ -34,10 +25,10 @@ interface Datatype {
   productDescription: string;
   productCategory: string;
   productName: string;
-  ImageUrl: string;
+  Image: string;
 }
-interface ImageUrl{
-  dataURL:string
+interface ImageUrl {
+  dataURL: string;
 }
 
 //Modal Component
@@ -62,7 +53,7 @@ const ProductForm = () => {
   }, [categories]);
 
   const productList = useAppSelector((state) => state.product.productList);
-  function geturls(array:ImageUrl[]) {
+  function geturls(array: ImageUrl[]) {
     setImageurl(array);
   }
   const addItem = (
@@ -99,7 +90,7 @@ const ProductForm = () => {
     setIsModalOpen(false);
   };
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: Datatype) => {
     setLoading(true);
 
     if (images.length != 0) {
@@ -198,29 +189,31 @@ const ProductForm = () => {
               >
                 <Input />
               </Form.Item>
-             
+
               <Form.Item
-  name="productPrice"
-  label="Product Price (INR)"
-  rules={[
-    { required: true, message: 'Please enter the product price.' },
-    {
-      type: 'number',
-      message: 'Please enter a valid number for the product price.',
-      transform: (value) => parseFloat(value), // Convert the input value to a float number
-    },
-    {
-      validator: (_, value) => {
-        if (value >= 0) {
-          return Promise.resolve(); // Value is valid, resolve the promise
-        }
-        return Promise.reject('Please enter a positive value for the product price.'); // Value is invalid, reject the promise with an error message
-      },
-    },
-  ]}
->
-  <Input />
-</Form.Item>
+                name="productPrice"
+                label="Product Price (INR)"
+                rules={[
+                  {
+                    type: "number",
+                    message:
+                      "Please enter a valid number for the product price.",
+                    transform: (value) => parseFloat(value),
+                  },
+                  {
+                    validator: (_, value) => {
+                      if (value >= 0) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        "Please enter a positive value for the product price."
+                      );
+                    },
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
               <Form.Item
                 name="productDescription"
                 label="Product Description"
@@ -267,13 +260,16 @@ const ProductForm = () => {
               </Form.Item>
               <Form.Item>
                 <div className={style.button_container}>
-                  <Button htmlType="submit" className={style.button_modal_primary}>
+                  <Button
+                    htmlType="submit"
+                    className={style.button_modal_primary}
+                  >
                     Add
                   </Button>
                   <Button
                     htmlType="button"
                     onClick={onReset}
-                    className={ style.button_modal_secondary}
+                    className={style.button_modal_secondary}
                   >
                     Reset
                   </Button>

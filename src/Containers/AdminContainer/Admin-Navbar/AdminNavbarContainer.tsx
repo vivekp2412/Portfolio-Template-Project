@@ -16,7 +16,7 @@ function AdminNavbarContainer() {
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     if (!theme) {
-      document.documentElement.setAttribute("data-theme", "pink");
+      document.documentElement.setAttribute("data-theme", "Pure Pitch");
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }
@@ -24,7 +24,6 @@ function AdminNavbarContainer() {
   function handleThemeSideBar() {
     setShowThemeMenu(!showThemeMenu);
   }
-  //Function hide/show Side Navbar
   function handleSidebar() {
     const classes = document.getElementById("mobileNavbar")?.classList;
     if (classes?.contains(style.hide)) {
@@ -43,9 +42,7 @@ function AdminNavbarContainer() {
   useEffect(() => {
     window.addEventListener("resize", updateWidth);
   }, []);
-  function handleSlider() {
-    setShowThemeMenu(!showThemeMenu);
-  }
+
   return (
     <div>
       <div className={style.navbarContainer}>
@@ -54,12 +51,12 @@ function AdminNavbarContainer() {
           <>
             <div className={style.hamburger_logo}>
               <h1 className={style.brand}>
-                {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+                {data?.["Portfolio Name"].slice(0, 3).toUpperCase()}
                 {}
                 <span className={style.secondary_text}>
-                  {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+                  {data?.["Portfolio Name"].slice(3, 4).toUpperCase()}
                 </span>
-                {data["Portfolio Name"].slice(4).toUpperCase()}
+                {data?.["Portfolio Name"].slice(4).toUpperCase()}
                 -ADMIN
               </h1>
               <div className={style.hamburger}>

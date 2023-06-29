@@ -1,41 +1,53 @@
-import  {  useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../Contact-Form/style.module.css";
 import { Button, Checkbox, Col, Form, Input, Row } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { addDetails, resetDetails } from "../../../../slices/contactSlice";
-interface FormData{
-  ["Portfolio Name"]:string,
-  ["Phone Number"]?:string,
-  ["Address"]:string,
-  ["Facebook Url"]:string,
-  ["Twitter Url"]:string,
-  ["Instagram Url"]:string,
-  ["Whatsapp Number"]:string,
-  ["Email"]:string,
-  ["Recieve Mail"]:boolean,
-  ["Recieve Whatsapp"]:boolean,
-  ["isNumberDifferent"]:boolean
+import {
+  addDetails,
+  fetchContactData,
+  resetDetails,
+} from "../../../../slices/contactSlice";
+import Loader from "../../../Comman/Loader/Loader";
+interface FormData {
+  ["Portfolio Name"]: string;
+  ["Phone Number"]?: string;
+  ["Address"]: string;
+  ["Facebook Url"]: string | null;
+  ["Twitter Url"]: string | null;
+  ["Instagram Url"]: string | null;
+  ["Whatsapp Number"]: string;
+  ["Email"]: string;
+  ["Recieve Mail"]: boolean;
+  ["Recieve Whatsapp"]: boolean;
+  ["isNumberDifferent"]: boolean;
 }
 const TextArea = Input.TextArea;
 
 export default function ContactForm() {
   const [isFormDisable, setIsFormDisable] = useState(true);
   const initialData = useAppSelector((state) => state.contact.contactDetails);
+  const pending = useAppSelector((state) => state.contact.pending);
+  console.log(initialData);
+
   const [showPhoneNumber, setShowPhoneNumber] = useState(
-    initialData.isNumberDifferent
+    initialData?.isNumberDifferent
   );
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-
- 
-  const validatePhoneNumber = (_:any, value:string) => {
-    const phoneNumberRegex = /^[0-9]{10}$/; // Example regex for 10-digit phone number
+  useEffect(() => {
+    const fetch = async () => {
+      await dispatch(fetchContactData());
+    };
+    fetch();
+  }, []);
+  const validatePhoneNumber = (_: any, value: string) => {
+    const phoneNumberRegex = /^[0-9]{10}$/;
     if (!phoneNumberRegex.test(value)) {
       return Promise.reject("Please enter a valid phone number");
     }
     return Promise.resolve();
   };
-  function onFinish(values:FormData) {
+  function onFinish(values: FormData) {
     setIsFormDisable(true);
 
     dispatch(addDetails({ ...values, isNumberDifferent: showPhoneNumber }));
@@ -44,12 +56,11 @@ export default function ContactForm() {
     dispatch(resetDetails());
     form.resetFields();
   };
-  if (!initialData) {
-    return <div>Loading...</div>;
+  if (initialData?.["Portfolio Name"] == "") {
+    return <Loader />;
   }
-
   return (
-    <div className={style.formContainer}>
+    <div className={style.formContainer} style={{ color: "black" }}>
       <Form
         size="large"
         form={form}
@@ -137,7 +148,7 @@ export default function ContactForm() {
               name="Facebook Url"
               label="Facebook URL"
               rules={[
-                { required: true },
+                // { required: true },
                 {
                   type: "url",
                   message: "This field must be a valid url.",
@@ -152,7 +163,7 @@ export default function ContactForm() {
               name="Instagram Url"
               label="Instagram URL"
               rules={[
-                { required: true },
+                // { required: true },
                 {
                   type: "url",
                   message: "This field must be a valid url.",
@@ -167,7 +178,7 @@ export default function ContactForm() {
               name="Twitter Url"
               label="Twitter URL"
               rules={[
-                { required: true },
+                // { required: true },
                 {
                   type: "url",
                   message: "This field must be a valid url.",

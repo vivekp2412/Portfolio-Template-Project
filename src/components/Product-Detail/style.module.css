@@ -41,7 +41,7 @@
   @apply flex ml-auto text-white bg-secondary border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded;
 }
 .share {
-  @apply rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-auto;
+  @apply rounded-full w-12 h-12 bg-secondary p-0 border-0 inline-flex items-center justify-center text-primary ml-auto;
 }
 .errorContainer {
   width: 100vw;
@@ -62,11 +62,7 @@
   width: 50%;
   height: 520px;
 }
-.svg {
-  height: 300px;
-  width: 300px;
-  fill: var(--color-primary);
-}
+
 .button_primary {
   background-color: var(--color-secondary);
   color: white;
@@ -82,4 +78,19 @@
     width: 90%;
     height: 50%;
   }
+}
+.button_primary {
+  background-color: var(--color-secondary) !important;
+  color: white !important;
+  outline: none !important;
+  border: none !important;
+  margin: 0 10px;
+  padding: 5px 15px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+.svg {
+  fill: var(--color-primary);
+  width: 20px;
+  height: 20px;
 }

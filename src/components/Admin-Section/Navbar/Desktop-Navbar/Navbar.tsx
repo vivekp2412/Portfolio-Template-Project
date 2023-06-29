@@ -1,9 +1,6 @@
 import { getAuth, signOut } from "firebase/auth";
 import { confirmAlert } from "react-confirm-alert";
-import {
-  NavLink,
-  useNavigate,
-} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 import { logoutUser } from "../../../../slices/authSlice";
@@ -36,13 +33,13 @@ function DesktopNavbar() {
     <>
       <div className={style.navbarContainer}>
         <div className={style.navbar}>
-          {data["Portfolio Name"] && (
+          {data?.["Portfolio Name"] && (
             <span className={style.title}>
-              {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+              {data?.["Portfolio Name"].slice(0, 3).toUpperCase()}
               <span className={style.secondary_text}>
-                {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+                {data?.["Portfolio Name"].slice(3, 4).toUpperCase()}
               </span>
-              {data["Portfolio Name"].slice(4).toUpperCase()}
+              {data?.["Portfolio Name"].slice(4).toUpperCase()}
               -ADMIN
             </span>
           )}
@@ -74,7 +71,7 @@ function DesktopNavbar() {
                   isActive ? `${style.activeLink}` : ""
                 }
               >
-                WORK
+                MY WORK
               </NavLink>
             </li>
             <li className={style.navoption}>

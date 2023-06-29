@@ -1,19 +1,22 @@
-import React, { useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import style from "../Form/style.module.css";
 import { useAppSelector } from "../../../Hooks/Hooks";
 import emailjs from "emailjs-com";
-import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  number: Yup.string().required("Number is required"),
+  email: Yup.string().email("Invalid email"),
+  number: Yup.string(),
   message: Yup.string().required("Message is required"),
 });
-
-const initialValues = {
+interface FormDataType {
+  name: string;
+  email?: string;
+  number?: string;
+  message: string;
+}
+const initialValues: FormDataType = {
   name: "",
   email: "",
   number: "",
@@ -22,8 +25,11 @@ const initialValues = {
 const ContactForm = () => {
   const data = useAppSelector((state) => state.contact.contactDetails);
 
-  const handleSubmit = (values, { resetForm }) => {
-    if (data["Recieve Mail"]) {
+  const handleSubmit = (
+    values: FormDataType,
+    { resetForm }: FormikHelpers<FormDataType>
+  ) => {
+    if (data?.["Recieve Mail"]) {
       const templateParams = {
         name: values.name,
         email: values.email,
@@ -38,25 +44,20 @@ const ContactForm = () => {
           templateParams,
           "LPQ_E_u9EI0W8gfEn"
         )
-        .then(
-          (result) => {
-            toast("Mail Sent Successfully");
-            window.location.reload();
-          },
-          (error) => {}
-        );
+        .then((result) => {
+          toast("Mail Sent Successfully");
+        })
+        .catch((error: any) => {
+          toast(error.message);
+        });
       resetForm();
     }
-    if (data["Recieve Whatsapp"]) {
-      console.log("hi");
-      
+    if (data?.["Recieve Whatsapp"]) {
       const messageText = `Name: ${values.name}
       \nEmail: ${values.email}\nNumber: ${values.number}\nMessage: ${values.message}`;
-      const whatsappURL = `https://wa.me/91${data["Whatsapp Number"]}?text=${encodeURIComponent(
-        messageText
-      )}`;
-     
-
+      const whatsappURL = `https://wa.me/91${
+        data?.["Whatsapp Number"]
+      }?text=${encodeURIComponent(messageText)}`;
 
       window.open(whatsappURL);
     }

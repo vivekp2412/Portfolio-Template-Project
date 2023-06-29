@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { auth } from "../firebase"; // Replace with your authentication library
-
-const ProtectedRoute = ({ children }) => {
+import { User } from "firebase/auth";
+const ProtectedRoute = ({ children }: { children: ReactNode }): any => {
   const [isAuth, setIsAuth] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const url = useLocation();
 
   useEffect(() => {
-    const checkAuthStatus = (user) => {
+    const checkAuthStatus = (user: User | null) => {
       setIsInitialized(true);
       if (!user) {
         setIsAuth(false);
@@ -21,8 +21,6 @@ const ProtectedRoute = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       checkAuthStatus(user);
     });
-
-    // resetLogoutTimer(); // Start the initial logout timer
 
     return () => {
       unsubscribe();

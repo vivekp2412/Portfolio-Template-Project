@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAppSelector } from "../../../Hooks/Hooks";
 import Loader from "../../Comman/Loader/Loader";
 import style from "../CardContainer/style.module.css";
@@ -19,9 +19,8 @@ function CardContainer() {
   );
 
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 6; // Number of cards per page
+  const itemsPerPage = 6;
 
-  // Apply filtering based on category
   let visibleProducts;
   if (filterCategory === "All") {
     visibleProducts = productList;
@@ -31,7 +30,6 @@ function CardContainer() {
     );
   }
 
-  // Apply searching based on search query
   let filteredProducts = visibleProducts;
   if (searchQuery !== "") {
     filteredProducts = visibleProducts.filter((product) =>
@@ -49,7 +47,13 @@ function CardContainer() {
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
-
+  const productSection = document.getElementById("productSection");
+  if (productSection) {
+    window.scrollTo({
+      top: productSection.offsetTop,
+      behavior: "smooth",
+    });
+  }
   return (
     <>
       <div className={style.cardContainer}>
@@ -75,42 +79,44 @@ function CardContainer() {
       <ReactPaginate
         className={style.paginate}
         previousLabel={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            className={style.nav_svg}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          <a href="#productSection">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              className={style.nav_svg}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </a>
         }
         nextLabel={
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            className={style.nav_svg}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          <a href="#productSection">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              className={style.nav_svg}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </a>
         }
         breakLabel={"..."}
-        breakClassName={"break-me"}
         pageCount={pageCount}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={handlePageChange}
-        containerClassName={"pagination"}
         activeClassName={style.active}
       />
     </>

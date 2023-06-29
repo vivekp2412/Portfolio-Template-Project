@@ -1,10 +1,9 @@
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "../Mobile-Navbar/style.module.css";
-import brand from "../../../assets/Navbar/Mobile-Navbar/logo.png";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../Hooks/Hooks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 type Propstype = {
   event: () => void;
 };
@@ -26,16 +25,16 @@ function MobileNavbar(props: Propstype) {
     setActiveSection(sectionId);
   };
   return (
-    <div id="" className={style.mobilenavbarContainer}>
+    <div className={style.mobilenavbarContainer}>
       <div className={style.mobileNavbar}>
         <div className={style.logo_title}>
           <span className={style.title}>
-            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+            {data?.["Portfolio Name"].slice(0, 3).toUpperCase()}
             {}
             <span className={style.secondary_text}>
-              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+              {data?.["Portfolio Name"].slice(3, 4).toUpperCase()}
             </span>
-            {data["Portfolio Name"].slice(4).toUpperCase()}
+            {data?.["Portfolio Name"].slice(4).toUpperCase()}
           </span>
         </div>
         <div>

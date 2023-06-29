@@ -10,7 +10,6 @@ import style from "../navbarContainer/style.module.css";
 function navbarContainer() {
   const [width, setWidth] = useState<number>(window.innerWidth);
   const data = useAppSelector((state) => state.contact.contactDetails);
-  //Function hide/show Side Navbar
   function handleSidebar() {
     const classes = document.getElementById("mobileNavbar")?.classList;
     if (classes?.contains(style.hide)) {
@@ -37,12 +36,12 @@ function navbarContainer() {
         <>
           <div className={style.hamburger_logo}>
             <span className={style.brand}>
-              {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+              {data?.["Portfolio Name"].slice(0, 3).toUpperCase()}
               {}
               <span className={style.secondary_text}>
-                {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+                {data?.["Portfolio Name"].slice(3, 4).toUpperCase()}
               </span>
-              {data["Portfolio Name"].slice(4).toUpperCase()}
+              {data?.["Portfolio Name"].slice(4).toUpperCase()}
             </span>
             <div className={style.hamburger}>
               <FontAwesomeIcon

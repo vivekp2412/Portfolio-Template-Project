@@ -5,32 +5,27 @@
 @tailwind utilities;
 
 @layer base {
-  :root[data-theme="green"] {
+  :root[data-theme="Glamorous Green"] {
     --color-primary: #f0f7f7;
     --color-secondary: #006565;
     --color-ternary: #000000de;
   }
-  :root[data-theme="maroon"] {
+  :root[data-theme="Bright Brown"] {
     --color-secondary: #80485b;
     --color-primary: #fff0df;
     --color-ternary: #000000de;
   }
-  :root[data-theme="purple"] {
+  :root[data-theme="Wonderful Violet"] {
     --color-secondary: #5854b1;
     --color-primary: #f6f7fb;
     --color-ternary: #000000de;
   }
-  :root[data-theme="blue"] {
+  :root[data-theme="Sweet Sky"] {
     --color-secondary: #68c8d5;
     --color-primary: #f7faff;
     --color-ternary: #000000de;
   }
-  :root[data-theme="light green"] {
-    --color-secondary: #1b9e85;
-    --color-primary: #f2f8f1;
-    --color-ternary: #000000de;
-  }
-  :root[data-theme="pink"] {
+  :root[data-theme="Pure Pitch"] {
     --color-secondary: #e66060;
     --color-primary: #f7e6e6;
     --color-ternary: #000000de;

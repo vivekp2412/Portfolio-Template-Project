@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../../Hooks/Hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../Comman/Loader/Loader";
 import style from "../Product-Detail/style.module.css";
 import { toast } from "react-toastify";
-import errorimg from "../../../src/assets/Error/No data.svg";
 import ErrorPage from "../Comman/Error_Page/ErrorPage";
 const ProductDetails = () => {
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState<boolean>();
   let { id } = useParams();
   const productList = useAppSelector((state) => state.product.productList);
   const [data] = productList.filter((product) => product.productId == id);
@@ -52,7 +51,6 @@ const ProductDetails = () => {
     if (showFullDescription) {
       return data.productDescription;
     }
-    // Truncate the description to a certain length
     const truncatedDescription = data.productDescription.slice(0, 600);
     return `${truncatedDescription}...`;
   };
@@ -90,27 +88,43 @@ const ProductDetails = () => {
 
             <div className={style.category}>
               <span className="">Category: {data.productCategory}</span>
-            </div>
-            <div className="flex">
-              <span className={style.price}>Rs.{data.productPrice}</span>
-              {/* <button className={style.button}>
-                Button
-              </button> */}
               <button className={style.share} onClick={handleShare}>
                 <svg
-                  width="20px"
-                  height="20px"
-                  viewBox="0 0 24 24"
-                  fill="none"
+                  className={style.svg}
+                  fill="#000000"
+                  version="1.1"
+                  id="Capa_1"
                   xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 481.6 481.6"
+                  xmlSpace="preserve"
                 >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M1 18.5088C1 13.1679 4.90169 8.77098 9.99995 7.84598V5.51119C9.99995 3.63887 12.1534 2.58563 13.6313 3.73514L21.9742 10.224C23.1323 11.1248 23.1324 12.8752 21.9742 13.7761L13.6314 20.2649C12.1534 21.4144 10 20.3612 10 18.4888V16.5189C7.74106 16.9525 5.9625 18.1157 4.92778 19.6838C4.33222 20.5863 3.30568 20.7735 2.55965 20.5635C1.80473 20.3511 1.00011 19.6306 1 18.5088ZM12.4034 5.31385C12.2392 5.18613 11.9999 5.30315 11.9999 5.51119V9.41672C11.9999 9.55479 11.8873 9.66637 11.7493 9.67008C8.09094 9.76836 4.97774 12.0115 3.66558 15.1656C3.46812 15.6402 3.31145 16.1354 3.19984 16.6471C3.07554 17.217 3.00713 17.8072 3.00053 18.412C3.00018 18.4442 3 18.4765 3 18.5088C3.00001 18.6437 3.18418 18.6948 3.25846 18.5822C3.27467 18.5577 3.29101 18.5332 3.30747 18.5088C3.30748 18.5088 3.30746 18.5088 3.30747 18.5088C3.63446 18.0244 4.01059 17.5765 4.42994 17.168C4.71487 16.8905 5.01975 16.6313 5.34276 16.3912C7.05882 15.1158 9.28642 14.3823 11.7496 14.3357C11.8877 14.3331 12 14.4453 12 14.5834V18.4888C12 18.6969 12.2393 18.8139 12.4035 18.6862L20.7463 12.1973C20.875 12.0973 20.875 11.9028 20.7463 11.8027L12.4034 5.31385Z"
-                    fill="#0F1729"
-                  />
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke="#CCCCCC"
+                    stroke-width="5.7792"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <g>
+                      {" "}
+                      <path d="M381.6,309.4c-27.7,0-52.4,13.2-68.2,33.6l-132.3-73.9c3.1-8.9,4.8-18.5,4.8-28.4c0-10-1.7-19.5-4.9-28.5l132.2-73.8 c15.7,20.5,40.5,33.8,68.3,33.8c47.4,0,86.1-38.6,86.1-86.1S429,0,381.5,0s-86.1,38.6-86.1,86.1c0,10,1.7,19.6,4.9,28.5 l-132.1,73.8c-15.7-20.6-40.5-33.8-68.3-33.8c-47.4,0-86.1,38.6-86.1,86.1s38.7,86.1,86.2,86.1c27.8,0,52.6-13.3,68.4-33.9 l132.2,73.9c-3.2,9-5,18.7-5,28.7c0,47.4,38.6,86.1,86.1,86.1s86.1-38.6,86.1-86.1S429.1,309.4,381.6,309.4z M381.6,27.1 c32.6,0,59.1,26.5,59.1,59.1s-26.5,59.1-59.1,59.1s-59.1-26.5-59.1-59.1S349.1,27.1,381.6,27.1z M100,299.8 c-32.6,0-59.1-26.5-59.1-59.1s26.5-59.1,59.1-59.1s59.1,26.5,59.1,59.1S132.5,299.8,100,299.8z M381.6,454.5 c-32.6,0-59.1-26.5-59.1-59.1c0-32.6,26.5-59.1,59.1-59.1s59.1,26.5,59.1,59.1C440.7,428,414.2,454.5,381.6,454.5z"></path>{" "}
+                    </g>{" "}
+                  </g>
                 </svg>
+              </button>
+            </div>
+            <div className="flex justify-between">
+              <span className={style.price}>Rs.{data.productPrice}</span>
+
+              <button
+                className={style.button_primary}
+                onClick={() => navigate("/")}
+              >
+                Go to Home
               </button>
             </div>
           </div>

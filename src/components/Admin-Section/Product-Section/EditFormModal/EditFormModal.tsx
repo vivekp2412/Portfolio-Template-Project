@@ -2,11 +2,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, Divider, Form, Input, Modal, Select, Space } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import {
-  addCategory,
-  fetchCategories,
-  updateProduct,
-} from "../../../../slices/productSlice";
+import { addCategory, updateProduct } from "../../../../slices/productSlice";
 import {
   getStorage,
   ref,
@@ -18,23 +14,18 @@ import style from "../Product-Form/style.module.css";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 const TextArea = Input.TextArea;
-interface PropsType{
-  setIsModalOpen:(x:boolean)=>void,
-  isModalOpen:boolean,
-  productId:string
+interface PropsType {
+  setIsModalOpen: (x: boolean) => void;
+  isModalOpen: boolean;
+  productId: string;
 }
-interface ImageURL{
-  dataURL:string
+interface ImageURL {
+  dataURL: string;
 }
-interface ProductType{
-  productName:string,
-  productCategory:string,
-  productDescription:string,
-  productPrice:string,
-  productId:string,
-  Image:string
+interface ProductType {
+  [key: string]: string;
 }
-function EditFormModal(props:PropsType) {
+function EditFormModal(props: PropsType) {
   let initialImg: string | null = null;
   const categories = useAppSelector((state) => state.product.categories);
   const { setIsModalOpen, isModalOpen, productId } = props;
@@ -53,13 +44,12 @@ function EditFormModal(props:PropsType) {
     setItems(categories);
   }, [categories]);
   const productList = useAppSelector((state) => state.product.productList);
-  let filteredArray:ProductType[];
+  let filteredArray: ProductType[] = [];
   if (productList.length > 0) {
     filteredArray = productList.filter((data) => data.productId == productId);
     if (filteredArray.length > 0) {
       initialImg = filteredArray[0].Image;
     }
-    const prevdata = filteredArray[0];
   }
   const addItem = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
@@ -78,7 +68,7 @@ function EditFormModal(props:PropsType) {
 
     setName("");
   };
-  function geturls(array:ImageURL[]) {
+  function geturls(array: ImageURL[]) {
     setImageurl(array[0].dataURL);
     initialImg = null;
   }
@@ -170,7 +160,7 @@ function EditFormModal(props:PropsType) {
               name="control-hooks"
               onFinish={onFinish}
               style={{ maxWidth: 600 }}
-              initialValues={filteredArray?.length > 0 && filteredArray[0]}
+              initialValues={filteredArray.length > 0 && filteredArray[0]}
               layout="vertical"
             >
               <Form.Item
@@ -185,23 +175,19 @@ function EditFormModal(props:PropsType) {
                 label="Product Price (INR)"
                 rules={[
                   {
-                    required: true,
-                    message: "Please enter the product price.",
-                  },
-                  {
                     type: "number",
                     message:
                       "Please enter a valid number for the product price.",
-                    transform: (value) => parseFloat(value), // Convert the input value to a float number
+                    transform: (value) => parseFloat(value),
                   },
                   {
                     validator: (_, value) => {
                       if (value >= 0) {
-                        return Promise.resolve(); // Value is valid, resolve the promise
+                        return Promise.resolve();
                       }
                       return Promise.reject(
                         "Please enter a positive value for the product price."
-                      ); // Value is invalid, reject the promise with an error message
+                      );
                     },
                   },
                 ]}

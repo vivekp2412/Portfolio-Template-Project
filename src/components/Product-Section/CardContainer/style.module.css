@@ -7,10 +7,11 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  color: white;
+  color: var(--color-secondary);
 }
 .active {
   color: var(--color-secondary);
+  font-weight: 600;
 }
 .loader {
   min-height: 150px;

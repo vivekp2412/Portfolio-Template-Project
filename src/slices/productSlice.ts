@@ -2,22 +2,18 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { dataref } from "../firebase";
 import { toast } from "react-toastify";
 interface ProductType{
-  productName:string,
-  productCategory:string,
-  productDescription:string,
-  productPrice:string,
-  productId:string,
-  Image:string
+ 
+  [key: string]:string
 }
 interface InitialStateType{
   showProductSection: boolean;
-  productList: ProductType[]; // Replace 'any' with the appropriate type for your product list
+  productList: ProductType[]; 
   pending: boolean;
-  editform: any; // Replace 'any' with the appropriate type for your edit form
+  editform: any; 
   filteredCategory: string;
-  searchedProducts: ProductType[]; // Replace 'any' with the appropriate type for your searched products
+  searchedProducts: ProductType[]; 
   searchQuery: string;
-  categories: string[]; // Replace 'any' with the appropriate type for your categories
+  categories: string[]; 
   selectedProduct: ProductType | null;
 }
 const initialState:InitialStateType={
@@ -112,21 +108,9 @@ export const productSlice = createSlice({
         },
         searchProduct(state,action){
             let searchquery:string =  action.payload.searchquery;
-            let searchBy:string =  action.payload.searchBy;
             state.searchQuery=searchquery;
             let upprcseSearch = searchquery.toUpperCase(); 
-            if(searchBy){
-
-              const filteredArray=state.productList.filter((product)=>{
-                let productProperty=product[searchBy];
-                let upprcseProperty =  productProperty.toUpperCase();
-                if(upprcseProperty.includes(upprcseSearch)) {
-                  return product
-                  
-                }
-              })
-              state.searchedProducts=filteredArray;
-            }else{
+          
               const filteredArray=state.productList.filter((product)=>{
                 let productId=product.productId;
                 let productName=product.productName;
@@ -141,7 +125,7 @@ export const productSlice = createSlice({
               })
               state.searchedProducts=filteredArray;
 
-            }
+            
             
         },
         addCategory(state,action){

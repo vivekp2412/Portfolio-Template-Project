@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { dataref, db } from "../firebase";
 import { toast } from "react-toastify";
 
@@ -9,31 +9,46 @@ export const fetchContactData = createAsyncThunk(
       const data = (await dataref.ref("Contact Details").once("value")).val().contactDetails;
       
       return data;
-    } catch (error) {
+    } catch (error:any) {
       return rejectWithValue(error.message);
     }
   }
 );
-
+interface initialStateType{
+  pending:boolean,
+  contactDetails:{
+    ["Portfolio Name"]:string,
+        Address:string,
+        Email:string,
+        ["Instagram Url"]:string,
+        ["Facebook Url"]:string,
+        ["Twitter Url"]:string,
+        ["Recieve Mail"]:boolean,
+        ["Recieve Whatsapp"]:boolean,
+        ["Whatsapp Number"]:string,
+        ["Phone Number"]:string,
+        isNumberDifferent:boolean,
+  }|null
+}
+const initialState:initialStateType={
+  pending: false,
+  contactDetails:{
+      ["Portfolio Name"]:"",
+      Address:"",
+      Email:"",
+      ["Instagram Url"]:"",
+      ["Facebook Url"]:"",
+      ["Twitter Url"]:"",
+      ["Recieve Mail"]:false,
+      ["Recieve Whatsapp"]:false,
+      ["Whatsapp Number"]:"",
+      ["Phone Number"]:"",
+      isNumberDifferent:false,
+  },
+}
 export const contactSlice = createSlice({
   name: "contact",
-  initialState: {
-  
-    pending: false,
-    contactDetails:{
-        ["Portfolio Name"]:"",
-        Address:"",
-        Email:"",
-        ["Instagram Url"]:"",
-        ["Facebook Url"]:"",
-        ["Twitter Url"]:"",
-        ["Recieve Mail"]:false,
-        ["Recieve Whatsapp"]:false,
-        ["Whatsapp Number"]:"",
-        ["Phone Number"]:"",
-        isNumberDifferent:false,
-    },
-  },
+  initialState,
   reducers: {
     addDetails(state, action) {
       toast.success('Details Updated Successfully');
@@ -46,7 +61,7 @@ export const contactSlice = createSlice({
     },
     
     resetDetails(state){
-      state.contactDetails={};
+      state.contactDetails=null;
       dataref.ref("Contact Details").set({
         contactDetails: state.contactDetails,
       });

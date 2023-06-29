@@ -2,13 +2,17 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import errorimg from "../../../../src/assets/Error/404-error-animate.svg";
 import style from "../Error_Page/style.module.css";
-function ErrorPage(props) {
+interface Propstype {
+  errorCode: string;
+  errorMessage: string;
+}
+function ErrorPage(props: Propstype) {
   let { errorCode, errorMessage } = props;
   const navigate = useNavigate();
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     if (!theme) {
-      document.documentElement.setAttribute("data-theme", "pink");
+      document.documentElement.setAttribute("data-theme", "Pure Pitch");
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }

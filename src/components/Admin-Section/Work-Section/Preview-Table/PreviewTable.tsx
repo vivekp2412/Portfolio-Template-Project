@@ -1,30 +1,33 @@
 import { useState } from "react";
 import { Image, Space, Switch, Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
 import style from "../Preview-Table/style.module.css";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
 
 import uuid from "react-uuid";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { deleteProduct } from "../../../../slices/productSlice";
-import Loader from "../../../Comman/Loader/Loader";
 import { deleteWork, showSection } from "../../../../slices/workSlice";
 import EditFormModal from "../EditFormModal/EditFormModal";
+import { ColumnsType } from "antd/es/table";
+interface DataType {
+  workId: string;
+  workTitle: string;
+  workDesc: string;
 
+  Image: string;
+}
 function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [switchStatus, setSwitchStatus] = useState();
+  const [switchStatus, setSwitchStatus] = useState<boolean>();
 
-  const [workId, setWorkId] = useState<string>();
+  const [workId, setWorkId] = useState<string>("");
   const workList = useAppSelector((state) => state.work.allWorks);
   const pending = useAppSelector((state) => state.work.pending);
   const dispatch = useAppDispatch();
   const [expanded, setExpanded] = useState(false);
-  const [expandId, setExpandId] = useState();
+  const [expandId, setExpandId] = useState<string>();
   const showWorkSection = useAppSelector((state) => state.work.showWorkSection);
-  const columns = [
+  const columns: ColumnsType<DataType> = [
     {
       title: "Work Id",
       dataIndex: "workId",
@@ -36,7 +39,7 @@ function PreviewTable() {
     {
       title: "Description",
       dataIndex: "workDesc",
-      render: (text, record) => {
+      render: (text: string, record) => {
         return (
           <div>
             {expanded && record.workId == expandId ? (
@@ -91,11 +94,11 @@ function PreviewTable() {
               version="1.1"
               id="Capa_1"
               xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
               width="20px"
               height="20px"
               viewBox="0 0 494.936 494.936"
-              xml:space="preserve"
+              xmlSpace="preserve"
             >
               <g>
                 <g>

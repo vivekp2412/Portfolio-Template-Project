@@ -1,15 +1,9 @@
 import React, { useRef, useState } from "react";
-// import style from "../Modal/style.module.css";
 import style from "../Work-Form/style.module.css";
-import * as yup from "yup";
-import { Button, Divider, Form, Input, Modal, Select, Space } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 const TextArea = Input.TextArea;
 
-import { useEffect } from "react";
-import { dataref } from "../../../../firebase";
-
-import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { addImage, fetchCarouselData } from "../../../../slices/homeSlice";
+import { useAppDispatch } from "../../../../Hooks/Hooks";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 import { addWork } from "../../../../slices/workSlice";
 import {
@@ -20,14 +14,17 @@ import {
 } from "firebase/storage";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 const storage = getStorage();
-interface Datatype {
-  image: string;
-  imageId: string;
-  active: true;
-}
+
 // Random Id generator
 function idGenerator() {
   return Date.now().toString().slice(-4);
+}
+interface ImageUrl {
+  dataURL: string;
+}
+interface FormDataType {
+  WorkTitle: string;
+  WorkDescription: string;
 }
 //Modal Component
 const WorkFormModal = () => {
@@ -35,10 +32,10 @@ const WorkFormModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
   const formRef = useRef(null);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState<boolean>();
   const [imageErr, setImageErr] = useState<boolean>(false);
   const [images, setImages] = useState([]);
-  const [imageUrls, setImageurl] = useState<{}[]>([]);
+  const [imageUrls, setImageurl] = useState<ImageUrl[]>([]);
 
   const handleImageError = () => {
     setImageErr(false);
@@ -55,10 +52,10 @@ const WorkFormModal = () => {
     setIsModalOpen(false);
   };
 
-  function geturls(array) {
+  function geturls(array: ImageUrl[]) {
     setImageurl(array);
   }
-  function handleSubmit(values) {
+  function handleSubmit(values: FormDataType) {
     setLoading(true);
     if (images.length != 0) {
       setImageErr(false);
@@ -66,6 +63,7 @@ const WorkFormModal = () => {
         workId: idGenerator(),
         workTitle: values.WorkTitle,
         workDesc: values.WorkDescription,
+        Image: "",
       };
       const storageRef = ref(storage, `Wroks/${idGenerator()}`);
       uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
@@ -150,7 +148,6 @@ const WorkFormModal = () => {
                   <Button
                     htmlType="submit"
                     className={style.button_modal_primary}
-                    //   onClick={handleSubmit}
                   >
                     Add
                   </Button>

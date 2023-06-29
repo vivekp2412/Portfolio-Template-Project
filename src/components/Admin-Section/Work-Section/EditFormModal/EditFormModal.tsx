@@ -1,9 +1,7 @@
-import { Button,  Form, Input, Modal } from "antd";
-import React, {  useRef, useState } from "react";
+import { Button, Form, Input, Modal } from "antd";
+import React, { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import {
-  addCategory,
-} from "../../../../slices/productSlice";
+import { addCategory } from "../../../../slices/productSlice";
 import {
   getStorage,
   ref,
@@ -17,19 +15,23 @@ import { updateWork } from "../../../../slices/workSlice";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 
 const TextArea = Input.TextArea;
-interface WorkType{
-  workTitle:string,
-  workDesc:string,
-  Image:string,
-  workId:string
+interface WorkType {
+  workTitle: string;
+  workDesc: string;
+  Image: string;
+  workId: string;
 }
-interface PropsType{
-  setIsModalOpen:(x:boolean)=>void,
-  isModalOpen:boolean,
-  workId:string
+interface ImageURL {
+  dataURL: string;
 }
+interface PropsType {
+  setIsModalOpen: (value: boolean) => void;
+  isModalOpen: boolean;
+  workId: string;
+}
+
 let initialImg: string | null = null;
-function EditFormModal(props:PropsType) {
+function EditFormModal(props: PropsType) {
   const categories = useAppSelector((state) => state.product.categories);
   const { setIsModalOpen, isModalOpen, workId } = props;
   const [items, setItems] = useState<string[]>(categories);
@@ -44,7 +46,7 @@ function EditFormModal(props:PropsType) {
   const dispatch = useAppDispatch();
 
   const workList = useAppSelector((state) => state.work.allWorks);
-  let filteredArray:WorkType[];
+  let filteredArray: WorkType[] = [];
   if (workList.length > 0) {
     filteredArray = workList.filter((data) => data.workId == workId);
     if (filteredArray.length > 0) {
@@ -68,7 +70,7 @@ function EditFormModal(props:PropsType) {
 
     setName("");
   };
-  function geturls(array) {
+  function geturls(array: ImageURL[]) {
     setImageurl(array[0].dataURL);
     initialImg = null;
   }
@@ -109,12 +111,6 @@ function EditFormModal(props:PropsType) {
   const onReset = () => {
     form.resetFields();
     setIsModalOpen(false);
-  };
-
-  const handleSelect = (e: string) => {
-    const id = e.slice(0, 3);
-    let uniqueNumber = Date.now().toString();
-    setUniqueId(id.toUpperCase() + uniqueNumber.slice(-4));
   };
 
   const handleCancel = () => {
@@ -160,7 +156,7 @@ function EditFormModal(props:PropsType) {
               name="control-hooks"
               onFinish={onFinish}
               style={{ maxWidth: 600 }}
-              initialValues={filteredArray?.length > 0 && filteredArray[0]}
+              initialValues={filteredArray.length > 0 && filteredArray[0]}
               layout="vertical"
             >
               <Form.Item
@@ -181,15 +177,14 @@ function EditFormModal(props:PropsType) {
                 <div className={style.button_container}>
                   <Button
                     htmlType="submit"
-                    className={style.button_modal}
-                    // onClick={onFinish}
+                    className={style.button_modal_primary}
                   >
                     Edit
                   </Button>
                   <Button
                     htmlType="button"
                     onClick={onReset}
-                    className={style.button_modal}
+                    className={style.button_modal_secondary}
                   >
                     Close
                   </Button>

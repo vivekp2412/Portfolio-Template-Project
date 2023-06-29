@@ -1,48 +1,63 @@
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import style from "../Theme-Sidebar/style.module.css";
 import ThemeCard from "./Theme-Card/ThemeCard";
-function ThemeSideBar(props) {
+interface PropsType {
+  toggleSlide: (value: boolean) => void;
+}
+function ThemeSideBar(props: PropsType) {
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
   function closeSideBar() {
     props.toggleSlide(false);
   }
   const themeArray = [
     {
-      name: "green",
+      name: "Glamorous Green",
       secondary: "#006565",
       primary: "#F0f7f7",
       ternary: "#000000DE",
     },
     {
-      name: "maroon",
+      name: "Bright Brown",
       secondary: "#80485B",
       primary: "#FFF0DF",
       ternary: "#000000DE",
     },
     {
-      name: "purple",
+      name: "Wonderful Violet",
       secondary: "#5854B1",
       primary: "#f6f7fb",
       ternary: "#000000DE",
     },
     {
-      name: "blue",
+      name: "Sweet Sky",
       secondary: "#68c8d5",
       primary: "#f7faff",
       ternary: "#000000DE",
     },
     {
-      name: "pink",
+      name: "Pure Pitch",
       secondary: "#e66060",
       primary: "#f7e6e6",
       ternary: "#000000DE",
     },
   ];
-  const [themeValue, setThemeValue] = useState("pink");
-  function handleTheme(name) {
+  function handleTheme(name: string) {
     localStorage.setItem("theme", name);
+    toast(`${name} : Theme Applied`, {
+      style: {
+        backgroundColor: "var(--color-secondary)",
+        boxShadow:
+          "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+      },
+      progressStyle: { backgroundColor: "white" },
+    });
+
     document.documentElement.setAttribute("data-theme", name);
+    closeSideBar();
   }
   const themes = themeArray.map((theme) => {
     return (
@@ -56,8 +71,8 @@ function ThemeSideBar(props) {
     );
   });
   return (
-    <div id="" className={style.themenavbarContainer}>
-      <div className={style.themeNavbar}>
+    <div className={style.themenavbarContainer}>
+      <div ref={sidebarRef} className={style.themeNavbar}>
         <div className={style.title}>Theme Selector</div>
         <div>
           <ul className={style.navoptions}>{themes}</ul>

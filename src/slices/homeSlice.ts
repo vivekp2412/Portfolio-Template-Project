@@ -14,19 +14,22 @@ export const fetchCarouselData = createAsyncThunk(
     }
   }
 );
-interface Images{
-  dataURL:string
+interface ImageType{
+  active:boolean,
+  imageId:string,
+  image:string
 }
 interface InitialStateType{
   pending:boolean,
-  allImages:Images[]
+  allImages:ImageType[]
+}
+const initialState:InitialStateType={
+  pending:false,
+  allImages:[]
 }
 export const homeSlice = createSlice({
   name: "home",
-  initialState: {
-    pending: false,
-    allImages: [],
-  },
+  initialState,
   reducers: {
     addImage(state, action) {
       toast.success('Image Added Successfully');

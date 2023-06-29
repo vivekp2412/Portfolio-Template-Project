@@ -9,50 +9,28 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../Hooks/Hooks";
 import { useEffect, useState } from "react";
 import useDebounce from "../../../Hooks/useDebounce";
-import { ConfigProvider, Select } from "antd";
 import SelectMenu from "../../Comman/Select-Menu/SelectMenu";
-const { Option } = Select;
 export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchBy, setSearchBy] = useState();
   const [filterBy, setFilterBy] = useState("All");
   const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const dispatch = useAppDispatch();
   let categories = useAppSelector((state) => state.product.categories);
 
-  function getSearchBy(value) {
-    setSearchBy(value);
-    dispatch(
-      searchProduct({
-        searchquery: debouncedSearchQuery,
-        searchBy: value,
-      })
-    );
-  }
-  function getFilterBy(value) {
+  function getFilterBy(value: string) {
     dispatch(changeFilterCategory(value));
     setFilterBy(value);
   }
-
-  // function getFilterCategory(value) {
-  // }
 
   useEffect(() => {
     dispatch(
       searchProduct({
         searchquery: debouncedSearchQuery,
-        searchBy: searchBy,
       })
     );
   }, [debouncedSearchQuery]);
   return (
     <div className={style.Product_Navbar_container}>
-      <SelectMenu
-        searchQuery={searchQuery}
-        options={["productName", "productId"]}
-        searchBy={getSearchBy}
-        initialValue="Search By"
-      />
       <div className={style.searchSection}>
         <div className={style.searchbar}>
           <input

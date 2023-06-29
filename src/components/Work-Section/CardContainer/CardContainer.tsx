@@ -1,26 +1,10 @@
-import { useEffect } from "react";
-import { useAppSelector } from "../../../Hooks/Hooks";
 import style from "../CardContainer/style.module.css";
 import Carousell from "../Carousel/Carousell";
-import Card from "../Work-Card/Card";
-import { SwiperSlide } from "swiper/react";
-function CardContainer() {
-  const allWorks = useAppSelector((state) => state.work.allWorks);
-  const works = allWorks.map((work, index) => {
-    return (
-      <SwiperSlide key={index} style={{ width: "100%" }}>
-        <Card
-          workTitle={work.workTitle}
-          workDesc={work.workDesc}
-          image={work.Image}
-        />
-      </SwiperSlide>
-    );
-  });
 
+function CardContainer() {
   return (
     <div className={style.cardContainer}>
-      <Carousell works={works} />
+      <Carousell />
     </div>
   );
 }

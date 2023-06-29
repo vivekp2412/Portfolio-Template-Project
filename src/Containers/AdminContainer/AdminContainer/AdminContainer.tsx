@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../Hooks/Hooks";
-import {
-  fetchCategories,
-  fetchProductsData,
-} from "../../../slices/productSlice";
+
 import AdminNavbarContainer from "../Admin-Navbar/AdminNavbarContainer";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { fetchWorkData } from "../../../slices/workSlice";
-import { auth } from "../../../firebase";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import style from "../AdminContainer/style.module.css";
@@ -19,7 +13,7 @@ function AdminContainer() {
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     if (!theme) {
-      document.documentElement.setAttribute("data-theme", "pink");
+      document.documentElement.setAttribute("data-theme", "Pure Pitch");
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }

@@ -1,15 +1,15 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../../Hooks/Hooks";
 import { selectProduct } from "../../../slices/productSlice";
 import style from "../Cards/style.module.css";
-function ProductCard(props) {
+interface PropsType {
+  data: {
+    productName: string;
+    productId: string;
+    Image: string;
+  };
+}
+function ProductCard(props: PropsType) {
   const { data } = props;
   const dispatch = useAppDispatch();
   const imgSrc = data.Image;

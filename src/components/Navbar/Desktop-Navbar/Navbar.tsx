@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { confirmAlert } from "react-confirm-alert";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../Hooks/Hooks";
 import style from "../Desktop-Navbar/style.module.css";
 //Desktop Navbar
@@ -25,12 +24,12 @@ function DesktopNavbar() {
       <div className={style.navbarContainer}>
         <div className={style.navbar}>
           <span className={style.title}>
-            {data["Portfolio Name"].slice(0, 3).toUpperCase()}
+            {data?.["Portfolio Name"].slice(0, 3).toUpperCase()}
             {}
             <span className={style.secondary_text}>
-              {data["Portfolio Name"].slice(3, 4).toUpperCase()}
+              {data?.["Portfolio Name"].slice(3, 4).toUpperCase()}
             </span>
-            {data["Portfolio Name"].slice(4).toUpperCase()}
+            {data?.["Portfolio Name"].slice(4).toUpperCase()}
           </span>
           <ul className={style.navoptions}>
             <li
@@ -88,7 +87,6 @@ function DesktopNavbar() {
             <button className={style.navBtn} onClick={() => logIn()}>
               LOG IN
             </button>
-           
           </ul>
         </div>
       </div>

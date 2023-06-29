@@ -1,4 +1,3 @@
-import Modal from "antd/es/modal/Modal";
 import { useEffect } from "react";
 import FormModal from "../../../components/Admin-Section/Home-Section/Modal/FormModal";
 import PreviewTable from "../../../components/Admin-Section/Home-Section/Preview-Table/PreviewTable";
@@ -10,7 +9,6 @@ import AdminNavbarContainer from "../Admin-Navbar/AdminNavbarContainer";
 
 function HomeSection() {
   const dispatch = useAppDispatch();
-  const allImages = useAppSelector((state) => state.home.allImages);
   useEffect(() => {
     dispatch(fetchCarouselData());
   }, []);

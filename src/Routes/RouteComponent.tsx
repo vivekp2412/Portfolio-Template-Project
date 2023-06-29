@@ -1,10 +1,4 @@
-import {
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import HomeSection from "../Containers/AdminContainer/Admin-Home/HomeSection";
 
 import AdminContainer from "../Containers/AdminContainer/AdminContainer/AdminContainer";
@@ -18,13 +12,12 @@ import ProductDetail from "../components/Product-Detail/Product Detail";
 import { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import ErrorPage from "../components/Comman/Error_Page/ErrorPage";
-
+import { User } from "firebase/auth";
 function RouteComponent() {
   const [isAuth, setIsAuth] = useState(false);
-  const url = useLocation();
 
   useEffect(() => {
-    const checkAuthStatus = (user) => {
+    const checkAuthStatus = (user: User | null) => {
       if (!user) {
         setIsAuth(false);
       } else {
@@ -35,8 +28,6 @@ function RouteComponent() {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       checkAuthStatus(user);
     });
-
-    // resetLogoutTimer(); // Start the initial logout timer
 
     return () => {
       unsubscribe();

@@ -1,4 +1,4 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {  createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { dataref } from "../firebase";
 export const fetchWorkData = createAsyncThunk(
@@ -6,15 +6,13 @@ export const fetchWorkData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await dataref.ref("Our Work").once("value");
-      if(true){
+      
         
         const workList = response.val().works;
         const showWorkSection = response.val().show;
         
         return {workList,showWorkSection};
-      }else{
-        return[]
-      }
+     
     } catch (error:any) {
       return rejectWithValue(error.message);
     }

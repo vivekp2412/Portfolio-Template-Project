@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ContactContainer from "../ContactContainer/ContactContainer";
 import FooterContainer from "../FooterContainer/FooterContainer";
 import HomeContainer from "../HomeContainer/HomeContainer";
@@ -8,8 +8,7 @@ import WorkContainer from "../WorkContainer/WorkContainer";
 import { useAppDispatch, useAppSelector } from "../../Hooks/Hooks";
 import Loader from "../../components/Comman/Loader/Loader";
 import { fetchCategories, fetchProductsData } from "../../slices/productSlice";
-import { auth } from "../../firebase";
-import { loginUser } from "../../slices/authSlice";
+
 import { fetchContactData } from "../../slices/contactSlice";
 import { fetchCarouselData } from "../../slices/homeSlice";
 import { fetchWorkData } from "../../slices/workSlice";
@@ -24,14 +23,12 @@ function PortfolioContainer() {
   useEffect(() => {
     let themeValue = localStorage.getItem("theme");
     if (!themeValue) {
-      document.documentElement.setAttribute("data-theme", "pink");
+      document.documentElement.setAttribute("data-theme", "Pure Pitch");
     } else {
       document.documentElement.setAttribute("data-theme", themeValue);
     }
-    // setLoading(true);
     const fetch = async () => {
       try {
-        // setLoading(true);
         await dispatch(fetchProductsData());
         await dispatch(fetchCategories());
         await dispatch(fetchCarouselData());
@@ -42,8 +39,6 @@ function PortfolioContainer() {
       }
     };
     fetch();
-    // setLoading(false);
-    // console.log("hi");
   }, []);
   setTimeout(() => {
     setLoading(false);
@@ -62,10 +57,7 @@ function PortfolioContainer() {
         <Loader />
       </div>
     );
-
-    // return "Zilen";
   }
-  // else {
   return (
     <div>
       <NavbarContainer />

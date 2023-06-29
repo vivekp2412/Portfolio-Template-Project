@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../Hooks/Hooks";
-import {
-  changeFilterCategory,
-  searchProduct,
-} from "../../../slices/productSlice";
-import style from "./selectStyle.module.css";
+import { useEffect, useState } from "react";
 
-const SelectMenu: React.FC = (props) => {
+import style from "./selectStyle.module.css";
+interface PropsType {
+  initialValue: string;
+  options: string[];
+  filterBy: (value: string) => void;
+}
+const SelectMenu = (props: PropsType) => {
   const [selectedOption, setSelectedOption] = useState(props.initialValue);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dispatch = useAppDispatch();
   let options = props.options;
-  const getSearchByValue = props.searchBy;
   const getFilterByValue = props.filterBy;
-  const searchQuery = props.searchQuery;
   let selectOptions;
-  // getFilterByValue(option);
   useEffect(() => {
     if (getFilterByValue) {
       getFilterByValue("All");
@@ -23,52 +19,21 @@ const SelectMenu: React.FC = (props) => {
   }, []);
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
-    if (getSearchByValue) {
-      getSearchByValue(option);
-      // dispatch(searchProduct(se))
-    } else {
-      getFilterByValue(option);
-    }
+
+    getFilterByValue(option);
   };
 
-  const handleOutsideClick = (e: React.MouseEvent) => {
-    const dropdown = document.getElementById(
-      "filter-switch"
-    ) as HTMLInputElement;
-    const isDropdownChild = (e.target as HTMLElement).closest(
-      ".dropdown__filter"
+  selectOptions = options?.map((option) => {
+    return (
+      <li
+        className={style.dropdown__select_option}
+        role="option"
+        onClick={() => handleOptionClick(option)}
+      >
+        {option}
+      </li>
     );
-
-    if (!isDropdownChild) {
-      dropdown.checked = false;
-      setIsDropdownOpen(false);
-    }
-  };
-  if (getSearchByValue == undefined) {
-    selectOptions = options?.map((option) => {
-      return (
-        <li
-          className={style.dropdown__select_option}
-          role="option"
-          onClick={() => handleOptionClick(option)}
-        >
-          {option}
-        </li>
-      );
-    });
-  } else {
-    selectOptions = options?.map((option) => {
-      return (
-        <li
-          className={style.dropdown__select_option}
-          role="option"
-          onClick={() => handleOptionClick(option)}
-        >
-          {`Product ` + option.slice(7)}
-        </li>
-      );
-    });
-  }
+  });
 
   return (
     <div className={style.dropdown}>
@@ -79,15 +44,7 @@ const SelectMenu: React.FC = (props) => {
       >
         <ul className={style.dropdown__filter} role="listbox" tabIndex={-1}>
           <li className={style.dropdown__filter_selected} aria-selected="true">
-            {getFilterByValue ? (
-              `Category : ${selectedOption}`
-            ) : (
-              <>
-                {selectedOption === "Search By"
-                  ? "Search By"
-                  : `Product ${selectedOption.slice(7)}`}
-              </>
-            )}
+            {`Category : ${selectedOption}`}
             <svg
               className={style.secondary_svg}
               viewBox="0 0 24 24"

@@ -14,11 +14,9 @@ import tailwindConfig from "../tsconfig.json";
 import Loader from "./components/Comman/Loader/Loader";
 function App() {
   const dispatch = useAppDispatch();
-  const [loadng, setLoading] = useState();
   useEffect(() => {
     const fetch = async () => {
       try {
-        setLoading(true);
         await dispatch(fetchProductsData());
         await dispatch(fetchCategories());
         await dispatch(fetchCarouselData());
@@ -29,14 +27,6 @@ function App() {
       }
     };
     fetch();
-    setLoading(false);
-    // const listener = auth.onAuthStateChanged((user) => {
-    //   if (!user) {
-    //   } else {
-    //     dispatch(loginUser());
-    //   }
-    // });
-    // return () => listener();
   }, []);
   return (
     <>
@@ -55,7 +45,6 @@ function App() {
         />
         <RouteComponent />
       </>
-      {/* )} */}
     </>
   );
 }

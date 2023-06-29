@@ -1,14 +1,11 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { Image, Space, Table } from "antd";
-import {  Modal } from "antd";
+import { Modal } from "antd";
 import style from "../Preview-Table/style.module.css";
 import type { ColumnsType } from "antd/es/table";
 import { Switch } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import {
-  deleteImage,
-  updateState,
-} from "../../../../slices/homeSlice";
+import { deleteImage, updateState } from "../../../../slices/homeSlice";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 //Type Declaration
@@ -17,8 +14,6 @@ interface DataType {
   image: string;
   active: boolean;
 }
-
-//Fetch data
 
 //Preview Component
 function PreviewTable() {
@@ -70,11 +65,6 @@ function PreviewTable() {
           ></p>
           <p
             className={style.action_link_delete}
-            // onClick={() => {
-            //   if (confirm("Are You sure want to delete") == true) {
-            //     dispatch(deleteImage(record.imageId));
-            //   }
-            // }}
             onClick={() => {
               confirmAlert({
                 title: "Deleting Image",
