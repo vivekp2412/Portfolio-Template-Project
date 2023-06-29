@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { Button } from "antd";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../Hooks/Hooks";
 import { selectProduct } from "../../../slices/productSlice";
 import style from "../Cards/style.module.css";
@@ -12,6 +13,7 @@ interface PropsType {
 function ProductCard(props: PropsType) {
   const { data } = props;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const imgSrc = data.Image;
   return (
     <>
@@ -30,13 +32,15 @@ function ProductCard(props: PropsType) {
           <div className={`${style.items} ${style.cart}`}>
             <span>
               <hr />
-              <NavLink
-                className={style.readMore}
-                to={`/products/${data.productId}`}
-                onClick={() => dispatch(selectProduct(data.productId))}
+              <Button
+                className={style.readMoreBtn}
+                onClick={() => {
+                  dispatch(selectProduct(data.productId));
+                  navigate(`/products/${data.productId}`);
+                }}
               >
                 Read More
-              </NavLink>
+              </Button>
             </span>
           </div>
         </div>

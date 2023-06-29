@@ -23,7 +23,7 @@ const ProductDetails = () => {
   }, []);
   setTimeout(() => {
     setLoading(false);
-  }, 2000);
+  }, 0);
   if (loading) {
     return (
       <div className={style.loaderContainer}>

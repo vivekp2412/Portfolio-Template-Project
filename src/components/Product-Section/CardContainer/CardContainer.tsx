@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../Hooks/Hooks";
 import Loader from "../../Comman/Loader/Loader";
 import style from "../CardContainer/style.module.css";
@@ -10,6 +10,7 @@ import { Col, Row } from "antd";
 function CardContainer() {
   const productList = useAppSelector((state) => state.product.productList);
   const searchQuery = useAppSelector((state) => state.product.searchQuery);
+  const [currentPage, setCurrentPage] = useState(0);
   const searchedProducts = useAppSelector(
     (state) => state.product.searchedProducts
   );
@@ -18,7 +19,6 @@ function CardContainer() {
     (state) => state.product.filteredCategory
   );
 
-  const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 6;
 
   let visibleProducts;
@@ -47,6 +47,8 @@ function CardContainer() {
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
+  console.log(currentProducts);
+
   const productSection = document.getElementById("productSection");
   if (productSection) {
     window.scrollTo({
