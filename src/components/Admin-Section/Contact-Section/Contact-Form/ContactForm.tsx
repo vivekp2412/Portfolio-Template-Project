@@ -26,7 +26,6 @@ const TextArea = Input.TextArea;
 export default function ContactForm() {
   const [isFormDisable, setIsFormDisable] = useState(true);
   const initialData = useAppSelector((state) => state.contact.contactDetails);
-  const pending = useAppSelector((state) => state.contact.pending);
   console.log(initialData);
 
   const [showPhoneNumber, setShowPhoneNumber] = useState(
@@ -34,12 +33,7 @@ export default function ContactForm() {
   );
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  useEffect(() => {
-    const fetch = async () => {
-      await dispatch(fetchContactData());
-    };
-    fetch();
-  }, []);
+
   const validatePhoneNumber = (_: any, value: string) => {
     const phoneNumberRegex = /^[0-9]{10}$/;
     if (!phoneNumberRegex.test(value)) {
@@ -56,9 +50,7 @@ export default function ContactForm() {
     dispatch(resetDetails());
     form.resetFields();
   };
-  if (initialData?.["Portfolio Name"] == "") {
-    return <Loader />;
-  }
+
   return (
     <div className={style.formContainer} style={{ color: "black" }}>
       <Form

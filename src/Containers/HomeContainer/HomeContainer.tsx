@@ -7,13 +7,13 @@ import { fetchCarouselData } from "../../slices/homeSlice";
 import { fetchContactData } from "../../slices/contactSlice";
 export default function HomeContainer() {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    const fetch = async () => {
-      await dispatch(fetchCarouselData());
-      await dispatch(fetchContactData());
-    };
-    fetch();
-  }, []);
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     await dispatch(fetchCarouselData());
+  //     await dispatch(fetchContactData());
+  //   };
+  //   fetch();
+  // }, []);
   return (
     <div className={style.homeContainer}>
       <Carousell />

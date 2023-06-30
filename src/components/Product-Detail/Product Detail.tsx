@@ -6,32 +6,31 @@ import style from "../Product-Detail/style.module.css";
 import { toast } from "react-toastify";
 import ErrorPage from "../Comman/Error_Page/ErrorPage";
 const ProductDetails = () => {
-  const [loading, setLoading] = useState<boolean>(true);
+  // const [loading, setLoading] = useState<boolean>(true);
   let { id } = useParams();
   const productList = useAppSelector((state) => state.product.productList);
   const [data] = productList.filter((product) => product.productId == id);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    // setLoading(true);
     const theme = localStorage.getItem("theme");
     if (!theme) {
       document.documentElement.setAttribute("data-theme", "pink");
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }
-     setTimeout(() => {
-      setLoading(false);
-    },2000);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 2000);
   }, []);
-  if (loading) {
-    return (
-      <div className={style.loaderContainer}>
-        <Loader></Loader>
-      </div>
-    );
-  }
-  if ((!data && !loading)) {
+  // if (loading) {
+  //   return (
+  //     <div className={style.loaderContainer}>
+  //       <Loader></Loader>
+  //     </div>
+  //   );
+  // }
+  if (!data) {
     return <ErrorPage errorCode={"404"} errorMessage={"Data Not Found"} />;
   }
   function handleShare() {
@@ -51,7 +50,7 @@ const ProductDetails = () => {
     if (showFullDescription) {
       return data.productDescription;
     }
-    const truncatedDescription = data.productDescription.slice(0, 600);
+    const truncatedDescription = data.productDescription.slice(0, 300);
     return `${truncatedDescription}`;
   };
 
@@ -71,7 +70,7 @@ const ProductDetails = () => {
         <div className={style.productContainer}>
           <img
             src={data.Image}
-            style={{ maxHeight: "500px", objectFit: "contain" }}
+            style={{ maxHeight: "500px" }}
             className={`${style.img} ${showFullDescription ? "lg:w-full" : ""}`}
           />
           <div
@@ -118,9 +117,9 @@ const ProductDetails = () => {
               </button>
             </div>
             <div className="flex justify-between">
-              {(data.price!=="") && 
-              <span className={style.price}>Rs.{data.productPrice}</span>
-              }
+              {data.price !== "0" && (
+                <span className={style.price}>Rs{data.productPrice}</span>
+              )}
 
               <button
                 className={style.button_primary}

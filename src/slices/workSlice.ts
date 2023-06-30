@@ -8,9 +8,14 @@ export const fetchWorkData = createAsyncThunk(
       const response = await dataref.ref("Our Work").once("value");
       
         
-        const workList = response.val().works;
-        const showWorkSection = response.val().show;
-        
+        let workList = response.val().works;
+        if(workList==undefined){
+          workList=[];
+        }
+        let showWorkSection = response.val().show;
+        if(showWorkSection==undefined){
+          showWorkSection=true;
+        }
         return {workList,showWorkSection};
      
     } catch (error:any) {

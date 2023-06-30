@@ -1,33 +1,26 @@
 import "./App.css";
 import RouteComponent from "./Routes/RouteComponent";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./Hooks/Hooks";
 import { fetchCategories, fetchProductsData } from "./slices/productSlice";
 import { fetchCarouselData } from "./slices/homeSlice";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchWorkData } from "./slices/workSlice";
 import { fetchContactData } from "./slices/contactSlice";
-import { auth } from "./firebase";
-import { loginUser } from "./slices/authSlice";
-import tailwindConfig from "../tsconfig.json";
 import Loader from "./components/Comman/Loader/Loader";
+
 function App() {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        await dispatch(fetchProductsData());
-        await dispatch(fetchCategories());
-        await dispatch(fetchCarouselData());
-        await dispatch(fetchContactData());
-        await dispatch(fetchWorkData());
-      } catch (err) {
-        alert(err);
-      }
-    };
-    fetch();
+    dispatch(fetchProductsData());
+    dispatch(fetchCategories());
+    dispatch(fetchCarouselData());
+    dispatch(fetchContactData());
+    dispatch(fetchWorkData());
   }, []);
+
   return (
     <>
       <>

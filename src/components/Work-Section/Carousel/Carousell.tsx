@@ -20,11 +20,11 @@ const Carousel = () => {
             <Loader />
           </div>
         )}
-        {!pending && works.length == 0 && (
+        {!pending && works?.length == 0 && (
           <h1 className={style.loader}>Data not found</h1>
         )}
         <Swiper navigation={true} pagination={{ clickable: true }}>
-          {works.map((work, index) => (
+          {works?.map((work, index) => (
             <SwiperSlide key={index}>
               <Card
                 workTitle={work.workTitle}

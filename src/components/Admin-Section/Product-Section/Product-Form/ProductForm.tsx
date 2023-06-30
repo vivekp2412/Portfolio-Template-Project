@@ -21,6 +21,7 @@ import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
 const storage = getStorage();
 interface Datatype {
   productImage: File;
+  productPrice: string;
   productId: string;
   productDescription: string;
   productCategory: string;
@@ -95,16 +96,30 @@ const ProductForm = () => {
 
     if (images.length != 0) {
       setImageErr(false);
-      let data = {
-        ...values,
-        productId: uniqueId,
-      };
+      let data: Datatype;
+      if (values.productPrice == undefined || values.productPrice == "") {
+        console.log("hi");
+
+        data = {
+          ...values,
+          productPrice: "0",
+          productId: uniqueId,
+        };
+      } else {
+        console.log("hi");
+
+        data = {
+          ...values,
+          productId: uniqueId,
+        };
+      }
 
       if (productList) {
         const storageRef = ref(storage, `Products/${uniqueId}`);
         uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
           getDownloadURL(storageRef).then((downloadURL) => {
             setLoading(false);
+            console.log("setted");
 
             data = {
               ...data,
@@ -115,6 +130,7 @@ const ProductForm = () => {
             setImages([]);
             handleOk();
             setFileList([]);
+            // setIsModalOpen(false);
           });
         });
       }
@@ -194,15 +210,15 @@ const ProductForm = () => {
                 name="productPrice"
                 label="Product Price (INR)"
                 rules={[
-                  {
-                    type: "number",
-                    message:
-                      "Please enter a valid number for the product price.",
-                    transform: (value) => parseFloat(value),
-                  },
+                  // {
+                  //   type: "number",
+                  //   message:
+                  //     "Please enter a valid number for the product price.",
+                  //   transform: (value) => parseFloat(value),
+                  // },
                   {
                     validator: (_, value) => {
-                      if (value >= 0) {
+                      if (value >= 0 || value == undefined) {
                         return Promise.resolve();
                       }
                       return Promise.reject(

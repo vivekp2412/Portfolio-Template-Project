@@ -6,7 +6,11 @@ export const fetchContactData = createAsyncThunk(
   "/fetchContactData",
   async (_, { rejectWithValue }) => {
     try {
-      const data = (await dataref.ref("Contact Details").once("value")).val().contactDetails;
+      let data = (await dataref.ref("Contact Details").once("value")).val().contactDetails;
+      // if(data==undefined){
+      //   data={}
+      // }
+      console.log(data);
       
       return data;
     } catch (error:any) {
@@ -31,7 +35,7 @@ interface initialStateType{
   }|null
 }
 const initialState:initialStateType={
-  pending: false,
+  pending: true,
   contactDetails:{
       ["Portfolio Name"]:"",
       Address:"",

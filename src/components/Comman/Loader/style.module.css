@@ -3,6 +3,7 @@
   width: 100px;
   height: 100px;
   position: relative;
+  /* background-color: black; */
 }
 .loader::after,
 .loader::before {
@@ -16,7 +17,8 @@
   opacity: 0;
   left: 0;
   top: 0;
-  animation: animloader 2s linear infinite;
+  z-index: 1000000 !important;
+  animation: animloader 3s linear infinite;
 }
 .loader::after {
   animation-delay: 1s;

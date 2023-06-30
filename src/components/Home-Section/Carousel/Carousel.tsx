@@ -1,7 +1,6 @@
 import { Carousel } from "antd";
 import style from "../Carousel/style.module.css";
 
-import { useState } from "react";
 import { useAppSelector } from "../../../Hooks/Hooks";
 interface Datatype {
   image: string;
@@ -10,17 +9,18 @@ interface Datatype {
 }
 function Carousell() {
   const pending = useAppSelector((state) => state.home.pending);
-  const allimages = useAppSelector((state) => state.home.allImages);
-  const imageToShow = allimages.filter((x) => x.active == true);
+  const allimages = useAppSelector((state) => state.home.allImages) ?? [];
+  const imageToShow = allimages?.filter((x) => x.active == true);
+  console.log(imageToShow);
 
-  let images = imageToShow.map((src) => {
+  let images = imageToShow?.map((src) => {
     return (
       <div>
         <img src={src.image} className={style.Caro_img}></img>
       </div>
     );
   });
-  if (images.length == 0 && pending == false) {
+  if (images?.length == 0 && pending == false) {
     images = [
       <div>
         <h1 className={style.Caro_img} style={{ color: "wheat" }}>
@@ -32,7 +32,7 @@ function Carousell() {
   return (
     <>
       <Carousel autoplay className={style.carousel}>
-        {images}
+        {images && images}
       </Carousel>
     </>
   );

@@ -32,8 +32,14 @@ export const fetchProductsData = createAsyncThunk(
     async (_, { rejectWithValue }) => {
       try {
         const response = await dataref.ref("Products").once("value")
-        const productList = response.val().productList;
-        const showProductSection = response.val().show;
+        let productList = response.val().productList;
+        let showProductSection = response.val().show;
+        if(showProductSection==undefined){
+          showProductSection=true;
+        }
+        if(productList==undefined){
+             productList=[];
+        }
         return {productList,showProductSection};
       } catch (error:any) {
         return rejectWithValue(error.message);
@@ -67,7 +73,7 @@ export const productSlice = createSlice({
             toast.success("Product Added Successfully");
             state.productList=[...state.productList,action.payload];
             
-            dataref.ref("Products").set({
+            dataref.ref("Products").update({
                 productList:state.productList
             })
         },
@@ -77,7 +83,7 @@ export const productSlice = createSlice({
           });
           state.productList.splice(indexToDelete,1);
           toast.success("Product deleted Successfully");
-              dataref.ref("Products").set({
+              dataref.ref("Products").update({
                 productList:state.productList
               })
 
@@ -96,7 +102,7 @@ export const productSlice = createSlice({
             const indexToUpdate = state.productList.findIndex((x)=> x.productId==id);
             state.productList[indexToUpdate]=action.payload;
             toast.success("Product updated Successfully");
-            dataref.ref("Products").set({
+            dataref.ref("Products").update({
                 productList:state.productList
             });
             

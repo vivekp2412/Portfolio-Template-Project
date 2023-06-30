@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import style from "../AdminContainer/style.module.css";
 import ThemeSideBar from "../../../components/Comman/Theme-Sidebar/ThemeSideBar";
+import { useAppSelector } from "../../../Hooks/Hooks";
+import Loader from "../../../components/Comman/Loader/Loader";
 function AdminContainer() {
   const [showThemeMenu, setShowThemeMenu] = useState(false);
   useEffect(() => {
@@ -21,6 +23,7 @@ function AdminContainer() {
   function handleSideBar() {
     setShowThemeMenu(!showThemeMenu);
   }
+
   return (
     <div
       style={{ overflow: "hidden", minHeight: "100vh", position: "relative" }}
