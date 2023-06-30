@@ -6,24 +6,24 @@ import style from "../Product-Detail/style.module.css";
 import { toast } from "react-toastify";
 import ErrorPage from "../Comman/Error_Page/ErrorPage";
 const ProductDetails = () => {
-  const [loading, setLoading] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>(true);
   let { id } = useParams();
   const productList = useAppSelector((state) => state.product.productList);
   const [data] = productList.filter((product) => product.productId == id);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     const theme = localStorage.getItem("theme");
     if (!theme) {
       document.documentElement.setAttribute("data-theme", "pink");
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }
+     setTimeout(() => {
+      setLoading(false);
+    },2000);
   }, []);
-  setTimeout(() => {
-    setLoading(false);
-  }, 0);
   if (loading) {
     return (
       <div className={style.loaderContainer}>
@@ -31,7 +31,7 @@ const ProductDetails = () => {
       </div>
     );
   }
-  if (!data) {
+  if ((!data && !loading)) {
     return <ErrorPage errorCode={"404"} errorMessage={"Data Not Found"} />;
   }
   function handleShare() {
@@ -52,7 +52,7 @@ const ProductDetails = () => {
       return data.productDescription;
     }
     const truncatedDescription = data.productDescription.slice(0, 600);
-    return `${truncatedDescription}...`;
+    return `${truncatedDescription}`;
   };
 
   const renderReadMoreButton = () => {
@@ -118,7 +118,9 @@ const ProductDetails = () => {
               </button>
             </div>
             <div className="flex justify-between">
+              {(data.price!=="") && 
               <span className={style.price}>Rs.{data.productPrice}</span>
+              }
 
               <button
                 className={style.button_primary}

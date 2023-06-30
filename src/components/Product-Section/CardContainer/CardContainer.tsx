@@ -18,6 +18,9 @@ function CardContainer() {
   const filterCategory = useAppSelector(
     (state) => state.product.filteredCategory
   );
+   useEffect(()=>{
+setCurrentPage(0);
+   },[filterCategory,searchQuery])
 
   const itemsPerPage = 6;
 
@@ -27,10 +30,10 @@ function CardContainer() {
   } else {
     visibleProducts = productList.filter(
       (product) => product.productCategory === filterCategory
-    );
-  }
-
-  let filteredProducts = visibleProducts;
+      );
+    }
+    
+    let filteredProducts = visibleProducts;
   if (searchQuery !== "") {
     filteredProducts = visibleProducts.filter((product) =>
       searchedProducts.includes(product)
@@ -42,6 +45,13 @@ function CardContainer() {
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
+    const productSection = document.getElementById("productSection");
+    if (productSection) {
+      window.scrollTo({
+        top: productSection.offsetTop,
+        behavior: "smooth",
+      });
+    }
   };
 
   const startIndex = currentPage * itemsPerPage;
@@ -49,13 +59,7 @@ function CardContainer() {
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
   console.log(currentProducts);
 
-  const productSection = document.getElementById("productSection");
-  if (productSection) {
-    window.scrollTo({
-      top: productSection.offsetTop,
-      behavior: "smooth",
-    });
-  }
+ 
   return (
     <>
       <div className={style.cardContainer}>
@@ -118,6 +122,7 @@ function CardContainer() {
         pageCount={pageCount}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
+        forcePage={currentPage}
         onPageChange={handlePageChange}
         activeClassName={style.active}
       />

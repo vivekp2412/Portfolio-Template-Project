@@ -42,7 +42,7 @@ function PortfolioContainer() {
   }, []);
   setTimeout(() => {
     setLoading(false);
-  }, 0);
+  }, 1000);
   if (loading) {
     return (
       <div
