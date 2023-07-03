@@ -155,8 +155,12 @@ function EditFormModal(props: PropsType) {
               >
                 <TextArea rows={4} cols={4} />
               </Form.Item>
-              <Form.Item>  const [items, setItems] = useState<string[]>(categories);
-  const [name, setName] = useState("");
+              <Form.Item>
+                <div className={style.button_container}>
+                  <Button
+                    htmlType="submit"
+                    className={style.button_modal_primary}
+                  >
                     Edit
                   </Button>
                   <Button

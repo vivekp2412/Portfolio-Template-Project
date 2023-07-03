@@ -2,8 +2,13 @@ import { useState } from "react";
 
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import style from "../Image-Upload/style.module.css";
-
-export const ImageUpload = (props) => {
+// interface PropsType {
+//   images: ImageListType;
+//   setImages: () => void;
+//   handleImageError: () => void;
+//   imageError: boolean;
+// }
+export const ImageUpload = (props: PropsType) => {
   const { images, setImages, handleImageError, imageError } = props;
 
   const [error, setError] = useState<string | null>(null);
