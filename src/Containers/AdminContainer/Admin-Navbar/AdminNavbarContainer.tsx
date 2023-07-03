@@ -81,7 +81,11 @@ function AdminNavbarContainer() {
             className={style.settingsIcon}
           />
         </div>
-        <div className={`${style.sideBar} ${showThemeMenu ? style.open : ""}`}>
+        <div
+          className={`${style.sideBar} ${
+            showThemeMenu ? style.open : style.hide
+          }`}
+        >
           <ThemeSideBar toggleSlide={setShowThemeMenu} />
         </div>
       </div>

@@ -1,10 +1,12 @@
 .homeContainer {
   position: relative;
   min-height: 750px;
+  /* height: 750px; */
+  /* max-height: 750px; */
 }
 .Title {
+  @apply top-[15vw] min-h-[350px];
   position: absolute;
-  top: 250px;
   width: 100%;
   margin: 0 auto;
   z-index: 11;
@@ -20,11 +22,14 @@
 }
 @media screen and (max-width: 550px) {
   .Title {
-    top: 120px;
+    @apply top-[30vw] min-h-[350px];
   }
 }
 @media screen and (max-width: 1150px) {
   .homeContainer {
     min-height: 0;
+  }
+  .Title {
+    @apply top-[20vw];
   }
 }

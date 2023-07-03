@@ -119,7 +119,7 @@ function PreviewTable() {
             className={style.action_delete}
             onClick={() => {
               confirmAlert({
-                title: "Deleting Image",
+                title: "Deleting Work",
                 message: "Are you sure to do this.",
                 buttons: [
                   {

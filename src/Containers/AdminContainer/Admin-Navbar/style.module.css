@@ -1,6 +1,7 @@
 .hide {
   transition: all 0.3s;
   transform: translateX(-100%);
+  display: none;
 }
 
 .show {
@@ -81,7 +82,7 @@
 
 .sideBar {
   position: absolute;
-
+  display: none;
   background-color: var(--color-secondary);
 
   top: 0px;
@@ -93,6 +94,7 @@
 .open {
   right: 0;
   display: block;
+  transition: all 1s;
 }
 .themeContainer {
   overflow: hidden;

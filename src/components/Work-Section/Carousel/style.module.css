@@ -1,5 +1,5 @@
 .cardContainer {
-  @apply w-[80%] mx-auto pt-10;
+  @apply w-[95%] md:w-[80%] mx-auto pt-10;
   height: 400px;
 }
 

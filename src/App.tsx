@@ -1,6 +1,6 @@
 import "./App.css";
 import RouteComponent from "./Routes/RouteComponent";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./Hooks/Hooks";
 import { fetchCategories, fetchProductsData } from "./slices/productSlice";
 import { fetchCarouselData } from "./slices/homeSlice";
@@ -8,7 +8,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchWorkData } from "./slices/workSlice";
 import { fetchContactData } from "./slices/contactSlice";
-import Loader from "./components/Comman/Loader/Loader";
 
 function App() {
   const dispatch = useAppDispatch();

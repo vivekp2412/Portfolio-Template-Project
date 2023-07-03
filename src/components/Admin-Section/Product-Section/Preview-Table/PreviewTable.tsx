@@ -13,8 +13,7 @@ import { deleteProduct, showSection } from "../../../../slices/productSlice";
 interface DataType {
   [key: string]: string;
 }
-//Delete function for data
-//Preview Component
+
 function PreviewTable() {
   const showProductSection = useAppSelector(
     (state) => state.product.showProductSection
@@ -132,7 +131,7 @@ function PreviewTable() {
             className={style.action_delete}
             onClick={() => {
               confirmAlert({
-                title: "Deleting Image",
+                title: "Deleting Product",
                 message: "Are you sure to do this.",
                 buttons: [
                   {

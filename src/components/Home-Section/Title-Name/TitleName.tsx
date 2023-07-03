@@ -5,7 +5,7 @@ export default function TitleName() {
   const data = useAppSelector((state) => state.contact.contactDetails);
   return (
     <div className={style.title_and_button}>
-      <h1 className={style.title}>
+      <h1 className={`${style.title}`}>
         <>
           PORTF
           <span className={style.secondary_text}>O</span>

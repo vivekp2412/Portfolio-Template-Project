@@ -1,9 +1,7 @@
 .Caro_img {
-  @apply w-[100%] max-h-[750px];
+  @apply w-[100%] min-h-[350px] max-h-[750px];
 }
-.carousel {
-  background-color: var(--color-ternary);
-}
+
 .loader {
   position: absolute;
   top: 30%;
