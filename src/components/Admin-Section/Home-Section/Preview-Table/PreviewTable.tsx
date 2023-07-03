@@ -21,7 +21,6 @@ function PreviewTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalimg, setModalimg] = useState<string>();
   const data = useAppSelector((state) => state.home.allImages);
-
   const dispatch = useAppDispatch();
   const onChange = (checked: boolean, id: string) => {
     dispatch(updateState({ checked, id }));
@@ -49,8 +48,15 @@ function PreviewTable() {
       render: (_, record) => (
         <Space size="middle">
           <Switch
+            style={{
+              backgroundColor: record.active
+                ? "var(--color-secondary)"
+                : "gray",
+            }}
             checked={record.active}
-            onChange={(checked) => onChange(checked, record.imageId)}
+            onChange={(checked) => {
+              onChange(checked, record.imageId);
+            }}
           />
         </Space>
       ),
