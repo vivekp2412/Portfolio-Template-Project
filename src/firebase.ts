@@ -4,14 +4,14 @@ import "firebase/compat/database";
 import {initializeApp} from "firebase/app";
 import { getAuth } from "firebase/auth";
 const firebaseConfig = {
-  apiKey: "AIzaSyAZALq2kLkzfB3rOtDyzETLJKeHiCkqUVY",
-  authDomain: "portfolio-template-bc671.firebaseapp.com",
-  databaseURL: "https://portfolio-template-bc671-default-rtdb.firebaseio.com",
-  projectId: "portfolio-template-bc671",
-  storageBucket: "portfolio-template-bc671.appspot.com",
-  messagingSenderId: "798002836055",
-  appId: "1:798002836055:web:562e3b760fd72a46bba912",
-  measurementId: "G-KNF8T0SL3X"
+  apiKey:import.meta.env.VITE_APIKEY ,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  databaseURL: import.meta.env.VITE_DATABASEURL,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
+  measurementId: import.meta.env.VITE_MEASUREMENTID
 };
 const app = initializeApp(firebaseConfig);
 export const db =  getFirestore(app);

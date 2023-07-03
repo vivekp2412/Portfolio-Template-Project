@@ -15,7 +15,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     if (!theme) {
-      document.documentElement.setAttribute("data-theme", "pink");
+      document.documentElement.setAttribute("data-theme", "Pure Pitch");
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }

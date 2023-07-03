@@ -39,7 +39,7 @@ function Login() {
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     if (!theme) {
-      document.documentElement.setAttribute("data-theme", "Pure-Pitch");
+      document.documentElement.setAttribute("data-theme", "Pure Pitch");
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }
