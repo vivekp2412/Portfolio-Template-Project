@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "../Contact-Form/style.module.css";
 import { Button, Checkbox, Col, Form, Input, Row } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import {
-  addDetails,
-  fetchContactData,
-  resetDetails,
-} from "../../../../slices/contactSlice";
-import Loader from "../../../Comman/Loader/Loader";
+import { addDetails, resetDetails } from "../../../../slices/contactSlice";
 interface FormData {
   ["Portfolio Name"]: string;
   ["Phone Number"]?: string;
@@ -26,7 +21,6 @@ const TextArea = Input.TextArea;
 export default function ContactForm() {
   const [isFormDisable, setIsFormDisable] = useState(true);
   const initialData = useAppSelector((state) => state.contact.contactDetails);
-  console.log(initialData);
 
   const [showPhoneNumber, setShowPhoneNumber] = useState(
     initialData?.isNumberDifferent
@@ -140,7 +134,6 @@ export default function ContactForm() {
               name="Facebook Url"
               label="Facebook URL"
               rules={[
-                // { required: true },
                 {
                   type: "url",
                   message: "This field must be a valid url.",
@@ -155,7 +148,6 @@ export default function ContactForm() {
               name="Instagram Url"
               label="Instagram URL"
               rules={[
-                // { required: true },
                 {
                   type: "url",
                   message: "This field must be a valid url.",
@@ -170,7 +162,6 @@ export default function ContactForm() {
               name="Twitter Url"
               label="Twitter URL"
               rules={[
-                // { required: true },
                 {
                   type: "url",
                   message: "This field must be a valid url.",

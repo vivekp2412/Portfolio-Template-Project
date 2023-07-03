@@ -19,17 +19,7 @@ const ProductDetails = () => {
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 2000);
-  }, []);
-  // if (loading) {
-  //   return (
-  //     <div className={style.loaderContainer}>
-  //       <Loader></Loader>
-  //     </div>
-  //   );
-  // }
+  });
   if (!data) {
     return <ErrorPage errorCode={"404"} errorMessage={"Data Not Found"} />;
   }

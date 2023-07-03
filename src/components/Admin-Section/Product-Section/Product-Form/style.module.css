@@ -3,7 +3,6 @@
 }
 .button_modal {
   background-color: var(--color-secondary) !important;
-  /* width: 120px; */
   margin: 5px 10px;
   padding: 5px 15px;
   font-weight: 600;
@@ -28,7 +27,6 @@
   @apply flex justify-center md:justify-end my-3;
 }
 .button_modal:hover {
-  /* border: none; */
   @apply bg-secondary text-white !important;
 }
 .button_container {

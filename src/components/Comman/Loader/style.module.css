@@ -3,7 +3,6 @@
   width: 100px;
   height: 100px;
   position: relative;
-  /* background-color: black; */
 }
 .loader::after,
 .loader::before {

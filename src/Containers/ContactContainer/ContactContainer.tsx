@@ -7,9 +7,7 @@ import { useAppDispatch } from "../../Hooks/Hooks";
 import { fetchContactData } from "../../slices/contactSlice";
 function ContactContainer() {
   const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchContactData());
-  // }, []);
+
   return (
     <div className={style.contactContainer}>
       <ContactHeader />

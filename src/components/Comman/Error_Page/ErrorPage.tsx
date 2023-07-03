@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import errorimg from "../../../../src/assets/Error/404-error-animate.svg";
 import style from "../Error_Page/style.module.css";
 interface Propstype {
   errorCode: string;

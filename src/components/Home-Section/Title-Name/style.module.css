@@ -5,7 +5,6 @@
   white-space: nowrap;
   overflow: hidden;
   border-right: 5px solid;
-  /* color: lightgreen; */
   font-family: "Montserrat", sans-serif;
   font-size: 4rem;
   place-items: center;
@@ -46,10 +45,7 @@
 .secondary_text {
   @apply text-secondary;
 }
-/* .btn:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-ternary);
-} */
+
 @media screen and (max-width: 500px) {
   .btn {
     padding: 2px 5px;

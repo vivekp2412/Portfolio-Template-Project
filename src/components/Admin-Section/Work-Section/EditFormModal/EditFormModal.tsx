@@ -1,7 +1,6 @@
 import { Button, Form, Input, Modal } from "antd";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/Hooks";
-import { addCategory } from "../../../../slices/productSlice";
 import {
   getStorage,
   ref,
@@ -34,8 +33,7 @@ let initialImg: string | null = null;
 function EditFormModal(props: PropsType) {
   const categories = useAppSelector((state) => state.product.categories);
   const { setIsModalOpen, isModalOpen, workId } = props;
-  const [items, setItems] = useState<string[]>(categories);
-  const [name, setName] = useState("");
+
   const [form] = Form.useForm();
   const [uniqueId, setUniqueId] = useState("");
   const [imageUrls, setImageurl] = useState("");
@@ -53,23 +51,7 @@ function EditFormModal(props: PropsType) {
       initialImg = filteredArray[0].Image;
     }
   }
-  const addItem = (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  ) => {
-    e.preventDefault();
-    let categoryExists = items.filter(
-      (category) => category.toUpperCase() == name.toUpperCase()
-    );
 
-    if (categoryExists.length > 0) {
-      alert("Category already present");
-      return;
-    }
-    setItems([...items, name]);
-    dispatch(addCategory([...items, name]));
-
-    setName("");
-  };
   function geturls(array: ImageURL[]) {
     setImageurl(array[0].dataURL);
     initialImg = null;
@@ -173,12 +155,8 @@ function EditFormModal(props: PropsType) {
               >
                 <TextArea rows={4} cols={4} />
               </Form.Item>
-              <Form.Item>
-                <div className={style.button_container}>
-                  <Button
-                    htmlType="submit"
-                    className={style.button_modal_primary}
-                  >
+              <Form.Item>  const [items, setItems] = useState<string[]>(categories);
+  const [name, setName] = useState("");
                     Edit
                   </Button>
                   <Button

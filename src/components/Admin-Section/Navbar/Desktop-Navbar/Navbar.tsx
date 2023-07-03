@@ -26,9 +26,7 @@ function DesktopNavbar() {
         toast(err.message);
       });
   };
-  function toggleSidebar() {
-    setIsOpen(!isOpen);
-  }
+
   return (
     <>
       <div className={style.navbarContainer}>

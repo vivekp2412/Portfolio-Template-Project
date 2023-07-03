@@ -1,4 +1,5 @@
 #loading-bar-spinner.spinner {
+  color: var(--color-secondary);
   left: 50%;
   margin-left: -20px;
   top: 50%;

@@ -1,4 +1,3 @@
-import React from "react";
 import style from "../Social Icons/style.module.css";
 import { useAppSelector } from "../../../Hooks/Hooks";
 function SocialIcons() {

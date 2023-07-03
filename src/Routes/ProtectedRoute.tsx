@@ -1,9 +1,7 @@
 import { useState, useEffect, ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { auth } from "../firebase"; // Replace with your authentication library
+import { auth } from "../firebase";
 import { User } from "firebase/auth";
-import Loader from "../components/Comman/Loader/Loader";
-import { useAppSelector } from "../Hooks/Hooks";
 const ProtectedRoute = ({ children }: { children: ReactNode }): any => {
   const [isAuth, setIsAuth] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);

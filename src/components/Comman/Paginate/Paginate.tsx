@@ -1,9 +1,7 @@
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
-import CardContainer from "../../Product-Section/CardContainer/CardContainer";
 import { useAppSelector } from "../../../Hooks/Hooks";
 import ProductCard from "../../Product-Section/Cards/ProductCard";
-import style from "../../Product-Section/CardContainer/style.module.css";
 function Paginate({ itemsPerPage }) {
   const productList = useAppSelector((state) => state.product.productList);
   const [itemOffset, setItemOffset] = useState(0);
@@ -12,7 +10,6 @@ function Paginate({ itemsPerPage }) {
   const searchedProducts = useAppSelector(
     (state) => state.product.searchedProducts
   );
-  let loading = useAppSelector((state) => state.product.pending);
   const filterCategory = useAppSelector(
     (state) => state.product.filteredCategory
   );
@@ -44,7 +41,6 @@ function Paginate({ itemsPerPage }) {
   const currentItems = AllCards.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(AllCards.length / itemsPerPage);
 
-  // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % AllCards.length;
     setItemOffset(newOffset);

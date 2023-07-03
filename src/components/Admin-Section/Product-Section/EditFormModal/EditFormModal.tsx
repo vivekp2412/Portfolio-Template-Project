@@ -13,6 +13,7 @@ const storage = getStorage();
 import style from "../Product-Form/style.module.css";
 import { ImageUpload } from "../Image-Upload/ImageUpload";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
+import { toast } from "react-toastify";
 const TextArea = Input.TextArea;
 interface PropsType {
   setIsModalOpen: (x: boolean) => void;
@@ -60,7 +61,7 @@ function EditFormModal(props: PropsType) {
     );
 
     if (categoryExists.length > 0) {
-      alert("Category already present");
+      toast.warning("Category already present");
       return;
     }
     setItems([...items, name]);

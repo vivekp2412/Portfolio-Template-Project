@@ -18,7 +18,7 @@ function PortfolioContainer() {
 
   useEffect(() => {
     let themeValue = localStorage.getItem("theme");
-    if (!themeValue) {
+    if (!themeValue || themeValue == "maroon") {
       document.documentElement.setAttribute("data-theme", "Pure Pitch");
     } else {
       document.documentElement.setAttribute("data-theme", themeValue);
@@ -54,6 +54,5 @@ function PortfolioContainer() {
     </div>
   );
 }
-// }
 
 export default PortfolioContainer;

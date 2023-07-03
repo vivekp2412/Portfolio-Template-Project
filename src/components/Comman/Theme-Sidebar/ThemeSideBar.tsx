@@ -1,6 +1,6 @@
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { toast } from "react-toastify";
 import style from "../Theme-Sidebar/style.module.css";
 import ThemeCard from "./Theme-Card/ThemeCard";

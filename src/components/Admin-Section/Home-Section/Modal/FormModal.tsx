@@ -1,4 +1,4 @@
-import  {  useState } from "react";
+import { useState } from "react";
 import style from "../Modal/style.module.css";
 import { Button, Modal } from "antd";
 
@@ -11,19 +11,11 @@ import {
 } from "firebase/storage";
 const storage = getStorage();
 
-import {
-  addImage,
- 
-} from "../../../../slices/homeSlice";
+import { addImage } from "../../../../slices/homeSlice";
 import { ImageUpload } from "../../Product-Section/Image-Upload/ImageUpload";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
-interface Datatype {
-  image: string;
-  imageId: string;
-  active: true;
-}
-interface ImageURL{
-  dataURL:string
+interface ImageURL {
+  dataURL: string;
 }
 // Random Id generator
 function idGenerator() {
@@ -54,7 +46,7 @@ const FormModal = () => {
     setIsModalOpen(false);
   };
 
-  function geturls(array:ImageURL[]) {
+  function geturls(array: ImageURL[]) {
     setImageurl(array);
   }
   async function handleSubmit() {
@@ -63,7 +55,7 @@ const FormModal = () => {
     let data = {
       imageId: idGenerator(),
       active: true,
-      image:""
+      image: "",
     };
     if (images.length != 0) {
       setImageErr(false);

@@ -2,16 +2,11 @@ import { Carousel } from "antd";
 import style from "../Carousel/style.module.css";
 
 import { useAppSelector } from "../../../Hooks/Hooks";
-interface Datatype {
-  image: string;
-  imagfeId: string;
-  active: boolean;
-}
+
 function Carousell() {
   const pending = useAppSelector((state) => state.home.pending);
   const allimages = useAppSelector((state) => state.home.allImages) ?? [];
   const imageToShow = allimages?.filter((x) => x.active == true);
-  console.log(imageToShow);
 
   let images = imageToShow?.map((src) => {
     return (

@@ -34,7 +34,6 @@ function AdminNavbarContainer() {
       document.getElementById("mobileNavbar")?.classList.remove(style.show);
     }
   }
-  //calculating the inner width
   const updateWidth = () => {
     let widthinner = window.innerWidth;
     setWidth(widthinner);

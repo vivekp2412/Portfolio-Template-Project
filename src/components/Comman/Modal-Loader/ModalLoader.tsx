@@ -1,4 +1,3 @@
-import React from "react";
 import "../Modal-Loader/style.css";
 function ModalLoader() {
   return (

@@ -18,6 +18,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import ModalLoader from "../../../Comman/Modal-Loader/ModalLoader";
+import { toast } from "react-toastify";
 const storage = getStorage();
 interface Datatype {
   productImage: File;
@@ -66,7 +67,7 @@ const ProductForm = () => {
     );
 
     if (categoryExists.length > 0) {
-      alert("Category already present");
+      toast.warning("Category already present");
       return;
     }
     setItems([...items, name]);
@@ -98,16 +99,12 @@ const ProductForm = () => {
       setImageErr(false);
       let data: Datatype;
       if (values.productPrice == undefined || values.productPrice == "") {
-        console.log("hi");
-
         data = {
           ...values,
           productPrice: "0",
           productId: uniqueId,
         };
       } else {
-        console.log("hi");
-
         data = {
           ...values,
           productId: uniqueId,
@@ -119,7 +116,6 @@ const ProductForm = () => {
         uploadString(storageRef, imageUrls[0].dataURL, "data_url").then(() => {
           getDownloadURL(storageRef).then((downloadURL) => {
             setLoading(false);
-            console.log("setted");
 
             data = {
               ...data,
@@ -130,7 +126,6 @@ const ProductForm = () => {
             setImages([]);
             handleOk();
             setFileList([]);
-            // setIsModalOpen(false);
           });
         });
       }
@@ -196,7 +191,6 @@ const ProductForm = () => {
               name="control-hooks"
               onFinish={onFinish}
               style={{ maxWidth: 600 }}
-              // initialValues={props.values}
             >
               <Form.Item
                 name="productName"
@@ -210,12 +204,6 @@ const ProductForm = () => {
                 name="productPrice"
                 label="Product Price (INR)"
                 rules={[
-                  // {
-                  //   type: "number",
-                  //   message:
-                  //     "Please enter a valid number for the product price.",
-                  //   transform: (value) => parseFloat(value),
-                  // },
                   {
                     validator: (_, value) => {
                       if (value >= 0 || value == undefined) {

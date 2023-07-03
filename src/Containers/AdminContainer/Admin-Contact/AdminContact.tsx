@@ -5,18 +5,15 @@ import ContactTitle from "../../../components/Admin-Section/Contact-Section/Cont
 import AdminNavbarContainer from "../Admin-Navbar/AdminNavbarContainer";
 import { useAppSelector } from "../../../Hooks/Hooks";
 import Loader from "../../../components/Comman/Loader/Loader";
+import ModalLoader from "../../../components/Comman/Modal-Loader/ModalLoader";
 
 export default function AdminContact() {
   const pending = useAppSelector((state) => state.contact.pending);
-  console.log(pending);
 
   if (pending) {
-    console.log("pending");
-
     return (
       <>
-        <Loader />
-        <h1>Hu</h1>
+        <ModalLoader />
       </>
     );
   } else {
