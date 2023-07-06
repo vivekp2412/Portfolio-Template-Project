@@ -51,13 +51,13 @@ export const fetchProductsData = createAsyncThunk(
     'yourSlice/fetchCategories',
     async (_, { rejectWithValue }) => {
       try {
-        const response = await dataref.ref("Products Categories").once("value")
-        if(response.val()){
+        const response = await dataref.ref("Products").once("value")
+        let data = response.val().Categories;
+        if(data==undefined){
 
-          const data = response.val().Categories
-          return data;
+          return [];
         }else{
-          return []
+          return data
         }
       } catch (error:any) {
         return rejectWithValue(error.message);
@@ -157,7 +157,7 @@ export const productSlice = createSlice({
         },
         addCategory(state,action){
           state.categories=action.payload;
-          dataref.ref("Products Categories").set({
+          dataref.ref("Products").update({
             Categories:state.categories
           });
         },
