@@ -34,7 +34,14 @@ export const homeSlice = createSlice({
   initialState,
   reducers: {
     addImage(state, action) {
-      toast.success('Image Added Successfully');
+      toast.success('Image Added Successfully',{
+        style: {
+          backgroundColor: "var(--color-secondary)",
+          boxShadow:
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+        },
+        progressStyle: { backgroundColor: "white" },
+      });
       state.allImages = [...state.allImages, action.payload];
       dataref.ref("Carousel").set({
         image: state.allImages,
@@ -45,7 +52,14 @@ export const homeSlice = createSlice({
         return object.imageId == action.payload;
       });
       state.allImages.splice(indexToDelete, 1);
-      toast.success("Image Deleted Successfully");
+      toast.success("Image Deleted Successfully",{
+        style: {
+          backgroundColor: "var(--color-secondary)",
+          boxShadow:
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+        },
+        progressStyle: { backgroundColor: "white" },
+      });
       dataref.ref("Carousel").set({
         image: state.allImages,
       });

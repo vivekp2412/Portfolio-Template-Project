@@ -57,7 +57,6 @@ setCurrentPage(0);
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
-  console.log(currentProducts);
 
  
   return (

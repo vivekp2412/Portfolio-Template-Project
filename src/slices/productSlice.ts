@@ -70,7 +70,14 @@ export const productSlice = createSlice({
     initialState,
     reducers: {
         addProduct(state,action){
-            toast.success("Product Added Successfully");
+            toast.success("Product Added Successfully",{
+              style: {
+                backgroundColor: "var(--color-secondary)",
+                boxShadow:
+                  "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+              },
+              progressStyle: { backgroundColor: "white" },
+            });
             state.productList=[...state.productList,action.payload];
             
             dataref.ref("Products").update({
@@ -82,7 +89,14 @@ export const productSlice = createSlice({
             return object.productId == action.payload;
           });
           state.productList.splice(indexToDelete,1);
-          toast.success("Product deleted Successfully");
+          toast.success("Product deleted Successfully",{
+            style: {
+              backgroundColor: "var(--color-secondary)",
+              boxShadow:
+                "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+            },
+            progressStyle: { backgroundColor: "white" },
+          });
               dataref.ref("Products").update({
                 productList:state.productList
               })
@@ -101,7 +115,14 @@ export const productSlice = createSlice({
             let id  = action.payload.productId;
             const indexToUpdate = state.productList.findIndex((x)=> x.productId==id);
             state.productList[indexToUpdate]=action.payload;
-            toast.success("Product updated Successfully");
+            toast.success("Product updated Successfully",{
+              style: {
+                backgroundColor: "var(--color-secondary)",
+                boxShadow:
+                  "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+              },
+              progressStyle: { backgroundColor: "white" },
+            });
             dataref.ref("Products").update({
                 productList:state.productList
             });

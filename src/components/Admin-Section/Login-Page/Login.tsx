@@ -27,13 +27,27 @@ function Login() {
       .then((userCredentials) => {
         setLoading(false);
         dispatch(loginUser());
-        toast.success("Logged in Successfully");
+        toast.success("Logged in Successfully", {
+          style: {
+            backgroundColor: "var(--color-secondary)",
+            boxShadow:
+              "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+          },
+          progressStyle: { backgroundColor: "white" },
+        });
 
         navigate("/admin/home");
       })
       .catch((error) => {
         setLoading(false);
-        toast(error.message);
+        toast.error(error.message, {
+          style: {
+            backgroundColor: "var(--color-secondary)",
+            boxShadow:
+              "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+          },
+          progressStyle: { backgroundColor: "white" },
+        });
       });
   }
   useEffect(() => {
@@ -45,7 +59,7 @@ function Login() {
     }
   }, []);
   const onFinishFailed = (errorInfo: any) => {
-    toast("Failed:", errorInfo);
+    toast.error("Failed:", errorInfo);
   };
   const validatePassword = (_: any, value: string) => {
     if (value && value.length < 8) {
@@ -60,9 +74,25 @@ function Login() {
     let email = value;
 
     sendPasswordResetEmail(auth, email)
-      .then(() => toast("Reset Password Link Sent Successfully"))
+      .then(() =>
+        toast.success("Reset Password Link Sent Successfully", {
+          style: {
+            backgroundColor: "var(--color-secondary)",
+            boxShadow:
+              "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+          },
+          progressStyle: { backgroundColor: "white" },
+        })
+      )
       .catch((err) => {
-        toast(err.message);
+        toast.error(err.message, {
+          style: {
+            backgroundColor: "var(--color-secondary)",
+            boxShadow:
+              "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+          },
+          progressStyle: { backgroundColor: "white" },
+        });
       });
   };
   return (

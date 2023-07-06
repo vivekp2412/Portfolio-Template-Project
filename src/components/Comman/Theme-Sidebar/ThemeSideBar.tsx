@@ -47,7 +47,7 @@ function ThemeSideBar(props: PropsType) {
   ];
   function handleTheme(name: string) {
     localStorage.setItem("theme", name);
-    toast(`${name} : Theme Applied`, {
+    toast.success(`${name} : Theme Applied`, {
       style: {
         backgroundColor: "var(--color-secondary)",
         boxShadow:

@@ -52,7 +52,14 @@ export const workSlice = createSlice({
       dataref.ref("Our Work").set({
         works: state.allWorks,
       });
-      toast.success("New Work Added Successfully");
+      toast.success("New Work Added Successfully",{
+        style: {
+          backgroundColor: "var(--color-secondary)",
+          boxShadow:
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+        },
+        progressStyle: { backgroundColor: "white" },
+      });
     },
     deleteWork(state, action) {
       const indexToDelete = state.allWorks.findIndex((object) => {
@@ -64,7 +71,14 @@ export const workSlice = createSlice({
       dataref.ref("Our Work").set({
     works: state.allWorks,
       });
-      toast.success(" Work Deleted Successfully");
+      toast.success(" Work Deleted Successfully",{
+        style: {
+          backgroundColor: "var(--color-secondary)",
+          boxShadow:
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+        },
+        progressStyle: { backgroundColor: "white" },
+      });
 
     },
     showSection(state,action){
@@ -82,7 +96,14 @@ export const workSlice = createSlice({
       
       state.allWorks[index]=action.payload;
       dataref.ref("Our Work").set({works:state.allWorks});
-      toast.success("Updated Successfully");
+      toast.success("Updated Successfully",{
+        style: {
+          backgroundColor: "var(--color-secondary)",
+          boxShadow:
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+        },
+        progressStyle: { backgroundColor: "white" },
+      });
 
     },
   },

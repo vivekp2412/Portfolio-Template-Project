@@ -7,11 +7,7 @@ export const fetchContactData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       let data = (await dataref.ref("Contact Details").once("value")).val().contactDetails;
-      // if(data==undefined){
-      //   data={}
-      // }
-      console.log(data);
-      
+  
       return data;
     } catch (error:any) {
       return rejectWithValue(error.message);
@@ -55,7 +51,14 @@ export const contactSlice = createSlice({
   initialState,
   reducers: {
     addDetails(state, action) {
-      toast.success('Details Updated Successfully');
+      toast.success('Details Updated Successfully',{
+        style: {
+          backgroundColor: "var(--color-secondary)",
+          boxShadow:
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+        },
+        progressStyle: { backgroundColor: "white" },
+      });
       let details =action.payload;
       state.contactDetails ={...state.contactDetails,...details};
       
@@ -69,7 +72,14 @@ export const contactSlice = createSlice({
       dataref.ref("Contact Details").set({
         contactDetails: state.contactDetails,
       });
-      toast.success('Details reset Successfully');
+      toast.success('Details reset Successfully',{
+        style: {
+          backgroundColor: "var(--color-secondary)",
+          boxShadow:
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+        },
+        progressStyle: { backgroundColor: "white" },
+      });
 
     }
    

@@ -61,7 +61,14 @@ function EditFormModal(props: PropsType) {
     );
 
     if (categoryExists.length > 0) {
-      toast.warning("Category already present");
+      toast.warning("Category already present", {
+        style: {
+          backgroundColor: "var(--color-secondary)",
+          boxShadow:
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+        },
+        progressStyle: { backgroundColor: "white" },
+      });
       return;
     }
     setItems([...items, name]);
