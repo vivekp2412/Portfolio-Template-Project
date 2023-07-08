@@ -1,7 +1,6 @@
 .hide {
   transition: all 1s;
   transform: translateX(-100%);
-  /* display: none; */
 }
 
 .show {
@@ -98,4 +97,5 @@
 .themeContainer {
   overflow: hidden;
   min-height: "100vh";
+  width: 100vw;
 }
