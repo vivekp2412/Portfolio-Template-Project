@@ -1,0 +1,66 @@
+{
+  "Carousel": {
+    "image": [
+      {
+        "active": true,
+        "image": "https://firebasestorage.googleapis.com/v0/b/portfolio-template-bc671.appspot.com/o/images%2F7040?alt=media&token=55781c81-fa76-4933-ae49-1ff4744ba380",
+        "imageId": "7040"
+      }
+    ]
+  },
+  "Contact Details": {
+    "contactDetails": {
+      "Address": "qwd",
+      "Email": "viveklimbani2412@gmal.com",
+      "Facebook Url": "",
+      "Instagram Url": "",
+      "Phone Number": "",
+      "Portfolio Name": "Google",
+      "Recieve Mail": false,
+      "Recieve Whatsapp": true,
+      "Twitter Url": "",
+      "Whatsapp Number": "9723733655",
+      "isNumberDifferent": false
+    }
+  },
+  "Our Work": {
+    "works": [
+      {
+        "Image": "https://firebasestorage.googleapis.com/v0/b/portfolio-template-bc671.appspot.com/o/Wroks%2F0491?alt=media&token=6115f147-f907-4c9f-b833-c22182deb3b3",
+        "workDesc": "Maiores facere molli",
+        "workId": "0491",
+        "workTitle": "Quasi error facere i"
+      },
+      {
+        "Image": "https://firebasestorage.googleapis.com/v0/b/portfolio-template-bc671.appspot.com/o/Wroks%2F2768?alt=media&token=9d782e4c-7529-4c27-85b5-37c69c8d2eb6",
+        "workDesc": " am cum aliqua Veniam cum aliqua Veniam cum aliqua Veniam cum aliqua Veniam cum aliqua Veniam cum aliqua Veniam cum aliqua",
+        "workId": "2768",
+        "workTitle": "Voluptates ea sint q"
+      }
+    ]
+  },
+  "Products": {
+    "Categories": [
+      "fgefg"
+    ],
+    "productList": [
+      {
+        "Image": "https://firebasestorage.googleapis.com/v0/b/portfolio-template-bc671.appspot.com/o/Products%2FPLA6404?alt=media&token=51508544-f9e0-4c2a-ad68-30e84dea2a78",
+        "productCategory": "Place",
+        "productDescription": "He heard the loud impact before he ever saw the result. It had been so loud that it had actually made him jump back in his seat. As soon as he recovered from the surprise, he saw the crack in the windshield. It seemed to be an analogy of the current condition of his life.\nOne can cook on and with an open fire. These are some of the ways to cook with fire outside. Cooking meat using a spit is a great way to evenly cook meat. In order to keep meat from burning, it's best to slowly rotate it. Hot stones can be used to toast bread. Coals are hot and can bring things to a boil quickly. If one is very adventurous, one can make a hole in the ground, fill it with coals and place foil-covered meat, veggies, and potatoes into the coals, and cover all of it with dirt. In a short period of time, the food will be baked. Campfire cooking can be done in many ways.\nPatricia's friend who was here hardly had any issues at all, but she wasn't telling the truth. Yesterday, before she left to go home, she heard that her husband is in the hospital and pretended to be surprised. It later came out that she was the person who had put him there.\nThe paper was blank. It shouldn't have been. There should have been writing on the paper, at least a paragraph if not more. The fact that the writing wasn't there was frustrating. Actually, it was even more than frustrating. It was downright distressing.\nIt really doesn't matter what she thinks as it isn't her problem to solve. That's what he kept trying to convince himself. She was trying to insert her opinion where it wasn't wanted or welcome. He already had a plan and even though that plan didn't correspond with what she wanted him to do or what should be done, it wasn't her decision to make. The question now became whether he would stick to his convictions and go through with his plan knowing she wouldn't approve.\nIt was difficult for him to admit he was wrong. He had been so certain that he was correct and the deeply held belief could never be shaken. Yet the proof that he had been incorrect stood right before his eyes. \"See daddy, I told you that they are real!\" his daughter excitedly proclaimed.\nHe collected the plastic trash on a daily basis. It never seemed to end. Even if he cleaned the entire beach, more plastic would cover it the next day after the tide had come in. Although it was a futile effort that would never be done, he continued to pick up the trash each day.\nThe water rush down the wash and into the slot canyon below. Two hikers had started the day to sunny weather without a cloud in the sky, but they hadn't thought to check the weather north of the canyon. Huge thunderstorms had brought a deluge o rain and produced flash floods heading their way. The two hikers had no idea what was coming.\nOne dollar and eighty-seven cents. That was all. And sixty cents of it was in pennies. Pennies saved one and two at a time by bulldozing the grocer and the vegetable man and the butcher until one’s cheeks burned with the silent imputation of parsimony that such close dealing implied. One dollar and eighty-seven cents. And the next day would be Christmas...\nI checked in for the night at Out O The Way motel. What a bad choice that was. First I took a shower and a spider crawled out of the drain. Next, the towel rack fell down when I reached for the one small bath towel. This allowed the towel to fall halfway into the toilet. I tried to watch a movie, but the remote control was sticky and wouldn’t stop scrolling through the channels. I gave up for the night and crawled into bed. I stretched out my leg and felt something furry by my foot. Filled with fear, I reached down and to my surprise, I pulled out a raccoon skin pair of underwear. After my initial relief that it wasn’t alive, the image of a fat, ugly businessman wearing raccoon skin briefs filled my brain. I jumped out of the bed, threw my toothbrush into my bag, and sprinted towards my car.\nHe was an expert but not in a discipline that anyone could fully appreciate. He knew how to hold the cone just right so that the soft server ice-cream fell into it at the precise angle to form a perfect cone each and every time. It had taken years to perfect and he could now do it without even putting any thought behind it. Nobody seemed to fully understand the beauty of this accomplishment except for the new worker who watched in amazement.\nI haven't bailed on writing. Look, I'm generating a random paragraph at this very moment in an attempt to get my writing back on track. I am making an effort. I will start writing consistently again!",
+        "productId": "PLA6404",
+        "productName": "Alvin Morrison",
+        "productPrice": "357"
+      },
+      {
+        "Image": "https://firebasestorage.googleapis.com/v0/b/portfolio-template-bc671.appspot.com/o/Products%2FFGE5374?alt=media&token=27221af9-8c59-479e-b599-d83d799f65af",
+        "productCategory": "fgefg",
+        "productDescription": "Iure nisi deserunt e",
+        "productId": "FGE5374",
+        "productName": "Guinevere Taylor",
+        "productPrice": "277"
+      }
+    ],
+    "show": true
+  }
+}
